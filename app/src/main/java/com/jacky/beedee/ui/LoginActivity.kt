@@ -1,14 +1,12 @@
 package com.jacky.beedee.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.jacky.beedee.R
+import com.jacky.beedee.ui.inner.arch.BaseActivity
 
-
-class MainActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_login)
     }
 }
