@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by YoKeyword on 16/6/3.
  */
-public class BottomBar extends LinearLayout {
+public class BottomBarLayout extends LinearLayout {
     private static final int TRANSLATE_DURATION_MILLIS = 200;
 
     private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
@@ -35,15 +35,15 @@ public class BottomBar extends LinearLayout {
     private OnTabSelectedListener mListener;
     private OnTabDoubleClickListener mDoubleClickListener;
 
-    public BottomBar(Context context) {
+    public BottomBarLayout(Context context) {
         this(context, null);
     }
 
-    public BottomBar(Context context, AttributeSet attrs) {
+    public BottomBarLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BottomBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BottomBarLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -59,7 +59,7 @@ public class BottomBar extends LinearLayout {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    public BottomBar addItem(final BottomBarTab tab) {
+    public BottomBarLayout addItem(final BottomBarTab tab) {
         tab.setOnClickListener(v -> {
             if (mListener == null) {
                 return;

@@ -11,12 +11,13 @@
     <!--android:layout_height="match_parent"-->
     <!--android:layout_marginBottom="@dimen/home_tab_height" />-->
 
-    <com.qmuiteam.qmui.widget.QMUITabSegment
-        android:id="@+id/tabs"
-        android:layout_gravity="bottom"
-        android:background="?attr/qmui_list_item_bg_with_border_top"
-        android:textSize="12sp"
-        app:qmui_tab_icon_position="top"
+
+
+    <com.jacky.beedee.ui.widget.bottombar.BottomBarLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_tab_height" />
+        android:layout_height="@dimen/home_tab_height"
+        android:layout_gravity="bottom"
+        android:background="@drawable/qmui_list_item_bg_with_border_top" />
+
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

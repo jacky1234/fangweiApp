@@ -16,8 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.common.module.skin.DefaultSkinLoader;
 import com.jacky.beedee.R;
 
 /**
@@ -113,7 +111,7 @@ public class BottomBarTab extends LinearLayout {
         mTvUnreadCount = new TextView(context);
         mTvUnreadCount.setBackgroundResource(R.drawable.spot_bg);
         mTvUnreadCount.setMinWidth(min);
-        mTvUnreadCount.setTextColor(R.color.spot_text_color);
+        mTvUnreadCount.setTextColor(getResources().getColor(R.color.spot_text_color));
         mTvUnreadCount.setTextSize(10f);
         mTvUnreadCount.setPadding(padding, 0, padding, 0);
         mTvUnreadCount.setGravity(Gravity.CENTER);
@@ -141,26 +139,20 @@ public class BottomBarTab extends LinearLayout {
     public void setSelected(boolean selected) {
         super.setSelected(selected);
         if (selected) {
-//            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.colorPrimary));
-//            mIcon.setImageResource(iconSelect);
             setImageIcon(iconSelect);
-//            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_bar_title_sel_color));
             setTitleColor(colorSelect);
         } else {
-//            mIcon.setColorFilter(ContextCompat.getColor(mContext, R.color.tab_unselect));
-//            mIcon.setImageResource(iconNormal);
             setImageIcon(iconNormal);
-//            mTvTitle.setTextColor(ContextCompat.getColor(mContext, R.color.tab_bar_title_nor_color));
             setTitleColor(colorNormal);
         }
     }
 
     public void setImageIcon(int resId) {
-        mIcon.setImageDrawable(DefaultSkinLoader.getInstance().getDrawable(resId));
+        mIcon.setImageResource(resId);
     }
 
     public void setTitleColor(int colorId) {
-        mTvTitle.setTextColor(DefaultSkinLoader.getInstance().getColor(colorId));
+        mTvTitle.setTextColor(colorId);
     }
 
     public void setTabPosition(int position) {
@@ -202,10 +194,10 @@ public class BottomBarTab extends LinearLayout {
 
     public void setBadgeBackGroundDrawable(int resId) {
         if (dot != null) {
-            dot.setBackground(DefaultSkinLoader.getInstance().getDrawable(resId));
+            dot.setBackgroundResource(resId);
         }
         if (mTvUnreadCount != null) {
-            mTvUnreadCount.setBackground(DefaultSkinLoader.getInstance().getDrawable(resId));
+            mTvUnreadCount.setBackgroundResource(resId);
         }
     }
 
