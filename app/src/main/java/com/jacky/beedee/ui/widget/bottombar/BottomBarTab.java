@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.jacky.beedee.R;
 
 /**
@@ -79,21 +80,21 @@ public class BottomBarTab extends LinearLayout {
         Drawable drawable = typedArray.getDrawable(0);
         setBackgroundDrawable(drawable);
         typedArray.recycle();
+        setGravity(Gravity.CENTER_HORIZONTAL);
 
         LinearLayout lLContainer = new LinearLayout(context);
         lLContainer.setOrientation(LinearLayout.VERTICAL);
         lLContainer.setGravity(Gravity.CENTER);
-        FrameLayout.LayoutParams paramsContainer = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams paramsContainer = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         paramsContainer.gravity = Gravity.CENTER;
         lLContainer.setLayoutParams(paramsContainer);
+        addView(lLContainer);
 
         mIcon = new ImageView(context);
         int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 27, getResources().getDisplayMetrics());
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
-//        mIcon.setImageResource(iconNormal);
         setImageIcon(iconNormal);
         mIcon.setLayoutParams(params);
-//        mIcon.setColorFilter(ContextCompat.getColor(context, R.color.tab_unselect));
         lLContainer.addView(mIcon);
 
         mTvTitle = new TextView(context);
@@ -104,7 +105,6 @@ public class BottomBarTab extends LinearLayout {
         setTitleColor(colorNormal);
         mTvTitle.setLayoutParams(paramsTv);
         lLContainer.addView(mTvTitle);
-        addView(lLContainer);
 
         int min = dip2px(context, 20);
         int padding = dip2px(context, 2);

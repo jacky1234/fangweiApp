@@ -7,6 +7,6 @@
 
     <color name="spot_bg_color">#FF6688</color>
     <color name="spot_text_color">#FFFFFF</color>
-    <color name="tabbar_text_color">#7F0601B3</color>
-    <color name="tabbar_text_hig_color">#7F0601B4</color>
+    <color name="tabbar_text_color">#B3B3B3</color>
+    <color name="tabbar_text_hig_color">@android:color/black</color>
 </resources>

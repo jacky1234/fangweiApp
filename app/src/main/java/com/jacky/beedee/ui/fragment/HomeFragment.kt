@@ -1,15 +1,17 @@
 package com.jacky.beedee.ui.fragment
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.jacky.beedee.R
-import com.jacky.beedee.ui.inner.arch.BaseFragment
+import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.bottombar.BottomBarLayout
 import com.jacky.beedee.ui.widget.bottombar.BottomBarTab
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : MySupportFragment() {
     private lateinit var bottomBarLayout: BottomBarLayout
-    override fun onCreateView(): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout = LayoutInflater.from(activity).inflate(R.layout.fragment_home, null)
         initTabs(layout)
         return layout
@@ -23,7 +25,7 @@ class HomeFragment : BaseFragment() {
                 .addItem(BottomBarTab(activity, R.mipmap.ic_tab_defake, R.mipmap.ic_tab_defake_selected, "防伪检测"))
                 .addItem(BottomBarTab(activity, R.mipmap.ic_tab_me, R.mipmap.ic_tab_me_selected, "我的"))
 
-        bottomBarLayout.setOnTabSelectedListener(object :BottomBarLayout.OnTabSelectedListener {
+        bottomBarLayout.setOnTabSelectedListener(object : BottomBarLayout.OnTabSelectedListener {
             override fun onTabUnselected(position: Int) {
 
             }

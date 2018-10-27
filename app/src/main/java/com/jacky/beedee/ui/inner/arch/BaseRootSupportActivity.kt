@@ -1,0 +1,36 @@
+package com.jacky.beedee.ui.inner.arch
+
+import android.os.Bundle
+import android.widget.FrameLayout
+import com.jacky.beedee.R
+
+abstract class BaseRootSupportActivity<T : MySupportFragment> : BaseActivity() {
+    private var fragment: T? = null
+    private var clazz: Class<T>? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.let {
+            val container = FrameLayout(this)
+            container.id = R.id.baseroot_activity_container_id
+            setContentView(container)
+            clazz = createClazz()
+            createSupportFragmentInternal()
+            loadRootFragment(R.id.baseroot_activity_container_id, fragment!!)
+        }
+    }
+
+    protected abstract fun createClazz(): Class<T>
+
+    private fun createSupportFragmentInternal() {
+        fragment = findFragment(clazz)
+        if (fragment == null) {
+            fragment = createSupportFragment()
+        }
+    }
+
+    abstract fun createSupportFragment(): T
+    fun getFragment(): T {
+        return fragment!!
+    }
+}
