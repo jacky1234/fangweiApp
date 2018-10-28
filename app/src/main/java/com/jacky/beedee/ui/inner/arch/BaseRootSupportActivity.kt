@@ -6,7 +6,7 @@ import com.jacky.beedee.R
 
 abstract class BaseRootSupportActivity<T : MySupportFragment> : BaseActivity() {
     private var fragment: T? = null
-    private var clazz: Class<T>? = null
+    private lateinit var clazz: Class<T>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

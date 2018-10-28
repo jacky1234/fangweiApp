@@ -4,9 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="spot_bg_color">#FF6688</color>
     <color name="spot_text_color">#FFFFFF</color>
     <color name="tabbar_text_color">#B3B3B3</color>
     <color name="tabbar_text_hig_color">@android:color/black</color>
+
+
+    <color name="action_confirm">#FFEF04</color>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="home_title_height">45dp</dimen>
+    <dimen name="title_height">45dp</dimen>
     <dimen name="home_tab_height">50dp</dimen>
     <dimen name="common_content_spacing">@dimen/qmui_content_spacing_horizontal</dimen>
 
@@ -28,6 +28,7 @@
     <dimen name="spanUtils_common_textSize">16sp</dimen>
 
     <dimen name="normal_textsize">14sp</dimen>
+    <dimen name="lager_textsize">16sp</dimen>
     <dimen name="title_textsize">18sp</dimen>
     <dimen name="first_margin_from_left">14dp</dimen>
     <dimen name="normal_margin">4dp</dimen>
