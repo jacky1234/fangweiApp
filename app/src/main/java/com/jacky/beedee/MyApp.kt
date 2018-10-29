@@ -2,6 +2,7 @@ package com.jacky.beedee
 
 import android.app.Application
 import com.jacky.beedee.support.log.Logger
+import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
 class MyApp : Application() {
@@ -10,6 +11,7 @@ class MyApp : Application() {
         super.onCreate()
 
         initFragmentation()
+        RxJavaPlugins.setErrorHandler(Logger.Companion::e)
     }
 
     private fun initFragmentation() {
