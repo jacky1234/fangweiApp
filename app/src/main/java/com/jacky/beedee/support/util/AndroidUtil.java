@@ -3,6 +3,12 @@ package com.jacky.beedee.support.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.jacky.beedee.support.Starter;
+
 
 /**
  * 2018/10/29.
@@ -11,6 +17,8 @@ import android.content.pm.PackageManager;
  * @author jacky
  */
 public class AndroidUtil {
+    private static Handler uiHandle = new Handler(Looper.getMainLooper());
+
     /**
      * 获取应用版本信息
      *
@@ -30,5 +38,29 @@ public class AndroidUtil {
         } catch (PackageManager.NameNotFoundException e) {
             return "1.0.0";
         }
+    }
+
+    public static void toast(int id) {
+        toast(getString(id));
+    }
+
+    public static void toast(CharSequence msg) {
+        Toast.makeText(Starter.getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static CharSequence getString(int id) {
+        return Starter.getContext().getString(id);
+    }
+
+    public static void runUI(Runnable runnable) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            runnable.run();
+        } else {
+            uiHandle.post(runnable);
+        }
+    }
+
+    public static void runUI(Runnable runnable, long delay) {
+        uiHandle.postDelayed(runnable, delay);
     }
 }

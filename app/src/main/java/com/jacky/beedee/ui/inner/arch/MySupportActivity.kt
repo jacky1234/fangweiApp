@@ -132,7 +132,7 @@ open class MySupportActivity : AppCompatActivity(), ISupportActivity {
      * It is recommended to use [SupportFragment.startWithPopTo].
      *
      * @see .popTo
-     * @see .start
+     * @see .launch
      */
     fun startWithPopTo(toFragment: ISupportFragment, targetFragmentClass: Class<*>, includeTargetFragment: Boolean) {
         mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment)

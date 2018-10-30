@@ -6,25 +6,32 @@ import com.jacky.beedee.support.system.DeviceDependency
 import com.jacky.beedee.support.util.Strings
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-object RetrofitManager {
+class RetrofitManager private constructor() {
     private val HTTP_TIMEOUT_SECONDS = 30L
     private val JSON = MediaType.parse("application/json; charset=utf-8")
     private val TYPE_FILE = MediaType.parse("application/octet-stream")
-
     val deviceDependency = DeviceDependency.current
-    //header
-    val x_app_version: String
+
+    companion object {
+        private val instance = RetrofitManager()
+        fun get() = instance
+    }
 
     init {
-        x_app_version = """ "BeeDee/" + ${DeviceDependency.current.device.appVersion} + " "
-            | + ${DeviceDependency.current.device.type.name} + "/" + ${DeviceDependency.current.device.osVersion} """.trimMargin()
+        //header
+    }
+
+    private fun getAppVersionHeader(): String {
+        val sb = StringBuilder()
+        sb.append("BeeDee").append("/").append(deviceDependency.device.appVersion).append(" ")
+                .append(deviceDependency.device.type.name).append("/").append(deviceDependency.device.osVersion)
+        return sb.toString()
     }
 
     val service: ApiService by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
@@ -54,10 +61,12 @@ object RetrofitManager {
         return Interceptor { chain ->
             val originalRequest = chain.request()
             val requestBuilder = originalRequest.newBuilder()
+            requestBuilder.addHeader("Content-Type", "application/json")
+            requestBuilder.addHeader("Accept", "application/json")
             if (Strings.isNotBlank(MySelf.instance.authorization)) {
                 requestBuilder.header("Authorization", MySelf.instance.authorization)
             }
-            requestBuilder.header("X-App-Version", x_app_version)
+            requestBuilder.header("X-App-Version", getAppVersionHeader())
             requestBuilder.method(originalRequest.method(), originalRequest.body())
             val request = requestBuilder.build()
             chain.proceed(request)
@@ -110,7 +119,7 @@ object RetrofitManager {
         //添加一个log拦截器,打印所有的log
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         //可以设置请求过滤的水平,body,basic,headers
-        httpLoggingInterceptor.level = BODY
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         //设置 请求的缓存的大小跟位置
         val cacheFile = File(Starter.getContext().cacheDir, "cache")

@@ -1,21 +1,31 @@
 package com.jacky.beedee.ui
 
+import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
+import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.android.ActivityEvent
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : BaseActivity() {
+    lateinit var rxPermissions: RxPermissions
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        rxPermissions = RxPermissions(this)
+        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE
+                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)
+                .subscribe()
 
         titleView.setLeftAction(View.OnClickListener { finish() })
 
@@ -30,7 +40,7 @@ class LoginActivity : BaseActivity() {
                     }
 
                     if (!RegexUtils.isMobileSimple(phone)) {
-                        toast("请输入正确的手机号")
+                        toast(R.string.mobile_number_wrong)
                         return@subscribe
                     }
 
@@ -42,5 +52,9 @@ class LoginActivity : BaseActivity() {
 
                     TODO("login")
                 }
+
+        tv_register.setOnClickListener({
+            LoginActivity@ this.launch<RegisterActivity>()
+        })
     }
 }

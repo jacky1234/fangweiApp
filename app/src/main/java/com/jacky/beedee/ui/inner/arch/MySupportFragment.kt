@@ -223,7 +223,7 @@ open class MySupportFragment : Fragment(), ISupportFragment {
      * Similar to [Activity.onNewIntent]
      *
      * @param args putNewBundle(Bundle newBundle)
-     * @see .start
+     * @see .launch
      */
     override fun onNewBundle(args: Bundle) {
         mDelegate.onNewBundle(args)
@@ -232,7 +232,7 @@ open class MySupportFragment : Fragment(), ISupportFragment {
     /**
      * 添加NewBundle,用于启动模式为SingleTask/SingleTop时
      *
-     * @see .start
+     * @see .launch
      */
     override fun putNewBundle(newBundle: Bundle) {
         mDelegate.putNewBundle(newBundle)
@@ -324,7 +324,7 @@ open class MySupportFragment : Fragment(), ISupportFragment {
 
     /**
      * @see .popTo
-     * @see .start
+     * @see .launch
      */
     fun startWithPopTo(toFragment: ISupportFragment, targetFragmentClass: Class<*>, includeTargetFragment: Boolean) {
         mDelegate.startWithPopTo(toFragment, targetFragmentClass, includeTargetFragment)

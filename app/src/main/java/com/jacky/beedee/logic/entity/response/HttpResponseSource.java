@@ -1,9 +1,14 @@
-package com.jacky.beedee.logic.entity.base;
+package com.jacky.beedee.logic.entity.response;
 
-public class HttpResponse<T> {
+/**
+ * 2018/10/31.
+ * GitHub:[https://github.com/jacky1234]
+ *
+ * @author jacky
+ */
+public class HttpResponseSource {
     private int code;
     private String message;
-    private T t;
 
     public int getCode() {
         return code;
@@ -11,9 +16,5 @@ public class HttpResponse<T> {
 
     public String getMessage() {
         return message;
-    }
-
-    public T getT() {
-        return t;
     }
 }

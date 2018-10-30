@@ -9,8 +9,8 @@ import android.content.Intent
  * @author  jacky
  */
 
-//start<DetailActivity>
-inline fun <reified T : Activity> Activity?.start() {
+//launch<DetailActivity>
+inline fun <reified T : Activity> Activity?.launch() {
     val intent = Intent(this, T::class.java)
     this?.startActivity(intent)
 }

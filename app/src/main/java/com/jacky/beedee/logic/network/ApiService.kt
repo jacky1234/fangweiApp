@@ -1,10 +1,14 @@
 package com.jacky.beedee.logic.network
 
-import com.jacky.beedee.logic.entity.base.HttpResponse
+import com.jacky.beedee.logic.entity.request.ReigsterRequest
+import com.jacky.beedee.logic.entity.response.HttpResponse
+import com.jacky.beedee.logic.entity.response.HttpResponseSource
 import com.jacky.beedee.logic.entity.response.RegisterResponse
 import io.reactivex.Observable
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 /**
  * <pre>
@@ -17,10 +21,16 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
-    /**
-     * 获取图片列表
-     */
-    @POST("/login")
-    fun reigster(@Query("url") url: String): Observable<HttpResponse<RegisterResponse>>
+    @POST("login")
+    fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
+
+    @POST("login")
+    fun login(@Field("mobile") mobile: String
+              , @Field("password") password: String
+    ): Observable<HttpResponse<RegisterResponse>>
+
+    @POST("send_sms_code")
+    @FormUrlEncoded
+    fun sendCode(@Field("mobile") mobile: String): Observable<HttpResponseSource>
 
 }
