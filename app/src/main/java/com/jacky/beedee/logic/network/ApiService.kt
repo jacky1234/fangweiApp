@@ -7,7 +7,6 @@ import com.jacky.beedee.logic.entity.response.RegisterResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 /**
@@ -30,7 +29,6 @@ interface ApiService {
     ): Observable<HttpResponse<RegisterResponse>>
 
     @POST("send_sms_code")
-    @FormUrlEncoded
-    fun sendCode(@Field("mobile") mobile: String): Observable<HttpResponseSource>
+    fun sendCode(@Body mobile: String): Observable<HttpResponseSource>
 
 }

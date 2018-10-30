@@ -40,7 +40,7 @@ class RegisterActivity : BaseActivity() {
                     }
 
                     RxView.enabled(btnGainCode).accept(false)
-                    DataManager.get().sendCode(phone)
+                    DataManager.get().sendCode(phone).subscribe()
 
                 }.subscribe {
                     Observable.interval(1, TimeUnit.SECONDS).take(MAX_SECOND).observeOn(AndroidSchedulers.mainThread())

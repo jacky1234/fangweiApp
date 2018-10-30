@@ -2,6 +2,7 @@ package com.jacky.beedee.logic.network;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.JsonObject;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
@@ -33,8 +34,10 @@ public class DataManager {
     }
 
 
-    public Observable<HttpResponseSource> sendCode(@NotNull String phone) {
-        return apiService.sendCode(phone)
+    public Observable<HttpResponseSource> sendCode(@NotNull String mobile) {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("mobile",mobile);
+        return apiService.sendCode(jsonObject.toString())
                 .compose(SchedulerUtils.INSTANCE.ioToMain());
     }
 
