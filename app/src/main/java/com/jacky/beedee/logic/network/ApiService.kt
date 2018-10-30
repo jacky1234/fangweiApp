@@ -1,8 +1,10 @@
 package com.jacky.beedee.logic.network
 
-import com.king.kotlinmvp.mvp.model.bean.parser.ImageListParser
+import com.jacky.beedee.logic.entity.base.HttpResponse
+import com.jacky.beedee.logic.entity.response.RegisterResponse
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * <pre>
@@ -13,13 +15,12 @@ import retrofit2.http.*
  *     version: 1.0
  * </pre>
  */
-interface ApiService{
+interface ApiService {
 
     /**
      * 获取图片列表
      */
-    @Headers("method:GET_IMAGE_LIST")
-    @GET("mobile/mobileIn.do?")
-    fun getImageList(@Query("url") url:String): Observable<ImageListParser>
+    @POST("/login")
+    fun reigster(@Query("url") url: String): Observable<HttpResponse<RegisterResponse>>
 
 }

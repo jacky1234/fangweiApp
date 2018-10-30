@@ -3,5 +3,7 @@
     <string name="back">返回</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="complete">完成</string>
+    <string name="fill_myself_info">完善资料</string>
     <string name="get_vertify_code">获取验证码</string>
 </resources>

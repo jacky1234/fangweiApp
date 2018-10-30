@@ -17,13 +17,13 @@ public class Starter {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    public static void init(Context context){
+    public static void init(Context context) {
         Starter.context = context;
 
 
-        Device device = Device.create(android.os.Build.VERSION.RELEASE,
+        Device device = Device.create(Device.Type.ANDROID, android.os.Build.VERSION.RELEASE,
                 AndroidUtil.getVersionName(context));
-        DeviceDependency.current = new DeviceDependency(device);
+        DeviceDependency.current = new DeviceDependency(device, "https://api.beedee.yituizhineng.top");
     }
 
     public static Context getContext() {

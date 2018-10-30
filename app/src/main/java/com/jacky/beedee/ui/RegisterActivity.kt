@@ -3,7 +3,11 @@ package com.jacky.beedee.ui
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.network.RetrofitManager
+import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.log.Logger
+import com.jacky.beedee.support.util.Strings
+import com.jacky.beedee.support.util.regex.RegexUtils
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -34,6 +38,33 @@ class RegisterActivity : BaseActivity() {
                                 RxTextView.textRes(btnGainCode).accept(R.string.get_vertify_code)
                                 RxView.enabled(btnGainCode).accept(true)
                             })
+                }
+
+        val next = tv_next
+        RxView.clicks(next).throttleFirst(MAX_SECOND, TimeUnit.SECONDS)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .bindToLifecycle(btnGainCode)
+                .subscribe {
+                    val phone = et_phone.text.toString()
+                    if (Strings.isNullOrEmpty(phone)) {
+                        toast("请输入手机号")
+                        return@subscribe
+                    }
+
+                    if (!RegexUtils.isMobileSimple(phone)) {
+                        toast("请输入正确的手机号")
+                        return@subscribe
+                    }
+
+                    val code = et_code.text.toString()
+                    if (!Strings.isNullOrEmpty(code)) {
+                        toast("请输入验证码")
+                        return@subscribe
+                    }
+
+                    RetrofitManager.service.
+
+//                    RegisterFillInfoActivity.launch(this, phone, code)
                 }
     }
 }

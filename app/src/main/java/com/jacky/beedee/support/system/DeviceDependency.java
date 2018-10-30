@@ -10,8 +10,10 @@ public class DeviceDependency {
     public static DeviceDependency current;
 
     public Device device;
+    public String baseUrl;
 
-    public DeviceDependency(Device device) {
+    public DeviceDependency(Device device, String baseUrl) {
         this.device = device;
+        this.baseUrl = baseUrl;
     }
 }
