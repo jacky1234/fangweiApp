@@ -14,7 +14,7 @@
     <com.jacky.beedee.ui.widget.bottombar.BottomBarLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
         android:layout_gravity="bottom"
         android:background="@drawable/qmui_list_item_bg_with_border_top" />
 

@@ -3,12 +3,15 @@ package com.jacky.beedee.ui
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.network.DataManager
+import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.logic.network.exception.CustomException
+import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.log.Logger
+import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
+import com.jacky.beedee.ui.Dialog.DialogHelper
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -40,7 +43,7 @@ class RegisterActivity : BaseActivity() {
                     }
 
                     RxView.enabled(btnGainCode).accept(false)
-                    DataManager.get().sendCode(phone).subscribe()
+                    RequestHelper.get().sendCode(phone).subscribe()
 
                 }.subscribe {
                     Observable.interval(1, TimeUnit.SECONDS).take(MAX_SECOND).observeOn(AndroidSchedulers.mainThread())
@@ -77,10 +80,11 @@ class RegisterActivity : BaseActivity() {
     }
 
     private fun requestRegister(phone: String, code: String) {
-        DataManager.get().register(phone, code)
+        RequestHelper.get().register(phone, code)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe({ response ->
-                    Logger.e(response.toString())
+                .subscribe({ _ ->
+                    DialogHelper.createSuccess(this, "注册成功")
+                    AndroidUtil.runUI({ this@RegisterActivity.launch<MainActivity>() }, 100)
                 }, { CustomException.handleException(it) })
     }
 }

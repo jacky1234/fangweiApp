@@ -21,10 +21,10 @@ import io.reactivex.Observable;
  * @author jacky
  * 请求接口
  */
-public class DataManager {
+public class RequestHelper {
     private ApiService apiService;
 
-    private DataManager() {
+    private RequestHelper() {
         apiService = RetrofitManager.Companion.get().getService();
     }
 
@@ -50,12 +50,12 @@ public class DataManager {
     }
 
 
-    public static DataManager get() {
+    public static RequestHelper get() {
         return InstanceHolder.INSTANCE;
     }
 
     private static final class InstanceHolder {
-        private static final DataManager INSTANCE = new DataManager();
+        private static final RequestHelper INSTANCE = new RequestHelper();
     }
 
 

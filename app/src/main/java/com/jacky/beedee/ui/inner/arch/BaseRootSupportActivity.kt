@@ -10,7 +10,7 @@ abstract class BaseRootSupportActivity<T : MySupportFragment> : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        savedInstanceState?.let {
+        if (savedInstanceState == null) {
             val container = FrameLayout(this)
             container.id = R.id.baseroot_activity_container_id
             setContentView(container)

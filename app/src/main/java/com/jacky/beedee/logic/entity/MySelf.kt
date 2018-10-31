@@ -1,20 +1,24 @@
 package com.jacky.beedee.logic.entity
 
+import com.jacky.beedee.logic.DaoFacade
 import com.jacky.beedee.support.util.Strings
 
 class MySelf private constructor() {
-    var authorization: String
-    var id: String
-    var username: String
-    var mobile: String
-    var role: String
+    var authorization: String? = null
+    var id: String? = null
+    var username: String? = null
+    var mobile: String? = null
+    var role: String? = null
 
     init {
-        authorization = Strings.empty
-        id = Strings.empty
-        username = Strings.empty
-        mobile = Strings.empty
-        role = Strings.empty
+        val dataFromDb = DaoFacade.get().mySelfInfo
+        if (dataFromDb != null) {
+            authorization = dataFromDb.authorization
+            id = dataFromDb.id
+            username = dataFromDb.username
+            mobile = dataFromDb.mobile
+            role = dataFromDb.role
+        }
     }
 
     companion object {
@@ -24,7 +28,12 @@ class MySelf private constructor() {
         var instance = MySelf()
     }
 
+    fun isLogined(): Boolean {
+        return Strings.isNotBlank(id)
+    }
+
     fun clear() {
+        DaoFacade.get().saveMyselfInfo(null)
         instance = MySelf()
     }
 

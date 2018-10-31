@@ -4,13 +4,14 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.network.DataManager
+import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
-import com.jacky.beedee.support.log.Logger
+import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
+import com.jacky.beedee.ui.Dialog.DialogHelper
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -30,6 +31,7 @@ class LoginActivity : BaseActivity() {
                 , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)
                 .subscribe()
 
+        checkLogin()
         titleView.setLeftAction(View.OnClickListener { finish() })
 
         val login = tv_login
@@ -53,15 +55,21 @@ class LoginActivity : BaseActivity() {
                         return@subscribe
                     }
 
-                    DataManager.get().login(phone, pwd)
+                    RequestHelper.get().login(phone, pwd)
                             .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                            .subscribe({ loginResponse ->
-                                Logger.e(loginResponse.toString())
-                            }, { CustomException.handleException(it) }, {})
+                            .subscribe({
+                                DialogHelper.createSuccess(this, "登录成功")
+                                AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
+                            }, { CustomException.handleException(it) })
                 }
 
         tv_register.setOnClickListener({
             LoginActivity@ this.launch<RegisterActivity>()
         })
+    }
+
+    private fun checkLogin(): Boolean {
+        //TODO(check)
+        return false
     }
 }
