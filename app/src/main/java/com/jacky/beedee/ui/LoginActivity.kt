@@ -4,8 +4,11 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.network.DataManager
+import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
+import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
 import com.jacky.beedee.ui.inner.arch.BaseActivity
@@ -45,12 +48,16 @@ class LoginActivity : BaseActivity() {
                     }
 
                     val pwd = et_pwd.text.toString()
-                    if (!Strings.isNullOrEmpty(pwd)) {
+                    if (Strings.isNullOrEmpty(pwd)) {
                         toast("请输入密码")
                         return@subscribe
                     }
 
-                    TODO("login")
+                    DataManager.get().login(phone, pwd)
+                            .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                            .subscribe({ loginResponse ->
+                                Logger.e(loginResponse.toString())
+                            }, { CustomException.handleException(it) }, {})
                 }
 
         tv_register.setOnClickListener({

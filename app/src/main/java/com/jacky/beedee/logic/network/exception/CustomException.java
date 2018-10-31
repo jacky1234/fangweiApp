@@ -67,8 +67,11 @@ public class CustomException {
     }
 
     private static void handlerExceptionInternal(ApiException apiException) {
-        if (Strings.isNotBlank(apiException.getDisplayMessage())) {
-            AndroidUtil.toast(apiException.getDisplayMessage());
+        int code = apiException.getCode();
+        if ((code >= 400 && code <= 600) || code >= 1000) {
+            if (Strings.isNotBlank(apiException.getDisplayMessage())) {
+                AndroidUtil.toast(apiException.getDisplayMessage());
+            }
         }
     }
 

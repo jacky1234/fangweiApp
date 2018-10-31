@@ -1,6 +1,11 @@
 package com.jacky.beedee.logic.network
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.entity.response.HttpResponse
+import com.jacky.beedee.logic.network.intecept.LogicInterceptor
+import com.jacky.beedee.logic.network.parse.JsonFormatParser
 import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.system.DeviceDependency
 import com.jacky.beedee.support.util.Strings
@@ -107,12 +112,18 @@ class RetrofitManager private constructor() {
     private fun getRetrofit(): Retrofit {
         // 获取retrofit的实例
         return Retrofit.Builder()
-                .baseUrl(deviceDependency.baseUrl)  //自己配置
+                .baseUrl(deviceDependency.baseUrl)
                 .client(getOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
+    }
+
+    private fun getGson(): Gson {
+        return GsonBuilder()
+                .registerTypeAdapter(HttpResponse::class.java, JsonFormatParser(HttpResponse::class.java))
+                .create()
     }
 
     private fun getOkHttpClient(): OkHttpClient {
@@ -128,6 +139,7 @@ class RetrofitManager private constructor() {
         return OkHttpClient.Builder()
                 .addInterceptor(addQueryParameterInterceptor())  //参数添加
                 .addInterceptor(addHeaderInterceptor()) // token过滤
+                .addInterceptor(LogicInterceptor())
 //              .addInterceptor(addCacheInterceptor())
                 .addInterceptor(httpLoggingInterceptor) //日志,所有的请求响应度看到
                 .cache(cache)  //添加缓存

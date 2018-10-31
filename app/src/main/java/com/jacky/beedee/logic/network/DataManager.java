@@ -3,8 +3,10 @@ package com.jacky.beedee.logic.network;
 import android.support.annotation.NonNull;
 
 import com.google.gson.JsonObject;
+import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
+import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils;
 
@@ -33,10 +35,16 @@ public class DataManager {
                 .compose(ResponseTransformer.handleResult());
     }
 
+    public Observable<LoginResponse> login(@NotNull String phone, @NonNull String pwd) {
+        return apiService.login(new LoginRequest(phone, pwd))
+                .compose(SchedulerUtils.INSTANCE.ioToMain())
+                .compose(ResponseTransformer.handleResult());
+    }
+
 
     public Observable<HttpResponseSource> sendCode(@NotNull String mobile) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("mobile",mobile);
+        jsonObject.addProperty("mobile", mobile);
         return apiService.sendCode(jsonObject.toString())
                 .compose(SchedulerUtils.INSTANCE.ioToMain());
     }

@@ -1,12 +1,13 @@
 package com.jacky.beedee.logic.network
 
+import com.jacky.beedee.logic.entity.request.LoginRequest
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
 import com.jacky.beedee.logic.entity.response.HttpResponse
 import com.jacky.beedee.logic.entity.response.HttpResponseSource
+import com.jacky.beedee.logic.entity.response.LoginResponse
 import com.jacky.beedee.logic.entity.response.RegisterResponse
 import io.reactivex.Observable
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.POST
 
 /**
@@ -24,9 +25,7 @@ interface ApiService {
     fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
 
     @POST("login")
-    fun login(@Field("mobile") mobile: String
-              , @Field("password") password: String
-    ): Observable<HttpResponse<RegisterResponse>>
+    fun login(@Body loginRequest: LoginRequest): Observable<HttpResponse<LoginResponse>>
 
     @POST("send_sms_code")
     fun sendCode(@Body mobile: String): Observable<HttpResponseSource>

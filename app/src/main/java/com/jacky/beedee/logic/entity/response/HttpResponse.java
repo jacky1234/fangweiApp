@@ -1,9 +1,13 @@
 package com.jacky.beedee.logic.entity.response;
 
 public class HttpResponse<T> extends HttpResponseSource {
-    private T t;
+    private T data;
+
+    public void setData(T data) {
+        this.data = data;
+    }
 
     public T getData() {
-        return t;
+        return data;
     }
 }
