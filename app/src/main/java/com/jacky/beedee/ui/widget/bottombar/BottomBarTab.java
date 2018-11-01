@@ -104,6 +104,7 @@ public class BottomBarTab extends LinearLayout {
         mTvTitle.setTextSize(10);
         setTitleColor(colorNormal);
         mTvTitle.setLayoutParams(paramsTv);
+        mTvTitle.setTextColor(getResources().getColor(R.color.selector_single_choose));
         lLContainer.addView(mTvTitle);
 
         int min = dip2px(context, 20);
@@ -152,35 +153,17 @@ public class BottomBarTab extends LinearLayout {
     }
 
     public void setTitleColor(int colorId) {
-        mTvTitle.setTextColor(colorId);
-    }
-
-    public void setTabPosition(int position) {
-        mTabPosition = position;
-        if (position == 0) {
-            setSelected(true);
-        }
+        mTvTitle.setTextColor(getResources().getColor(colorId));
     }
 
     public int getTabPosition() {
         return mTabPosition;
     }
 
-    /**
-     * 设置未读数量
-     */
-    public void setUnreadCount(int num) {
-        dot.setVisibility(GONE);
-        if (num <= 0) {
-            mTvUnreadCount.setText(String.valueOf(0));
-            mTvUnreadCount.setVisibility(GONE);
-        } else {
-            mTvUnreadCount.setVisibility(VISIBLE);
-            if (num > 99) {
-                mTvUnreadCount.setText("99+");
-            } else {
-                mTvUnreadCount.setText(String.valueOf(num));
-            }
+    public void setTabPosition(int position) {
+        mTabPosition = position;
+        if (position == 0) {
+            setSelected(true);
         }
     }
 
@@ -217,6 +200,24 @@ public class BottomBarTab extends LinearLayout {
         } catch (Exception ignored) {
         }
         return count;
+    }
+
+    /**
+     * 设置未读数量
+     */
+    public void setUnreadCount(int num) {
+        dot.setVisibility(GONE);
+        if (num <= 0) {
+            mTvUnreadCount.setText(String.valueOf(0));
+            mTvUnreadCount.setVisibility(GONE);
+        } else {
+            mTvUnreadCount.setVisibility(VISIBLE);
+            if (num > 99) {
+                mTvUnreadCount.setText("99+");
+            } else {
+                mTvUnreadCount.setText(String.valueOf(num));
+            }
+        }
     }
 
     private int dip2px(Context context, float dp) {

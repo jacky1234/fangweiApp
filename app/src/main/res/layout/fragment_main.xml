@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<com.qmuiteam.qmui.widget.QMUIViewPager-->
-    <!--android:id="@+id/pager"-->
-    <!--android:background="?attr/app_content_bg_color"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginBottom="@dimen/home_tab_height" />-->
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bottom_bar_height" />
 
 
     <com.jacky.beedee.ui.widget.bottombar.BottomBarLayout

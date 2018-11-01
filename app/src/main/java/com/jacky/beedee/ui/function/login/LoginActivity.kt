@@ -1,4 +1,4 @@
-package com.jacky.beedee.ui
+package com.jacky.beedee.ui.function.login
 
 import android.Manifest
 import android.os.Bundle
@@ -12,6 +12,7 @@ import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
 import com.jacky.beedee.ui.Dialog.DialogHelper
+import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.tbruyelle.rxpermissions2.RxPermissions

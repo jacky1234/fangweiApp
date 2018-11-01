@@ -1,4 +1,4 @@
-package com.jacky.beedee.ui
+package com.jacky.beedee.ui.function.login
 
 import android.content.Intent
 import android.os.Bundle
