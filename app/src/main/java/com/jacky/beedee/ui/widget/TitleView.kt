@@ -42,8 +42,8 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         try {
             ta = context.obtainStyledAttributes(attrs, R.styleable.TitleView)
             leftDrawableId = ta.getResourceId(R.styleable.TitleView_titleView_left_drawable, R.mipmap.ic_arrow_back_black)
-            leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, R.string.back)
-            middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, R.string.login)
+            leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, 0)
+            middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, 0)
             leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, resources.getColor(android.R.color.white))
             middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, resources.getColor(android.R.color.white))
         } finally {
@@ -64,7 +64,12 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setLeftTextId(leftTextId: Int) {
         this.leftTextId = leftTextId
-        tv_left_text.setText(leftTextId)
+        if (leftTextId == 0) {
+            tv_left_text.visibility = View.INVISIBLE
+        } else {
+            tv_left_text.visibility = View.VISIBLE
+            tv_left_text.setText(leftTextId)
+        }
     }
 
     fun setLeftTextColorId(leftTextColorId: Int) {
@@ -74,7 +79,12 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setMiddleTextId(middleTextId: Int) {
         this.middleTextId = middleTextId
-        tv_title.setText(middleTextId)
+        if (middleTextId == 0) {
+            tv_title.visibility = View.INVISIBLE
+        } else {
+            tv_title.visibility = View.VISIBLE
+            tv_title.setText(middleTextId)
+        }
     }
 
     fun setMiddleTextColorId(middleTextColorId: Int) {

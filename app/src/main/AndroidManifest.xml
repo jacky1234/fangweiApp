@@ -26,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.function.login.LoginActivity">
-        </activity>
+        <activity android:name=".ui.function.login.LoginActivity"></activity>
         <activity android:name=".ui.function.login.RegisterActivity"></activity>
+        <activity android:name=".ui.function.defake.DefakeDetailActivity"></activity>
     </application>
 </manifest>

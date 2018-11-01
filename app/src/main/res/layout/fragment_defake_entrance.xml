@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/title_text_style"
+        android:text="防伪检测" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:src="@mipmap/ic_scan_code_tip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="点击开始检测，并对准条形码进行扫描"
+            android:textColor="#666666"
+            android:textSize="@dimen/normal_textsize" />
+
+        <FrameLayout
+            android:id="@+id/parent_scan"
+            style="@style/confirm_button"
+            android:layout_marginTop="46dp">
+
+            <TextView
+                style="@style/confirm_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@mipmap/ic_small_scanner_logo"
+                android:drawablePadding="16dp"
+                android:text="开始检测" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>

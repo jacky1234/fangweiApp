@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.jacky.beedee.support.Starter;
@@ -26,6 +27,7 @@ public class AndroidUtil {
      * @return
      */
     public static String getVersionName(Context context) {
+        Fragment[] fragments = new Fragment[4];
         String versionName;
         // 获取当前应用版本号
         try {

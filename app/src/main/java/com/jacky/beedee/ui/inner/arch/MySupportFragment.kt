@@ -2,7 +2,6 @@ package com.jacky.beedee.ui.inner.arch
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.view.animation.Animation
@@ -12,7 +11,7 @@ import me.yokeyword.fragmentation.SupportFragmentDelegate
 import me.yokeyword.fragmentation.SupportHelper
 import me.yokeyword.fragmentation.anim.FragmentAnimator
 
-open class MySupportFragment : Fragment(), ISupportFragment {
+open class MySupportFragment : SecondFragment(), ISupportFragment {
     private val mDelegate = SupportFragmentDelegate(this)
     protected lateinit var _mActivity: FragmentActivity
 
@@ -39,7 +38,7 @@ open class MySupportFragment : Fragment(), ISupportFragment {
         mDelegate.onCreate(savedInstanceState)
     }
 
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation {
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
         return mDelegate.onCreateAnimation(transit, enter, nextAnim)
     }
 
@@ -404,14 +403,14 @@ open class MySupportFragment : Fragment(), ISupportFragment {
     /**
      * 获取栈内的fragment对象
      */
-    fun <T : ISupportFragment> findFragment(fragmentClass: Class<T>): T {
+    fun <T : ISupportFragment> findFragment(fragmentClass: Class<T>): T? {
         return SupportHelper.findFragment(fragmentManager, fragmentClass)
     }
 
     /**
      * 获取栈内的fragment对象
      */
-    fun <T : ISupportFragment> findChildFragment(fragmentClass: Class<T>): T {
+    fun <T : ISupportFragment> findChildFragment(fragmentClass: Class<T>): T? {
         return SupportHelper.findFragment(childFragmentManager, fragmentClass)
     }
 }

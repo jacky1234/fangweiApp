@@ -13,23 +13,31 @@ import com.jacky.beedee.ui.widget.bottombar.BottomBarLayout
 import com.jacky.beedee.ui.widget.bottombar.BottomBarTab
 
 class MainFragment : MySupportFragment() {
-    private val mFragments = arrayOf(MySupportFragment)
+    private val mFragments = ArrayList<MySupportFragment>(4)
     private lateinit var bottomBarLayout: BottomBarLayout
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout = LayoutInflater.from(activity).inflate(R.layout.fragment_main, null)
-        val findChildFragment = findChildFragment(HomeFragment::class.java)
-        if (findChildFragment == null) {
-            mFragments[0] = HomeFragment()
-            mFragments[1] = DiscoveryFragment()
-            mFragments[2] = DefakeFragment()
-            mFragments[3] = Mefragment()
+        val homeFragment = findChildFragment(HomeFragment::class.java)
+        mFragments.clear()
+        if (homeFragment == null) {
+            mFragments.add(HomeFragment())
+            mFragments.add(DiscoveryFragment())
+            mFragments.add(DefakeFragment())
+            mFragments.add(Mefragment())
 
             loadMultipleRootFragment(R.id.frameLayout, 0,
                     mFragments[0],
                     mFragments[1],
                     mFragments[2],
-                    mFragments[3],
+                    mFragments[3])
+        } else {
+            mFragments.add(homeFragment)
+            mFragments.add(findChildFragment(DiscoveryFragment::class.java)!!)
+            mFragments.add(findChildFragment(DefakeFragment::class.java)!!)
+            mFragments.add(findChildFragment(Mefragment::class.java)!!)
         }
+
+        showHideFragment(mFragments[0])
 
         initTabs(layout)
         return layout
@@ -37,7 +45,6 @@ class MainFragment : MySupportFragment() {
 
     private fun initTabs(view: View) {
         bottomBarLayout = view.findViewById(R.id.bottomBar)
-        bottomBarLayout.removeAllViews()
         bottomBarLayout
                 .addItem(BottomBarTab(activity, R.mipmap.ic_tab_home, R.mipmap.ic_tab_home_selected, "首页"))
                 .addItem(BottomBarTab(activity, R.mipmap.ic_tab_discovery, R.mipmap.ic_tab_discovery_selected, "发现"))
@@ -53,10 +60,18 @@ class MainFragment : MySupportFragment() {
             }
 
             override fun onTabSelected(position: Int, prePosition: Int) {
+                if (!mFragments[position].isAttached() || !mFragments[prePosition].isAttached()) {
+                    return
+                }
 
+                showHideFragment(mFragments[position], mFragments[prePosition])
             }
 
         })
+
+        bottomBarLayout.setOnTabDoubleClickListener {
+
+        }
 
     }
 }

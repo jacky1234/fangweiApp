@@ -32,7 +32,6 @@ class LoginActivity : BaseActivity() {
                 , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET)
                 .subscribe()
 
-        checkLogin()
         titleView.setLeftAction(View.OnClickListener { finish() })
 
         val login = tv_login
@@ -64,13 +63,8 @@ class LoginActivity : BaseActivity() {
                             }, { CustomException.handleException(it) })
                 }
 
-        tv_register.setOnClickListener({
+        tv_register.setOnClickListener {
             LoginActivity@ this.launch<RegisterActivity>()
-        })
-    }
-
-    private fun checkLogin(): Boolean {
-        //TODO(check)
-        return false
+        }
     }
 }
