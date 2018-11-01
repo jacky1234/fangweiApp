@@ -3,6 +3,7 @@ package com.jacky.beedee.support;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import com.jacky.beedee.logic.entity.MySelf;
 import com.jacky.beedee.support.system.Device;
 import com.jacky.beedee.support.system.DeviceDependency;
 import com.jacky.beedee.support.util.AndroidUtil;
@@ -20,10 +21,10 @@ public class Starter {
     public static void init(Context context) {
         Starter.context = context;
 
-
         Device device = Device.create(Device.Type.ANDROID, android.os.Build.VERSION.RELEASE,
                 AndroidUtil.getVersionName(context));
         DeviceDependency.current = new DeviceDependency(device, "https://api.beedee.yituizhineng.top");
+        MySelf.init();
     }
 
     public static Context getContext() {

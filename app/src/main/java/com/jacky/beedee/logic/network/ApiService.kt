@@ -1,7 +1,9 @@
 package com.jacky.beedee.logic.network
 
+import com.jacky.beedee.logic.entity.User
 import com.jacky.beedee.logic.entity.request.LoginRequest
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
+import com.jacky.beedee.logic.entity.request.UserRequest
 import com.jacky.beedee.logic.entity.response.HttpResponse
 import com.jacky.beedee.logic.entity.response.HttpResponseSource
 import com.jacky.beedee.logic.entity.response.LoginResponse
@@ -29,5 +31,8 @@ interface ApiService {
 
     @POST("send_sms_code")
     fun sendCode(@Body mobile: String): Observable<HttpResponseSource>
+
+    @POST("user/update")
+    fun completeUserInfo(@Body request: UserRequest): Observable<HttpResponse<User>>
 
 }

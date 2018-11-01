@@ -3,8 +3,10 @@ package com.jacky.beedee.logic.network;
 import android.support.annotation.NonNull;
 
 import com.google.gson.JsonObject;
+import com.jacky.beedee.logic.entity.User;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
+import com.jacky.beedee.logic.entity.request.UserRequest;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
@@ -47,6 +49,12 @@ public class RequestHelper {
         jsonObject.addProperty("mobile", mobile);
         return apiService.sendCode(jsonObject.toString())
                 .compose(SchedulerUtils.INSTANCE.ioToMain());
+    }
+
+    public Observable<User> completeUserInfo(@NotNull UserRequest user) {
+        return apiService.completeUserInfo(user)
+                .compose(SchedulerUtils.INSTANCE.ioToMain())
+                .compose(ResponseTransformer.handleResult());
     }
 
 

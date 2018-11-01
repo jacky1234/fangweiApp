@@ -38,7 +38,7 @@ class DefakeFragment : MySupportFragment() {
                                 activity!!.launch<DefakeDetailActivity>()
                             }
                         }, {
-                            AndroidUtil.toast("未获取权限")
+                            AndroidUtil.toast("请开启存储和相机权限")
                         })
                     }
         }

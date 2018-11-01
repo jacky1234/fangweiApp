@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_left_drawable="@mipmap/ic_arrow_back_black"
+        app:titleView_left_text="@string/back"
+        app:titleView_left_text_color="@color/black"
+        app:titleView_middle_text_color="@color/black"
+        app:titleView_title_text="@string/account_security">
+
+    </com.jacky.beedee.ui.widget.TitleView>
+
+    <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+        android:id="@+id/groupListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

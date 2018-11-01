@@ -26,6 +26,7 @@ public class LogicInterceptor implements Interceptor {
         for (int i = 0, count = headers.size(); i < count; i++) {
             if (Strings.equalNames(headers.name(i), "Authorization")) {
                 MySelf.get().setAuthorization(headers.value(i));
+                MySelf.get().save();
                 break;
             }
         }

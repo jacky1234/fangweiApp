@@ -2,7 +2,12 @@ package com.jacky.beedee.ui.function.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.entity.request.UserRequest
+import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.inner.arch.BaseActivity
@@ -18,6 +23,7 @@ class RegisterFillInfoActivity : BaseActivity() {
         val phone = intent.getStringExtra(KEY_PHONE)
         val code = intent.getStringExtra(KEY_CODE)
 
+        titleView.setLeftAction(View.OnClickListener { finish() })
 
         val complete = tv_complete
         RxView.clicks(complete).throttleFirst(2, TimeUnit.SECONDS)
@@ -28,6 +34,30 @@ class RegisterFillInfoActivity : BaseActivity() {
                         toast("请输入昵称")
                         return@subscribe
                     }
+
+                    val pwd = et_pwd.text.toString()
+                    if (Strings.isNullOrEmpty(pwd)) {
+                        toast("请输入密码")
+                        return@subscribe
+                    }
+                    if (Strings.isNullOrEmpty(et_confirm_pwd.text.toString())) {
+                        toast("请确认密码")
+                        return@subscribe
+                    }
+
+                    if (pwd != et_confirm_pwd.text.toString()) {
+                        toast("两次输入的密码不一致")
+                        return@subscribe
+                    }
+                    val request = UserRequest()
+                    request.nickName = nickname
+                    request.gender = if (rb_boy.isChecked) "MALE" else "FEMALE"
+                    request.password = pwd
+                    RequestHelper.get().completeUserInfo(request).subscribe({
+                        MySelf.get().from(it)
+                        MySelf.get().save()
+                    }, { CustomException.handleException(it) })
+
                 })
     }
 

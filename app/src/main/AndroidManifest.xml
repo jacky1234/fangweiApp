@@ -19,7 +19,9 @@
         <!--<activity android:name=".ui.LoadingActivity">-->
         <!---->
         <!--</activity>-->
-        <activity android:name=".ui.function.main.MainActivity">
+        <activity
+            android:name=".ui.function.main.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,5 +31,7 @@
         <activity android:name=".ui.function.login.LoginActivity"></activity>
         <activity android:name=".ui.function.login.RegisterActivity"></activity>
         <activity android:name=".ui.function.defake.DefakeDetailActivity"></activity>
+        <activity android:name=".ui.function.login.RegisterFillInfoActivity"></activity>
+        <activity android:name=".ui.function.me.AccountAndSecurityActivity" />
     </application>
 </manifest>
