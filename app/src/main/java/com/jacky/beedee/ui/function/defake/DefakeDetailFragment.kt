@@ -1,7 +1,6 @@
 package com.jacky.beedee.ui.function.defake
 
 import android.Manifest
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,6 @@ import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.TitleView
 import com.tbruyelle.rxpermissions2.RxPermissions
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.engine.impl.GlideEngine
 
 
 class DefakeDetailFragment : MySupportFragment() {
@@ -37,15 +33,15 @@ class DefakeDetailFragment : MySupportFragment() {
             rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
                     .subscribe {
                         if (it) {
-                            Matisse.from(this)
-                                    .choose(MimeType.ofImage())
-                                    .maxSelectable(1)
-//                    .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                                    .gridExpectedSize(300)
-                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                                    .thumbnailScale(0.85f)
-                                    .imageEngine(GlideEngine())
-                                    .forResult(REQUEST_CODE_CHOOSE)
+//                            Matisse.from(this)
+//                                    .choose(MimeType.ofImage())
+//                                    .maxSelectable(1)
+////                    .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                                    .gridExpectedSize(300)
+//                                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                                    .thumbnailScale(0.85f)
+//                                    .imageEngine(GlideEngine())
+//                                    .forResult(REQUEST_CODE_CHOOSE)
                         } else {
                             AndroidUtil.toast("请开启存储权限")
                         }

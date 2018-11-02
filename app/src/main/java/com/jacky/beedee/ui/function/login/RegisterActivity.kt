@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
@@ -13,7 +14,7 @@ import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
-import com.jacky.beedee.ui.Dialog.DialogHelper
+import com.jacky.beedee.ui.Dialog.DialogTipsHelper
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -32,7 +33,7 @@ class RegisterActivity : BaseActivity() {
         setContentView(R.layout.activity_register)
 
         titleView.setLeftAction(View.OnClickListener { finish() })
-
+        et_phone.setText(intent.getStringExtra(KEY_MOBILE))
         val btnGainCode = btn_gain_code
         btnGainCode.clickWithTrigger {
             val phone = et_phone.text.toString()
@@ -42,11 +43,15 @@ class RegisterActivity : BaseActivity() {
             }
 
             RxView.enabled(btnGainCode).accept(false)
-            Observable.interval(1, TimeUnit.SECONDS).take(MAX_SECOND).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ l -> RxTextView.text(btnGainCode).accept("剩余" + (MAX_SECOND - l) + "秒"); }, Logger.Companion::e, {
-                        RxTextView.textRes(btnGainCode).accept(R.string.get_vertify_code)
-                        RxView.enabled(btnGainCode).accept(true)
-                    })
+            RequestHelper.get().sendCode(phone).subscribe({
+                AndroidUtil.toast("发送成功")
+                Observable.interval(1, TimeUnit.SECONDS).take(MAX_SECOND).observeOn(AndroidSchedulers.mainThread())
+                        .compose(bindUntilEvent(ActivityEvent.DESTROY))
+                        .subscribe({ l -> RxTextView.text(btnGainCode).accept("剩余" + (MAX_SECOND - l) + "秒"); }, Logger.Companion::e, {
+                            RxTextView.textRes(btnGainCode).accept(R.string.get_vertify_code)
+                            RxView.enabled(btnGainCode).accept(true)
+                        })
+            }, { CustomException.handleException(it) })
         }
 
         val next = tv_next
@@ -87,8 +92,18 @@ class RegisterActivity : BaseActivity() {
                     MySelf.get().updateTime = it.updateTime
                     MySelf.get().save()
 
-                    DialogHelper.createSuccess(this, "注册成功")
+                    DialogTipsHelper.createSuccess(this, "注册成功")
                     AndroidUtil.runUI({ this@RegisterActivity.launch<RegisterFillInfoActivity>() }, 100)
                 }, { CustomException.handleException(it) })
+    }
+
+    companion object {
+        const val KEY_MOBILE = "KEY_MOBILE"
+        @JvmStatic
+        fun start(activity: BaseActivity, mobile: String) {
+            val intent = Intent(activity, RegisterActivity::class.java)
+            intent.putExtra(KEY_MOBILE, mobile)
+            activity.startActivity(intent)
+        }
     }
 }

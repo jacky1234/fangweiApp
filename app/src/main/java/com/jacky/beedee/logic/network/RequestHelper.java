@@ -2,14 +2,16 @@ package com.jacky.beedee.logic.network;
 
 import android.support.annotation.NonNull;
 
-import com.google.gson.JsonObject;
 import com.jacky.beedee.logic.entity.User;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
+import com.jacky.beedee.logic.entity.request.Mobile;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UserRequest;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
+import com.jacky.beedee.logic.network.transformer.BooleanTransformer;
+import com.jacky.beedee.logic.network.transformer.ResponseTransformer;
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,28 +35,29 @@ public class RequestHelper {
 
     public Observable<RegisterResponse> register(@NotNull String phone, @NonNull String code) {
         return apiService.register(new ReigsterRequest(phone, code))
-                .compose(SchedulerUtils.INSTANCE.ioToMain())
                 .compose(ResponseTransformer.handleResult());
     }
 
     public Observable<LoginResponse> login(@NotNull String phone, @NonNull String pwd) {
         return apiService.login(new LoginRequest(phone, pwd))
-                .compose(SchedulerUtils.INSTANCE.ioToMain())
                 .compose(ResponseTransformer.handleResult());
     }
 
 
-    public Observable<HttpResponseSource> sendCode(@NotNull String mobile) {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("mobile", mobile);
-        return apiService.sendCode(jsonObject.toString())
-                .compose(SchedulerUtils.INSTANCE.ioToMain());
+    public Observable<Boolean> sendCode(@NotNull String s) {
+        Mobile mobile = new Mobile();
+        mobile.setMobile(s);
+        return apiService.sendCode(mobile)
+                .compose(BooleanTransformer.handleResult());
     }
 
     public Observable<User> completeUserInfo(@NotNull UserRequest user) {
         return apiService.completeUserInfo(user)
-                .compose(SchedulerUtils.INSTANCE.ioToMain())
                 .compose(ResponseTransformer.handleResult());
+    }
+
+    public Observable<HttpResponseSource> logout() {
+        return apiService.logout().compose(SchedulerUtils.INSTANCE.ioToMain());
     }
 
 

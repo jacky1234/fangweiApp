@@ -69,7 +69,7 @@ class RetrofitManager private constructor() {
             requestBuilder.addHeader("Content-Type", "application/json")
             requestBuilder.addHeader("Accept", "application/json")
             if (Strings.isNotBlank(MySelf.get().authorization)) {
-                requestBuilder.header("Authorization", MySelf.get().authorization)
+                requestBuilder.header("Authorization", MySelf.get().authorization!!)
             }
             requestBuilder.header("X-App-Version", getAppVersionHeader())
             requestBuilder.method(originalRequest.method(), originalRequest.body())

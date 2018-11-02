@@ -3,7 +3,9 @@ package com.jacky.beedee.ui.inner.arch
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
+import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.support.misc.LifeCircleComponents
+import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.RxLifecycle
@@ -19,6 +21,7 @@ import io.reactivex.subjects.BehaviorSubject
  * @author  jacky
  */
 open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> {
+    protected lateinit var rxPermissions: RxPermissions
     private val lifeCircleComponents = LifeCircleComponents()
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
 
@@ -52,6 +55,7 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        rxPermissions = RxPermissions(this)
         lifecycleSubject.onNext(ActivityEvent.CREATE)
     }
 
@@ -64,6 +68,7 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     @CallSuper
     override fun onResume() {
         super.onResume()
+        MiscFacade.get().loginOutFlag(this, false)
         lifecycleSubject.onNext(ActivityEvent.RESUME)
     }
 

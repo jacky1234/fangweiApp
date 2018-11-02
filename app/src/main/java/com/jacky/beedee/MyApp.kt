@@ -1,12 +1,12 @@
 package com.jacky.beedee
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.log.Logger
 import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
-class MyApp : Application() {
+class MyApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -17,7 +17,7 @@ class MyApp : Application() {
 
     private fun initFragmentation() {
         Fragmentation.builder()
-                .stackViewMode(Fragmentation.SHAKE)
+                .stackViewMode(Fragmentation.NONE)
                 .debug(BuildConfig.DEBUG)
                 .handleException(Logger.Companion::e)
                 .install()

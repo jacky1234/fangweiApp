@@ -17,35 +17,41 @@
 
     </com.jacky.beedee.ui.widget.TitleView>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/qmui_list_item_height">
+        android:layout_height="wrap_content"
+        android:divider="@color/tabbar_text_color"
+        android:dividerPadding="0.5dp"
+        android:orientation="vertical"
+        android:showDividers="beginning|end|middle">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/first_margin_from_left"
-            android:text="头像" />
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parent_head"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
 
-        <ImageView
-            android:id="@+id/iv_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/first_margin_from_left"
-            android:src="@mipmap/ic_arrow_right_black" />
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parent_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
 
-        <ImageView
-            android:layout_width="47dp"
-            android:layout_height="47dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@id/iv_arrow" />
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parent_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
 
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parent_modify_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
 
-    </RelativeLayout>
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parent_logout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
+
+    </LinearLayout>
+
 
     <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
         android:id="@+id/groupListView"

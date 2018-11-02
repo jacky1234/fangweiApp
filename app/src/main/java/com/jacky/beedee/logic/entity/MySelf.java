@@ -81,19 +81,19 @@ public class MySelf {
         this.id = id;
     }
 
-    public long getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public long getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(long updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -105,12 +105,14 @@ public class MySelf {
         this.username = username;
     }
 
+    @NotNull
     public String getNickName() {
         if (Strings.isNotBlank(nickName)) {
             return username;
         }
 
-        return nickName;
+
+        return nickName == null ? Strings.empty : nickName;
     }
 
     public void setNickName(String nickName) {
@@ -133,8 +135,9 @@ public class MySelf {
         this.avatar = avatar;
     }
 
+    @NotNull
     public String getMobile() {
-        return mobile;
+        return mobile == null ? Strings.empty : mobile;
     }
 
     public void setMobile(String mobile) {
@@ -167,8 +170,10 @@ public class MySelf {
     }
 
     public void clear() {
-        DaoFacade.get().saveMyselfInfo(null);
+        String m = instance.mobile;
         instance = new MySelf();
+        instance.mobile = m;
+        DaoFacade.get().saveMyselfInfo(instance);
     }
 
     @Nullable

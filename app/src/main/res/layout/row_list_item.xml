@@ -5,26 +5,41 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/first_margin_from_left"
+        android:textColor="@color/black"
+        android:textSize="@dimen/lager_textsize"
         tools:text="头像" />
 
     <ImageView
         android:id="@+id/iv_arrow"
+        android:src="@mipmap/ic_arrow_right_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/first_margin_from_left"
-        tools:src="@mipmap/ic_arrow_right_black" />
+        android:layout_marginRight="@dimen/first_margin_from_left" />
 
     <ImageView
+        android:id="@+id/tv_image"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:layout_toLeftOf="@id/iv_arrow" />
+
+    <TextView
+        android:id="@+id/tv_right_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_toLeftOf="@id/iv_arrow"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:textColor="#333333"
+        android:textSize="@dimen/normal_textsize" />
 
 </merge>

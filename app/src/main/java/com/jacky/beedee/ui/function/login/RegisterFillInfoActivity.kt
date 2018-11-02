@@ -8,8 +8,10 @@ import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.logic.entity.request.UserRequest
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.logic.network.exception.CustomException
+import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.Strings
+import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -28,7 +30,7 @@ class RegisterFillInfoActivity : BaseActivity() {
         val complete = tv_complete
         RxView.clicks(complete).throttleFirst(2, TimeUnit.SECONDS)
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe({
+                .subscribe {
                     val nickname = et_nickname.text.toString()
                     if (Strings.isNullOrEmpty(nickname)) {
                         toast("请输入昵称")
@@ -53,12 +55,16 @@ class RegisterFillInfoActivity : BaseActivity() {
                     request.nickName = nickname
                     request.gender = if (rb_boy.isChecked) "MALE" else "FEMALE"
                     request.password = pwd
-                    RequestHelper.get().completeUserInfo(request).subscribe({
-                        MySelf.get().from(it)
-                        MySelf.get().save()
-                    }, { CustomException.handleException(it) })
+                    RequestHelper.get().completeUserInfo(request)
+                            .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                            .subscribe({
+                                MySelf.get().from(it)
+                                MySelf.get().save()
+                                finishAffinity()
+                                this@RegisterFillInfoActivity.launch<MainActivity>()
+                            }, { CustomException.handleException(it) })
 
-                })
+                }
     }
 
     companion object {

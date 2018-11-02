@@ -1,24 +1,28 @@
 package com.jacky.beedee.ui.Dialog;
 
-import android.content.Context;
+import android.app.Activity;
 
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
-/**
- * 2018/10/31.
- * GitHub:[https://github.com/jacky1234]
- *
- * @author jacky
- */
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class DialogHelper {
-    public static QMUITipDialog createSuccess(Context context) {
-        return createSuccess(context, "发送成功");
+    private static int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
+
+    public static QMUIDialog createSimpleConfirmDialog(@NotNull Activity activity, @NotNull String detail, @Nullable QMUIDialogAction.ActionListener positiveAction) {
+        return new QMUIDialog.MessageDialogBuilder(activity)
+                .setTitle("提示")
+                .setMessage(detail)
+                .addAction("取消", (dialog, index) -> dialog.dismiss())
+                .addAction("确定", (dialog, index) -> {
+                    dialog.dismiss();
+                    if (positiveAction != null) {
+                        positiveAction.onClick(dialog, index);
+                    }
+                })
+                .create(mCurrentDialogStyle);
     }
 
-    public static QMUITipDialog createSuccess(Context context, String s) {
-        return new QMUITipDialog.Builder(context)
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
-                .setTipWord(s)
-                .create();
-    }
 }

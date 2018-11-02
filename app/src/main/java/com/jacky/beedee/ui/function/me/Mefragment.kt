@@ -42,6 +42,12 @@ class Mefragment : MySupportFragment() {
     }
 
     private fun initFlexible() {
+        RxView.clicks(parentUnLogined).throttleFirst(1, TimeUnit.SECONDS)
+                .compose(bindToLifecycle())
+                .subscribe {
+                    activity!!.launch<LoginActivity>()
+                }
+
         if (MySelf.get().isLogined()) {
             parentLogined.visibility = View.VISIBLE
             parentUnLogined.visibility = View.GONE
@@ -54,13 +60,6 @@ class Mefragment : MySupportFragment() {
     }
 
     private fun initOnce() {
-        RxView.clicks(parentUnLogined).throttleFirst(1, TimeUnit.SECONDS)
-                .compose(bindToLifecycle())
-                .subscribe {
-                    activity!!.launch<LoginActivity>()
-                }
-
-
         val itemFavorite = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
                 "我的收藏",
