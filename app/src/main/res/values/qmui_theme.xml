@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--**********************************************
+      *                 qmui common list item          *
+      ***********************************************-->
+    <item name="qmui_common_list_item_chevron">@drawable/qmui_icon_chevron</item>
+    <item name="qmui_common_list_item_switch">@drawable/qmui_s_icon_switch</item>
+</resources>

@@ -5,8 +5,11 @@
     android:layout_height="match_parent">
 
     <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
+        app:titleView_right_text="@string/gallery"
+        app:titleView_right_text_color="@color/black"
         app:titleView_left_drawable="@mipmap/ic_xx">
 
     </com.jacky.beedee.ui.widget.TitleView>
@@ -33,7 +36,6 @@
         app:qrcv_isShowTipBackground="true"
         app:qrcv_isShowTipTextAsSingleLine="false"
         app:qrcv_isTipTextBelowRect="false"
-        app:qrcv_maskColor="#33FFFFFF"
         app:qrcv_qrCodeTipText="将二维码/条码放入框内，即可自动扫描"
         app:qrcv_rectWidth="200dp"
         app:qrcv_scanLineColor="@color/colorPrimaryDark"

@@ -38,4 +38,29 @@
         tools:text="登录"
         tools:textColor="@android:color/black" />
 
+    <LinearLayout
+        android:id="@+id/right_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/normal_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!--<ImageView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/first_margin_from_left"-->
+            <!--tools:src="@mipmap/ic_arrow_back_black" />-->
+
+        <TextView
+            android:id="@+id/tv_right_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normal_textsize"
+            tools:text="@string/back"
+            tools:textColor="@android:color/black" />
+    </LinearLayout>
+
 </FrameLayout>

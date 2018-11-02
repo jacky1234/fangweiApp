@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.jacky.beedee.R
+import kotlinx.android.synthetic.main.title_view.view.*
 
 /**
  * 2018/10/27.
@@ -21,12 +22,15 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     private var tv_left_text: TextView
     private var tv_title: TextView
     private var left_container: View
+    private var right_container: View
 
     private var leftDrawableId: Int
     private var leftTextId: Int
     private var leftTextColorId: Int
     private var middleTextId: Int
     private var middleTextColorId: Int
+    private var rightTextId: Int
+    private var rightTextColorId: Int
 
     init {
         val view = LayoutInflater.from(context).inflate(R.layout.title_view, null)
@@ -36,6 +40,7 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         tv_left_text = view.findViewById(R.id.tv_left_text)
         tv_title = view.findViewById(R.id.tv_title)
         left_container = view.findViewById(R.id.left_container)
+        right_container = view.findViewById(R.id.right_container)
 
 
         var ta: TypedArray? = null
@@ -46,6 +51,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, 0)
             leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, resources.getColor(android.R.color.white))
             middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, resources.getColor(android.R.color.white))
+            rightTextId = ta.getResourceId(R.styleable.TitleView_titleView_right_text, 0)
+            rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, resources.getColor(android.R.color.white))
+
         } finally {
             ta?.recycle()
         }
@@ -55,6 +63,8 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         setLeftTextColorId(leftTextColorId)
         setMiddleTextId(middleTextId)
         setMiddleTextColorId(middleTextColorId)
+        setRightTextId(rightTextId)
+        setRightTextColorId(rightTextColorId)
     }
 
     fun setLeftDrawableId(leftDrawableId: Int) {
@@ -77,6 +87,21 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         tv_left_text.setTextColor(leftTextColorId)
     }
 
+    fun setRightTextId(rightTextId: Int) {
+        this.rightTextId = rightTextId
+        if (rightTextId == 0) {
+            tv_right_text.visibility = View.INVISIBLE
+        } else {
+            tv_right_text.visibility = View.VISIBLE
+            tv_right_text.setText(rightTextId)
+        }
+    }
+
+    fun setRightTextColorId(rightTextColorId: Int) {
+        this.rightTextColorId = rightTextColorId
+        tv_right_text.setTextColor(rightTextColorId)
+    }
+
     fun setMiddleTextId(middleTextId: Int) {
         this.middleTextId = middleTextId
         if (middleTextId == 0) {
@@ -94,5 +119,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setLeftAction(onClickListener: OnClickListener?) {
         left_container.setOnClickListener(onClickListener)
+    }
+
+    fun setRightAction(onClickListener: OnClickListener?) {
+        right_container.setOnClickListener(onClickListener)
     }
 }

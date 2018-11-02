@@ -18,6 +18,5 @@ class AccountAndSecurityActivity : BaseActivity(){
         setContentView(R.layout.activity_account_security)
 
         titleView.setLeftAction(View.OnClickListener { finish() })
-
     }
 }
