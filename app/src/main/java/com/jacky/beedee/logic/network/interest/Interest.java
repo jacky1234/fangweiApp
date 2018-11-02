@@ -1,4 +1,4 @@
-package com.jacky.beedee.support.core;
+package com.jacky.beedee.logic.network.interest;
 
 /**
  * 2018/11/2.

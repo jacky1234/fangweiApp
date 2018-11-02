@@ -17,8 +17,9 @@ import io.reactivex.functions.Function;
  * @author jacky
  */
 public class HttpResponseTransformer {
-    public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult() {
+    public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult(boolean loading) {
         return upstream -> upstream
+                .compose(LoadingTransformer.loading(loading))
                 .compose(SchedulerUtils.INSTANCE.ioToMain())
                 .onErrorResumeNext(new ErrorResumeFunction<>())
                 .flatMap(new ResponseFunction<>());

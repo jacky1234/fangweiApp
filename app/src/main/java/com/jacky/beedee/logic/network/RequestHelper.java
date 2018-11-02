@@ -12,8 +12,6 @@ import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
 import com.jacky.beedee.logic.network.transformer.BooleanTransformer;
 import com.jacky.beedee.logic.network.transformer.HttpResponseTransformer;
-import com.jacky.beedee.logic.network.transformer.InterestTransformer;
-import com.jacky.beedee.support.core.LoadingInterest;
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,14 +35,12 @@ public class RequestHelper {
 
     public Observable<RegisterResponse> register(@NotNull String phone, @NonNull String code) {
         return apiService.register(new ReigsterRequest(phone, code))
-                .compose(InterestTransformer.interest(new LoadingInterest()))
-                .compose(HttpResponseTransformer.handleResult());
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
     public Observable<LoginResponse> login(@NotNull String phone, @NonNull String pwd) {
         return apiService.login(new LoginRequest(phone, pwd))
-                .compose(InterestTransformer.interest(new LoadingInterest()))
-                .compose(HttpResponseTransformer.handleResult());
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
 
@@ -52,14 +48,12 @@ public class RequestHelper {
         Mobile mobile = new Mobile();
         mobile.setMobile(s);
         return apiService.sendCode(mobile)
-                .compose(InterestTransformer.interest(new LoadingInterest()))
-                .compose(BooleanTransformer.handleResult());
+                .compose(BooleanTransformer.handleResult(true));
     }
 
     public Observable<User> completeUserInfo(@NotNull UserRequest user) {
         return apiService.completeUserInfo(user)
-                .compose(InterestTransformer.interest(new LoadingInterest()))
-                .compose(HttpResponseTransformer.handleResult());
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
     public Observable<HttpResponseSource> logout() {

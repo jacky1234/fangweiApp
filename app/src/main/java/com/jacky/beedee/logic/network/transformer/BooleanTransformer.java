@@ -12,8 +12,9 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.functions.Function;
 
 public class BooleanTransformer {
-    public static ObservableTransformer<HttpResponseSource, Boolean> handleResult() {
+    public static ObservableTransformer<HttpResponseSource, Boolean> handleResult(boolean loading) {
         return upstream -> upstream
+                .compose(LoadingTransformer.loading(loading))
                 .compose(SchedulerUtils.INSTANCE.ioToMain())
                 .onErrorResumeNext(new ErrorResumeFunction<>())
                 .flatMap(new ResponseFunction());

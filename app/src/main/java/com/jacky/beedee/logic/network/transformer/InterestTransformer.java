@@ -1,7 +1,7 @@
 package com.jacky.beedee.logic.network.transformer;
 
 
-import com.jacky.beedee.support.core.Interest;
+import com.jacky.beedee.logic.network.interest.Interest;
 import com.jacky.beedee.support.log.Logger;
 import com.jacky.beedee.support.util.AndroidUtil;
 

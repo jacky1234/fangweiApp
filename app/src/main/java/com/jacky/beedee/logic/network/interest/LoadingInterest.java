@@ -1,4 +1,4 @@
-package com.jacky.beedee.support.core;
+package com.jacky.beedee.logic.network.interest;
 
 import com.jacky.beedee.ui.Dialog.DialogTipsHelper;
 import com.jacky.beedee.ui.inner.arch.BaseActivity;
