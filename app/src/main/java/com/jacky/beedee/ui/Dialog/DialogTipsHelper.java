@@ -27,4 +27,15 @@ public class DialogTipsHelper {
         QMUITipDialog success = createSuccess(context, s);
         AndroidUtil.runUI(success::show, 1000);
     }
+
+    public static QMUITipDialog createDefaultLoading(Context context) {
+        return createLoading(context, "正在加载");
+    }
+
+    public static QMUITipDialog createLoading(Context context, String s) {
+        return new QMUITipDialog.Builder(context)
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .setTipWord(s)
+                .create();
+    }
 }

@@ -16,7 +16,7 @@ import io.reactivex.functions.Function;
  *
  * @author jacky
  */
-public class ResponseTransformer {
+public class HttpResponseTransformer {
     public static <T> ObservableTransformer<HttpResponse<T>, T> handleResult() {
         return upstream -> upstream
                 .compose(SchedulerUtils.INSTANCE.ioToMain())

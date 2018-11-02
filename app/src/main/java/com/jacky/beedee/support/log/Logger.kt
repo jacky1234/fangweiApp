@@ -31,7 +31,7 @@ class Logger {
 
         @JvmStatic
         private fun write(info: String) {
-            Log.d("Logger", info)
+            Log.d("Logger", "Thread," + Thread.currentThread().name + ",info:" + info)
         }
     }
 }

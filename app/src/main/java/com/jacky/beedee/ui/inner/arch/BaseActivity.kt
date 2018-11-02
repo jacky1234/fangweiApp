@@ -25,6 +25,11 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     private val lifeCircleComponents = LifeCircleComponents()
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
 
+    companion object {
+        @JvmField
+        var currentActivity: BaseActivity? = null
+    }
+
     protected fun addDispose(subscription: Disposable) {
         lifeCircleComponents.addDispose(subscription)
     }
@@ -32,6 +37,7 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
+        currentActivity = null
         lifecycleSubject.onNext(ActivityEvent.DESTROY)
         lifeCircleComponents.removeDispose()
     }
@@ -55,6 +61,7 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        currentActivity = this
         rxPermissions = RxPermissions(this)
         lifecycleSubject.onNext(ActivityEvent.CREATE)
     }
