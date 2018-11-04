@@ -1,7 +1,5 @@
 package com.jacky.beedee;
 
-import com.jacky.beedee.support.log.Logger;
-
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +18,9 @@ public class Util {
         CountDownLatch countDownLatch = new CountDownLatch(1);
         try {
             if (countDownLatch.await(second, TimeUnit.SECONDS)) {
-                Logger.i("the count reached zero");
+                log("the count reached zero");
             } else {
-                Logger.i("the waiting time elapsed before the count reached zero");
+                log("the waiting time elapsed before the count reached zero");
             }
         } catch (InterruptedException e) {
             System.out.println("thread interrupt" + e.getMessage());

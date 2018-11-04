@@ -77,12 +77,8 @@
 
         <Button
             android:id="@+id/btn_gain_code"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
+            style="@style/code_style"
             android:layout_marginRight="@dimen/first_margin_from_left"
-            android:background="@drawable/shape_rect_black"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:text="@string/get_vertify_code"
             android:textColor="@color/action_confirm"
             app:layout_constraintBottom_toBottomOf="@+id/et_code"

@@ -11,7 +11,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
+import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.then
 import com.jacky.beedee.support.image.MyGlideEngin
 import com.jacky.beedee.support.log.Logger
@@ -25,6 +27,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_account_security.*
+import java.io.File
 
 
 /**
@@ -39,7 +42,7 @@ class AccountAndSecurityActivity : BaseActivity() {
         setContentView(R.layout.activity_account_security)
 
         titleView.setLeftAction(View.OnClickListener { finish() })
-
+        titleView.setRightAction(View.OnClickListener { finish() })
 
         parent_head.setType(RowItemView.FLAG_RIGHT_SHOW_IMAGE)
         parent_head.setTitle("头像")
@@ -56,13 +59,7 @@ class AccountAndSecurityActivity : BaseActivity() {
         parent_logout.setType(RowItemView.FLAG_NONE)
         parent_logout.setTitle("退出登陆")
 
-        parent_logout.clickWithTrigger {
-            DialogHelper.createSimpleConfirmDialog(this, "确定要退出吗？", object : QMUIDialogAction.ActionListener {
-                override fun onClick(dialog: QMUIDialog?, index: Int) {
-                    MiscFacade.get().loginOutFlag(this@AccountAndSecurityActivity, true)
-                }
-            }).show()
-        }
+        //头像
         parent_head.setOnClickListener {
             rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
                 it?.let {
@@ -80,6 +77,25 @@ class AccountAndSecurityActivity : BaseActivity() {
 
             }
         }
+
+        //登出
+        parent_logout.clickWithTrigger {
+            DialogHelper.createSimpleConfirmDialog(this, "确定要退出吗？", object : QMUIDialogAction.ActionListener {
+                override fun onClick(dialog: QMUIDialog?, index: Int) {
+                    MiscFacade.get().loginOutFlag(this@AccountAndSecurityActivity, true)
+                }
+            }).show()
+        }
+
+        //nickname
+        parent_nickname.clickWithTrigger {
+            launch<ModifyNickNameActivity>()
+        }
+
+        //mobile
+        parent_mobile.clickWithTrigger {
+            launch<BindedMobileActivity>()
+        }
         changeableData()
     }
 
@@ -91,12 +107,17 @@ class AccountAndSecurityActivity : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CHOOSE) {
-            Matisse.obtainResult(data)?.let {
-                if (!it.isEmpty()) {
-                    val realPathFromUri = AndroidUtil.getRealPathFromUri(it[0])
-                    if (Strings.isNotBlank(realPathFromUri)) {
-                        Logger.i(realPathFromUri!!)
-                        
+            if (data != null) {
+                Matisse.obtainResult(data)?.let {
+                    if (!it.isEmpty()) {
+                        val realPathFromUri = AndroidUtil.getRealPathFromUri(it[0])
+                        if (Strings.isNotBlank(realPathFromUri)) {
+                            RequestHelper.get().uploadFile(File(realPathFromUri))
+                                    .compose(bindToLifecycle())
+                                    .subscribe({
+                                        Logger.i(it.toString())
+                                    }, { Logger.Companion.e(it) })
+                        }
                     }
                 }
             }

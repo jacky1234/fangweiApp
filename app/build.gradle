@@ -19,9 +19,25 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    signingConfigs {
+        sign {
+            keyAlias ALIAS
+            keyPassword ALIAS_PASSWORD
+            storeFile file(KEYSTORE_PATH)
+            storePassword KEYSTORE_PASSWORD
+        }
+    }
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.sign
             minifyEnabled false
+        }
+
+        release {
+            signingConfig signingConfigs.sign
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -29,6 +45,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
 }
 
 greendao {

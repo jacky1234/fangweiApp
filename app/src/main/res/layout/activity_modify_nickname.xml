@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_title_text="@string/modify_nickname" />
+
+    <com.jacky.beedee.ui.widget.RowItemView
+        android:id="@+id/modify_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/qmui_list_item_height" />
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        style="@style/confirm_button"
+        android:layout_marginTop="50dp"
+        android:text="@string/confirm" />
+
+</LinearLayout>

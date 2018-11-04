@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_title_text="@string/modify_mobile" />
+
+    <TextView
+        android:id="@+id/tv_mobile_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="125dp"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        tools:text="1999889999" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="13dp"
+        android:text="您当前绑定的手机号"
+        android:textColor="#A8A8A8" />
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        style="@style/confirm_button"
+        android:layout_marginTop="47dp"
+        android:text="@string/confirm" />
+
+</LinearLayout>

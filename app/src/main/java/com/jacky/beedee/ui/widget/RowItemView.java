@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,12 +21,14 @@ public class RowItemView extends RelativeLayout {
     public final static int FLAG_NONE = 0;
     public final static int FLAG_RIGHT_SHOW_IMAGE = 1;
     public final static int FLAG_RIGHT_SHOW_TEXT = 1 << 1;
+    public final static int FLAG_RIGHT_EDITABLE = 1 << 2;
     private int flag = FLAG_RIGHT_SHOW_TEXT;
 
     private TextView tv_title;
     private View iv_arrow;
     private ImageView iv_image;
     private TextView tv_right_desc;
+    private EditText et_edit;
 
     public RowItemView(Context context) {
         this(context, null);
@@ -42,13 +45,25 @@ public class RowItemView extends RelativeLayout {
         tv_title = findViewById(R.id.tv_title);
         iv_arrow = findViewById(R.id.iv_arrow);
         iv_image = findViewById(R.id.tv_image);
+        iv_image = findViewById(R.id.tv_image);
+        et_edit = findViewById(R.id.et_edit);
         tv_right_desc = findViewById(R.id.tv_right_desc);
     }
 
     public void setType(int type) {
+        tv_right_desc.setVisibility(View.GONE);
+        iv_image.setVisibility(GONE);
+        et_edit.setVisibility(View.GONE);
+
         this.flag = type;
         iv_image.setVisibility((flag & FLAG_RIGHT_SHOW_IMAGE) != 0 ? VISIBLE : GONE);
         tv_right_desc.setVisibility((flag & FLAG_RIGHT_SHOW_TEXT) != 0 ? VISIBLE : GONE);
+        if ((flag & FLAG_RIGHT_EDITABLE) != 0) {
+            iv_image.setVisibility(View.GONE);
+            tv_right_desc.setVisibility(View.GONE);
+            iv_arrow.setVisibility(View.GONE);
+            et_edit.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setTitle(String text) {
@@ -61,5 +76,9 @@ public class RowItemView extends RelativeLayout {
 
     public ImageView getImageView() {
         return iv_image;
+    }
+
+    public void setRightEditableText(CharSequence text) {
+        et_edit.setText(text);
     }
 }

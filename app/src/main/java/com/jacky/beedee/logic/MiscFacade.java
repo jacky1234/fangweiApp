@@ -1,5 +1,6 @@
 package com.jacky.beedee.logic;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 
@@ -7,22 +8,79 @@ import com.jacky.beedee.logic.entity.MySelf;
 import com.jacky.beedee.logic.network.RequestHelper;
 import com.jacky.beedee.ui.function.login.LoginActivity;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observables.ConnectableObservable;
 
 public class MiscFacade {
     private static boolean isNeedToLogout = false;
     //验证码周期
     private static final int VERTIFY_SECOND = 60;
-    private Long currentPassSecond;
-    private Observable<Long> longObservable;
+    private ConnectableObservable<Long> codeObservable;
+    private Disposable vertifyCodeDispose;
+    private Set<Observer> leftSecondObservers = Collections.synchronizedSet(new HashSet<>());
 
     private MiscFacade() {
-        longObservable = Observable.interval(1, TimeUnit.SECONDS).take(VERTIFY_SECOND)
-                .observeOn(AndroidSchedulers.mainThread());
+
+    }
+
+    @SuppressLint("CheckResult")
+    private void resetVertifyCodeDisposeAndConnect() {
+        codeObservable = Observable.interval(1, TimeUnit.SECONDS).take(VERTIFY_SECOND)
+                .observeOn(AndroidSchedulers.mainThread()).publish();
+        vertifyCodeDispose = codeObservable.connect();
+        codeObservable.subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                publishOnSubscribe(d);
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                publishOnNext(aLong);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                publishOnError(e);
+            }
+
+            @Override
+            public void onComplete() {
+                publishOnComplete();
+            }
+        });
+    }
+
+    private void publishOnComplete() {
+        for (Observer observer : leftSecondObservers) {
+            observer.onComplete();
+        }
+    }
+
+    private void publishOnError(Throwable e) {
+        for (Observer<Long> observer : leftSecondObservers) {
+            observer.onError(e);
+        }
+    }
+
+    private void publishOnNext(Long aLong) {
+        for (Observer<Long> observer : leftSecondObservers) {
+            observer.onNext(VERTIFY_SECOND - aLong);
+        }
+    }
+
+    private void publishOnSubscribe(Disposable d) {
+        for (Observer<Long> observer : leftSecondObservers) {
+            observer.onSubscribe(d);
+        }
     }
 
     private static final class InstanceHolder {
@@ -43,31 +101,26 @@ public class MiscFacade {
     }
 
     public boolean isVertifyCodeAvailable() {
-        return currentPassSecond == null || currentPassSecond == VERTIFY_SECOND || currentPassSecond == VERTIFY_SECOND - 1;
+        return vertifyCodeDispose == null || vertifyCodeDispose.isDisposed();
     }
 
-    public Observable<Long> vertifyCodeObservable() {
-        return Observable.create(emitter -> {
-            Consumer<Long> longConsumer = aLong -> {
-                currentPassSecond = aLong;
-                emitter.onNext(VERTIFY_SECOND - currentPassSecond);
-            };
+    public void registerCodeListenerAndTrigger(Observer<Long> observer) {
+        if (isVertifyCodeAvailable()) {
+            resetVertifyCodeDisposeAndConnect();
+        }
+        leftSecondObservers.add(observer);
+    }
 
-            longObservable.subscribe(longConsumer);
-
-//            if (isVertifyCodeAvailable()) {
-//                longObservable = Observable.interval(1, TimeUnit.SECONDS).take(VERTIFY_SECOND)
-//                        .observeOn(AndroidSchedulers.mainThread());
-//                longObservable.subscribe(longConsumer);
-//            } else {
-//            }
-        });
+    public boolean removeCodeListener(Observer<Long> observer) {
+        return leftSecondObservers.remove(observer);
     }
 
     public void loginOutFlag(Activity activity, boolean force) {
         if (isNeedToLogout || force) {
             isNeedToLogout = false;
-            RequestHelper.get().logout().subscribe();
+            if (MySelf.get().isLogined()) {
+                RequestHelper.get().logout().subscribe();
+            }
             MySelf.get().clear();
             activity.finishAffinity();
             Intent intent = new Intent(activity, LoginActivity.class);

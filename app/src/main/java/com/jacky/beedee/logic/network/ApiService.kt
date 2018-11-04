@@ -2,16 +2,15 @@ package com.jacky.beedee.logic.network
 
 import com.jacky.beedee.logic.entity.User
 import com.jacky.beedee.logic.entity.request.LoginRequest
-import com.jacky.beedee.logic.entity.request.Mobile
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
 import com.jacky.beedee.logic.entity.request.UserRequest
-import com.jacky.beedee.logic.entity.response.HttpResponse
-import com.jacky.beedee.logic.entity.response.HttpResponseSource
-import com.jacky.beedee.logic.entity.response.LoginResponse
-import com.jacky.beedee.logic.entity.response.RegisterResponse
+import com.jacky.beedee.logic.entity.response.*
 import io.reactivex.Observable
+import okhttp3.RequestBody
 import retrofit2.http.Body
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PartMap
 
 /**
  * <pre>
@@ -24,6 +23,10 @@ import retrofit2.http.POST
  */
 interface ApiService {
 
+    @Multipart
+    @POST("oss/upload")
+    fun uploadFile(@PartMap map: Map<String, RequestBody>): Observable<UploadFileResponse>
+
     @POST("login")
     fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
 
@@ -31,7 +34,7 @@ interface ApiService {
     fun login(@Body loginRequest: LoginRequest): Observable<HttpResponse<LoginResponse>>
 
     @POST("send_sms_code")
-    fun sendCode(@Body mobile: Mobile): Observable<HttpResponseSource>
+    fun sendCode(@Body map: Map<String, String>): Observable<HttpResponseSource>
 
     @POST("user/update")
     fun completeUserInfo(@Body request: UserRequest): Observable<HttpResponse<User>>

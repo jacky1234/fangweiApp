@@ -1,7 +1,6 @@
 package com.jacky.beedee
 
 import io.reactivex.Observable
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.util.concurrent.Executors
@@ -22,12 +21,9 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
-
+    fun code_observable() {
         val observable = Observable.interval(1, TimeUnit.SECONDS)
-
-
+                .take(20)
         observable.subscribe {
             Util.log("A-" + it)
         }
@@ -40,6 +36,74 @@ class ExampleUnitTest {
         }, 3, TimeUnit.SECONDS)
 
 
-        Util.suspend(100)
+        Util.suspend(30)
+    }
+
+    @Test
+    fun hot_observable() {
+        val observable = Observable.interval(1, TimeUnit.SECONDS)            //normal connectObservable
+                .take(10).publish()
+//        val observable = Observable.interval(1, TimeUnit.SECONDS)       //replay
+//                .take(20).replay()
+
+        observable.subscribe {
+            Util.log("A-" + it)
+        }
+
+        val dispose = observable.connect()
+        scheduledExecutorService.schedule({
+            observable.subscribe {
+                Util.log("B-" + it)
+            }
+        }, 3, TimeUnit.SECONDS)
+
+        //dispose after seconds
+//        scheduledExecutorService.schedule({
+//            dispose.dispose()
+//        }, 10, TimeUnit.SECONDS)
+
+
+        scheduledExecutorService.schedule({
+            observable.subscribe {
+                Util.log("C-" + it)
+            }
+        }, 5, TimeUnit.SECONDS)
+
+        scheduledExecutorService.schedule({
+            Util.log("observable disposeed? :" + dispose.isDisposed)
+
+            observable.subscribe {
+                observable.connect()
+                Util.log("D-" + it)
+            }
+        }, 11, TimeUnit.SECONDS)
+
+        Util.suspend(30)
+    }
+
+    @Test
+    fun hold_dispose() {
+        val observable = Observable.interval(1, TimeUnit.SECONDS)            //normal connectObservable
+                .take(10).publish()
+
+//        observable.subscribe {
+//            Util.log("A-" + it)
+//        }
+        observable.doOnNext {
+            Util.log("do on next:" + it)
+        }
+        val connect = observable.connect()
+        scheduledExecutorService.schedule({
+            Util.log("disposed 1?:" + connect.isDisposed)
+        }, 1, TimeUnit.SECONDS)
+
+        scheduledExecutorService.schedule({
+            Util.log("disposed 2?:" + connect.isDisposed)
+        }, 2, TimeUnit.SECONDS)
+
+        scheduledExecutorService.schedule({
+            Util.log("disposed 3?:" + connect.isDisposed)
+        }, 11, TimeUnit.SECONDS)
+        Util.suspend(20)
     }
 }

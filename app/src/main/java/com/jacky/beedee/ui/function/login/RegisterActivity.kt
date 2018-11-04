@@ -12,7 +12,6 @@ import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
-import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.support.util.regex.RegexUtils
@@ -22,13 +21,31 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
-import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observables.ConnectableObservable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.concurrent.TimeUnit
 
 class RegisterActivity : BaseActivity() {
+    private val codeObserver = object : Observer<Long> {
+        override fun onSubscribe(d: Disposable) {
+
+        }
+
+        override fun onNext(t: Long) {
+            RxTextView.text(btn_gain_code).accept("剩余" + t + "秒")
+        }
+
+        override fun onError(e: Throwable) {
+        }
+
+        override fun onComplete() {
+            RxTextView.textRes(btn_gain_code).accept(R.string.get_vertify_code)
+            RxView.enabled(btn_gain_code).accept(true)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -38,6 +55,9 @@ class RegisterActivity : BaseActivity() {
 
         val btnGainCode = btn_gain_code
         val vertifyCodeAvailable = MiscFacade.get().isVertifyCodeAvailable
+        if (!vertifyCodeAvailable) {
+            RxTextView.text(btnGainCode).accept(null)
+        }
         RxView.enabled(btnGainCode).accept(vertifyCodeAvailable)
         if (!vertifyCodeAvailable) {
             trigVertifyCode(btnGainCode)
@@ -83,14 +103,7 @@ class RegisterActivity : BaseActivity() {
     }
 
     private fun trigVertifyCode(btnGainCode: Button) {
-        MiscFacade.get().vertifyCodeObservable()
-                .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe({
-                    RxTextView.text(btnGainCode).accept("剩余" + it + "秒")
-                }, Logger.Companion::e, {
-                    RxTextView.textRes(btnGainCode).accept(R.string.get_vertify_code)
-                    RxView.enabled(btnGainCode).accept(true)
-                })
+        MiscFacade.get().registerCodeListenerAndTrigger(codeObserver)
     }
 
     private fun requestRegister(phone: String, code: String) {
@@ -108,6 +121,11 @@ class RegisterActivity : BaseActivity() {
                     DialogTipsHelper.createSuccess(this, "注册成功")
                     AndroidUtil.runUI({ this@RegisterActivity.launch<RegisterFillInfoActivity>() }, 100)
                 }, { CustomException.handleException(it) })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MiscFacade.get().removeCodeListener(codeObserver)
     }
 
     companion object {

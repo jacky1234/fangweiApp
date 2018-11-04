@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_left_drawable="@mipmap/ic_arrow_back_black"
+        app:titleView_left_text="@string/back"
+        app:titleView_left_text_color="@color/black"
+        app:titleView_middle_text_color="@color/black"
+        app:titleView_title_text="@string/branch_show" />
+
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+        
+       <ImageView
+           android:layout_gravity="center"
+           android:src="@mipmap/ic_photo"
+           android:layout_width="191dp"
+           android:layout_height="191dp" />
+
+       <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+           android:id="@+id/textView"
+           android:textColor="@color/black"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent" />
+
+   </FrameLayout>
+
+</LinearLayout>

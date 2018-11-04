@@ -18,12 +18,10 @@
     </com.jacky.beedee.ui.widget.TitleView>
 
     <LinearLayout
+        style="@style/gap_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/tabbar_text_color"
-        android:dividerPadding="0.5dp"
-        android:orientation="vertical"
-        android:showDividers="beginning|end|middle">
+        android:orientation="vertical">
 
         <com.jacky.beedee.ui.widget.RowItemView
             android:id="@+id/parent_head"

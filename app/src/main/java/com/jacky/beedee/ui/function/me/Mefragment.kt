@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.ui.function.login.LoginActivity
@@ -96,11 +97,14 @@ class Mefragment : MySupportFragment() {
             if (it is QMUICommonListItemView) {
                 val text = it.text
                 Toast.makeText(getActivity(), text.toString() + " is Clicked", Toast.LENGTH_SHORT).show()
-
             }
 
             if (it == itemAccount) {
-                activity!!.launch<AccountAndSecurityActivity>()
+                if (MySelf.get().isLogined) {
+                    activity!!.launch<AccountAndSecurityActivity>()
+                } else {
+                    MiscFacade.get().loginOutFlag(activity!!, true);
+                }
             }
         }
 
