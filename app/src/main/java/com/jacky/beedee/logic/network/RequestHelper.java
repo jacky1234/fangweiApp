@@ -2,16 +2,19 @@ package com.jacky.beedee.logic.network;
 
 import android.support.annotation.NonNull;
 
+import com.jacky.beedee.logic.entity.Banner;
 import com.jacky.beedee.logic.entity.User;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
+import com.jacky.beedee.logic.entity.response.ListGoodResponse;
 import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
 import com.jacky.beedee.logic.entity.response.UploadFileResponse;
 import com.jacky.beedee.logic.network.transformer.BooleanTransformer;
+import com.jacky.beedee.logic.network.transformer.HttpListResponseTransformer;
 import com.jacky.beedee.logic.network.transformer.HttpResponseTransformer;
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils;
 
@@ -19,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -84,8 +88,25 @@ public class RequestHelper {
     }
 
     //收藏
-    public Observable<FavoriteResponse> collectList(@NotNull String targetType, int page) {
-        return apiService.collectList(targetType, page, ParamCreator.PAGE_SIZE)
+    public Observable<FavoriteResponse> requestCollectList(@NotNull String targetType, int page) {
+        return apiService.requestCollectList(targetType, page, ParamCreator.PAGE_SIZE)
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
+    //横幅
+    public Observable<List<Banner>> requestBannerList() {
+        return apiService.requestBannerList()
+                .compose(HttpListResponseTransformer.handleResult(false));
+    }
+
+    //穿搭
+    public Observable<ListGoodResponse> requestOutfitGoods() {
+        return apiService.requestOutfitGoods()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+    //热门商品
+    public Observable<ListGoodResponse> requestHotGoods() {
+        return apiService.requestHotGoods()
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 

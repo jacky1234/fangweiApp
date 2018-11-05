@@ -1,6 +1,7 @@
 package com.jacky.beedee.logic.entity;
 
-public class ProductRow {
+//收藏
+public class Favorite {
 
     /**
      * id : 5bdb15204adc2b23847fa95a

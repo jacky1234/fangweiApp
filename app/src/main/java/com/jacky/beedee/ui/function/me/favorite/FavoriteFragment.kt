@@ -49,7 +49,7 @@ class FavoriteFragment : MySupportFragment() {
             }
         }
 
-        RequestHelper.get().collectList(targetType, page)
+        RequestHelper.get().requestCollectList(targetType, page)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {

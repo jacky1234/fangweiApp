@@ -14,7 +14,7 @@ import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jacky.beedee.ui.widget.RowItemView
 import com.jacky.beedee.ui.widget.TitleView
-import kotlinx.android.synthetic.main.activity_modify_nickname.*
+import kotlinx.android.synthetic.main.activity_update_nickname.*
 
 /**
  * 2018/11/4.
@@ -25,7 +25,7 @@ class UpdateNickNameActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_modify_nickname)
+        setContentView(R.layout.activity_update_nickname)
 
         titleView.setFlag(TitleView.COMPOSE_LEFT_MIDDLEL_FLAG)
         titleView.setLeftAction(View.OnClickListener {
@@ -38,7 +38,7 @@ class UpdateNickNameActivity : BaseActivity() {
         tv_confirm.clickWithTrigger {
             if (Checker.check(modify_nickname.rightEditText, "请输入昵称")) {
                 val request = UpdateUserRequest()
-                request.nickName = modify_nickname.rightContent.toString()
+                request.nickName = modify_nickname.rightEditableContent.toString()
                 RequestHelper.get().updateUserInfo(request)
                         .compose(bindToDestroy())
                         .subscribe {

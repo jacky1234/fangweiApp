@@ -150,6 +150,6 @@ class AccountAndSecurityActivity : BaseActivity() {
     }
 
     companion object {
-        val REQUEST_IMAGE_CHOOSE = 100
+        const val REQUEST_IMAGE_CHOOSE = 100
     }
 }

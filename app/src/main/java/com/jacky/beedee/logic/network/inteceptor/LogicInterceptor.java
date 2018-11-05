@@ -1,4 +1,4 @@
-package com.jacky.beedee.logic.network.intecept;
+package com.jacky.beedee.logic.network.inteceptor;
 
 import com.jacky.beedee.logic.entity.MySelf;
 import com.jacky.beedee.support.util.Strings;

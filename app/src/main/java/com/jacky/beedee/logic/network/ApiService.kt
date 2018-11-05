@@ -1,5 +1,6 @@
 package com.jacky.beedee.logic.network
 
+import com.jacky.beedee.logic.entity.Banner
 import com.jacky.beedee.logic.entity.User
 import com.jacky.beedee.logic.entity.request.LoginRequest
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
@@ -46,7 +47,17 @@ interface ApiService {
     fun logout(): Observable<HttpResponseSource>
 
     @GET("collect/list")
-    fun collectList(@Query("targetType") targetType: String,
-                    @Query("page") page: Int,
-                    @Query("size") size: Int): Observable<HttpResponse<FavoriteResponse>>
+    fun requestCollectList(@Query("targetType") targetType: String,
+                           @Query("page") page: Int,
+                           @Query("size") size: Int): Observable<HttpResponse<FavoriteResponse>>
+
+    @GET("banner/list")
+    fun requestBannerList(): Observable<HttpListResponse<Banner>>
+
+    //穿搭
+    @GET("outfit/list_hot")
+    fun requestOutfitGoods(): Observable<HttpResponse<ListGoodResponse>>
+
+    @GET("goods/list_hot")
+    fun requestHotGoods(): Observable<HttpResponse<ListGoodResponse>>
 }

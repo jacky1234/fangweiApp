@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.logic.entity.response.HttpResponse
-import com.jacky.beedee.logic.network.intecept.LogicInterceptor
+import com.jacky.beedee.logic.network.inteceptor.LogicInterceptor
 import com.jacky.beedee.logic.network.parse.JsonFormatParser
 import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.system.DeviceDependency

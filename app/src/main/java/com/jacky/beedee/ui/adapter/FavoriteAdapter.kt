@@ -6,11 +6,11 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.ProductRow
+import com.jacky.beedee.logic.entity.Favorite
 import com.jacky.beedee.logic.image.ImageLoader
 
-class FavoriteAdapter constructor(itemLayoutId: Int) : BaseQuickAdapter<ProductRow, BaseViewHolder>(itemLayoutId) {
-    override fun convert(helper: BaseViewHolder, item: ProductRow) {
+class FavoriteAdapter constructor(itemLayoutId: Int) : BaseQuickAdapter<Favorite, BaseViewHolder>(itemLayoutId) {
+    override fun convert(helper: BaseViewHolder, item: Favorite) {
         Glide.with(mContext)
                 .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
                 .load(item.target?.thumb)

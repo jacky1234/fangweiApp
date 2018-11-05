@@ -1,11 +1,16 @@
 package com.jacky.beedee.logic.entity.response;
 
-import com.jacky.beedee.logic.entity.Favorite;
+import com.jacky.beedee.logic.entity.Good;
 
 import java.util.List;
 
-public class FavoriteResponse {
-
+/**
+ * 2018/11/6.
+ * GitHub:[https://github.com/jacky1234]
+ *
+ * @author jacky
+ */
+public class ListGoodResponse {
 
     /**
      * page : 0
@@ -14,18 +19,18 @@ public class FavoriteResponse {
      * last : true
      * first : true
      */
-    private List<Favorite> content;
+    private List<Good> content;
     private int page;
     private int size;
     private int total;
     private boolean last;
     private boolean first;
 
-    public List<Favorite> getContent() {
+    public List<Good> getContent() {
         return content;
     }
 
-    public void setContent(List<Favorite> content) {
+    public void setContent(List<Good> content) {
         this.content = content;
     }
 
