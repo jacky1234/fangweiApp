@@ -2,11 +2,9 @@ package com.jacky.beedee.ui.function.other
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import com.jacky.beedee.R
 import com.jacky.beedee.support.util.SpanUtils
 import com.jacky.beedee.ui.inner.arch.BaseActivity
-import kotlinx.android.synthetic.main.activity_introduce.*
 
 /**
  * 2018/11/3.
@@ -18,9 +16,6 @@ class ShowBrandActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduce)
-
-        titleView.setLeftAction(View.OnClickListener { finish() })
-        textView.text = getInfo()
     }
 
     private fun getInfo(): CharSequence {
@@ -40,7 +35,7 @@ class ShowBrandActivity : BaseActivity() {
                         "of you who want it.\n" +
                         "Thanks to the 1 %  who will always be with us.\n").setForegroundColor(Color.parseColor("#666666")).setFontSize(13, false)
                 .appendLine().appendLine().appendLine()
-                .append("品牌理念\n").setFontSize(19,false).setBold()
+                .append("品牌理念\n").setFontSize(19, false).setBold()
                 .appendLine().appendLine()
                 .append("追求1%的生活理念\n" +
                         "世上总有80%的人过着平凡的生活\n" +

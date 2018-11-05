@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.jacky.beedee.ui.widget.TitleView
+            android:id="@+id/titleView"
             android:layout_width="match_parent"
-            app:titleView_visible_type="left_middle"
+            android:layout_height="@dimen/title_height"
             app:titleView_title_text="@string/scan_result"
-            android:layout_height="@dimen/title_height" />
+            app:titleView_visible_type="left_middle" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/parent_true"
             android:layout_width="match_parent"
-            android:textSize="@dimen/title_textsize"
-            android:layout_height="128dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_real"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/first_margin_from_left"
+                tools:text="1233ssdfads" />
+
+            <TextView
+                android:id="@+id/tv_scan_detail"
+                style="@style/confirm_button"
+                android:layout_marginTop="38dp"
+                android:text="查看产品详情" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/parent_false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView">
+
+            <ImageView
+                android:id="@+id/iv_false_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_scan_empty" />
+
+            <TextView
+                android:textColor="@color/false_grey_color"
+                android:layout_marginTop="15dp"
+                android:text="未扫描出该产品信息"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_marginTop="79dp"
+                android:text="@string/back"
+                style="@style/confirm_button"/>
+
+        </LinearLayout>
+
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

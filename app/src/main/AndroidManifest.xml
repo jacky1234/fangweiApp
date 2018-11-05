@@ -39,5 +39,6 @@
         <activity android:name=".ui.function.me.UpdatePwdActivity" />
         <activity android:name=".ui.function.me.UpdateNickNameActivity" />
         <activity android:name=".ui.function.me.UpdateMobileActivity" />
+        <activity android:name=".ui.function.discovery.ScanResultActivity"/>
     </application>
 </manifest>

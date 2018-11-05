@@ -10,8 +10,10 @@
     <color name="spot_text_color">#FFFFFF</color>
     <color name="tabbar_text_color">#B3B3B3</color>
     <color name="tab_grey_color">#666666</color>
+    <color name="false_grey_color">#A5A5A5</color>
     <color name="item_title_text_color">#333333</color>
     <color name="tabbar_text_hig_color">@android:color/black</color>
+
 
 
     <color name="action_confirm">#FFEF04</color>

@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 public final class Strings {
     public static String empty = "";
+    public static String blank = " ";
 
     // Don't let anyone instantiate this class.
     private Strings() {
