@@ -3,14 +3,11 @@ package com.jacky.beedee.logic.network
 import com.jacky.beedee.logic.entity.User
 import com.jacky.beedee.logic.entity.request.LoginRequest
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
-import com.jacky.beedee.logic.entity.request.UserRequest
+import com.jacky.beedee.logic.entity.request.UpdateUserRequest
 import com.jacky.beedee.logic.entity.response.*
 import io.reactivex.Observable
-import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.PartMap
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 /**
  * <pre>
@@ -25,7 +22,7 @@ interface ApiService {
 
     @Multipart
     @POST("oss/upload")
-    fun uploadFile(@PartMap map: Map<String, RequestBody>): Observable<UploadFileResponse>
+    fun uploadFile(@Part file: MultipartBody.Part): Observable<HttpResponse<UploadFileResponse>>
 
     @POST("login")
     fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
@@ -36,9 +33,20 @@ interface ApiService {
     @POST("send_sms_code")
     fun sendCode(@Body map: Map<String, String>): Observable<HttpResponseSource>
 
+    @POST("forgot_password")
+    fun forgetPwd(@Body map: Map<String, String>): Observable<HttpResponseSource>
+
     @POST("user/update")
-    fun completeUserInfo(@Body request: UserRequest): Observable<HttpResponse<User>>
+    fun updateUserInfo(@Body updateUserRequest: UpdateUserRequest): Observable<HttpResponse<User>>
+
+    @POST("change_mobile")
+    fun changeMobile(@Body map: Map<String, String>): Observable<HttpResponse<User>>
 
     @POST("logout")
     fun logout(): Observable<HttpResponseSource>
+
+    @GET("collect/list")
+    fun collectList(@Query("targetType") targetType: String,
+                    @Query("page") page: Int,
+                    @Query("size") size: Int): Observable<HttpResponse<FavoriteResponse>>
 }

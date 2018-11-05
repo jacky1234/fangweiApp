@@ -90,4 +90,8 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
         lifecycleSubject.onNext(ActivityEvent.STOP)
         super.onStop()
     }
+
+    fun <T> bindToDestroy(): LifecycleTransformer<T> {
+        return bindUntilEvent(ActivityEvent.DESTROY)
+    }
 }

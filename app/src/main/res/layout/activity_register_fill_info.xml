@@ -44,93 +44,94 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_background" />
 
-        <com.chaychan.viewlib.PowerfulEditText
-            android:id="@+id/et_nickname"
-            style="@style/normal_register_row_text"
-            android:layout_marginTop="27dp"
-            android:drawableLeft="@mipmap/ic_nickname"
-            android:drawablePadding="16dp"
-            android:hint="请输入昵称"
-            app:funcType="canClear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
         <LinearLayout
-            android:id="@+id/parent_sex"
-            style="@style/normal_register_row_text"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:id="@+id/parent_gap_container"
+            style="@style/gap_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_nickname">
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_sex" />
+            <com.chaychan.viewlib.PowerfulEditText
+                android:id="@+id/et_nickname"
+                style="@style/normal_register_row_text"
+                android:drawableLeft="@mipmap/ic_nickname"
+                android:drawablePadding="16dp"
+                android:hint="请输入昵称"
+                app:funcType="canClear" />
 
-            <TextView
-                android:id="@+id/tv_sex"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_weight="1"
-                android:text="性别"
-                android:textSize="@dimen/normal_textsize" />
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/parent_sex"
+                style="@style/normal_register_row_text"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_boy"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@null"
-                    android:checked="true"
-                    android:drawableLeft="@drawable/single_check"
-                    android:drawablePadding="2dp"
-                    android:text="男" />
+                    android:src="@mipmap/ic_sex" />
 
-                <RadioButton
-                    android:id="@+id/rb_girl"
+                <TextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:text="性别"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/single_check"
-                    android:drawablePadding="2dp"
-                    android:text="女"
-                    android:textColor="@color/selector_single_choose" />
+                    android:orientation="horizontal">
 
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/rb_boy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableLeft="@drawable/single_check"
+                        android:drawablePadding="2dp"
+                        android:text="男" />
+
+                    <RadioButton
+                        android:id="@+id/rb_girl"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/single_check"
+                        android:drawablePadding="2dp"
+                        android:text="女"
+                        android:textColor="@color/selector_single_choose" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <com.chaychan.viewlib.PowerfulEditText
+                android:id="@+id/et_pwd"
+                style="@style/normal_register_row_text"
+                android:drawableLeft="@mipmap/ic_pwd"
+                android:drawablePadding="16dp"
+                android:hint="请输入密码"
+                android:inputType="textPassword"
+                app:funcType="canWatchPwd" />
+
+            <com.chaychan.viewlib.PowerfulEditText
+                android:id="@+id/et_confirm_pwd"
+                style="@style/normal_register_row_text"
+                android:drawableLeft="@mipmap/ic_pwd"
+                android:drawablePadding="16dp"
+                android:hint="请确认密码"
+                android:inputType="textPassword"
+                app:funcType="canWatchPwd" />
+
         </LinearLayout>
 
-        <com.chaychan.viewlib.PowerfulEditText
-            android:id="@+id/et_pwd"
-            style="@style/normal_register_row_text"
-            android:drawableLeft="@mipmap/ic_pwd"
-            android:drawablePadding="16dp"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            app:funcType="canWatchPwd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/parent_sex" />
-
-        <com.chaychan.viewlib.PowerfulEditText
-            android:id="@+id/et_confirm_pwd"
-            style="@style/normal_register_row_text"
-            android:drawableLeft="@mipmap/ic_pwd"
-            android:drawablePadding="16dp"
-            android:hint="请确认密码"
-            android:inputType="textPassword"
-            app:funcType="canWatchPwd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
 
         <TextView
             android:id="@+id/tv_complete"
@@ -148,6 +149,6 @@
             android:textSize="@dimen/lager_textsize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_confirm_pwd" />
+            app:layout_constraintTop_toBottomOf="@+id/parent_gap_container" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

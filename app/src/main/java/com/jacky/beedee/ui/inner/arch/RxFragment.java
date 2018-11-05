@@ -100,4 +100,10 @@ public abstract class RxFragment extends Fragment implements LifecycleProvider<F
         lifecycleSubject.onNext(FragmentEvent.DETACH);
         super.onDetach();
     }
+
+    @NonNull
+    @CheckResult
+    public final <T> LifecycleTransformer<T> bindUntilDetach() {
+        return RxLifecycle.bindUntilEvent(lifecycleSubject, FragmentEvent.DETACH);
+    }
 }

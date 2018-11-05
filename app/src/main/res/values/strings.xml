@@ -14,5 +14,9 @@
     <string name="confirm">确定</string>
     <string name="modify_nickname">修改昵称</string>
     <string name="binded_mobile">绑定手机号</string>
-    <string name="modify_mobile">更改手机号</string>
+    <string name="update_mobile">更改手机号</string>
+    <string name="update_pwd">更改密码</string>
+    <string name="my_favorite">我的收藏</string>
+    <string name="update_success">修改成功</string>
+    <string name="scan_result">检测结果</string>
 </resources>

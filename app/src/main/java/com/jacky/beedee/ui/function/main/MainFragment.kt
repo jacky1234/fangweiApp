@@ -15,6 +15,7 @@ import com.jacky.beedee.ui.widget.bottombar.BottomBarTab
 class MainFragment : MySupportFragment() {
     private val mFragments = ArrayList<MySupportFragment>(4)
     private lateinit var bottomBarLayout: BottomBarLayout
+    private var tabIndex = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout = LayoutInflater.from(activity).inflate(R.layout.fragment_main, null)
         val homeFragment = findChildFragment(HomeFragment::class.java)
@@ -37,7 +38,7 @@ class MainFragment : MySupportFragment() {
             mFragments.add(findChildFragment(Mefragment::class.java)!!)
         }
 
-        showHideFragment(mFragments[0])
+        showHideFragment(mFragments[tabIndex])
 
         initTabs(layout)
         return layout
@@ -63,7 +64,7 @@ class MainFragment : MySupportFragment() {
                 if (!mFragments[position].isAttached() || !mFragments[prePosition].isAttached()) {
                     return
                 }
-
+                tabIndex = position
                 showHideFragment(mFragments[position], mFragments[prePosition])
             }
 

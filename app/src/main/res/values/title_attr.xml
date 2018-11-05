@@ -8,5 +8,9 @@
         <attr name="titleView_middle_text_color" format="color" />
         <attr name="titleView_right_text" format="reference" />
         <attr name="titleView_right_text_color" format="color" />
+        <attr name="titleView_visible_type" format="integer">
+            <enum name="left_middle" value="1" />
+            <enum name="all" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

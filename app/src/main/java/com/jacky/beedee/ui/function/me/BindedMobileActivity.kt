@@ -28,7 +28,7 @@ class BindedMobileActivity : BaseActivity() {
 
         tv_mobile_info.text = MySelf.get().mobile
         tv_confirm.clickWithTrigger {
-            launch<ModifyMobileActivity>()
+            launch<UpdateMobileActivity>()
         }
     }
 }

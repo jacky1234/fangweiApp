@@ -57,12 +57,18 @@
         <item name="android:showDividers">beginning|end|middle</item>
     </style>
 
-    <style name="code_style">
+    <style name="button_code_style">
         <item name="android:background">@drawable/selected_enable_code</item>
         <item name="android:paddingLeft">12dp</item>
         <item name="android:paddingRight">12dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">34dp</item>
+    </style>
+
+    <style name="item_title">
+        <item name="android:textSize">@dimen/lager_textsize</item>
+        <item name="android:textColor">@color/item_title_text_color</item>
+        <item name="android:singleLine">true</item>
     </style>
 
 </resources>

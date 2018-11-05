@@ -3,6 +3,7 @@ package com.jacky.beedee.logic.network.exception;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
+import com.jacky.beedee.support.log.Logger;
 import com.jacky.beedee.support.util.AndroidUtil;
 import com.jacky.beedee.support.util.Strings;
 
@@ -40,6 +41,8 @@ public class CustomException {
     public static final int HTTP_ERROR = 1003;
 
     public static ApiException handleException(Throwable e) {
+        Logger.Companion.e(e);
+        
         ApiException ex;
         if (e instanceof ApiException) {
             ex = (ApiException) e;
@@ -60,9 +63,7 @@ public class CustomException {
                 ex = new ApiException(UNKNOWN, e.getMessage());
             }
         }
-
-        handlerExceptionInternal(ex);
-
+        AndroidUtil.runUI(() -> handlerExceptionInternal(ex));
         return ex;
     }
 

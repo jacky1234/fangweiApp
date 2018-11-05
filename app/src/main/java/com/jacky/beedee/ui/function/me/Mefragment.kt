@@ -8,15 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.support.ext.launch
+import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.function.login.LoginActivity
+import com.jacky.beedee.ui.function.me.favorite.MyFavoriteActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+import kotlinx.android.synthetic.main.fragment_me.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -42,6 +49,7 @@ class Mefragment : MySupportFragment() {
         return content
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initFlexible() {
         RxView.clicks(parentUnLogined).throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindToLifecycle())
@@ -52,12 +60,22 @@ class Mefragment : MySupportFragment() {
         if (MySelf.get().isLogined()) {
             parentLogined.visibility = View.VISIBLE
             parentUnLogined.visibility = View.GONE
-            tv_nickname.text = MySelf.get().nickName
-            tv_detail.text = MySelf.get().mobile + "/" + MySelf.get().email
+            tv_nickname.text = MySelf.get().showingName
+            if (Strings.isNotBlank(MySelf.get().email)) {
+                tv_detail.text = "${MySelf.get().mobile}/${MySelf.get().email}"
+            } else {
+                tv_detail.text = MySelf.get().mobile
+            }
         } else {
             parentLogined.visibility = View.GONE
             parentUnLogined.visibility = View.VISIBLE
         }
+
+        Glide.with(this)
+                .setDefaultRequestOptions(ImageLoader.defaultRequestOptions)
+                .load(MySelf.get().avatar)
+                .apply(RequestOptions.bitmapTransform(CircleCrop()))
+                .into(iv_header)
     }
 
     private fun initOnce() {
@@ -99,11 +117,29 @@ class Mefragment : MySupportFragment() {
                 Toast.makeText(getActivity(), text.toString() + " is Clicked", Toast.LENGTH_SHORT).show()
             }
 
-            if (it == itemAccount) {
-                if (MySelf.get().isLogined) {
-                    activity!!.launch<AccountAndSecurityActivity>()
-                } else {
-                    MiscFacade.get().loginOutFlag(activity!!, true);
+            when (it) {
+                itemFavorite -> {
+                    if (MySelf.get().isLogined) {
+                        activity!!.launch<MyFavoriteActivity>()
+                    } else {
+                        MiscFacade.get().loginOutFlag(activity!!, true);
+                    }
+                }
+
+                itemAccount -> {
+                    if (MySelf.get().isLogined) {
+                        activity!!.launch<AccountAndSecurityActivity>()
+                    } else {
+                        MiscFacade.get().loginOutFlag(activity!!, true);
+                    }
+                }
+
+                itemAboutUs -> {
+
+                }
+
+                itemSetting -> {
+
                 }
             }
         }
@@ -119,8 +155,8 @@ class Mefragment : MySupportFragment() {
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
-        initFlexible()
         initOnce()
+        initFlexible()
     }
 
     override fun onResume() {

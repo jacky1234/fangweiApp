@@ -33,8 +33,11 @@
         <activity android:name=".ui.function.defake.DefakeDetailActivity"></activity>
         <activity android:name=".ui.function.login.RegisterFillInfoActivity"></activity>
         <activity android:name=".ui.function.me.AccountAndSecurityActivity" />
-        <activity android:name=".ui.function.me.ModifyNickNameActivity" />
         <activity android:name=".ui.function.me.BindedMobileActivity" />
-        <activity android:name=".ui.function.me.ModifyMobileActivity" />
+        <activity android:name=".ui.function.login.ForgetPwdActivity" />
+        <activity android:name=".ui.function.me.favorite.MyFavoriteActivity" />
+        <activity android:name=".ui.function.me.UpdatePwdActivity" />
+        <activity android:name=".ui.function.me.UpdateNickNameActivity" />
+        <activity android:name=".ui.function.me.UpdateMobileActivity" />
     </application>
 </manifest>

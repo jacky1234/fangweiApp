@@ -21,22 +21,19 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     companion object {
         @JvmField
         val FLAG_NONE = 0
-        @JvmField
-        val FLAG_LEFT_VISIBLE = 1
-        @JvmField
-        val FLAG_MIDDLE_VISIBLE = 1 shl 1
-        @JvmField
-        val FLAG_RIGHT_VISIBLE = 1 shl 2
+        const val FLAG_LEFT_VISIBLE = 1
+        const val FLAG_MIDDLE_VISIBLE = 1 shl 1
+        const val FLAG_RIGHT_VISIBLE = 1 shl 2
 
 
         //compose flag
-        @JvmField       //左中可见
-        val COMPOSE_LEFT_MIDDLEL_FLAG = FLAG_LEFT_VISIBLE or FLAG_MIDDLE_VISIBLE
-        @JvmField       //左中右都可见
-        val COMPOSE_ALL_FLAG = FLAG_LEFT_VISIBLE or FLAG_MIDDLE_VISIBLE or FLAG_RIGHT_VISIBLE
+        //左中可见
+        const val COMPOSE_LEFT_MIDDLEL_FLAG = FLAG_LEFT_VISIBLE or FLAG_MIDDLE_VISIBLE
+        //左中右都可见
+        const val COMPOSE_ALL_FLAG = FLAG_LEFT_VISIBLE or FLAG_MIDDLE_VISIBLE or FLAG_RIGHT_VISIBLE
     }
 
-    private var flag: Int = COMPOSE_LEFT_MIDDLEL_FLAG
+    private var flag = COMPOSE_LEFT_MIDDLEL_FLAG
     private var iv_left_icon: ImageView
     private var tv_left_text: TextView
     private var tv_title: TextView
@@ -72,6 +69,16 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, resources.getColor(android.R.color.black))
             rightTextId = ta.getResourceId(R.styleable.TitleView_titleView_right_text, R.string.complete)
             rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, resources.getColor(android.R.color.black))
+            val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, COMPOSE_LEFT_MIDDLEL_FLAG)
+            when (type) {
+                1 -> {
+                    flag = COMPOSE_LEFT_MIDDLEL_FLAG
+                }
+                2 -> {
+                    flag = COMPOSE_ALL_FLAG
+                }
+            }
+
 
         } finally {
             ta?.recycle()
@@ -91,10 +98,10 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         this.flag = flag
         if (flag and FLAG_LEFT_VISIBLE != 0) {
             iv_left_icon.visibility = View.VISIBLE
-            tv_right_text.visibility = View.VISIBLE
+            tv_left_text.visibility = View.VISIBLE
         } else {
             iv_left_icon.visibility = View.INVISIBLE
-            tv_right_text.visibility = View.INVISIBLE
+            tv_left_text.visibility = View.INVISIBLE
         }
 
         if (flag and FLAG_MIDDLE_VISIBLE != 0) {
@@ -104,9 +111,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         }
 
         if (flag and FLAG_RIGHT_VISIBLE != 0) {
-            tv_right_text.visibility = View.VISIBLE
+            right_container.visibility = View.VISIBLE
         } else {
-            tv_right_text.visibility = View.INVISIBLE
+            right_container.visibility = View.INVISIBLE
         }
     }
 

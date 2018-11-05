@@ -55,7 +55,9 @@ public class HttpResponseTransformer {
             if (code >= 200 && code < 300) {
                 return Observable.just(response.getData());
             } else {
-                return Observable.error(new ApiException(code, message));
+                ApiException exception = new ApiException(code, message);
+                CustomException.handleException(exception);
+                return Observable.error(exception);
             }
         }
     }

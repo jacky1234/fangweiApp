@@ -11,12 +11,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.then
+import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.image.MyGlideEngin
-import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.Dialog.DialogHelper
@@ -89,12 +90,17 @@ class AccountAndSecurityActivity : BaseActivity() {
 
         //nickname
         parent_nickname.clickWithTrigger {
-            launch<ModifyNickNameActivity>()
+            launch<UpdateNickNameActivity>()
         }
 
         //mobile
         parent_mobile.clickWithTrigger {
             launch<BindedMobileActivity>()
+        }
+
+        //pwd
+        parent_modify_pwd.clickWithTrigger {
+            launch<UpdatePwdActivity>()
         }
         changeableData()
     }
@@ -114,9 +120,12 @@ class AccountAndSecurityActivity : BaseActivity() {
                         if (Strings.isNotBlank(realPathFromUri)) {
                             RequestHelper.get().uploadFile(File(realPathFromUri))
                                     .compose(bindToLifecycle())
-                                    .subscribe({
-                                        Logger.i(it.toString())
-                                    }, { Logger.Companion.e(it) })
+                                    .subscribe {
+                                        toast("修改成功")
+                                        MySelf.get().avatar = it.url
+                                        MySelf.get().save()
+                                        changeableData()
+                                    }
                         }
                     }
                 }
@@ -127,7 +136,9 @@ class AccountAndSecurityActivity : BaseActivity() {
     private fun changeableData() {
         rxPermissions.request(Manifest.permission.INTERNET).subscribe {
             it.then({
-                Glide.with(this).load(MySelf.get().avatar)
+                Glide.with(this)
+                        .setDefaultRequestOptions(ImageLoader.defaultRequestOptions)
+                        .load(MySelf.get().avatar)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
                         .into(parent_head.imageView)
             }, { AndroidUtil.toast("未获取网络权限") })

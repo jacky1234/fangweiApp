@@ -6,7 +6,7 @@ import android.view.View
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
-import com.jacky.beedee.logic.network.exception.CustomException
+import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.AndroidUtil
@@ -54,14 +54,18 @@ class LoginActivity : BaseActivity() {
 
                     RequestHelper.get().login(phone, pwd)
                             .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                            .subscribe({
+                            .subscribe {
                                 DialogTipsHelper.createSuccess(this, "登录成功")
                                 AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
-                            }, { CustomException.handleException(it) })
+                            }
                 }
 
-        tv_register.setOnClickListener {
+        tv_register.clickWithTrigger {
             RegisterActivity.start(this, et_phone.text.toString())
+        }
+
+        tv_forget_pwd.clickWithTrigger {
+            ForgetPwdActivity.start(this, et_phone.text.toString())
         }
     }
 }

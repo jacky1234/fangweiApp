@@ -36,6 +36,11 @@ public class AndroidUtil {
         return dm.heightPixels;
     }
 
+    public static float dip2px(float dipValue) {
+        final float scale = Starter.getContext().getResources().getDisplayMetrics().density;
+        return dipValue * scale + 0.5f;
+    }
+
     /**
      * 获取应用版本信息
      *

@@ -5,7 +5,8 @@ import android.support.annotation.NonNull;
 import com.jacky.beedee.logic.entity.User;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
-import com.jacky.beedee.logic.entity.request.UserRequest;
+import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
+import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
@@ -21,8 +22,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 /**
  * 2018/10/30.
@@ -32,11 +31,6 @@ import okhttp3.RequestBody;
  * 请求接口
  */
 public class RequestHelper {
-    public static final MediaType JSON
-            = MediaType.parse("application/json; charset=utf-8");
-    private static final MediaType TYPE_FILE
-            = MediaType.parse("application/octet-stream");
-
     private ApiService apiService;
 
     private RequestHelper() {
@@ -44,10 +38,8 @@ public class RequestHelper {
     }
 
     public Observable<UploadFileResponse> uploadFile(@NotNull File file) {
-        Map<String, RequestBody> map = new HashMap<>(1);
-        map.put("file", RequestBody.create(TYPE_FILE, file));
-
-        return apiService.uploadFile(map);
+        return apiService.uploadFile(ParamCreator.prepareFilePart("file", file))
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
     public Observable<RegisterResponse> register(@NotNull String phone, @NonNull String code) {
@@ -68,9 +60,33 @@ public class RequestHelper {
                 .compose(BooleanTransformer.handleResult(true));
     }
 
-    public Observable<User> completeUserInfo(@NotNull UserRequest user) {
-        return apiService.completeUserInfo(user)
+    public Observable<Boolean> forgetPwd(String mobile, String code, String newPwd) {
+        Map<String, String> map = new HashMap<>(3);
+        map.put("mobile", mobile);
+        map.put("code", code);
+        map.put("newPassword", newPwd);
+        return apiService.forgetPwd(map)
+                .compose(BooleanTransformer.handleResult(true));
+    }
+
+    public Observable<User> updateUserInfo(@NotNull UpdateUserRequest user) {
+        return apiService.updateUserInfo(user)
                 .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<User> updateMobile(@NotNull String mobile, @NotNull String code) {
+        Map<String, String> map = new HashMap<>(2);
+        map.put("newMobile", mobile);
+        map.put("code", code);
+
+        return apiService.changeMobile(map)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    //收藏
+    public Observable<FavoriteResponse> collectList(@NotNull String targetType, int page) {
+        return apiService.collectList(targetType, page, ParamCreator.PAGE_SIZE)
+                .compose(HttpResponseTransformer.handleResult(false));
     }
 
     public Observable<HttpResponseSource> logout() {

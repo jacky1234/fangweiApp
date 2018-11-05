@@ -45,15 +45,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_background" />
 
-        <!--<LinearLayout-->
-            <!--style="@style/gap_line"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
-
-
-        <!--</LinearLayout>-->
-
         <EditText
             android:id="@+id/et_phone"
             android:layout_width="match_parent"
@@ -99,29 +90,35 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/et_code" />
 
-        <com.chaychan.viewlib.PowerfulEditText
-            android:id="@+id/et_pwd"
-            style="@style/normal_register_row_text"
-            android:drawableLeft="@mipmap/ic_pwd"
-            android:drawablePadding="16dp"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            app:funcType="canWatchPwd"
+        <LinearLayout
+            android:id="@+id/parent_gap_container"
+            style="@style/gap_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_code" />
+            app:layout_constraintTop_toBottomOf="@+id/et_code">
 
-        <com.chaychan.viewlib.PowerfulEditText
-            android:id="@+id/et_confirm_pwd"
-            style="@style/normal_register_row_text"
-            android:drawableLeft="@mipmap/ic_pwd"
-            android:drawablePadding="16dp"
-            android:hint="请确认密码"
-            android:inputType="textPassword"
-            app:funcType="canWatchPwd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
+            <com.chaychan.viewlib.PowerfulEditText
+                android:id="@+id/et_pwd"
+                style="@style/normal_register_row_text"
+                android:drawableLeft="@mipmap/ic_pwd"
+                android:drawablePadding="16dp"
+                android:hint="请设置新密码"
+                android:inputType="textPassword"
+                app:funcType="canWatchPwd" />
+
+            <com.chaychan.viewlib.PowerfulEditText
+                android:id="@+id/et_confirm_pwd"
+                style="@style/normal_register_row_text"
+                android:drawableLeft="@mipmap/ic_pwd"
+                android:drawablePadding="16dp"
+                android:hint="请再次输入新密码"
+                android:inputType="textPassword"
+                app:funcType="canWatchPwd" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tv_confirm"
@@ -130,7 +127,7 @@
             android:text="@string/confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_confirm_pwd" />
+            app:layout_constraintTop_toBottomOf="@+id/parent_gap_container" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

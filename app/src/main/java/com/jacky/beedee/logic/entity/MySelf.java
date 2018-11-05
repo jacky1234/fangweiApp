@@ -40,7 +40,7 @@ public class MySelf {
     private String role;
     private String authorization;
 
-    public void from(@NotNull User user) {
+    public void saveFromUser(@NotNull User user) {
         id = user.getId();
         createTime = user.getCreateTime();
         updateTime = user.getUpdateTime();
@@ -51,6 +51,8 @@ public class MySelf {
         mobile = user.getMobile();
         email = user.getEmail();
         role = user.getRole();
+
+        save();
     }
 
     public static void init() {
@@ -107,12 +109,20 @@ public class MySelf {
 
     @NotNull
     public String getNickName() {
+        return Strings.isNotBlank(nickName) ? nickName : Strings.empty;
+    }
+
+    @NotNull
+    public String getShowingName() {
         if (Strings.isNotBlank(nickName)) {
+            return nickName;
+        }
+
+        if (Strings.isNotBlank(username)) {
             return username;
         }
 
-
-        return nickName == null ? Strings.empty : nickName;
+        return Strings.empty;
     }
 
     public void setNickName(String nickName) {

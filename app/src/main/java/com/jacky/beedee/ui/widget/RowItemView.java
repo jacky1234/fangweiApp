@@ -81,4 +81,12 @@ public class RowItemView extends RelativeLayout {
     public void setRightEditableText(CharSequence text) {
         et_edit.setText(text);
     }
+
+    public CharSequence getRightContent() {
+        return tv_right_desc.getText();
+    }
+
+    public EditText getRightEditText() {
+        return et_edit;
+    }
 }

@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.MySelf
-import com.jacky.beedee.logic.entity.request.UserRequest
+import com.jacky.beedee.logic.entity.request.UpdateUserRequest
 import com.jacky.beedee.logic.network.RequestHelper
-import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.Strings
@@ -51,18 +50,17 @@ class RegisterFillInfoActivity : BaseActivity() {
                         toast("两次输入的密码不一致")
                         return@subscribe
                     }
-                    val request = UserRequest()
+                    val request = UpdateUserRequest()
                     request.nickName = nickname
                     request.gender = if (rb_boy.isChecked) "MALE" else "FEMALE"
                     request.password = pwd
-                    RequestHelper.get().completeUserInfo(request)
+                    RequestHelper.get().updateUserInfo(request)
                             .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
-                            .subscribe({
-                                MySelf.get().from(it)
-                                MySelf.get().save()
+                            .subscribe {
+                                MySelf.get().saveFromUser(it)
                                 finishAffinity()
                                 this@RegisterFillInfoActivity.launch<MainActivity>()
-                            }, { CustomException.handleException(it) })
+                            }
 
                 }
     }

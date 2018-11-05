@@ -6,7 +6,7 @@ package com.jacky.beedee.logic.entity.request;
  *
  * @author jacky
  */
-public class UserRequest {
+public class UpdateUserRequest {
 
     /**
      * nickName : Koma

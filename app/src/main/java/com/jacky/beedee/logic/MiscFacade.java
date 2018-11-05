@@ -25,7 +25,7 @@ public class MiscFacade {
     private static final int VERTIFY_SECOND = 60;
     private ConnectableObservable<Long> codeObservable;
     private Disposable vertifyCodeDispose;
-    private Set<Observer> leftSecondObservers = Collections.synchronizedSet(new HashSet<>());
+    private Set<Observer<Long>> leftSecondObservers = Collections.synchronizedSet(new HashSet<>());
 
     private MiscFacade() {
 
@@ -84,12 +84,7 @@ public class MiscFacade {
     }
 
     private static final class InstanceHolder {
-        public static final MiscFacade INSTANCE = new MiscFacade();
-
-        // Don't let anyone instantiate this class.
-        private InstanceHolder() {
-            // This constructor is intentionally empty.
-        }
+        private static final MiscFacade INSTANCE = new MiscFacade();
     }
 
     public static MiscFacade get() {
@@ -100,12 +95,12 @@ public class MiscFacade {
         MiscFacade.isNeedToLogout = isNeedToLogout;
     }
 
-    public boolean isVertifyCodeAvailable() {
+    public boolean isVerifyCodeAvailable() {
         return vertifyCodeDispose == null || vertifyCodeDispose.isDisposed();
     }
 
     public void registerCodeListenerAndTrigger(Observer<Long> observer) {
-        if (isVertifyCodeAvailable()) {
+        if (isVerifyCodeAvailable()) {
             resetVertifyCodeDisposeAndConnect();
         }
         leftSecondObservers.add(observer);

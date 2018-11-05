@@ -8,13 +8,10 @@ import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
-import com.jacky.beedee.logic.network.exception.CustomException
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
-import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.AndroidUtil
-import com.jacky.beedee.support.util.Strings
-import com.jacky.beedee.support.util.regex.RegexUtils
+import com.jacky.beedee.support.util.Checker
 import com.jacky.beedee.ui.Dialog.DialogTipsHelper
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
@@ -54,26 +51,25 @@ class RegisterActivity : BaseActivity() {
         et_phone.setText(intent.getStringExtra(KEY_MOBILE))
 
         val btnGainCode = btn_gain_code
-        val vertifyCodeAvailable = MiscFacade.get().isVertifyCodeAvailable
-        if (!vertifyCodeAvailable) {
+        val verifyCodeAvailable = MiscFacade.get().isVerifyCodeAvailable
+        if (!verifyCodeAvailable) {
             RxTextView.text(btnGainCode).accept(null)
         }
-        RxView.enabled(btnGainCode).accept(vertifyCodeAvailable)
-        if (!vertifyCodeAvailable) {
-            trigVertifyCode(btnGainCode)
+        RxView.enabled(btnGainCode).accept(verifyCodeAvailable)
+        if (!verifyCodeAvailable) {
+            trigVerifyCode(btnGainCode)
         }
         btnGainCode.clickWithTrigger {
             val phone = et_phone.text.toString()
-            if (!RegexUtils.isMobileSimple(phone)) {
-                toast(R.string.mobile_number_wrong)
+            if (!Checker.checkMobile(et_phone)) {
                 return@clickWithTrigger
             }
 
             RxView.enabled(btnGainCode).accept(false)
-            RequestHelper.get().sendCode(phone).subscribe({
+            RequestHelper.get().sendCode(phone).subscribe {
                 AndroidUtil.toast("发送成功")
-                trigVertifyCode(btnGainCode)
-            }, { CustomException.handleException(it) })
+                trigVerifyCode(btnGainCode)
+            }
         }
 
         val next = tv_next
@@ -82,34 +78,24 @@ class RegisterActivity : BaseActivity() {
                 .bindToLifecycle(btnGainCode)
                 .subscribe {
                     val phone = et_phone.text.toString()
-                    if (Strings.isNullOrEmpty(phone)) {
-                        toast("请输入手机号")
-                        return@subscribe
-                    }
-
-                    if (!RegexUtils.isMobileSimple(phone)) {
-                        toast(R.string.mobile_number_wrong)
-                        return@subscribe
-                    }
-
                     val code = et_code.text.toString()
-                    if (Strings.isNullOrEmpty(code)) {
-                        toast("请输入验证码")
-                        return@subscribe
-                    }
 
-                    requestRegister(phone, code)
+                    if (Checker.check(et_phone, "请输入手机号") &&
+                            Checker.checkMobile(et_phone) &&
+                            Checker.check(et_code, "请输入验证码") &&
+                            Checker.CheckChecked(checkbox, "请先同意使用协议"))
+                        requestRegister(phone, code)
                 }
     }
 
-    private fun trigVertifyCode(btnGainCode: Button) {
+    private fun trigVerifyCode(btnGainCode: Button) {
         MiscFacade.get().registerCodeListenerAndTrigger(codeObserver)
     }
 
     private fun requestRegister(phone: String, code: String) {
         RequestHelper.get().register(phone, code)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe({ it ->
+                .subscribe { it ->
                     MySelf.get().id = it.id
                     MySelf.get().username = it.username
                     MySelf.get().mobile = it.mobile
@@ -120,7 +106,7 @@ class RegisterActivity : BaseActivity() {
 
                     DialogTipsHelper.createSuccess(this, "注册成功")
                     AndroidUtil.runUI({ this@RegisterActivity.launch<RegisterFillInfoActivity>() }, 100)
-                }, { CustomException.handleException(it) })
+                }
     }
 
     override fun onDestroy() {
