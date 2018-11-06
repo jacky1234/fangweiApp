@@ -1,13 +1,23 @@
 package com.jacky.beedee.ui.function.main
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.entity.Banner
+import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.util.SpanUtils
+import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.looper.LoopViewPager
+import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
+import me.relex.circleindicator.CircleIndicator
+import java.util.*
 
 /**
  * 2018/11/1.
@@ -15,14 +25,44 @@ import com.jacky.beedee.ui.inner.arch.MySupportFragment
  * @author  jacky
  */
 class HomeFragment : MySupportFragment() {
-    lateinit var recyclerView: RecyclerView
+    lateinit var viewPager: LoopViewPager
+    lateinit var circleIndicator: CircleIndicator
+    lateinit var tvBrandDesc: TextView
+    private val defaultBanners = Collections.singletonList(Banner.empty)
 
     private fun requestBanner() {
         RequestHelper.get().requestBannerList()
                 .compose(bindUntilDetach())
                 .subscribe {
-
+                    onResultBannerList(it)
                 }
+    }
+
+    private fun onResultBannerList(list: List<Banner>) {
+        if (isAttached()) {
+            viewPager.setAutoScroll(true, 5000)
+            viewPager.adapter = LooperPagerAdapter(list.size) { position ->
+                val imageView = ImageView(activity)
+                if (isAttached()) {
+                    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                    imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                    setOnBannerClickListener(imageView, list[position])
+                    Glide.with(this)
+                            .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
+                            .load(list[position].image)
+                            .into(imageView)
+                }
+
+                imageView
+            }
+            circleIndicator.setViewPager(viewPager)
+        }
+    }
+
+    private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
+        imageView.setOnClickListener {
+            //            banner.link       todo
+        }
     }
 
     private fun requestOutfitGoods() {
@@ -43,8 +83,12 @@ class HomeFragment : MySupportFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.fragment_home, null)
-        recyclerView = content.findViewById(R.id.recyclerView)
+        viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
+        circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
+        tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
 
+        onResultBannerList(defaultBanners)
+        tvBrandDesc.text = getBranchDesc()
         return content
     }
 
@@ -53,5 +97,14 @@ class HomeFragment : MySupportFragment() {
         requestBanner()
         requestOutfitGoods()
         requestHotGoods()
+    }
+
+    private fun getBranchDesc(): CharSequence {
+        return SpanUtils()
+                .append("BEEDEE").setFontSize(15, false).setForegroundColor(resources.getColor(R.color.black)).setBold().appendLine()
+                .append("Pursuit the 1% Life, something different.").setFontSize(12, false).setForegroundColor(resources.getColor(R.color.tab_grey_color)).append(Strings.enter)
+                .append("追求1%的生活理念").setFontSize(12, false).setForegroundColor(resources.getColor(R.color.item_title_text_color)).append(Strings.enter)
+                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。")
+                .create()
     }
 }

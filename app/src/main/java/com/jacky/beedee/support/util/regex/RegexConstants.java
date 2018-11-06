@@ -63,7 +63,7 @@ public class RegexConstants {
      */
     public static final String REGEX_DOUBLE_BYTE_CHAR = "[^\\x00-\\xff]";
     /**
-     * Regex of blank line.
+     * Regex of enter line.
      */
     public static final String REGEX_BLANK_LINE = "\\n\\s*\\r";
     /**

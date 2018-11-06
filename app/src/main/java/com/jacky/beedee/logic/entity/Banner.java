@@ -8,6 +8,8 @@ package com.jacky.beedee.logic.entity;
  */
 public class Banner {
 
+    public static transient Banner empty = new Banner();
+
     /**
      * id : 5ba3d5ec94603a20e4b45815
      * createTime : 1541085053000

@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.jacky.beedee.logic.entity.MySelf;
 import com.jacky.beedee.logic.network.RequestHelper;
 import com.jacky.beedee.ui.function.login.LoginActivity;
+import com.jacky.beedee.ui.inner.arch.BaseActivity;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -91,8 +92,11 @@ public class MiscFacade {
         return MiscFacade.InstanceHolder.INSTANCE;
     }
 
-    public static void setIsNeedToLogout(boolean isNeedToLogout) {
+    public void setIsNeedToLogout(boolean isNeedToLogout) {
         MiscFacade.isNeedToLogout = isNeedToLogout;
+        if (BaseActivity.currentActivity != null) {
+            loginOutFlag(BaseActivity.currentActivity, false);
+        }
     }
 
     public boolean isVerifyCodeAvailable() {

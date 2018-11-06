@@ -8,11 +8,8 @@ import com.jacky.beedee.logic.entity.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
-import com.jacky.beedee.support.ext.toast
 import com.jacky.beedee.support.util.AndroidUtil
-import com.jacky.beedee.support.util.Strings
-import com.jacky.beedee.support.util.regex.RegexUtils
-import com.jacky.beedee.ui.Dialog.DialogTipsHelper
+import com.jacky.beedee.support.util.Checker
 import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
@@ -36,28 +33,15 @@ class LoginActivity : BaseActivity() {
                 .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe {
                     val phone = et_phone.text.toString()
-                    if (Strings.isNullOrEmpty(phone)) {
-                        toast("请输入手机号")
-                        return@subscribe
-                    }
-
-                    if (!RegexUtils.isMobileSimple(phone)) {
-                        toast(R.string.mobile_number_wrong)
-                        return@subscribe
-                    }
-
                     val pwd = et_pwd.text.toString()
-                    if (Strings.isNullOrEmpty(pwd)) {
-                        toast("请输入密码")
-                        return@subscribe
-                    }
-
-                    RequestHelper.get().login(phone, pwd)
-                            .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                            .subscribe {
-                                DialogTipsHelper.createSuccess(this, "登录成功")
-                                AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
-                            }
+                    if (Checker.check(et_phone, "请输入手机号") &&
+                            Checker.checkMobile(et_phone) && Checker.check(et_pwd, "请输入密码"))
+                        RequestHelper.get().login(phone, pwd)
+                                .compose(bindToDestroy())
+                                .subscribe {
+                                    AndroidUtil.toast("登录成功")
+                                    AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
+                                }
                 }
 
         tv_register.clickWithTrigger {

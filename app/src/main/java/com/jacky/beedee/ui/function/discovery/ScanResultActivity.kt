@@ -38,12 +38,12 @@ class ScanResultActivity : BaseActivity() {
     private fun getRealInfo(): CharSequence {
         return SpanUtils().append("扫描结果显示为正品").setFontSize(19, false).setBold()
                 .appendLine().appendLine()
-                .appendImage(R.mipmap.ic_small_back_vertical).append(Strings.blank).append("安全信息")
+                .appendImage(R.mipmap.ic_small_back_vertical).append(Strings.enter).append("安全信息")
 //                .appendLine().append("产品编号：").append("${}")
 //                .appendLine().append("生产日期：").append("${}")
 //                .appendLine().append("生产公司：").append("${}")
                 .appendLine().appendLine()
-                .appendImage(R.mipmap.ic_small_back_vertical).append(Strings.blank).append("产品详情")
+                .appendImage(R.mipmap.ic_small_back_vertical).append(Strings.enter).append("产品详情")
 //                .appendLine().append("${}")
                 .create()
     }

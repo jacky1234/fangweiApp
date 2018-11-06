@@ -3,6 +3,7 @@ package com.jacky.beedee.logic.network.exception;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
+import com.jacky.beedee.logic.MiscFacade;
 import com.jacky.beedee.support.log.Logger;
 import com.jacky.beedee.support.util.AndroidUtil;
 import com.jacky.beedee.support.util.Strings;
@@ -40,9 +41,13 @@ public class CustomException {
      */
     public static final int HTTP_ERROR = 1003;
 
+    //重新登陆
+    public static final int ACTION_RELOGIN = 401;
+
+
     public static ApiException handleException(Throwable e) {
         Logger.Companion.e(e);
-        
+
         ApiException ex;
         if (e instanceof ApiException) {
             ex = (ApiException) e;
@@ -55,9 +60,11 @@ public class CustomException {
             } else if (e instanceof ConnectException) {
                 //网络错误
                 ex = new ApiException(NETWORK_ERROR, e.getMessage());
-            } else if (e instanceof UnknownHostException || e instanceof SocketTimeoutException) {
+            } else if (e instanceof UnknownHostException) {
                 //连接错误
-                ex = new ApiException(NETWORK_ERROR, e.getMessage());
+                ex = new ApiException(NETWORK_ERROR, "连接异常");
+            } else if (e instanceof SocketTimeoutException) {
+                ex = new ApiException(NETWORK_ERROR, "连接超时");
             } else {
                 //未知错误
                 ex = new ApiException(UNKNOWN, e.getMessage());
@@ -70,8 +77,12 @@ public class CustomException {
     private static void handlerExceptionInternal(ApiException apiException) {
         int code = apiException.getCode();
         if ((code >= 400 && code <= 600) || code >= 1000) {
-            if (Strings.isNotBlank(apiException.getDisplayMessage())) {
-                AndroidUtil.toast(apiException.getDisplayMessage());
+            if (code == ACTION_RELOGIN) {
+                MiscFacade.get().setIsNeedToLogout(true);
+            } else {
+                if (Strings.isNotBlank(apiException.getDisplayMessage())) {
+                    AndroidUtil.toast(apiException.getDisplayMessage());
+                }
             }
         }
     }
