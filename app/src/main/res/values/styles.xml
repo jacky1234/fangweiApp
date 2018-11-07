@@ -39,6 +39,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="smallButton">
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingRight">14dp</item>
+        <item name="android:background">@drawable/shape_rect_black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/action_confirm</item>
+    </style>
+
     <!--大button-->
     <style name="confirm_button">
         <item name="android:layout_marginLeft">@dimen/normal_confirm_margin</item>

@@ -11,8 +11,10 @@ import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.Banner
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.ext.clickWithTrigger
+import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.SpanUtils
-import com.jacky.beedee.support.util.Strings
+import com.jacky.beedee.ui.function.other.ShowBrandActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.looper.LoopViewPager
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
@@ -28,6 +30,7 @@ class HomeFragment : MySupportFragment() {
     lateinit var viewPager: LoopViewPager
     lateinit var circleIndicator: CircleIndicator
     lateinit var tvBrandDesc: TextView
+    lateinit var tvKnowMore: TextView
     private val defaultBanners = Collections.singletonList(Banner.empty)
 
     private fun requestBanner() {
@@ -86,6 +89,11 @@ class HomeFragment : MySupportFragment() {
         viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
         circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
         tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
+        tvKnowMore = content.findViewById(R.id.tv_know_more) as TextView
+
+        tvKnowMore.clickWithTrigger {
+            activity.launch<ShowBrandActivity>()
+        }
 
         onResultBannerList(defaultBanners)
         tvBrandDesc.text = getBranchDesc()
@@ -101,10 +109,10 @@ class HomeFragment : MySupportFragment() {
 
     private fun getBranchDesc(): CharSequence {
         return SpanUtils()
-                .append("BEEDEE").setFontSize(15, false).setForegroundColor(resources.getColor(R.color.black)).setBold().appendLine()
-                .append("Pursuit the 1% Life, something different.").setFontSize(12, false).setForegroundColor(resources.getColor(R.color.tab_grey_color)).append(Strings.enter)
-                .append("追求1%的生活理念").setFontSize(12, false).setForegroundColor(resources.getColor(R.color.item_title_text_color)).append(Strings.enter)
-                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。")
+                .append("BEEDEE").setFontSize(15, true).setForegroundColor(resources.getColor(R.color.black)).setBold().appendLine()
+                .append("Pursuit the 1% Life, something different.").setFontSize(12, true).setForegroundColor(resources.getColor(R.color.tab_grey_color)).appendLine()
+                .append("追求1%的生活理念").setFontSize(12, true).appendLine()
+                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(resources.getColor(R.color.item_title_text_color)).appendLine()
                 .create()
     }
 }

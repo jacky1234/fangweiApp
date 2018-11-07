@@ -2,9 +2,11 @@ package com.jacky.beedee.ui.function.other
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import com.jacky.beedee.R
 import com.jacky.beedee.support.util.SpanUtils
 import com.jacky.beedee.ui.inner.arch.BaseActivity
+import kotlinx.android.synthetic.main.activity_introduce.*
 
 /**
  * 2018/11/3.
@@ -16,12 +18,15 @@ class ShowBrandActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduce)
+
+        titleView.setLeftAction(View.OnClickListener { finish() })
+        textView.text = getInfo()
     }
 
     private fun getInfo(): CharSequence {
-        return SpanUtils().append("BEEDEE\n").setFontSize(28, false).setBold().appendLine()
-                .append("SOMETHING DIFFERENT\n").setForegroundColor(Color.parseColor("#BFBEBE")).setFontSize(14, false)
-                .appendLine().appendLine()
+        return SpanUtils().append("BEEDEE").setFontSize(28, true).setBold().appendLine()
+                .append("SOMETHING DIFFERENT").setForegroundColor(Color.parseColor("#BFBEBE")).setFontSize(14, true)
+                .appendLine()
                 .append("Pursuit the 1 % Life \n" +
                         "Concept There are 80% of the people in the world lead \n" +
                         "normal lives.\n" +
@@ -33,9 +38,9 @@ class ShowBrandActivity : BaseActivity() {
                         "innovation, stick to originalityTo share what we want.\n" +
                         "We want to pass on a different design concept to those \n" +
                         "of you who want it.\n" +
-                        "Thanks to the 1 %  who will always be with us.\n").setForegroundColor(Color.parseColor("#666666")).setFontSize(13, false)
-                .appendLine().appendLine().appendLine()
-                .append("品牌理念\n").setFontSize(19, false).setBold()
+                        "Thanks to the 1 %  who will always be with us.\n").setForegroundColor(Color.parseColor("#666666")).setFontSize(13, true)
+                .appendLine()
+                .append("品牌理念").setFontSize(19, true).setBold()
                 .appendLine().appendLine()
                 .append("追求1%的生活理念\n" +
                         "世上总有80%的人过着平凡的生活\n" +
