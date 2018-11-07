@@ -21,7 +21,9 @@
         <!--</activity>-->
         <activity
             android:name=".ui.function.main.MainActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,8 +41,9 @@
         <activity android:name=".ui.function.me.UpdatePwdActivity" />
         <activity android:name=".ui.function.me.UpdateNickNameActivity" />
         <activity android:name=".ui.function.me.UpdateMobileActivity" />
-        <activity android:name=".ui.function.discovery.ScanResultActivity" />
+        <activity android:name=".ui.function.defake.ScanResultActivity" />
         <activity android:name=".ui.function.other.ShowBrandActivity" />
         <activity android:name=".ui.function.main.NewHotsGoodActivity" />
+        <activity android:name=".ui.function.discovery.SearchActivity"/>
     </application>
 </manifest>

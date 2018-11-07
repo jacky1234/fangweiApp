@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.jacky.beedee.R;
+import com.jacky.beedee.support.util.AndroidUtil;
 
 @SuppressLint("CheckResult")
 public class ImageLoader {
+    public static final float item_padding = AndroidUtil.dip2px(15);
     public static final RequestOptions defaultRequestOptions = new RequestOptions();
     public static final RequestOptions _16To9RequestOptions = new RequestOptions();
     public static final RequestOptions _1To1RequestOptions = new RequestOptions();

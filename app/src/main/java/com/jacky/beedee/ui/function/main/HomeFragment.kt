@@ -13,13 +13,16 @@ import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
+import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.SpanUtils
 import com.jacky.beedee.ui.function.other.ShowBrandActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.GridContainer
 import com.jacky.beedee.ui.widget.looper.LoopViewPager
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import me.relex.circleindicator.CircleIndicator
 import java.util.*
+
 
 /**
  * 2018/11/1.
@@ -27,12 +30,13 @@ import java.util.*
  * @author  jacky
  */
 class HomeFragment : MySupportFragment() {
-    lateinit var viewPager: LoopViewPager
-    lateinit var circleIndicator: CircleIndicator
-    lateinit var tvBrandDesc: TextView
-    lateinit var tvKnowMore: TextView
-    lateinit var tvOutFit: TextView
-    lateinit var ivOutFitImageView: ImageView
+    private lateinit var viewPager: LoopViewPager
+    private lateinit var circleIndicator: CircleIndicator
+    private lateinit var tvBrandDesc: TextView
+    private lateinit var tvKnowMore: TextView
+    private lateinit var tvOutFit: TextView
+    private lateinit var ivOutFitImageView: ImageView
+    private lateinit var gridContainer: GridContainer
     private val defaultBanners = Collections.singletonList(Banner.empty)
 
     private fun requestBanner() {
@@ -66,7 +70,16 @@ class HomeFragment : MySupportFragment() {
         RequestHelper.get().requestHotGoods()
                 .compose(bindUntilDetach())
                 .subscribe {
+                    if (it != null && !it.content.isEmpty()) {
+                        it.content.forEachIndexed { index, goodItem ->
+                            if (index > 3) return@forEachIndexed
 
+                            for (i in 0..4) {
+                                val child = layoutInflater.inflate(R.layout.item_home_grid, null)
+                                gridContainer.addView(child)
+                            }
+                        }
+                    }
                 }
     }
 
@@ -93,13 +106,20 @@ class HomeFragment : MySupportFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.fragment_home, null)
-        viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
-        circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
-        tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
-        tvKnowMore = content.findViewById(R.id.tv_know_more) as TextView
-        tvOutFit = content.findViewById(R.id.tv_outfit_title) as TextView
-        ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
+        initView(content)
+        initListener()
+        initGridContainer()
+        initDefaultData()
+        return content
+    }
 
+    private fun initDefaultData() {
+        ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
+        onResultBannerList(defaultBanners)
+        tvBrandDesc.text = getBranchDesc()
+    }
+
+    private fun initListener() {
         tvKnowMore.clickWithTrigger {
             activity.launch<ShowBrandActivity>()
         }
@@ -107,11 +127,31 @@ class HomeFragment : MySupportFragment() {
         tvOutFit.clickWithTrigger {
             activity.launch<NewHotsGoodActivity>()
         }
+    }
 
-        ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
-        onResultBannerList(defaultBanners)
-        tvBrandDesc.text = getBranchDesc()
-        return content
+    private fun initGridContainer() {
+        val child = layoutInflater.inflate(R.layout.item_home_grid, null)
+        gridContainer.addView(child)
+    }
+
+    private fun initView(content: View) {
+        viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
+        circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
+        tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
+        tvKnowMore = content.findViewById(R.id.tv_know_more) as TextView
+        tvOutFit = content.findViewById(R.id.tv_outfit_title) as TextView
+        ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
+        gridContainer = content.findViewById(R.id.gridContainer) as GridContainer
+        gridContainer.setItemPadding(ImageLoader.item_padding)
+
+
+        gridContainer.post {
+            val itemPadding = AndroidUtil.dip2px(15f)
+            val itemWidth = (gridContainer.measuredWidth - itemPadding) / 2
+            gridContainer.setItemPadding(itemPadding)
+            gridContainer.setItemWidth(itemWidth)
+        }
+
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {

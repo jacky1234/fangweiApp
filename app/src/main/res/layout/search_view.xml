@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_search"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/title_view"
+    android:background="@drawable/shape_search_rect_gray"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_closeSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/iv_closeSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="4dp"
+            android:src="@mipmap/eye_close" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/ic_small_search" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@id/rl_closeSearch"
+        android:layout_toRightOf="@id/iv_search"
+        android:background="@null"
+        android:gravity="left|center_vertical"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:textSize="13sp"
+        tools:hint="搜索产品，“羽绒服”..."
+        tools:text="123" />
+</RelativeLayout>

@@ -10,6 +10,8 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jacky.beedee.support.Starter;
@@ -105,5 +107,16 @@ public class AndroidUtil {
         }
 
         return null;
+    }
+
+    public static void showKeyBoard(EditText editText) {
+        if (editText == null) {
+            return;
+        }
+        editText.requestFocus();
+        final InputMethodManager inputMethodManager = (InputMethodManager) Starter.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 }

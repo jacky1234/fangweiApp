@@ -1,4 +1,4 @@
-package com.jacky.beedee.ui.function.discovery
+package com.jacky.beedee.ui.function.defake
 
 import android.os.Bundle
 import android.view.View
