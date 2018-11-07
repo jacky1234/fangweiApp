@@ -1,7 +1,10 @@
 package com.jacky.beedee.logic.entity.response;
 
-import com.jacky.beedee.logic.entity.Good;
+import android.support.annotation.NonNull;
 
+import com.jacky.beedee.logic.entity.GoodItem;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,18 +22,23 @@ public class ListGoodResponse {
      * last : true
      * first : true
      */
-    private List<Good> content;
+    private List<GoodItem> content;
     private int page;
     private int size;
     private int total;
     private boolean last;
     private boolean first;
 
-    public List<Good> getContent() {
+    @NonNull
+    public List<GoodItem> getContent() {
+        if (content == null) {
+            return new ArrayList<>(1);
+        }
+
         return content;
     }
 
-    public void setContent(List<Good> content) {
+    public void setContent(List<GoodItem> content) {
         this.content = content;
     }
 

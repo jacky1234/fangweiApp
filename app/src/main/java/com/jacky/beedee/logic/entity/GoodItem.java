@@ -6,7 +6,7 @@ package com.jacky.beedee.logic.entity;
  *
  * @author jacky
  */
-public class Good {
+public class GoodItem {
 
     /**
      * id : 5bd707804adc2b34b062fc8f

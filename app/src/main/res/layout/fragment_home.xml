@@ -1,111 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="30dp">
 
-    <TextView
-        android:id="@+id/tv_title"
+    <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:gravity="center"
-        android:text="BEEDEE"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="16:9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
-
-        <com.jacky.beedee.ui.widget.looper.LoopViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/circleIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="4dp"
-            app:ci_drawable="@drawable/shape_dot_black"
-            app:ci_drawable_unselected="@drawable/shape_dot_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/viewPager"
-            app:layout_constraintStart_toStartOf="@+id/viewPager" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textView2"
-        style="@style/home_item_bold_title_scrollable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
-        android:drawablePadding="4dp"
-        android:drawableRight="@mipmap/ic_arrow_right_black"
-        android:text="品牌介绍"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
-            android:layout_marginLeft="@dimen/first_margin_from_left"
-            android:id="@+id/tv_brand_desc"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:background="#F7F7F7"
-            android:paddingBottom="24dp"
-            android:paddingLeft="@dimen/first_margin_from_left"
-            android:paddingRight="@dimen/first_margin_from_left"
-            android:paddingTop="24dp"
-            tools:text="BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。\n
-BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。" />
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:text="BEEDEE"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+            <com.jacky.beedee.ui.widget.looper.LoopViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/circleIndicator"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginBottom="4dp"
+                app:ci_drawable="@drawable/shape_dot_black"
+                app:ci_drawable_unselected="@drawable/shape_dot_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager"
+                app:layout_constraintStart_toStartOf="@+id/viewPager" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_brand_title"
+            style="@style/home_item_bold_title_scrollable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="@dimen/first_margin_from_left"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="4dp"
+            android:drawableRight="@mipmap/ic_arrow_right_black"
+            android:text="品牌介绍"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="61dp"
-                android:layout_height="68dp"
-                android:src="@mipmap/image_brand_black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        <LinearLayout
+            android:id="@+id/parent_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tv_brand_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_brand_title">
 
             <TextView
-                android:id="@+id/tv_know_more"
-                style="@style/smallButton"
+                android:id="@+id/tv_brand_desc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F7F7F7"
+                android:lineSpacingMultiplier="1.1"
+                android:paddingBottom="24dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="24dp"
+                tools:text="BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。\n
+BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginTop="15dp"
-                android:text="了解更多" />
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="61dp"
+                    android:layout_height="68dp"
+                    android:src="@mipmap/image_brand_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_brand_title" />
+
+                <TextView
+                    android:id="@+id/tv_know_more"
+                    style="@style/smallButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="了解更多" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tv_outfit_title"
+            style="@style/home_item_bold_title_scrollable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="4dp"
+            android:drawableRight="@mipmap/ic_arrow_right_black"
+            android:text="人气穿搭"
+            app:layout_constraintStart_toStartOf="@+id/tv_brand_title"
+            app:layout_constraintTop_toBottomOf="@+id/parent_brand" />
 
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/iv_hotFit"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/first_margin_from_left"
+            android:layout_marginRight="@dimen/first_margin_from_left"
+            android:layout_marginTop="15dp"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_outfit_title" />
+
+
+        <TextView
+            android:id="@+id/tv_hots_title"
+            style="@style/home_item_bold_title_scrollable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="4dp"
+            android:drawableRight="@mipmap/ic_arrow_right_black"
+            android:text="最新主推"
+            app:layout_constraintStart_toStartOf="@+id/tv_brand_title"
+            app:layout_constraintTop_toBottomOf="@+id/iv_hotFit" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

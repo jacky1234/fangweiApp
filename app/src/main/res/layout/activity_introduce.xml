@@ -26,13 +26,14 @@
             android:src="@mipmap/image_large_gray_brand" />
 
         <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
-            android:paddingTop="42dp"
-            android:paddingLeft="@dimen/first_margin_from_left"
-            android:paddingRight="@dimen/first_margin_from_left"
-            android:paddingBottom="42dp"
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingBottom="42dp"
+            android:paddingLeft="@dimen/first_margin_from_left"
+            android:paddingRight="@dimen/first_margin_from_left"
+            android:paddingTop="42dp" />
 
     </FrameLayout>
 

@@ -54,10 +54,23 @@ interface ApiService {
     @GET("banner/list")
     fun requestBannerList(): Observable<HttpListResponse<Banner>>
 
-    //穿搭
+    //查询热门穿搭（首页“人气穿搭”和人气穿搭页“搭配推荐”）
     @GET("outfit/list_hot")
-    fun requestOutfitGoods(): Observable<HttpResponse<ListGoodResponse>>
+    fun requestOutfitHot(): Observable<HttpResponse<ListGoodResponse>>
+
+    //查询最新穿搭
+    @GET("outfit/list_new")
+    fun requestOutfitNew(): Observable<HttpResponse<ListGoodResponse>>
+
+    @GET("outfit/search")
+    fun searchOutfit(): Observable<HttpResponse<ListGoodResponse>>
+
+    //查询穿搭详情
+    @GET("outfit/get")
+    fun requestOutfitDetail(@Body map: Map<String, String>): Observable<HttpResponse<ListGoodResponse>>
+
 
     @GET("goods/list_hot")
     fun requestHotGoods(): Observable<HttpResponse<ListGoodResponse>>
+
 }

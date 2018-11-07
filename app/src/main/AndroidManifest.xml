@@ -39,7 +39,8 @@
         <activity android:name=".ui.function.me.UpdatePwdActivity" />
         <activity android:name=".ui.function.me.UpdateNickNameActivity" />
         <activity android:name=".ui.function.me.UpdateMobileActivity" />
-        <activity android:name=".ui.function.discovery.ScanResultActivity"/>
-        <activity android:name=".ui.function.other.ShowBrandActivity"/>
+        <activity android:name=".ui.function.discovery.ScanResultActivity" />
+        <activity android:name=".ui.function.other.ShowBrandActivity" />
+        <activity android:name=".ui.function.main.NewHotsGoodActivity" />
     </application>
 </manifest>

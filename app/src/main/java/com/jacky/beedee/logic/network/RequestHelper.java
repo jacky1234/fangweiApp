@@ -100,10 +100,19 @@ public class RequestHelper {
     }
 
     //穿搭
-    public Observable<ListGoodResponse> requestOutfitGoods() {
-        return apiService.requestOutfitGoods()
+    public Observable<ListGoodResponse> requestOutfitHot() {
+        return apiService.requestOutfitHot()
                 .compose(HttpResponseTransformer.handleResult(false));
     }
+
+    public Observable<ListGoodResponse> requestOutfitDetail(String outfitId) {
+        Map<String, String> map = new HashMap<>(1);
+        map.put("outfitId", outfitId);
+
+        return apiService.requestOutfitDetail(map)
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
     //热门商品
     public Observable<ListGoodResponse> requestHotGoods() {
         return apiService.requestHotGoods()

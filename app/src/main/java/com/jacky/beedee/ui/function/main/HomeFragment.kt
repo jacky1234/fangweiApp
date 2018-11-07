@@ -31,6 +31,8 @@ class HomeFragment : MySupportFragment() {
     lateinit var circleIndicator: CircleIndicator
     lateinit var tvBrandDesc: TextView
     lateinit var tvKnowMore: TextView
+    lateinit var tvOutFit: TextView
+    lateinit var ivOutFitImageView: ImageView
     private val defaultBanners = Collections.singletonList(Banner.empty)
 
     private fun requestBanner() {
@@ -38,6 +40,33 @@ class HomeFragment : MySupportFragment() {
                 .compose(bindUntilDetach())
                 .subscribe {
                     onResultBannerList(it)
+                }
+    }
+
+    private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
+        imageView.setOnClickListener {
+            //            banner.link       todo
+        }
+    }
+
+    private fun requestOutfitGoods() {
+        RequestHelper.get().requestOutfitHot()
+                .compose(bindUntilDetach())
+                .subscribe {
+                    if (it != null && !it.content.isEmpty()) {
+                        Glide.with(this)
+                                .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
+                                .load(it.content[0].thumb)
+                                .into(ivOutFitImageView)
+                    }
+                }
+    }
+
+    private fun requestHotGoods() {
+        RequestHelper.get().requestHotGoods()
+                .compose(bindUntilDetach())
+                .subscribe {
+
                 }
     }
 
@@ -62,39 +91,24 @@ class HomeFragment : MySupportFragment() {
         }
     }
 
-    private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
-        imageView.setOnClickListener {
-            //            banner.link       todo
-        }
-    }
-
-    private fun requestOutfitGoods() {
-        RequestHelper.get().requestOutfitGoods()
-                .compose(bindUntilDetach())
-                .subscribe {
-
-                }
-    }
-
-    private fun requestHotGoods() {
-        RequestHelper.get().requestHotGoods()
-                .compose(bindUntilDetach())
-                .subscribe {
-
-                }
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.fragment_home, null)
         viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
         circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
         tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
         tvKnowMore = content.findViewById(R.id.tv_know_more) as TextView
+        tvOutFit = content.findViewById(R.id.tv_outfit_title) as TextView
+        ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
 
         tvKnowMore.clickWithTrigger {
             activity.launch<ShowBrandActivity>()
         }
 
+        tvOutFit.clickWithTrigger {
+            activity.launch<NewHotsGoodActivity>()
+        }
+
+        ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
         onResultBannerList(defaultBanners)
         tvBrandDesc.text = getBranchDesc()
         return content
