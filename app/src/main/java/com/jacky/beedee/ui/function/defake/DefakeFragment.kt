@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.jacky.beedee.R
 import com.jacky.beedee.support.ext.clickWithTrigger
-import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.then
+import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.s2icode.dao.S2iCodeResult
+import com.s2icode.dao.S2iCodeResultBase
+import com.s2icode.main.S2iCodeModule
+import com.s2icode.main.S2iCodeResultInterface
 import com.tbruyelle.rxpermissions2.RxPermissions
 
 /**
@@ -19,7 +23,19 @@ import com.tbruyelle.rxpermissions2.RxPermissions
  * GitHub:[https://github.com/jacky1234]
  * @author  jacky
  */
-class DefakeFragment : MySupportFragment() {
+class DefakeFragment : MySupportFragment(), S2iCodeResultInterface {
+    override fun onS2iCodeError(p0: S2iCodeResultBase?) {
+        p0?.let {
+            Logger.i(it.toString())
+        }
+    }
+
+    override fun onS2iCodeResult(p0: S2iCodeResult?) {
+        p0?.let {
+            Logger.e(it.toString())
+        }
+    }
+
     lateinit var rxPermissions: RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +51,10 @@ class DefakeFragment : MySupportFragment() {
                     .subscribe {
                         it.then({
                             if (isAttached()) {
-                                activity!!.launch<DefakeDetailActivity>()
+//                                activity!!.launch<DefakeDetailActivity>()
+
+                                S2iCodeModule.setS2iCodeResultInterface(this)
+                                S2iCodeModule.startS2iCamera(true)
                             }
                         }, {
                             AndroidUtil.toast("请开启存储和相机权限")
@@ -44,6 +63,11 @@ class DefakeFragment : MySupportFragment() {
         }
 
         return content
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        S2iCodeModule.setS2iCodeResultInterface(null)
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {

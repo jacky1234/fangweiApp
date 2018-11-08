@@ -2,7 +2,7 @@ package com.jacky.beedee.logic.entity.response;
 
 import android.support.annotation.NonNull;
 
-import com.jacky.beedee.logic.entity.GoodItem;
+import com.jacky.beedee.logic.entity.module.GoodItem;
 
 import java.util.ArrayList;
 import java.util.List;

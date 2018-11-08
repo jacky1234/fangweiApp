@@ -1,4 +1,4 @@
-package com.jacky.beedee.logic.entity;
+package com.jacky.beedee.logic.entity.module;
 
 //收藏
 public class Favorite {

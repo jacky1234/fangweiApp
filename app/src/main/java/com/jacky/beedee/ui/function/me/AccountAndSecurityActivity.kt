@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
-import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger

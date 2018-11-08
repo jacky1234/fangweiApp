@@ -20,24 +20,15 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-
-
 ### greenDAO 3
 -keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
 public static java.lang.String TABLENAME;
 }
--keep class **$Properties
 
 # If you do not use SQLCipher:
 -dontwarn org.greenrobot.greendao.database.**
 # If you do not use RxJava:
 -dontwarn rx.**
-
-### greenDAO 2
--keepclassmembers class * extends de.greenrobot.dao.AbstractDao {
-public static java.lang.String TABLENAME;
-}
--keep class **$Properties
 
 -dontwarn com.bumptech.glide.**
 
@@ -48,5 +39,76 @@ public static java.lang.String TABLENAME;
   public *;
 }
 
+
+#---OkHttp3---
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.squareup.okhttp.** { *; }
+-keep interface com.squareup.okhttp.** { *; }
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+
 # for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+#-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
+
+
+-dontwarn com.android.volley.toolbox.**
+#s2icode
+-keep class com.s2icode.**{*;}
+-dontwarn com.s2icode.**
+
+#retrofit
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontwarn retrofit2.**
+-keep public class retrofit2.** { *; }
+
+
+#---------------------------------默认保留区---------------------------------
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.view.View
+-keep class android.support.** {*;}
+
+-keep public class * extends android.view.View{
+    *** get*();
+    void set*(***);
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+-keep class **.R$* {
+ *;
+}
+-keepclassmembers class * {
+    void *(**On*Event);
+}
+
+
+#---Gson---
+-keepattributes Signature
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+-keep class com.google.gson.** { *; }
+#---zxing---
+-keep class com.google.zxing.** {*;}
+-dontwarn com.google.zxing.**

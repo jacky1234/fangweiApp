@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.launch

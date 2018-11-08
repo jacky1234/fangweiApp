@@ -77,6 +77,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                 2 -> {
                     flag = COMPOSE_ALL_FLAG
                 }
+                3 -> {
+                    flag = FLAG_LEFT_VISIBLE
+                }
             }
 
 

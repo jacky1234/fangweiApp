@@ -1,4 +1,4 @@
-package com.jacky.beedee.logic.entity;
+package com.jacky.beedee.logic.entity.module;
 
 /**
  * 2018/11/1.

@@ -1,4 +1,4 @@
-package com.jacky.beedee.logic.entity;
+package com.jacky.beedee.logic.entity.module;
 
 /**
  * 2018/11/6.
@@ -27,6 +27,7 @@ public class GoodItem {
     private int price;
     private boolean collected;
     private int collectCount;
+    public static GoodItem empty = new GoodItem();
 
     public String getId() {
         return id;

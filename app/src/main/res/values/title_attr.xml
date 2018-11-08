@@ -11,6 +11,7 @@
         <attr name="titleView_visible_type" format="integer">
             <enum name="left_middle" value="1" />
             <enum name="all" value="2" />
+            <enum name="left" value="3" />
         </attr>
     </declare-styleable>
 </resources>

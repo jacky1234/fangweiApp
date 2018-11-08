@@ -2,7 +2,7 @@ package com.jacky.beedee.logic.network
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.jacky.beedee.logic.entity.MySelf
+import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.entity.response.HttpResponse
 import com.jacky.beedee.logic.network.inteceptor.LogicInterceptor
 import com.jacky.beedee.logic.network.parse.JsonFormatParser

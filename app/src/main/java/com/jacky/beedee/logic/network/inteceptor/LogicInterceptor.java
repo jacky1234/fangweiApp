@@ -1,6 +1,6 @@
 package com.jacky.beedee.logic.network.inteceptor;
 
-import com.jacky.beedee.logic.entity.MySelf;
+import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.support.util.Strings;
 
 import java.io.IOException;

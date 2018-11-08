@@ -8,7 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.Banner
+import com.jacky.beedee.logic.entity.module.Banner
+import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
@@ -71,16 +72,25 @@ class HomeFragment : MySupportFragment() {
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {
-                        it.content.forEachIndexed { index, goodItem ->
-                            if (index > 3) return@forEachIndexed
-
-                            for (i in 0..4) {
-                                val child = layoutInflater.inflate(R.layout.item_home_grid, null)
-                                gridContainer.addView(child)
-                            }
-                        }
+                        onResultHotGoods(it.content)
                     }
                 }
+    }
+
+    private fun onResultHotGoods(hots: List<GoodItem>) {
+        gridContainer.removeAllViews()
+
+        hots.forEachIndexed { index, goodItem ->
+            if (index > 3) return@forEachIndexed
+
+            val child = layoutInflater.inflate(R.layout.item_home_grid, gridContainer, false)
+            val imageView = child.findViewById<ImageView>(R.id.imageView)
+            Glide.with(this)
+                    .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
+                    .load(goodItem.thumb)
+                    .into(imageView)
+            gridContainer.addView(child)
+        }
     }
 
     private fun onResultBannerList(list: List<Banner>) {
@@ -117,6 +127,7 @@ class HomeFragment : MySupportFragment() {
         ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
         onResultBannerList(defaultBanners)
         tvBrandDesc.text = getBranchDesc()
+        onResultHotGoods(Collections.singletonList(GoodItem.empty))
     }
 
     private fun initListener() {
@@ -130,8 +141,10 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun initGridContainer() {
-        val child = layoutInflater.inflate(R.layout.item_home_grid, null)
-        gridContainer.addView(child)
+        gridContainer.setItemPadding(AndroidUtil.dip2px(15f))
+                .setSpanCount(2)
+                .setRatio(1.0f)
+                .layout()
     }
 
     private fun initView(content: View) {
@@ -143,15 +156,6 @@ class HomeFragment : MySupportFragment() {
         ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
         gridContainer = content.findViewById(R.id.gridContainer) as GridContainer
         gridContainer.setItemPadding(ImageLoader.item_padding)
-
-
-        gridContainer.post {
-            val itemPadding = AndroidUtil.dip2px(15f)
-            val itemWidth = (gridContainer.measuredWidth - itemPadding) / 2
-            gridContainer.setItemPadding(itemPadding)
-            gridContainer.setItemWidth(itemWidth)
-        }
-
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {

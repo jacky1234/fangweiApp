@@ -2,8 +2,9 @@ package com.jacky.beedee.logic.network;
 
 import android.support.annotation.NonNull;
 
-import com.jacky.beedee.logic.entity.Banner;
-import com.jacky.beedee.logic.entity.User;
+import com.jacky.beedee.logic.entity.module.Banner;
+import com.jacky.beedee.logic.entity.module.Good;
+import com.jacky.beedee.logic.entity.module.User;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
@@ -105,7 +106,7 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
-    public Observable<ListGoodResponse> requestOutfitDetail(String outfitId) {
+    public Observable<Good> requestOutfitDetail(String outfitId) {
         Map<String, String> map = new HashMap<>(1);
         map.put("outfitId", outfitId);
 

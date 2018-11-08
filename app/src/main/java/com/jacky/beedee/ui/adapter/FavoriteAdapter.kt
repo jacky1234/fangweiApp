@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.Favorite
+import com.jacky.beedee.logic.entity.module.Favorite
 import com.jacky.beedee.logic.image.ImageLoader
 
 class FavoriteAdapter constructor(itemLayoutId: Int) : BaseQuickAdapter<Favorite, BaseViewHolder>(itemLayoutId) {

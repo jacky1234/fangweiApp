@@ -1,11 +1,10 @@
 package com.jacky.beedee.logic.entity.response;
 
-import com.jacky.beedee.logic.entity.module.Favorite;
+import com.jacky.beedee.logic.entity.module.Video;
 
 import java.util.List;
 
-public class FavoriteResponse {
-
+public class HotVideoResponse {
 
     /**
      * page : 0
@@ -14,18 +13,18 @@ public class FavoriteResponse {
      * last : true
      * first : true
      */
-    private List<Favorite> content;
+    private List<Video> content;
     private int page;
     private int size;
     private int total;
     private boolean last;
     private boolean first;
 
-    public List<Favorite> getContent() {
+    public List<Video> getContent() {
         return content;
     }
 
-    public void setContent(List<Favorite> content) {
+    public void setContent(List<Video> content) {
         this.content = content;
     }
 

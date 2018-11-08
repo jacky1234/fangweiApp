@@ -3,7 +3,7 @@ package com.jacky.beedee.support;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.jacky.beedee.logic.entity.MySelf;
+import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.support.system.Device;
 import com.jacky.beedee.support.system.DeviceDependency;
 import com.jacky.beedee.support.util.AndroidUtil;

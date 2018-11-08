@@ -1,4 +1,4 @@
-package com.jacky.beedee.logic.entity;
+package com.jacky.beedee.logic.entity.module;
 
 import com.jacky.beedee.logic.DaoFacade;
 import com.jacky.beedee.support.util.Strings;

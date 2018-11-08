@@ -1,6 +1,6 @@
 package com.jacky.beedee.logic;
 
-import com.jacky.beedee.logic.entity.MySelf;
+import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.support.dao.DbManager;
 import com.jacky.beedee.support.dao.generate.DaoSession;
 import com.jacky.beedee.support.dao.generate.PreferenceDao;

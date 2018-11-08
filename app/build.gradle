@@ -12,7 +12,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.jacky.beedee"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -31,6 +31,8 @@ android {
         debug {
             signingConfig signingConfigs.sign
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
 
         release {
@@ -53,6 +55,16 @@ greendao {
     schemaVersion 1
     daoPackage "com.jacky.beedee.support.dao.generate"
     targetGenDir 'src/main/java'
+}
+
+//添加一个本地仓库，并把libs目录作为仓库的地址
+repositories {
+    jcenter()
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 dependencies {
@@ -88,5 +100,11 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
-    implementation 'com.lzy.widget:ninegridview:0.2.0'
+//    implementation 'com.lzy.widget:ninegridview:0.2.0'
+
+    //defake
+    implementation(name: 'S2iCodeModule_v2.6.0', ext: 'aar')
+    implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
+
+
 }

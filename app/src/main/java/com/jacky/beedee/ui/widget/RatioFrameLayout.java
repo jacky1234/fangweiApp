@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.jacky.beedee.R;
@@ -35,6 +37,33 @@ public class RatioFrameLayout extends FrameLayout {
         widthRatio = a.getFloat(R.styleable.RatioFrameLayout_widthRatio, 0);
         heightRatio = a.getFloat(R.styleable.RatioFrameLayout_heightRatio, 0);
         a.recycle();
+    }
+
+    @Override
+    public void addView(View child) {
+        super.addView(child);
+    }
+
+    @Override
+    public void addView(View child, int index) {
+        super.addView(child, index);
+    }
+
+    @Override
+    public void addView(View child, ViewGroup.LayoutParams params) {
+        params.width = getWidth();
+        params.height = getHeight();
+        super.addView(child, params);
+    }
+
+    @Override
+    public void addView(View child, int width, int height) {
+        super.addView(child, width, height);
+    }
+
+    @Override
+    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+        super.addView(child, index, params);
     }
 
     @Override

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.jacky.beedee.logic.entity.MySelf;
+import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.logic.network.RequestHelper;
 import com.jacky.beedee.ui.function.login.LoginActivity;
 import com.jacky.beedee.ui.inner.arch.BaseActivity;
