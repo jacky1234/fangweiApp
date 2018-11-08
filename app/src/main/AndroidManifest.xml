@@ -45,5 +45,6 @@
         <activity android:name=".ui.function.other.ShowBrandActivity" />
         <activity android:name=".ui.function.main.NewHotsGoodActivity" />
         <activity android:name=".ui.function.discovery.SearchActivity" />
+        <activity android:name=".ui.function.main.OutFitActivity" />
     </application>
 </manifest>

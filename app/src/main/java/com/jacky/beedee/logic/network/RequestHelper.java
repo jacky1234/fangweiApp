@@ -9,6 +9,7 @@ import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
+import com.jacky.beedee.logic.entity.response.HotVideoResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.ListGoodResponse;
 import com.jacky.beedee.logic.entity.response.LoginResponse;
@@ -119,6 +120,12 @@ public class RequestHelper {
         return apiService.requestHotGoods()
                 .compose(HttpResponseTransformer.handleResult(false));
     }
+
+    public Observable<HotVideoResponse> requestDesignVideo() {
+        return apiService.requestHotDesignVideo()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
 
     public Observable<HttpResponseSource> logout() {
         return apiService.logout().compose(SchedulerUtils.INSTANCE.ioToMain());

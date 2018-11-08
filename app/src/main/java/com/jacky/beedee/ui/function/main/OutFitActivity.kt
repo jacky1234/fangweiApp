@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import com.jacky.beedee.ui.inner.arch.BaseRootSupportActivity
 
-class OutFitDetailActivity : BaseRootSupportActivity<OutFitDetailFragment>() {
-    override fun createClazz(): Class<OutFitDetailFragment> = OutFitDetailFragment::class.java
+class OutFitActivity : BaseRootSupportActivity<OutFitFragment>() {
+    override fun createClazz(): Class<OutFitFragment> = OutFitFragment::class.java
 
-    override fun createSupportFragment(): OutFitDetailFragment {
-        return OutFitDetailFragment.newInstance(intent.getStringExtra(KEY_OUTFITID))
+    override fun createSupportFragment(): OutFitFragment {
+//        return OutFitDetailFragment.newInstance(intent.getStringExtra(KEY_OUTFITID))
+
+        return OutFitFragment()
     }
 
     companion object {
@@ -16,7 +18,7 @@ class OutFitDetailActivity : BaseRootSupportActivity<OutFitDetailFragment>() {
 
         @JvmStatic
         fun start(activity: Activity, id: String) {
-            val intent = Intent(activity, OutFitDetailActivity::class.java)
+            val intent = Intent(activity, OutFitActivity::class.java)
             intent.putExtra(KEY_OUTFITID, id)
             activity.startActivity(intent)
         }

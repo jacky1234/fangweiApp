@@ -12,19 +12,13 @@
         app:titleView_visible_type="left_middle" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/first_margin_from_left"
-        android:layout_marginTop="29dp"
-        android:text="衣服制作视频"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/titleView" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="16:9" />
+        android:paddingBottom="30dp"
+        android:scrollbars="none"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintTop_toBottomOf="@id/titleView" />
+
 </android.support.constraint.ConstraintLayout>

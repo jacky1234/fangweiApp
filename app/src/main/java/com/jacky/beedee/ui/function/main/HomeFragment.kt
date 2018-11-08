@@ -59,13 +59,23 @@ class HomeFragment : MySupportFragment() {
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {
-                        Glide.with(this)
-                                .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
-                                .load(it.content[0].thumb)
-                                .into(ivOutFitImageView)
+                        onResultOutfit(it.content)
                     }
                 }
     }
+
+    private fun onResultOutfit(lists: List<GoodItem>) {
+        val thumb = lists[0].thumb
+        Glide.with(this)
+                .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
+                .load(thumb)
+                .into(ivOutFitImageView)
+
+        tvOutFit.clickWithTrigger {
+            OutFitActivity.start(activity!!, thumb)
+        }
+    }
+
 
     private fun requestHotGoods() {
         RequestHelper.get().requestHotGoods()
@@ -133,10 +143,6 @@ class HomeFragment : MySupportFragment() {
     private fun initListener() {
         tvKnowMore.clickWithTrigger {
             activity.launch<ShowBrandActivity>()
-        }
-
-        tvOutFit.clickWithTrigger {
-            activity.launch<NewHotsGoodActivity>()
         }
     }
 

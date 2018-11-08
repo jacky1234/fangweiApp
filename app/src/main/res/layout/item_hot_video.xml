@@ -8,7 +8,7 @@
     <com.jacky.beedee.ui.widget.RatioFrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:heightRatio="0。5625"
+        app:heightRatio="0.5625"
         app:widthRatio="1.0">
 
         <ImageView
