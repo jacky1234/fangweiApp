@@ -36,7 +36,6 @@ public class BannerLayoutManager extends LinearLayoutManager {
         super(context);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mRealCount = realCount;
-        this.mHandler = new TaskHandler(this);
         this.mRecyclerView = recyclerView;
         setOrientation(HORIZONTAL);
         this.mOrientation = HORIZONTAL;
@@ -46,7 +45,6 @@ public class BannerLayoutManager extends LinearLayoutManager {
         super(context);
         this.mLinearSnapHelper = new LinearSnapHelper();
         this.mRealCount = realCount;
-        this.mHandler = new TaskHandler(this);
         this.mRecyclerView = recyclerView;
         setOrientation(orientation);
         this.mOrientation = orientation;
@@ -61,7 +59,9 @@ public class BannerLayoutManager extends LinearLayoutManager {
     @Override
     public void onAttachedToWindow(RecyclerView view) {
         super.onAttachedToWindow(view);
-        mLinearSnapHelper.attachToRecyclerView(view);
+        if (view.getOnFlingListener() == null) {
+            mLinearSnapHelper.attachToRecyclerView(view);
+        }
     }
 
 
@@ -85,7 +85,7 @@ public class BannerLayoutManager extends LinearLayoutManager {
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
         if (state == RecyclerView.SCROLL_STATE_IDLE) {//滑动停止
-            if (mLinearSnapHelper != null) {
+            if (mLinearSnapHelper != null && mHandler != null) {
 
                 View view = mLinearSnapHelper.findSnapView(this);
                 mCurrentPosition = getPosition(view);
@@ -101,7 +101,7 @@ public class BannerLayoutManager extends LinearLayoutManager {
                 mHandler.sendMessageDelayed(msg, mTimeDelayed);
 
             }
-        } else if (state == SCROLL_STATE_DRAGGING) {//拖动
+        } else if (state == SCROLL_STATE_DRAGGING && mHandler != null) {//拖动
             mHandler.setSendMsg(false);
         }
     }
@@ -117,10 +117,12 @@ public class BannerLayoutManager extends LinearLayoutManager {
     @Override
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         super.onLayoutChildren(recycler, state);
-        mHandler.setSendMsg(true);
-        Message msg = Message.obtain();
-        msg.what = mCurrentPosition + 1;
-        mHandler.sendMessageDelayed(msg, mTimeDelayed);
+        if (mHandler != null) {
+            mHandler.setSendMsg(true);
+            Message msg = Message.obtain();
+            msg.what = mCurrentPosition + 1;
+            mHandler.sendMessageDelayed(msg, mTimeDelayed);
+        }
     }
 
     public void setOnSelectedViewListener(OnSelectedViewListener listener) {

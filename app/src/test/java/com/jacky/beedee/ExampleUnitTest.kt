@@ -6,6 +6,8 @@ import org.junit.Test
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
+
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -105,5 +107,15 @@ class ExampleUnitTest {
             Util.log("disposed 3?:" + connect.isDisposed)
         }, 11, TimeUnit.SECONDS)
         Util.suspend(20)
+    }
+
+    @Test
+    fun regex() {
+        val r_name3 = "www.hettp.10*4.png"
+        val pattern = Pattern.compile("[\\d]*[\\d]]")
+        val matcher = pattern.matcher(r_name3)
+        if (matcher.find()) {
+            System.out.println(matcher.group())
+        }
     }
 }

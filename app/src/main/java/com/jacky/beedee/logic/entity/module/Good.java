@@ -38,6 +38,7 @@ public class Good {
     private int collectCount;
     private List<String> gallery;
     private List<String> details;
+    public static Good empty = new Good();
 
     public String getId() {
         return id;

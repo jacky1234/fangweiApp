@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jacky.beedee.ui.widget.TitleView
-        android:id="@+id/titleView"
-        app:titleView_visible_type="left"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height" />
+        android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_height"
+                android:background="@null"
+                app:layout_collapseMode="pin">
+
+                <com.jacky.beedee.ui.widget.TitleView
+                    android:id="@+id/titleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/title_height"
+                    app:titleView_visible_type="left" />
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="9:16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <com.jacky.beedee.ui.widget.looper.LoopViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/circleIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginBottom="4dp"
-            app:ci_drawable="@drawable/shape_dot_black"
-            app:ci_drawable_unselected="@drawable/shape_dot_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/viewPager"
-            app:layout_constraintStart_toStartOf="@+id/viewPager" />
-
-    </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

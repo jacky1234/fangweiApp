@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/first_margin_from_left"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        tools:text="初秋微凉的天气超级爱穿的裙子啦～" />
+
+
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textColor="#999999"
+        android:textSize="15sp"
+        tools:text="适合初秋微凉的天气穿的裙子，微风吹起裙摆直击你
+的少女心。再冷一点的冬季也替你打算好了，套一件
+外套也同样甜美可爱哦～～" />
+</LinearLayout>

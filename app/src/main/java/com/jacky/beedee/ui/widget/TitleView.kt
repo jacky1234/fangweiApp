@@ -21,7 +21,7 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
     companion object {
         @JvmField
         val FLAG_NONE = 0
-        const val FLAG_LEFT_VISIBLE = 1
+        const val FLAG_LEFT_VISIBLE = 1 shl 0
         const val FLAG_MIDDLE_VISIBLE = 1 shl 1
         const val FLAG_RIGHT_VISIBLE = 1 shl 2
 

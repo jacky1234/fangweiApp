@@ -1,22 +1,25 @@
 package com.jacky.beedee.ui.adapter
 
-import android.graphics.Typeface
+import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.module.GoodItem
+import com.jacky.beedee.logic.entity.module.Video
+import com.jacky.beedee.logic.entity.wrapper.VideosWrapper
 import com.jacky.beedee.logic.image.ImageLoader
-import com.jacky.beedee.support.Starter
-import com.jacky.beedee.support.util.AndroidUtil
+import com.jacky.beedee.ui.widget.layoutManager.BannerLayoutManager
 import kotlinx.android.synthetic.main.item_outfit_recommand.view.*
+import kotlinx.android.synthetic.main.item_video.view.*
 
-class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OutfitAdapter(private val context: Context, private val delegate: Delegate?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val TYPE_VIDEO_TITLE = 1
         const val TYPE_VIDEO_BANNER = 2
@@ -29,9 +32,10 @@ class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var dataList = ArrayList<Any>()
 
-
-    fun setData(goodItems: List<GoodItem>) {
+    fun setData(videos: List<Video>, goodItems: List<GoodItem>) {
+        dataList.clear()
         dataList.add(VIDEO_TITLE)
+        dataList.add(VideosWrapper(videos))
         dataList.add(OUTFIT_RECOMMENT_TITLE)
         dataList.addAll(goodItems)
 
@@ -46,13 +50,13 @@ class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var viewHolder: BaseViewHolder? = null
         when (viewType) {
             TYPE_VIDEO_TITLE -> {
-                viewHolder = TitleViewHolder(TextView(parent.context))
+                viewHolder = TitleViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_video_title, parent, false))
             }
             TYPE_VIDEO_BANNER -> {
                 viewHolder = VideoVideoHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_video, parent, false))
             }
             TYPE_OUTFIT_RECOMMEND -> {
-                viewHolder = TitleViewHolder(TextView(parent.context))
+                viewHolder = TitleViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_outfit_recommand_title, parent, false))
             }
             TYPE_OUTFIT_ITEM -> {
                 viewHolder = OutFitItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_outfit_recommand, parent, false))
@@ -71,6 +75,7 @@ class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 OUTFIT_RECOMMENT_TITLE -> viewType = TYPE_OUTFIT_RECOMMEND
             }
             is GoodItem -> viewType = TYPE_OUTFIT_ITEM
+            is VideosWrapper -> viewType = TYPE_VIDEO_BANNER
         }
         return viewType
     }
@@ -83,6 +88,12 @@ class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val content = dataList[position] as String
                 titleViewHolder.bind(content)
             }
+            TYPE_VIDEO_BANNER -> {
+                val videoVideoHolder = holder as VideoVideoHolder
+                val content = dataList[position] as VideosWrapper
+                videoVideoHolder.bind(content.videos)
+            }
+
             TYPE_OUTFIT_RECOMMEND -> {
                 val titleViewHolder = holder as TitleViewHolder
                 val content = dataList[position] as String
@@ -97,37 +108,60 @@ class VideoBannerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private class TitleViewHolder constructor(view: View) : BaseViewHolder(view) {
-        init {
-            val textView = itemView as TextView
-            textView.setSingleLine()
-            textView.setPadding(AndroidUtil.dip2px(15F).toInt(), 0, 0, 0)
-            textView.setTypeface(textView.typeface, Typeface.BOLD_ITALIC)
-            textView.setTextColor(Starter.getContext().resources.getColor(R.color.black))
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19f)
-        }
-
         fun bind(content: String) {
             val textView = itemView as TextView
             textView.text = content
         }
     }
 
-    private class VideoVideoHolder constructor(view: View) : BaseViewHolder(view) {
-        fun bind() {
-            val recyclerView = itemView as RecyclerView
+    private inner class VideoVideoHolder constructor(view: View) : BaseViewHolder(view) {
+        fun bind(videos: List<Video>) {
+            val recyclerView = itemView.recyclerView
+
+            recyclerView.layoutManager = BannerLayoutManager(context, recyclerView, videos.size)
+            recyclerView.adapter = object : BaseQuickAdapter<Video, BaseViewHolder>(R.layout.item_video_detail, videos) {
+                override fun convert(helper: BaseViewHolder, item: Video) {
+                    val imageView = helper.getView<ImageView>(R.id.ivVideoCover)
+                    val tvDesc = helper.getView<TextView>(R.id.tvDesc)
+                    val ivPlay = helper.getView<ImageView>(R.id.ivPlay)
+                    Glide.with(context)
+                            .setDefaultRequestOptions(ImageLoader._16To9RequestRoundCornerOptions)
+                            .load(item.url)
+                            .into(imageView)
+
+                    tvDesc.text = item.name
+
+                    ivPlay.setOnClickListener {
+                        //                        TODO("play video")
+                    }
+                }
+            }
         }
     }
 
-    private class OutFitItemViewHolder constructor(view: View) : BaseViewHolder(view) {
+    private inner class OutFitItemViewHolder constructor(view: View) : BaseViewHolder(view) {
         fun bind(item: GoodItem) {
             Glide.with(itemView.context)
-                    .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
+                    .setDefaultRequestOptions(ImageLoader._16To9RequestRoundCornerOptions)
                     .load(item.thumb)
                     .into(itemView.imageView)
 
             itemView.tv_desc.text = item.name
-            itemView.iv_like.isEnabled = item.isCollected
+            itemView.cb_like.isSelected = item.isCollected
             itemView.tv_like_num.text = item.collectCount.toString()
+            itemView.cb_like.setOnClickListener {
+                delegate?.onLikeClick(item)
+            }
+
+            itemView.setOnClickListener {
+                delegate?.onOutfitDetail(item)
+            }
         }
+    }
+
+    interface Delegate {
+        fun onLikeClick(item: GoodItem)
+
+        fun onOutfitDetail(item: GoodItem)
     }
 }

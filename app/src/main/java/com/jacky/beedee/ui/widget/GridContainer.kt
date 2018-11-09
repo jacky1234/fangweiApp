@@ -2,7 +2,6 @@ package com.jacky.beedee.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.view.View.MeasureSpec.EXACTLY
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -32,12 +31,6 @@ class GridContainer @JvmOverloads constructor(context: Context, attrs: Attribute
     fun setSpanCount(spanCount: Int): GridContainer {
         this.spanCount = spanCount
         return this
-    }
-
-    override fun addView(child: View?) {
-        val layoutManager = ViewGroup.LayoutParams(itemWidth.toInt(), itemWidth.toInt())
-        super.addView(child, layoutManager)
-        requestLayout()
     }
 
     fun setRatio(ratio: Float): GridContainer {

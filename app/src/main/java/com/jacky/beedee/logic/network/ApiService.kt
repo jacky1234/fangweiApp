@@ -3,6 +3,7 @@ package com.jacky.beedee.logic.network
 import com.jacky.beedee.logic.entity.module.Banner
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.entity.module.User
+import com.jacky.beedee.logic.entity.request.CollectRequest
 import com.jacky.beedee.logic.entity.request.LoginRequest
 import com.jacky.beedee.logic.entity.request.ReigsterRequest
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest
@@ -68,7 +69,7 @@ interface ApiService {
 
     //查询穿搭详情
     @GET("outfit/get")
-    fun requestOutfitDetail(@Body map: Map<String, String>): Observable<HttpResponse<Good>>
+    fun requestOutfitDetail(@Query("outfitId") outfitId: String): Observable<HttpResponse<Good>>
 
 
     @GET("goods/list_hot")
@@ -76,4 +77,10 @@ interface ApiService {
 
     @GET("design/list_hot")
     fun requestHotDesignVideo(): Observable<HttpResponse<HotVideoResponse>>
+
+    @POST("collect")
+    fun collectGood(@Body request: CollectRequest): Observable<HttpResponse<CollectResponse>>
+
+    @POST("uncollect")
+    fun uncollectGood(@Body request: CollectRequest): Observable<HttpResponseSource>
 }

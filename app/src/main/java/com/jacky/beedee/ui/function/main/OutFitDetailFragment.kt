@@ -1,52 +1,44 @@
 package com.jacky.beedee.ui.function.main
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.ui.adapter.OutfitDetailAdapter
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
-import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import kotlinx.android.synthetic.main.fragment_detail_outfit.*
 
 class OutFitDetailFragment : MySupportFragment() {
+    private lateinit var adapter: OutfitDetailAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_detail_outfit, container)
+        return inflater.inflate(R.layout.fragment_detail_outfit, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         titleView.setLeftAction(View.OnClickListener { pop() })
 
+        adapter = OutfitDetailAdapter(context!!)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
 
         val id = arguments?.getString(KEY_OUTFITID)
+        requestOutfitDetail(id!!)
+    }
+
+    private fun requestOutfitDetail(id: String) {
         RequestHelper.get().requestOutfitDetail(id)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    viewPager.setAutoScroll(true, 5000)
-                    viewPager.adapter = LooperPagerAdapter(it.gallery.size) { position ->
-                        val imageView = ImageView(activity)
-                        if (isAttached()) {
-                            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                            imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                            Glide.with(this)
-                                    .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
-                                    .load(it.gallery[position])
-                                    .into(imageView)
-                        }
-
-                        imageView
-                    }
-                    circleIndicator.setViewPager(viewPager)
+                    adapter.setData(it)
                 }
     }
 

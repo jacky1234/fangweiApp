@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import com.jacky.beedee.logic.entity.module.Banner;
 import com.jacky.beedee.logic.entity.module.Good;
 import com.jacky.beedee.logic.entity.module.User;
+import com.jacky.beedee.logic.entity.request.CollectRequest;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
+import com.jacky.beedee.logic.entity.response.CollectResponse;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HotVideoResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
@@ -108,10 +110,7 @@ public class RequestHelper {
     }
 
     public Observable<Good> requestOutfitDetail(String outfitId) {
-        Map<String, String> map = new HashMap<>(1);
-        map.put("outfitId", outfitId);
-
-        return apiService.requestOutfitDetail(map)
+        return apiService.requestOutfitDetail(outfitId)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
@@ -126,6 +125,24 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
+    public Observable<CollectResponse> collectOutFit(String targetId) {
+        CollectRequest request = new CollectRequest();
+        request.setTargetId(targetId);
+        request.setTargetType("OUTFIT");
+
+        return apiService.collectGood(request)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+
+    public Observable<Boolean> uncollectOutFit(String targetId) {
+        CollectRequest request = new CollectRequest();
+        request.setTargetId(targetId);
+        request.setTargetType("OUTFIT");
+
+        return apiService.uncollectGood(request)
+                .compose(BooleanTransformer.handleResult(true));
+    }
 
     public Observable<HttpResponseSource> logout() {
         return apiService.logout().compose(SchedulerUtils.INSTANCE.ioToMain());

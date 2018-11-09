@@ -27,6 +27,15 @@ public class MiscFacade {
     private ConnectableObservable<Long> codeObservable;
     private Disposable vertifyCodeDispose;
     private Set<Observer<Long>> leftSecondObservers = Collections.synchronizedSet(new HashSet<>());
+    private Runnable lastRunnable;
+
+    public Runnable getLastRunnable() {
+        return lastRunnable;
+    }
+
+    public void setLastRunnable(Runnable lastRunnable) {
+        this.lastRunnable = lastRunnable;
+    }
 
     private MiscFacade() {
 

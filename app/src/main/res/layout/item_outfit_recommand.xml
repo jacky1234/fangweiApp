@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="25dp"
     android:paddingLeft="@dimen/first_margin_from_left"
     android:paddingRight="@dimen/first_margin_from_left">
 
@@ -40,11 +41,12 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/tv_desc">
 
-        <ImageView
-            android:id="@+id/iv_like"
+        <CheckBox
+            android:id="@+id/cb_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selected_like_enable" />
+            android:background="@drawable/selected_like_enable"
+            android:button="@null" />
 
         <TextView
             android:id="@+id/tv_like_num"
