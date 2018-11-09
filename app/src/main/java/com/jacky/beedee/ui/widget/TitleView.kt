@@ -127,7 +127,6 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setLeftTextId(leftTextId: Int) {
         this.leftTextId = leftTextId
-        tv_left_text.visibility = View.VISIBLE
         tv_left_text.setText(leftTextId)
     }
 
@@ -138,7 +137,6 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setRightTextId(rightTextId: Int) {
         this.rightTextId = rightTextId
-        tv_right_text.visibility = View.VISIBLE
         tv_right_text.setText(rightTextId)
     }
 
@@ -149,7 +147,6 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     fun setMiddleTextId(middleTextId: Int) {
         this.middleTextId = middleTextId
-        tv_title.visibility = View.VISIBLE
         tv_title.setText(middleTextId)
     }
 
