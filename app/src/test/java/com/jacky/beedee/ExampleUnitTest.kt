@@ -111,8 +111,8 @@ class ExampleUnitTest {
 
     @Test
     fun regex() {
-        val r_name3 = "www.hettp.10*4.png"
-        val pattern = Pattern.compile("[\\d]*[\\d]]")
+        val r_name3 = "www.hettp.10x4.png"
+        val pattern = Pattern.compile("\\d*x\\d*")
         val matcher = pattern.matcher(r_name3)
         if (matcher.find()) {
             System.out.println(matcher.group())

@@ -12,9 +12,11 @@ import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.support.util.AndroidUtil
+import com.jacky.beedee.support.util.regex.RegexConstants
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import kotlinx.android.synthetic.main.layout_banner_wrapper.view.*
 import kotlinx.android.synthetic.main.layout_outfit_text.view.*
+import java.util.regex.Pattern
 
 class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -22,8 +24,12 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         private const val TYPE_BANNER_DETAIL = 1
         private const val TYPE_TEXT = 2
         private const val TYPE_IMAGE = 3
+
+        private val marginleft = AndroidUtil.dip2px(15f)
+        private val max_width = (AndroidUtil.getScreenWidth() - 2 * marginleft).toInt()
     }
 
+    private val map = HashMap<String, String>()
     private var dataList = ArrayList<Any>()
     private lateinit var item: Good
     fun setData(item: Good) {
@@ -32,6 +38,14 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         dataList.add(TYPE_BANNER_DETAIL)
         dataList.add(TYPE_TEXT)
         for (s in item.gallery) {
+            val pattern = Pattern.compile(RegexConstants.REGEX_W_H)
+            val matcher = pattern.matcher(s)
+            if (matcher.find()) {
+                map[s] = matcher.group()
+            } else {
+                map[s] = max_width.toString() + "x" + max_width
+            }
+
             dataList.add(s)
         }
 
@@ -120,9 +134,15 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
             val layoutParams = RecyclerView.LayoutParams(100, 200)
             layoutParams.leftMargin = AndroidUtil.dip2px(15F).toInt()
             layoutParams.topMargin = AndroidUtil.dip2px(15F).toInt()
-            val screenWidth = AndroidUtil.getScreenWidth()
 
-            url.contains(".")
+            try {
+                val split = map[url]!!.split("x")
+                layoutParams.width = split[0].toInt()
+                layoutParams.height = split[1].toInt()
+            } catch (e: Exception) {
+                layoutParams.width = 600
+                layoutParams.height = 600
+            }
 
             imageView.layoutParams = layoutParams
             Glide.with(context)

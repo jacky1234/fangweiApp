@@ -2,6 +2,11 @@ package com.jacky.beedee.support.util.regex;
 
 public class RegexConstants {
     /**
+     * 45x56
+     */
+    public static final String REGEX_W_H = "\\d*x\\d*";
+
+    /**
      * Regex of simple mobile.
      */
     public static final String REGEX_MOBILE_SIMPLE = "^[1]\\d{10}$";
