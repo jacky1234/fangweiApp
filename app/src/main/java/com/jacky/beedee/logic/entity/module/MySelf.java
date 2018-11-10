@@ -112,6 +112,10 @@ public class MySelf {
         return Strings.isNotBlank(nickName) ? nickName : Strings.empty;
     }
 
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     @NotNull
     public String getShowingName() {
         if (Strings.isNotBlank(nickName)) {
@@ -123,10 +127,6 @@ public class MySelf {
         }
 
         return Strings.empty;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getGender() {
@@ -176,7 +176,7 @@ public class MySelf {
     }
 
     public boolean isLogined() {
-        return Strings.isNotBlank(id);
+        return Strings.isNotBlank(id) && Strings.isNotBlank(authorization);
     }
 
     public void clear() {

@@ -2,6 +2,7 @@ package com.jacky.beedee.ui.widget
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.jacky.beedee.R
+import com.jacky.beedee.support.Starter
 import kotlinx.android.synthetic.main.title_view.view.*
 
 /**
@@ -65,10 +67,10 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             leftDrawableId = ta.getResourceId(R.styleable.TitleView_titleView_left_drawable, R.mipmap.ic_arrow_back_black)
             leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, R.string.back)
             middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, R.string.login)
-            leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, resources.getColor(android.R.color.black))
-            middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, resources.getColor(android.R.color.black))
+            leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
+            middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
             rightTextId = ta.getResourceId(R.styleable.TitleView_titleView_right_text, R.string.complete)
-            rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, resources.getColor(android.R.color.black))
+            rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
             val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, COMPOSE_LEFT_MIDDLEL_FLAG)
             when (type) {
                 1 -> {

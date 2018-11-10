@@ -16,9 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
 
-        <!--<activity android:name=".ui.LoadingActivity">-->
-        <!---->
-        <!--</activity>-->
         <activity
             android:name=".ui.function.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
@@ -46,5 +43,8 @@
         <activity android:name=".ui.function.main.NewHotsGoodActivity" />
         <activity android:name=".ui.function.discovery.SearchActivity" />
         <activity android:name=".ui.function.main.OutFitActivity" />
+        <activity android:name=".ui.function.discovery.GoodDetailActivity" />
+        <activity android:name=".ui.function.main.OutFitDetailActivity" />
+
     </application>
 </manifest>

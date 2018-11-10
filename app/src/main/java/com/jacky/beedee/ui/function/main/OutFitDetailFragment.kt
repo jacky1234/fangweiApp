@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.adapter.OutfitDetailAdapter
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.decoration.BottomOffsetDecoration
 import kotlinx.android.synthetic.main.fragment_detail_outfit.*
 
 class OutFitDetailFragment : MySupportFragment() {
@@ -24,6 +26,7 @@ class OutFitDetailFragment : MySupportFragment() {
 
         adapter = OutfitDetailAdapter(context!!)
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(BottomOffsetDecoration(AndroidUtil.dip2px(15f).toInt()))
         recyclerView.adapter = adapter
     }
 

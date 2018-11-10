@@ -24,7 +24,9 @@ class ShowBrandActivity : BaseActivity() {
     }
 
     private fun getInfo(): CharSequence {
-        return SpanUtils().append("BEEDEE").setFontSize(28, true).setBold().appendLine()
+        return SpanUtils()
+                .appendLine().appendLine()
+                .append("BEEDEE").setFontSize(28, true).setBold().appendLine()
                 .append("SOMETHING DIFFERENT").setForegroundColor(Color.parseColor("#BFBEBE")).setFontSize(14, true)
                 .appendLine()
                 .append("Pursuit the 1 % Life \n" +
@@ -52,6 +54,7 @@ class ShowBrandActivity : BaseActivity() {
                         "追求我们想要的感觉\n" +
                         "希望把不一样的设计理念传递给有所追求的你们\n" +
                         "感谢那些永远跟随我们的1%\n")
+                .appendLine().appendLine()
                 .create()
 
     }

@@ -29,10 +29,10 @@ class MyFavoriteActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favorite)
-        tabNames.add("穿搭收藏(2)")
-        tabNames.add("产品收藏(5)")
-        fragments.add(FavoriteFragment.create(FavoriteFragment.FAVORITE_WARE))
-        fragments.add(FavoriteFragment.create(FavoriteFragment.FAVORITE_PRODUCT))
+        tabNames.add("穿搭收藏")
+        tabNames.add("产品收藏")
+        fragments.add(FavoriteOutFitFragment())
+        fragments.add(FavoriteGoodFragment())
 
         val commonNavigator = CommonNavigator(this)
         commonNavigator.scrollPivotX = 0.25f

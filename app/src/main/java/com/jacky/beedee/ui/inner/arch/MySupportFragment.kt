@@ -413,4 +413,8 @@ open class MySupportFragment : SecondFragment(), ISupportFragment {
     fun <T : ISupportFragment> findChildFragment(fragmentClass: Class<T>): T? {
         return SupportHelper.findFragment(childFragmentManager, fragmentClass)
     }
+
+    fun <T : ISupportFragment> findChildFragment(tag: String): T? {
+        return SupportHelper.findFragment(childFragmentManager, tag)
+    }
 }

@@ -39,7 +39,7 @@ class MyApp : MultiDexApplication() {
 
     private fun initFragmentation() {
         Fragmentation.builder()
-                .stackViewMode(Fragmentation.NONE)
+                .stackViewMode(Fragmentation.BUBBLE)
                 .debug(BuildConfig.DEBUG)
                 .handleException(Logger.Companion::e)
                 .install()

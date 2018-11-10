@@ -3,7 +3,10 @@ package com.jacky.beedee.logic.network;
 import android.support.annotation.NonNull;
 
 import com.jacky.beedee.logic.entity.module.Banner;
+import com.jacky.beedee.logic.entity.module.Category;
 import com.jacky.beedee.logic.entity.module.Good;
+import com.jacky.beedee.logic.entity.module.GoodType;
+import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.logic.entity.module.User;
 import com.jacky.beedee.logic.entity.request.CollectRequest;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
@@ -14,8 +17,8 @@ import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HotVideoResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.ListGoodResponse;
-import com.jacky.beedee.logic.entity.response.LoginResponse;
 import com.jacky.beedee.logic.entity.response.RegisterResponse;
+import com.jacky.beedee.logic.entity.response.SecondCategoryResponse;
 import com.jacky.beedee.logic.entity.response.UploadFileResponse;
 import com.jacky.beedee.logic.network.transformer.BooleanTransformer;
 import com.jacky.beedee.logic.network.transformer.HttpListResponseTransformer;
@@ -51,11 +54,13 @@ public class RequestHelper {
     }
 
     public Observable<RegisterResponse> register(@NotNull String phone, @NonNull String code) {
+        MySelf.get().setAuthorization(null);
         return apiService.register(new ReigsterRequest(phone, code))
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
-    public Observable<LoginResponse> login(@NotNull String phone, @NonNull String pwd) {
+    public Observable<User> login(@NotNull String phone, @NonNull String pwd) {
+        MySelf.get().setAuthorization(null);
         return apiService.login(new LoginRequest(phone, pwd))
                 .compose(HttpResponseTransformer.handleResult(true));
     }
@@ -92,8 +97,8 @@ public class RequestHelper {
     }
 
     //收藏
-    public Observable<FavoriteResponse> requestCollectList(@NotNull String targetType, int page) {
-        return apiService.requestCollectList(targetType, page, ParamCreator.PAGE_SIZE)
+    public Observable<FavoriteResponse> requestCollectList(@NotNull GoodType goodType, int page) {
+        return apiService.requestCollectList(goodType.name(), page, ParamCreator.PAGE_SIZE)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
@@ -114,6 +119,11 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
+    public Observable<Good> requestGoodDetail(String outfitId) {
+        return apiService.requestGoodDetail(outfitId)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
     //热门商品
     public Observable<ListGoodResponse> requestHotGoods() {
         return apiService.requestHotGoods()
@@ -125,23 +135,37 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
-    public Observable<CollectResponse> collectOutFit(String targetId) {
+    public Observable<CollectResponse> collectItem(@NotNull GoodType type, String targetId) {
         CollectRequest request = new CollectRequest();
         request.setTargetId(targetId);
-        request.setTargetType("OUTFIT");
+        request.setTargetType(type.name());
 
         return apiService.collectGood(request)
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
-
-    public Observable<Boolean> uncollectOutFit(String targetId) {
+    public Observable<CollectResponse> uncollectItem(@NotNull GoodType type, String targetId) {
         CollectRequest request = new CollectRequest();
         request.setTargetId(targetId);
-        request.setTargetType("OUTFIT");
+        request.setTargetType(type.name());
 
-        return apiService.uncollectGood(request)
-                .compose(BooleanTransformer.handleResult(true));
+        return apiService.collectGood(request)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<List<Category>> requestFirstSort() {
+        return apiService.requestFirstCategory()
+                .compose(HttpListResponseTransformer.handleResult(true));
+    }
+
+    public Observable<ListGoodResponse> requestSearchGood(String key) {
+        return apiService.requestSearchGood(key)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<List<SecondCategoryResponse>> requestGroupByCategroy(String categoryId) {
+        return apiService.requestGroupByCategroy(categoryId)
+                .compose(HttpListResponseTransformer.handleResult(true));
     }
 
     public Observable<HttpResponseSource> logout() {

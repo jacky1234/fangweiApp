@@ -1,6 +1,7 @@
 package com.jacky.beedee.ui.function.me
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -15,7 +16,11 @@ import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.image.ImageLoader
+import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
+import com.jacky.beedee.support.util.AndroidUtil
+import com.jacky.beedee.support.util.AndroidUtil.toast
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.function.login.LoginActivity
 import com.jacky.beedee.ui.function.me.favorite.MyFavoriteActivity
@@ -23,7 +28,9 @@ import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jakewharton.rxbinding2.view.RxView
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
+import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.fragment_me.*
+import java.io.File
 import java.util.concurrent.TimeUnit
 
 /**
@@ -49,6 +56,15 @@ class Mefragment : MySupportFragment() {
         return content
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        ivHeader.clickWithTrigger {
+            ImageLoader.chooseImageFromGallery(_mActivity)
+                    .forResult(200)
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun initFlexible() {
         RxView.clicks(parentUnLogined).throttleFirst(1, TimeUnit.SECONDS)
@@ -57,7 +73,7 @@ class Mefragment : MySupportFragment() {
                     activity!!.launch<LoginActivity>()
                 }
 
-        if (MySelf.get().isLogined()) {
+        if (MySelf.get().isLogined) {
             parentLogined.visibility = View.VISIBLE
             parentUnLogined.visibility = View.GONE
             tv_nickname.text = MySelf.get().showingName
@@ -75,7 +91,7 @@ class Mefragment : MySupportFragment() {
                 .setDefaultRequestOptions(ImageLoader.defaultRequestOptions)
                 .load(MySelf.get().avatar)
                 .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                .into(iv_header)
+                .into(ivHeader)
     }
 
     private fun initOnce() {
@@ -122,7 +138,10 @@ class Mefragment : MySupportFragment() {
                     if (MySelf.get().isLogined) {
                         activity!!.launch<MyFavoriteActivity>()
                     } else {
-                        MiscFacade.get().loginOutFlag(activity!!, true);
+                        MiscFacade.get().setLastRunnable {
+                            itemFavorite.performClick()
+                        }
+                        activity.launch<LoginActivity>()
                     }
                 }
 
@@ -130,7 +149,10 @@ class Mefragment : MySupportFragment() {
                     if (MySelf.get().isLogined) {
                         activity!!.launch<AccountAndSecurityActivity>()
                     } else {
-                        MiscFacade.get().loginOutFlag(activity!!, true);
+                        MiscFacade.get().setLastRunnable {
+                            itemAccount.performClick()
+                        }
+                        activity.launch<LoginActivity>()
                     }
                 }
 
@@ -152,6 +174,29 @@ class Mefragment : MySupportFragment() {
                 .addTo(groupListView)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 200) {
+            if (data != null) {
+                Matisse.obtainResult(data)?.let {
+                    if (!it.isEmpty()) {
+                        val realPathFromUri = AndroidUtil.getRealPathFromUri(it[0])
+                        if (Strings.isNotBlank(realPathFromUri)) {
+                            RequestHelper.get().uploadFile(File(realPathFromUri))
+                                    .compose(bindToLifecycle())
+                                    .subscribe {
+                                        toast("修改成功")
+                                        MySelf.get().avatar = it.url
+                                        MySelf.get().save()
+                                        initFlexible()
+                                    }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)

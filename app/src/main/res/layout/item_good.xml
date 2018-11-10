@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.jacky.beedee.ui.widget.RatioFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:heightRatio="1.0"
-    app:widthRatio="1.0">
+    android:background="@drawable/shape_white_with_gray_stroke"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        tools:src="@mipmap/item_empty_1_1" />
 
-</com.jacky.beedee.ui.widget.RatioFrameLayout>
+</android.support.constraint.ConstraintLayout>

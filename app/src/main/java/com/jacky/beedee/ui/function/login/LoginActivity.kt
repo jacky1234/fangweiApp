@@ -39,6 +39,7 @@ class LoginActivity : BaseActivity() {
                         RequestHelper.get().login(phone, pwd)
                                 .compose(bindToDestroy())
                                 .subscribe {
+                                    MySelf.get().saveFromUser(it)
                                     AndroidUtil.toast("登录成功")
                                     AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
                                 }

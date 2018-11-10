@@ -3,6 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/first_margin_from_left"
+    android:layout_marginRight="@dimen/first_margin_from_left"
     android:layout_marginTop="40dp"
     android:text="衣服制作视频"
     android:textColor="@color/black"

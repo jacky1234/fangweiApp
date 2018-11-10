@@ -2,7 +2,6 @@ package com.jacky.beedee.ui.function.me
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import com.bumptech.glide.Glide
@@ -17,7 +16,6 @@ import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.ext.then
 import com.jacky.beedee.support.ext.toast
-import com.jacky.beedee.support.image.MyGlideEngin
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.Dialog.DialogHelper
@@ -26,7 +24,6 @@ import com.jacky.beedee.ui.widget.RowItemView
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction
 import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_account_security.*
 import java.io.File
 
@@ -65,13 +62,7 @@ class AccountAndSecurityActivity : BaseActivity() {
             rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE).subscribe {
                 it?.let {
                     it.then({
-                        Matisse.from(this)
-                                .choose(MimeType.ofImage())
-                                .showSingleMediaType(true)
-                                .gridExpectedSize(AndroidUtil.getScreenWidth() / 3 - 10)
-                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
-                                .thumbnailScale(0.85f)
-                                .imageEngine(MyGlideEngin())
+                        ImageLoader.chooseImageFromGallery(this)
                                 .forResult(REQUEST_IMAGE_CHOOSE)
                     }, { AndroidUtil.toast("未获取存储权限") })
                 }

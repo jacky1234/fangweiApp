@@ -10,7 +10,12 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhihu.matisse.engine.ImageEngine;
 
-public class MyGlideEngin implements ImageEngine {
+public class MyGlideEngine implements ImageEngine {
+    public static final MyGlideEngine DEFAULT = new MyGlideEngine();
+
+    private MyGlideEngine() {
+    }
+
     @Override
     public void loadThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri) {
         RequestOptions requestOptions = new RequestOptions()

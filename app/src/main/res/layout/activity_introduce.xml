@@ -29,11 +29,9 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:lineSpacingMultiplier="1.2"
-            android:paddingBottom="42dp"
+            android:lineSpacingMultiplier="1.5"
             android:paddingLeft="@dimen/first_margin_from_left"
-            android:paddingRight="@dimen/first_margin_from_left"
-            android:paddingTop="42dp" />
+            android:paddingRight="@dimen/first_margin_from_left" />
 
     </FrameLayout>
 

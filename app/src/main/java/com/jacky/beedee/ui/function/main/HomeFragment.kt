@@ -1,6 +1,7 @@
 package com.jacky.beedee.ui.function.main
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,18 @@ import com.jacky.beedee.logic.entity.module.Banner
 import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.SpanUtils
+import com.jacky.beedee.ui.function.discovery.GoodDetailActivity
 import com.jacky.beedee.ui.function.other.ShowBrandActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.GridContainer
 import com.jacky.beedee.ui.widget.looper.LoopViewPager
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 import me.relex.circleindicator.CircleIndicator
 import java.util.*
 
@@ -34,8 +38,8 @@ class HomeFragment : MySupportFragment() {
     private lateinit var viewPager: LoopViewPager
     private lateinit var circleIndicator: CircleIndicator
     private lateinit var tvBrandDesc: TextView
-    private lateinit var tvKnowMore: TextView
     private lateinit var tvOutFit: TextView
+    private lateinit var tvHotTitle: TextView
     private lateinit var ivOutFitImageView: ImageView
     private lateinit var gridContainer: GridContainer
     private val defaultBanners = Collections.singletonList(Banner.empty)
@@ -50,7 +54,7 @@ class HomeFragment : MySupportFragment() {
 
     private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
         imageView.setOnClickListener {
-            //            banner.link       todo
+            GoodDetailActivity.start(_mActivity, banner.id)
         }
     }
 
@@ -72,7 +76,11 @@ class HomeFragment : MySupportFragment() {
                 .into(ivOutFitImageView)
 
         tvOutFit.clickWithTrigger {
-            OutFitActivity.start(activity!!, thumb)
+            activity.launch<OutFitActivity>()
+        }
+
+        ivOutFitImageView.clickWithTrigger {
+            activity.launch<OutFitActivity>()
         }
     }
 
@@ -89,6 +97,9 @@ class HomeFragment : MySupportFragment() {
 
     private fun onResultHotGoods(hots: List<GoodItem>) {
         gridContainer.removeAllViews()
+        tvHotTitle.clickWithTrigger {
+            activity.launch<NewHotsGoodActivity>()
+        }
 
         hots.forEachIndexed { index, goodItem ->
             if (index > 3) return@forEachIndexed
@@ -100,6 +111,10 @@ class HomeFragment : MySupportFragment() {
                     .load(goodItem.thumb)
                     .into(imageView)
             gridContainer.addView(child)
+
+            child.clickWithTrigger {
+                activity.launch<NewHotsGoodActivity>()
+            }
         }
     }
 
@@ -127,10 +142,20 @@ class HomeFragment : MySupportFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.fragment_home, null)
         initView(content)
-        initListener()
         initGridContainer()
         initDefaultData()
         return content
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        parent_brand.clickWithTrigger {
+            activity.launch<ShowBrandActivity>()
+        }
+        tvBrandTitle.clickWithTrigger {
+            activity.launch<ShowBrandActivity>()
+        }
     }
 
     private fun initDefaultData() {
@@ -140,11 +165,6 @@ class HomeFragment : MySupportFragment() {
         onResultHotGoods(Collections.singletonList(GoodItem.empty))
     }
 
-    private fun initListener() {
-        tvKnowMore.clickWithTrigger {
-            activity.launch<ShowBrandActivity>()
-        }
-    }
 
     private fun initGridContainer() {
         gridContainer.setItemPadding(AndroidUtil.dip2px(15f))
@@ -157,8 +177,8 @@ class HomeFragment : MySupportFragment() {
         viewPager = content.findViewById(R.id.viewPager) as LoopViewPager
         circleIndicator = content.findViewById(R.id.circleIndicator) as CircleIndicator
         tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
-        tvKnowMore = content.findViewById(R.id.tv_know_more) as TextView
         tvOutFit = content.findViewById(R.id.tv_outfit_title) as TextView
+        tvHotTitle = content.findViewById(R.id.tv_hots_title) as TextView
         ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
         gridContainer = content.findViewById(R.id.gridContainer) as GridContainer
         gridContainer.setItemPadding(ImageLoader.item_padding)
@@ -173,10 +193,10 @@ class HomeFragment : MySupportFragment() {
 
     private fun getBranchDesc(): CharSequence {
         return SpanUtils()
-                .append("BEEDEE").setFontSize(15, true).setForegroundColor(resources.getColor(R.color.black)).setBold().appendLine()
-                .append("Pursuit the 1% Life, something different.").setFontSize(12, true).setForegroundColor(resources.getColor(R.color.tab_grey_color)).appendLine()
+                .append("BEEDEE").setFontSize(15, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), android.R.color.black)).setBold().appendLine()
+                .append("Pursuit the 1% Life, something different.").setFontSize(12, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.tab_grey_color)).appendLine()
                 .append("追求1%的生活理念").setFontSize(12, true).appendLine()
-                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(resources.getColor(R.color.item_title_text_color)).appendLine()
+                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.item_title_text_color)).appendLine()
                 .create()
     }
 }

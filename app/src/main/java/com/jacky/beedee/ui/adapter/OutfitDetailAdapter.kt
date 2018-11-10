@@ -37,7 +37,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         dataList.clear()
         dataList.add(TYPE_BANNER_DETAIL)
         dataList.add(TYPE_TEXT)
-        for (s in item.gallery) {
+        for (s in item.details) {
             val pattern = Pattern.compile(RegexConstants.REGEX_W_H)
             val matcher = pattern.matcher(s)
             if (matcher.find()) {
@@ -111,7 +111,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
                 imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 Glide.with(context)
                         .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
-                        .load(item.details[position])
+                        .load(item.gallery[position])
                         .into(imageView)
 
                 imageView

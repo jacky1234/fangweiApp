@@ -1,12 +1,17 @@
 package com.jacky.beedee.logic.image;
 
 import android.annotation.SuppressLint;
-import android.widget.ImageView;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
 
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.jacky.beedee.R;
+import com.jacky.beedee.support.image.MyGlideEngine;
 import com.jacky.beedee.support.util.AndroidUtil;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.SelectionCreator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +37,19 @@ public class ImageLoader {
                 .error(R.mipmap.item_empty_1_1);
     }
 
-    public static void load16_9(@NotNull ImageView imageView, @NotNull String url, @NotNull int radio) {
-//        Glide.with()
+    /**
+     * open gallery to choose
+     *
+     * @param activity
+     * @return
+     */
+    public static SelectionCreator chooseImageFromGallery(@NotNull Activity activity) {
+       return Matisse.from(activity)
+                .choose(MimeType.ofImage())
+                .showSingleMediaType(true)
+                .gridExpectedSize(AndroidUtil.getScreenWidth() / 3 - 10)
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                .thumbnailScale(0.85f)
+                .imageEngine(MyGlideEngine.DEFAULT);
     }
 }

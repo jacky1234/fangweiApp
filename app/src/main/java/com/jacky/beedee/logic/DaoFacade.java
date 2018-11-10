@@ -7,9 +7,13 @@ import com.jacky.beedee.support.dao.generate.PreferenceDao;
 import com.jacky.beedee.support.dao.module.Preference;
 import com.jacky.beedee.support.util.JsonUtil;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * 2018/10/31.
@@ -19,6 +23,7 @@ import java.util.List;
  */
 public class DaoFacade {
     private static final long MYSELF_INFO = 1;
+    private static final long SEARCH_KEY = 2;
     private DaoSession daoSession;
 
     private DaoFacade() {
@@ -46,6 +51,33 @@ public class DaoFacade {
         }
 
         return JsonUtil.fromJSON(MySelf.class, list.get(0).getValue());
+    }
+
+    @NotNull
+    public List<String> getSearchHistoryKeys() {
+        List<String> keys = new ArrayList<>();
+
+        List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
+                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEY)).list();
+        if (!list.isEmpty()) {
+            keys.addAll(JsonUtil.getListFromJSON(String.class, list.get(0).getValue()));
+        }
+
+        return keys;
+    }
+
+    public Set<String> addSearchKey(@NotNull String key) {
+        Set<String> keys = new TreeSet<>();
+
+        List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
+                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEY)).list();
+        keys.add(key);
+        if (!list.isEmpty()) {
+            keys.addAll(JsonUtil.getListFromJSON(String.class, list.get(0).getValue()));
+        }
+        daoSession.getPreferenceDao().insertOrReplace(new Preference(SEARCH_KEY, JsonUtil.toJSON(keys)));
+
+        return keys;
     }
 
     private static final class InstanceHolder {

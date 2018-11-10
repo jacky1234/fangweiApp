@@ -1,6 +1,7 @@
 package com.jacky.beedee.logic.network
 
 import com.jacky.beedee.logic.entity.module.Banner
+import com.jacky.beedee.logic.entity.module.Category
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.entity.module.User
 import com.jacky.beedee.logic.entity.request.CollectRequest
@@ -31,7 +32,7 @@ interface ApiService {
     fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
 
     @POST("login")
-    fun login(@Body loginRequest: LoginRequest): Observable<HttpResponse<LoginResponse>>
+    fun login(@Body loginRequest: LoginRequest): Observable<HttpResponse<User>>
 
     @POST("send_sms_code")
     fun sendCode(@Body map: Map<String, String>): Observable<HttpResponseSource>
@@ -71,6 +72,10 @@ interface ApiService {
     @GET("outfit/get")
     fun requestOutfitDetail(@Query("outfitId") outfitId: String): Observable<HttpResponse<Good>>
 
+    //查询商品详情
+    @GET("goods/get")
+    fun requestGoodDetail(@Query("goodsId") goodsId: String): Observable<HttpResponse<Good>>
+
 
     @GET("goods/list_hot")
     fun requestHotGoods(): Observable<HttpResponse<ListGoodResponse>>
@@ -83,4 +88,13 @@ interface ApiService {
 
     @POST("uncollect")
     fun uncollectGood(@Body request: CollectRequest): Observable<HttpResponseSource>
+
+    @GET("category/list")
+    fun requestFirstCategory(): Observable<HttpListResponse<Category>>
+
+    @GET("goods/search")
+    fun requestSearchGood(@Query("keyword") keyword: String): Observable<HttpResponse<ListGoodResponse>>
+
+    @GET("goods/group_by_category")
+    fun requestGroupByCategroy(@Query("categoryId") categoryId: String):Observable<HttpListResponse<SecondCategoryResponse>>
 }

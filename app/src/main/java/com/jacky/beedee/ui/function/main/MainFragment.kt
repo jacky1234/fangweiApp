@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -74,5 +75,12 @@ class MainFragment : MySupportFragment() {
 
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        mFragments.forEach {
+            it.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }

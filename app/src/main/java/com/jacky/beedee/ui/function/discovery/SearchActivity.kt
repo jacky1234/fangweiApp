@@ -2,20 +2,18 @@ package com.jacky.beedee.ui.function.discovery
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Bundle
-import com.jacky.beedee.R
-import com.jacky.beedee.ui.inner.arch.BaseActivity
+import com.jacky.beedee.ui.inner.arch.BaseRootSupportActivity
 
 /**
  * 2018/11/8.
  * GitHub:[https://github.com/jacky1234]
  * @author  jacky
  */
-class SearchActivity : BaseActivity() {
+class SearchActivity : BaseRootSupportActivity<SearchFragment>() {
+    override fun createClazz(): Class<SearchFragment> = SearchFragment::class.java
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+    override fun createSupportFragment(): SearchFragment {
+        return SearchFragment()
     }
 
     companion object {

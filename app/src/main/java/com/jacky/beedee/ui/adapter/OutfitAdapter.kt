@@ -102,7 +102,7 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
             TYPE_OUTFIT_ITEM -> {
                 val outFitItemViewHolder = holder as OutFitItemViewHolder
                 val content = dataList[position] as GoodItem
-                outFitItemViewHolder.bind(content)
+                outFitItemViewHolder.bind(content, position == itemCount - 1)
             }
         }
     }
@@ -132,7 +132,7 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
                     tvDesc.text = item.name
 
                     ivPlay.setOnClickListener {
-                        //                        TODO("play video")
+                        delegate?.onVideoClick(item)
                     }
                 }
             }
@@ -140,7 +140,7 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
     }
 
     private inner class OutFitItemViewHolder constructor(view: View) : BaseViewHolder(view) {
-        fun bind(item: GoodItem) {
+        fun bind(item: GoodItem, last: Boolean) {
             Glide.with(itemView.context)
                     .setDefaultRequestOptions(ImageLoader._16To9RequestRoundCornerOptions)
                     .load(item.thumb)
@@ -163,5 +163,7 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
         fun onLikeClick(item: GoodItem)
 
         fun onOutfitDetail(item: GoodItem)
+
+        fun onVideoClick(video: Video)
     }
 }

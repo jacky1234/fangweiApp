@@ -21,9 +21,10 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <ImageView
+                    android:id="@+id/ivEmptyHeader"
                     android:layout_width="62dp"
                     android:layout_height="62dp"
                     android:layout_marginLeft="16dp"
@@ -44,10 +45,11 @@
                 android:id="@+id/parent_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                tools:visibility="gone">
 
                 <ImageView
-                    android:id="@+id/iv_header"
+                    android:id="@+id/ivHeader"
                     android:layout_width="62dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center_vertical"

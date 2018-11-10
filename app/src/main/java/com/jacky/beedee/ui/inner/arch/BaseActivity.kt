@@ -3,6 +3,7 @@ package com.jacky.beedee.ui.inner.arch
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
+import android.support.v4.app.ActivityCompat
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.support.misc.LifeCircleComponents
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -93,5 +94,23 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
 
     fun <T> bindToDestroy(): LifecycleTransformer<T> {
         return bindUntilEvent(ActivityEvent.DESTROY)
+    }
+
+    override fun onBackPressedSupport() {
+        var backStackCount = supportFragmentManager.backStackEntryCount
+        for (i in 0 until backStackCount) {            //新版glide上面有一层fragment覆盖着
+            val entry = supportFragmentManager.getBackStackEntryAt(i)
+            entry.name?.let {
+                if (it.contains("SupportRequestManagerFragment")) {
+                    backStackCount--
+                }
+            }
+        }
+
+        if (backStackCount > 1) {
+            pop()
+        } else {
+            ActivityCompat.finishAfterTransition(this)
+        }
     }
 }
