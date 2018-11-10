@@ -95,15 +95,8 @@ class RegisterActivity : BaseActivity() {
     private fun requestRegister(phone: String, code: String) {
         RequestHelper.get().register(phone, code)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe { it ->
-                    MySelf.get().id = it.id
-                    MySelf.get().username = it.username
-                    MySelf.get().mobile = it.mobile
-                    MySelf.get().role = it.role
-                    MySelf.get().createTime = it.createTime
-                    MySelf.get().updateTime = it.updateTime
-                    MySelf.get().save()
-
+                .subscribe {
+                    MySelf.get().saveFromUser(it)
                     DialogTipsHelper.createSuccess(this, "注册成功")
                     AndroidUtil.runUI({ this@RegisterActivity.launch<RegisterFillInfoActivity>() }, 100)
                 }

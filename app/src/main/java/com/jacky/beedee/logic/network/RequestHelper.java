@@ -17,7 +17,6 @@ import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HotVideoResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
 import com.jacky.beedee.logic.entity.response.ListGoodResponse;
-import com.jacky.beedee.logic.entity.response.RegisterResponse;
 import com.jacky.beedee.logic.entity.response.SecondCategoryResponse;
 import com.jacky.beedee.logic.entity.response.UploadFileResponse;
 import com.jacky.beedee.logic.network.transformer.BooleanTransformer;
@@ -53,7 +52,7 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
-    public Observable<RegisterResponse> register(@NotNull String phone, @NonNull String code) {
+    public Observable<User> register(@NotNull String phone, @NonNull String code) {
         MySelf.get().setAuthorization(null);
         return apiService.register(new ReigsterRequest(phone, code))
                 .compose(HttpResponseTransformer.handleResult(true));

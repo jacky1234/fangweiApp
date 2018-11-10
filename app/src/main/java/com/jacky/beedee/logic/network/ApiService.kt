@@ -29,7 +29,7 @@ interface ApiService {
     fun uploadFile(@Part file: MultipartBody.Part): Observable<HttpResponse<UploadFileResponse>>
 
     @POST("login")
-    fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<RegisterResponse>>
+    fun register(@Body registerRequest: ReigsterRequest): Observable<HttpResponse<User>>
 
     @POST("login")
     fun login(@Body loginRequest: LoginRequest): Observable<HttpResponse<User>>
