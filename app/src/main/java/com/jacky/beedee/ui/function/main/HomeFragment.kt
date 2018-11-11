@@ -18,7 +18,8 @@ import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.SpanUtils
-import com.jacky.beedee.ui.function.discovery.GoodDetailActivity
+import com.jacky.beedee.ui.common.Image
+import com.jacky.beedee.ui.common.ImagePreviewActivity
 import com.jacky.beedee.ui.function.other.ShowBrandActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.GridContainer
@@ -27,6 +28,7 @@ import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.relex.circleindicator.CircleIndicator
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -54,7 +56,12 @@ class HomeFragment : MySupportFragment() {
 
     private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
         imageView.setOnClickListener {
-            GoodDetailActivity.start(_mActivity, banner.id)
+            val image = Image()
+            image.origin = banner.image
+
+            val images = ArrayList<Image>()
+            images.add(image)
+            ImagePreviewActivity.start(_mActivity, images)
         }
     }
 

@@ -58,17 +58,7 @@ class FavoriteGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreL
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
-                        //test
-                        val data = ArrayList<Favorite>()
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-
-                        adapter.setNewData(data)
+                        adapter.setNewData(it.content)
                     } else {
                         adapter.addData(it.content)
                     }

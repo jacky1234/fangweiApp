@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +16,19 @@ import java.util.List;
  *
  * @author jacky
  */
-public class PreviewPagerAdapter extends FragmentPagerAdapter {
+public class ImagePreviewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Image> mItems = new ArrayList<>();
-    private PreviewPagerAdapter.OnPrimaryItemSetListener mListener;
+    private ImagePreviewPagerAdapter.OnPrimaryItemSetListener mListener;
 
-    public PreviewPagerAdapter(FragmentManager manager, PreviewPagerAdapter.OnPrimaryItemSetListener listener) {
+    public ImagePreviewPagerAdapter(FragmentManager manager, @Nullable ImagePreviewPagerAdapter.OnPrimaryItemSetListener listener) {
         super(manager);
         mListener = listener;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ImagePreviewFragment.newInstance(mItems.get(position));
+        return ImagePreviewDetailFragment.newInstance(mItems.get(position));
     }
 
     @Override

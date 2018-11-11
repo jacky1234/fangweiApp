@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.adapter.NewHotsGoodAdapter
@@ -67,13 +66,7 @@ class NewHotsGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
-                        val content = ArrayList<GoodItem>()
-                        content.addAll(it.content)              //test
-                        content.addAll(it.content)
-                        content.addAll(it.content)
-                        content.addAll(it.content)
-
-                        adapter.setNewData(content)
+                        adapter.setNewData(it.content)
                         refreshLayout.finishRefresh(true)
                     } else {
                         if (it.content.isEmpty()) {

@@ -3,14 +3,24 @@ package com.jacky.beedee.ui.common;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * 2018/11/10.
  * GitHub:[https://github.com/jacky1234]
  *
  * @author jacky
  */
-public class Image implements Parcelable {
+public class Image implements Parcelable ,Serializable{
     private String origin;
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
 
     @Override
     public int describeContents() {

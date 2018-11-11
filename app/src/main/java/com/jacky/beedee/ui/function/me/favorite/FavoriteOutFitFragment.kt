@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
-import com.jacky.beedee.logic.entity.module.Favorite
 import com.jacky.beedee.logic.entity.module.GoodType
 import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
@@ -50,7 +49,7 @@ class FavoriteOutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMor
                 if (MySelf.get().isLogined) {
                     DialogHelper.createSimpleConfirmDialog(_mActivity, "确定取消收藏吗？") { _, _ ->
                         val item = adapter.getItem(position)!!
-                        RequestHelper.get().uncollectItem(GoodType.OUTFIT,item.id)
+                        RequestHelper.get().uncollectItem(GoodType.OUTFIT, item.id)
                                 .compose(bindUntilDetach())
                                 .subscribe {
                                     adapter.remove(position)
@@ -91,17 +90,7 @@ class FavoriteOutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMor
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
-                        //test
-                        val data = ArrayList<Favorite>()
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-                        data.addAll(it.content)
-
-                        adapter.setNewData(data)
+                        adapter.setNewData(it.content)
                     } else {
                         adapter.addData(it.content)
                     }

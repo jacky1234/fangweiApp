@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
@@ -41,7 +42,11 @@ class LoginActivity : BaseActivity() {
                                 .subscribe {
                                     MySelf.get().saveFromUser(it)
                                     AndroidUtil.toast("登录成功")
-                                    AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
+                                    if (MiscFacade.get().lastRunnable == null) {
+                                        AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
+                                    }
+
+                                    finish()
                                 }
                 }
 

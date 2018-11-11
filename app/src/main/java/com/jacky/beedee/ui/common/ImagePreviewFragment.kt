@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import kotlinx.android.synthetic.main.fragment_image_preview.*
 
 class ImagePreviewFragment : MySupportFragment() {
 
@@ -16,17 +17,21 @@ class ImagePreviewFragment : MySupportFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewPager.adapter =
+        viewPager.offscreenPageLimit = 3
+        val imagePreviewPagerAdapter = ImagePreviewPagerAdapter(childFragmentManager, null)
+        imagePreviewPagerAdapter.addAll(arguments!!.getSerializable(KEY_IMAGE) as ArrayList<Image>)
+        viewPager.adapter = imagePreviewPagerAdapter
+        viewPager.currentItem = 0
     }
 
     companion object {
-        const val KEY_IMAGE = "KEY_IMAGE"
+        private const val KEY_IMAGE = "KEY_IMAGE"
 
         @JvmStatic
-        fun newInstance(image:Image): ImagePreviewFragment {
+        fun newInstance(images: ArrayList<Image>): ImagePreviewFragment {
             val fragment = ImagePreviewFragment()
             val arguments = Bundle()
-            arguments.putParcelable(KEY_IMAGE,image)
+            arguments.putSerializable(KEY_IMAGE, images)
             fragment.arguments = arguments
             return fragment
         }

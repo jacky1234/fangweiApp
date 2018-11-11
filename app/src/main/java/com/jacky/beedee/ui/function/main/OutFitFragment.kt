@@ -104,10 +104,6 @@ class OutFitFragment : MySupportFragment() {
                 .compose(bindUntilDetach())
                 .subscribe {
                     videos.clear()
-                    videos.addAll(it.content)       //test
-                    videos.addAll(it.content)
-                    videos.addAll(it.content)
-                    videos.addAll(it.content)
                     videos.addAll(it.content)
                     triggerData()
                 }
@@ -117,10 +113,6 @@ class OutFitFragment : MySupportFragment() {
                 .compose(bindUntilDetach())
                 .subscribe {
                     goodItems.clear()
-                    goodItems.addAll(it.content)        //test
-                    goodItems.addAll(it.content)
-                    goodItems.addAll(it.content)
-                    goodItems.addAll(it.content)
                     goodItems.addAll(it.content)
                     triggerData()
                 }

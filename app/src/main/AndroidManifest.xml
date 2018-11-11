@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.jacky.beedee">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -8,13 +9,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".MyApp"
+        android:name=".BeeApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/beedee_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MyAppTheme">
+        android:theme="@style/MyAppTheme"
+        tools:replace="android:label">
 
         <activity
             android:name=".ui.function.main.MainActivity"
@@ -45,6 +47,7 @@
         <activity android:name=".ui.function.main.OutFitActivity" />
         <activity android:name=".ui.function.discovery.GoodDetailActivity" />
         <activity android:name=".ui.function.main.OutFitDetailActivity" />
+        <activity android:name=".ui.common.ImagePreviewActivity" />
 
     </application>
 </manifest>

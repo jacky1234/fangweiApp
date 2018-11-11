@@ -6,7 +6,7 @@ import com.jacky.beedee.support.log.Logger
 import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
-class MyApp : MultiDexApplication() {
+class BeeApp : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

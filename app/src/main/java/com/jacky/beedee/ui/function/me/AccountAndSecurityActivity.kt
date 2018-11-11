@@ -21,8 +21,6 @@ import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.Dialog.DialogHelper
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jacky.beedee.ui.widget.RowItemView
-import com.qmuiteam.qmui.widget.dialog.QMUIDialog
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.activity_account_security.*
 import java.io.File
@@ -72,11 +70,9 @@ class AccountAndSecurityActivity : BaseActivity() {
 
         //登出
         parent_logout.clickWithTrigger {
-            DialogHelper.createSimpleConfirmDialog(this, "确定要退出吗？", object : QMUIDialogAction.ActionListener {
-                override fun onClick(dialog: QMUIDialog?, index: Int) {
-                    MiscFacade.get().loginOutFlag(this@AccountAndSecurityActivity, true)
-                }
-            }).show()
+            DialogHelper.createSimpleConfirmDialog(this, "确定要退出吗？") { _, _ ->
+                MiscFacade.get().loginOutFlag(this@AccountAndSecurityActivity, true)
+            }.show()
         }
 
         //nickname
