@@ -28,6 +28,30 @@ class ImagePreviewDetailFragment : MySupportFragment() {
         return inflater.inflate(R.layout.fragment_image_preview_detail, container, false)
     }
 
+    private val target = object : SimpleTarget<Drawable>() {
+        override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+            if (isAttached()) {
+                if (resource is BitmapDrawable) {
+                    imageView.setImage(ImageSource.bitmap(resource.bitmap))
+                } else {
+                    imageView.setImage(ImageSource.bitmap(AndroidUtil.drawableToBitmap(resource)))
+                }
+            }
+        }
+
+        override fun onLoadStarted(placeholder: Drawable?) {
+            if (isAttached()) {
+                imageView.setImage(ImageSource.resource(placeHolder))
+            }
+        }
+
+        override fun onLoadFailed(errorDrawable: Drawable?) {
+            if (isAttached()) {
+                imageView.setImage(ImageSource.resource(placeHolder))
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,30 +59,7 @@ class ImagePreviewDetailFragment : MySupportFragment() {
 
         Glide.with(context!!)
                 .load(image.origin)
-                .into(object : SimpleTarget<Drawable>() {
-                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                        if (isAttached()) {
-                            if (resource is BitmapDrawable) {
-                                val bitmapDrawable = resource as BitmapDrawable
-                                imageView.setImage(ImageSource.bitmap(bitmapDrawable.bitmap))
-                            } else {
-                                imageView.setImage(ImageSource.bitmap(AndroidUtil.drawableToBitmap(resource)))
-                            }
-                        }
-                    }
-
-                    override fun onLoadStarted(placeholder: Drawable?) {
-                        if (isAttached()) {
-                            imageView.setImage(ImageSource.resource(placeHolder))
-                        }
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        if (isAttached()) {
-                            imageView.setImage(ImageSource.resource(placeHolder))
-                        }
-                    }
-                })
+                .into(target)
 
     }
 
@@ -74,5 +75,4 @@ class ImagePreviewDetailFragment : MySupportFragment() {
             return fragment
         }
     }
-
 }

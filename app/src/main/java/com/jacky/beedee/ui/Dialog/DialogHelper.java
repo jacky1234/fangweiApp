@@ -13,7 +13,6 @@ public class DialogHelper {
 
     public static QMUIDialog createSimpleConfirmDialog(@NotNull Activity activity, @NotNull String detail, @Nullable QMUIDialogAction.ActionListener positiveAction) {
         return new QMUIDialog.MessageDialogBuilder(activity)
-                .setTitle("提示")
                 .setMessage(detail)
                 .addAction("取消", (dialog, index) -> dialog.dismiss())
                 .addAction("确定", (dialog, index) -> {
