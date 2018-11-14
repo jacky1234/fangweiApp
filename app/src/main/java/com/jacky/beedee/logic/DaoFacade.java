@@ -24,6 +24,7 @@ import java.util.TreeSet;
 public class DaoFacade {
     private static final long MYSELF_INFO = 1;
     private static final long SEARCH_KEY = 2;
+    private static final long SETTING_PUSH = 3;         //是否打开推送
     private DaoSession daoSession;
 
     private DaoFacade() {

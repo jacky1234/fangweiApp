@@ -157,7 +157,7 @@ class Mefragment : MySupportFragment() {
                 }
 
                 itemAboutUs -> {
-
+                    activity!!.launch<AboutUsActivity>()
                 }
 
                 itemSetting -> {

@@ -50,6 +50,8 @@
         <activity android:name=".ui.function.discovery.GoodDetailActivity" />
         <activity android:name=".ui.function.main.OutFitDetailActivity" />
         <activity android:name=".ui.common.ImagePreviewActivity" />
+        <activity android:name=".ui.function.me.AboutUsActivity" />
+        <activity android:name=".ui.function.me.AppIntroduceActivity" />
 
     </application>
 </manifest>

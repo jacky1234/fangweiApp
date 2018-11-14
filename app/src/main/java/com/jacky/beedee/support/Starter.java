@@ -22,7 +22,7 @@ public class Starter {
         Starter.context = context;
 
         Device device = Device.create(Device.Type.ANDROID, android.os.Build.VERSION.RELEASE,
-                AndroidUtil.getVersionName(context));
+                AndroidUtil.getVersionName());
         DeviceDependency.current = new DeviceDependency(device, "https://api.beedee.yituizhineng.top");
         MySelf.init();
     }

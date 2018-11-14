@@ -67,11 +67,11 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             leftDrawableId = ta.getResourceId(R.styleable.TitleView_titleView_left_drawable, R.mipmap.ic_arrow_back_black)
             leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, R.string.back)
             middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, R.string.login)
-            leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
-            middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
+            leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
+            middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
             rightTextId = ta.getResourceId(R.styleable.TitleView_titleView_right_text, R.string.complete)
-            rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, ContextCompat.getColor(Starter.getContext(),android.R.color.black))
-            val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, COMPOSE_LEFT_MIDDLEL_FLAG)
+            rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
+            val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, 3)
             when (type) {
                 1 -> {
                     flag = COMPOSE_LEFT_MIDDLEL_FLAG

@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -49,19 +48,13 @@ public class AndroidUtil {
 
     /**
      * 获取应用版本信息
-     *
-     * @param context
-     * @return
      */
-    public static String getVersionName(Context context) {
-        Fragment[] fragments = new Fragment[4];
+    public static String getVersionName() {
         String versionName;
-        // 获取当前应用版本号
         try {
-            // 获取packagemanager的实例
-            PackageManager packageManager = context.getPackageManager();
+            PackageManager packageManager = Starter.getContext().getPackageManager();
             // getPackageName()是你当前类的包名，0代表是获取版本信息
-            PackageInfo packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            PackageInfo packInfo = packageManager.getPackageInfo(Starter.getContext().getPackageName(), 0);
             versionName = packInfo.versionName;
             return versionName;
         } catch (PackageManager.NameNotFoundException e) {

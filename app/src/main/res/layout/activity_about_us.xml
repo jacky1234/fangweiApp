@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_visible_type="left_middle"
+        app:titleView_title_text="@string/about_us" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/ic_clear_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleView" />
+
+    <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
+        android:id="@+id/tvVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textColor="#666666"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        tools:text="版本 V1.0" />
+
+    <LinearLayout
+        style="@style/gap_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvVersion">
+
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parentAppIntroduce"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
+
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parentFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

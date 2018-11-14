@@ -42,7 +42,7 @@ public class MiscFacade {
     }
 
     @SuppressLint("CheckResult")
-    private void resetVertifyCodeDisposeAndConnect() {
+    private void resetVerifyCodeDisposeAndConnect() {
         codeObservable = Observable.interval(1, TimeUnit.SECONDS).take(VERTIFY_SECOND)
                 .observeOn(AndroidSchedulers.mainThread()).publish();
         vertifyCodeDispose = codeObservable.connect();
@@ -114,7 +114,7 @@ public class MiscFacade {
 
     public void registerCodeListenerAndTrigger(Observer<Long> observer) {
         if (isVerifyCodeAvailable()) {
-            resetVertifyCodeDisposeAndConnect();
+            resetVerifyCodeDisposeAndConnect();
         }
         leftSecondObservers.add(observer);
     }

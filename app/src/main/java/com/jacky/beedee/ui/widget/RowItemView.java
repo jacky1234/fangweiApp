@@ -22,6 +22,9 @@ public class RowItemView extends RelativeLayout {
     public final static int FLAG_RIGHT_SHOW_IMAGE = 1;
     public final static int FLAG_RIGHT_SHOW_TEXT = 1 << 1;
     public final static int FLAG_RIGHT_EDITABLE = 1 << 2;
+
+
+    public final static int FLAG_ONLY_LEFT = ~(FLAG_RIGHT_SHOW_TEXT | FLAG_RIGHT_SHOW_IMAGE | FLAG_RIGHT_EDITABLE);
     private int flag = FLAG_RIGHT_SHOW_TEXT;
 
     private TextView tv_title;
