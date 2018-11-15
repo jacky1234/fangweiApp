@@ -53,6 +53,7 @@
         <activity android:name=".ui.function.me.AboutUsActivity" />
         <activity android:name=".ui.function.me.AppIntroduceActivity" />
         <activity android:name=".ui.function.me.SettingActivity" />
+        <activity android:name=".ui.function.me.ProblemFeedbackActivity" />
 
     </application>
 </manifest>

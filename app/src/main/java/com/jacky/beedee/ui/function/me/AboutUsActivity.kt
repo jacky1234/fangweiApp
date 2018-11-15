@@ -29,5 +29,9 @@ class AboutUsActivity : BaseActivity() {
         parentAppIntroduce.clickWithTrigger {
             launch<AppIntroduceActivity>()
         }
+
+        parentFeedback.clickWithTrigger {
+            launch<ProblemFeedbackActivity>()
+        }
     }
 }

@@ -14,7 +14,7 @@
     <color name="item_title_text_color">#333333</color>
     <color name="tabbar_text_hig_color">@android:color/black</color>
 
-
-
+    <color name="release_limit_btn_text_color">#AAAAAA</color>
+    <color name="release_prompt_text_color">#DDDDDD</color>
     <color name="action_confirm">#FFEF04</color>
 </resources>

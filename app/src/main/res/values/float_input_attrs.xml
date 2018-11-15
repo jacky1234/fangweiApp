@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FloatInputLayout">
+        <attr name="floatLabelTextAppearance" format="reference" />
+        <attr name="hintText" format="string" />
+        <attr name="hintEnabled" format="boolean" />
+        <attr name="textColorHint" format="color" />
+        <attr name="textSizeHint" format="dimension" />
+        <attr name="textHintPadding" format="dimension" />
+        <attr name="counterFlowTextColor" format="color" />
+        <attr name="counterTextColor" format="color" />
+        <attr name="counterTextSize" format="dimension" />
+        <attr name="counterEnabled" format="boolean" />
+        <attr name="maxCounter" format="integer" />
+        <attr name="errorEnable" format="boolean" />
+        <attr name="floatInputErrorMessage" format="string" />
+        <attr name="floatInputErrorTextColor" format="color" />
+    </declare-styleable>
+</resources>

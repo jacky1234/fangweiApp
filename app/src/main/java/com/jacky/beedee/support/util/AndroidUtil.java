@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
+import android.text.InputFilter;
 import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -132,5 +133,10 @@ public class AndroidUtil {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    public static void setMaxLengthForEditText(EditText mEditText, int maxLength) {
+        InputFilter[] filters = {new InputFilter.LengthFilter(maxLength)};
+        mEditText.setFilters(filters);
     }
 }

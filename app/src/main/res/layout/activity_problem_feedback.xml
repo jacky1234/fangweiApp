@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <com.jacky.beedee.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_title_text="@string/problem_feedback"
+        app:titleView_visible_type="left_middle" />
+
+
+    <com.jacky.beedee.ui.widget.FloatInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        app:counterEnabled="true"
+        app:hintEnabled="false"
+        app:maxCounter="200">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="@string/feedback_hint"
+            android:maxLength="200"
+            android:minHeight="250dp"
+            android:textSize="15sp" />
+    </com.jacky.beedee.ui.widget.FloatInputLayout>
+
+    <TextView
+        android:id="@+id/tvConfirm"
+        style="@style/confirm_button"
+        android:layout_marginTop="50dp"
+        android:text="提交" />
+</LinearLayout>
