@@ -81,6 +81,21 @@ public class DaoFacade {
         return keys;
     }
 
+    public boolean isPushOpened() {
+        List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
+                .where(PreferenceDao.Properties.Index.eq(SETTING_PUSH)).list();
+        if (!list.isEmpty()) {
+            return Integer.parseInt(list.get(0).getValue()) == 1;
+        }
+
+        return true;
+    }
+
+    public void togglePushSetting() {
+        String value = isPushOpened() ? String.valueOf(0) : String.valueOf(1);
+        daoSession.getPreferenceDao().insertOrReplace(new Preference(SETTING_PUSH, value));
+    }
+
     private static final class InstanceHolder {
         private static DaoFacade instance = new DaoFacade();
     }

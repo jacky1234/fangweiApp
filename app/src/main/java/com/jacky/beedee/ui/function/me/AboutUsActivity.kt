@@ -21,10 +21,10 @@ class AboutUsActivity : BaseActivity() {
 
         tvVersion.text = "版本 V${DeviceDependency.current.device.appVersion}"
         parentAppIntroduce.setTitle("APP说明")
-        parentAppIntroduce.setType(RowItemView.FLAG_ONLY_LEFT)
+        parentAppIntroduce.setType(RowItemView.FLAG_NONE)
 
         parentFeedback.setTitle("问题反馈")
-        parentFeedback.setType(RowItemView.FLAG_ONLY_LEFT)
+        parentFeedback.setType(RowItemView.FLAG_NONE)
 
         parentAppIntroduce.clickWithTrigger {
             launch<AppIntroduceActivity>()

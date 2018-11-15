@@ -60,8 +60,7 @@
     </style>
 
     <style name="gap_line">
-        <item name="android:divider">@color/tabbar_text_color</item>
-        <item name="android:dividerHeight">0.5dp</item>
+        <item name="android:divider">@drawable/shape_gray_divider</item>
         <item name="android:showDividers">beginning|end|middle</item>
     </style>
 

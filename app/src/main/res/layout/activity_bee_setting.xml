@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.jacky.beedee.ui.widget.TitleView
-        android:layout_width="match_parent"
         android:id="@+id/titleView"
-        app:titleView_visible_type="left_middle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
         app:titleView_title_text="@string/bee_settings"
-        android:layout_height="@dimen/title_height" />
+        app:titleView_visible_type="left_middle" />
 
+    <LinearLayout
+        style="@style/gap_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <com.jacky.beedee.ui.widget.RowItemView
+            android:id="@+id/parentPush"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
+    </LinearLayout>
 </LinearLayout>

@@ -21,7 +21,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/first_margin_from_left"
-        android:src="@mipmap/ic_arrow_right_black" />
+        android:src="@mipmap/ic_arrow_right_black"
+        tools:visibility="gone" />
 
     <ImageView
         android:id="@+id/tv_image"
@@ -29,7 +30,21 @@
         android:layout_height="47dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
-        android:layout_toLeftOf="@id/iv_arrow" />
+        android:layout_toLeftOf="@id/iv_arrow"
+        tools:visibility="gone" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/multi_checked"
+        android:button="@null"
+        tools:checked="true" />
 
     <TextView
         android:id="@+id/tv_right_desc"
@@ -40,7 +55,8 @@
         android:layout_toLeftOf="@id/iv_arrow"
         android:singleLine="true"
         android:textColor="#333333"
-        android:textSize="@dimen/normal_textsize" />
+        android:textSize="@dimen/normal_textsize"
+        tools:visibility="gone" />
 
     <EditText
         android:id="@+id/et_edit"
@@ -53,6 +69,7 @@
         android:background="@null"
         android:gravity="right|center_vertical"
         android:textColor="@color/item_title_text_color"
-        tools:text="abdc" />
+        tools:text="abdc"
+        tools:visibility="gone" />
 
 </RelativeLayout>

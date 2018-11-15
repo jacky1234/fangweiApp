@@ -161,7 +161,7 @@ class Mefragment : MySupportFragment() {
                 }
 
                 itemSetting -> {
-
+                    activity!!.launch<SettingActivity>()
                 }
             }
         }
