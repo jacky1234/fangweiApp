@@ -19,7 +19,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+
     signingConfigs {
+        config {
+            keyAlias 'zhenweichaxun'
+            keyPassword '123456'
+            storeFile file('./zhenweichaxun.jks')
+            storePassword '123456'
+        }
+
         sign {
             keyAlias ALIAS
             keyPassword ALIAS_PASSWORD
@@ -111,8 +119,8 @@ dependencies {
     implementation('com.github.hotchemi:permissionsdispatcher:2.3.1') {
         exclude group: 'com.android.support'
     }
-    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.3.1'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    kapt 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     implementation('com.facebook.fresco:animated-gif:0.13.0') {
         exclude group: 'com.android.support'
