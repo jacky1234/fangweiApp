@@ -1,0 +1,19 @@
+{
+  "showSettings": true,
+  "colorGreen": "#28AF63",
+  "colorGray": "#494949",
+  "titleTextColor": "#000000",
+  "titleColor": "#ffffff",
+  "titleTextSize": 18,
+  "themeColor": "#28AF63",
+  "showResult": true,
+  "webServiceUrl": "https://svc-pannpass-sirena.s2icode.com/api/svc",
+  "webServiceToken": "e27d28d6-6224-46c9-9580-37e81878272a",
+  "aMapToken": "211cfc6dffca06f7e9d9d6c295f02d2e",
+  "showLevel": true,
+  "forcedFlash": true,
+  "changeLanguage": true
+}
+//  "webServiceUrl": "https://dec.s2icode.com/api/svc",
+//  "webServiceToken": "a8c02521-ffd8-416e-85a5-ac6b63f4ba75",
+//  "aMapToken": "8d54f842d17afb03df178305415639a0",
