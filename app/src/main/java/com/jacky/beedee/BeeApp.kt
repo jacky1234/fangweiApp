@@ -3,6 +3,7 @@ package com.jacky.beedee
 import android.support.multidex.MultiDexApplication
 import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.log.Logger
+import com.s2icode.main.S2iCodeModule
 import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
@@ -13,7 +14,7 @@ class BeeApp : MultiDexApplication() {
         Starter.init(this)
         initFragmentation()
         RxJavaPlugins.setErrorHandler(Logger.Companion::e)
-//        S2iCodeModule.init(this)
+        S2iCodeModule.init(this)
     }
 
     //nineGridView
