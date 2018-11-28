@@ -4,10 +4,7 @@ import com.jacky.beedee.logic.entity.module.Banner
 import com.jacky.beedee.logic.entity.module.Category
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.entity.module.User
-import com.jacky.beedee.logic.entity.request.CollectRequest
-import com.jacky.beedee.logic.entity.request.LoginRequest
-import com.jacky.beedee.logic.entity.request.ReigsterRequest
-import com.jacky.beedee.logic.entity.request.UpdateUserRequest
+import com.jacky.beedee.logic.entity.request.*
 import com.jacky.beedee.logic.entity.response.*
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -96,5 +93,11 @@ interface ApiService {
     fun requestSearchGood(@Query("keyword") keyword: String): Observable<HttpResponse<ListGoodResponse>>
 
     @GET("goods/group_by_category")
-    fun requestGroupByCategroy(@Query("categoryId") categoryId: String):Observable<HttpListResponse<SecondCategoryResponse>>
+    fun requestGroupByCatalogue(@Query("categoryId") categoryId: String): Observable<HttpListResponse<SecondCategoryResponse>>
+
+    @POST("feedback/post")
+    fun feedbackProblem(@Body request: FeedbackRequest): Observable<HttpResponseSource>
+
+    @GET("goods/get_search_term")
+    fun getSearchKeyword(): Observable<HttpResponse<KeywordResponse>>
 }

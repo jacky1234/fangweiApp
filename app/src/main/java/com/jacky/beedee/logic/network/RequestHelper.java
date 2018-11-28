@@ -9,6 +9,7 @@ import com.jacky.beedee.logic.entity.module.GoodType;
 import com.jacky.beedee.logic.entity.module.MySelf;
 import com.jacky.beedee.logic.entity.module.User;
 import com.jacky.beedee.logic.entity.request.CollectRequest;
+import com.jacky.beedee.logic.entity.request.FeedbackRequest;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
@@ -16,6 +17,7 @@ import com.jacky.beedee.logic.entity.response.CollectResponse;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HotVideoResponse;
 import com.jacky.beedee.logic.entity.response.HttpResponseSource;
+import com.jacky.beedee.logic.entity.response.KeywordResponse;
 import com.jacky.beedee.logic.entity.response.ListGoodResponse;
 import com.jacky.beedee.logic.entity.response.SecondCategoryResponse;
 import com.jacky.beedee.logic.entity.response.UploadFileResponse;
@@ -69,6 +71,13 @@ public class RequestHelper {
         Map<String, String> map = new HashMap<>(1);
         map.put("mobile", s);
         return apiService.sendCode(map)
+                .compose(BooleanTransformer.handleResult(true));
+    }
+
+    public Observable<Boolean> feedbackProblem(@NotNull String s) {
+        FeedbackRequest request = new FeedbackRequest();
+        request.setContent(s);
+        return apiService.feedbackProblem(request)
                 .compose(BooleanTransformer.handleResult(true));
     }
 
@@ -163,7 +172,7 @@ public class RequestHelper {
     }
 
     public Observable<List<SecondCategoryResponse>> requestGroupByCategroy(String categoryId) {
-        return apiService.requestGroupByCategroy(categoryId)
+        return apiService.requestGroupByCatalogue(categoryId)
                 .compose(HttpListResponseTransformer.handleResult(true));
     }
 
@@ -171,6 +180,10 @@ public class RequestHelper {
         return apiService.logout().compose(SchedulerUtils.INSTANCE.ioToMain());
     }
 
+    public Observable<KeywordResponse> getSearchKeyword() {
+        return apiService.getSearchKeyword()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
 
     public static RequestHelper get() {
         return InstanceHolder.INSTANCE;

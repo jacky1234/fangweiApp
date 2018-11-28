@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.DaoFacade
 import com.jacky.beedee.logic.entity.module.Category
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.clickWithTrigger
+import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.adapter.SearchOnFirstCategoryAdapter
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import kotlinx.android.synthetic.main.fragment_discovery.*
@@ -23,6 +25,16 @@ class DiscoveryFragment : MySupportFragment() {
     private val data = ArrayList<Category>()
     private var index = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        RequestHelper.get().searchKeyword
+                .compose(bindUntilDetach())
+                .subscribe {
+                    DaoFacade.get().searchKey = it.value
+                    recoveryKeyWord()
+                }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_discovery, container, false)
     }
@@ -30,6 +42,7 @@ class DiscoveryFragment : MySupportFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        recoveryKeyWord()
         tvSearch.clickWithTrigger {
             SearchActivity.start(activity!!, SearchActivity.KEY_SEARCH_CODE_REQUEST)
         }
@@ -51,6 +64,13 @@ class DiscoveryFragment : MySupportFragment() {
         }
     }
 
+    private fun recoveryKeyWord() {
+        val searchKey = DaoFacade.get().searchKey
+        if (Strings.isNotBlank(searchKey)) {
+            tvSearch.text = "搜索产品，$searchKey"
+        }
+    }
+
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
 
@@ -64,7 +84,6 @@ class DiscoveryFragment : MySupportFragment() {
                         adapter.notifyDataSetChanged()
                     }
                 }
-
 
 
     }

@@ -30,6 +30,7 @@ class SearchKeyFragment : MySupportFragment() {
         requestKeyWord()
         iv_clear.clickWithTrigger {
             DialogHelper.createSimpleConfirmDialog(activity!!, "确定需要删除历史记录吗？") { _, _ ->
+                DaoFacade.get().clearHistoryKeys()
                 requestKeyWord()
             }.show()
         }

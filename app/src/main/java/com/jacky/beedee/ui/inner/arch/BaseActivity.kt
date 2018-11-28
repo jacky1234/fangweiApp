@@ -5,6 +5,7 @@ import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
 import android.support.v4.app.ActivityCompat
 import com.jacky.beedee.logic.MiscFacade
+import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.misc.LifeCircleComponents
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.trello.rxlifecycle2.LifecycleProvider
@@ -37,7 +38,11 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
 
     @CallSuper
     override fun onDestroy() {
-        super.onDestroy()
+        try {
+            super.onDestroy()
+        } catch (e: Exception) {
+            Logger.e(e)
+        }
         currentActivity = null
         lifecycleSubject.onNext(ActivityEvent.DESTROY)
         lifeCircleComponents.removeDispose()

@@ -112,3 +112,14 @@ public static java.lang.String TABLENAME;
 #---zxing---
 -keep class com.google.zxing.** {*;}
 -dontwarn com.google.zxing.**
+
+##-----wx------
+-keep class com.tencent.mm.opensdk.** {
+*;
+}
+-keep class com.tencent.wxop.** {
+*;
+}
+-keep class com.tencent.mm.sdk.** {
+*;
+}

@@ -45,9 +45,17 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
         showOrHide(searchKeyFragment!!)
 
         tvCancel.clickWithTrigger { _mActivity.finish() }
-        searchView.setSearchHint("搜索产品，“羽绒服”...")
+
+        val searchKey = DaoFacade.get().searchKey
+        if (Strings.isNotBlank(searchKey)) {
+            searchView.setSearchHint("搜索产品，$searchKey")
+        }
         searchView.setKeyDelegate {
-            val key = searchView.text
+            var key = searchView.text
+            if (Strings.isNullOrEmpty(key)) {
+                key = searchKey
+            }
+
             if (Strings.isNullOrEmpty(key)) {
                 AndroidUtil.toast("请输入关键字")
             }

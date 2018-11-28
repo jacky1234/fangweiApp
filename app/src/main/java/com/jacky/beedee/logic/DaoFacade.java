@@ -23,8 +23,9 @@ import java.util.TreeSet;
  */
 public class DaoFacade {
     private static final long MYSELF_INFO = 1;
-    private static final long SEARCH_KEY = 2;
+    private static final long SEARCH_KEYS = 2;
     private static final long SETTING_PUSH = 3;         //是否打开推送
+    private static final long SEARCH_KEYWORD = 4;       //推荐搜索
     private DaoSession daoSession;
 
     private DaoFacade() {
@@ -59,7 +60,7 @@ public class DaoFacade {
         List<String> keys = new ArrayList<>();
 
         List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
-                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEY)).list();
+                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEYS)).list();
         if (!list.isEmpty()) {
             keys.addAll(JsonUtil.getListFromJSON(String.class, list.get(0).getValue()));
         }
@@ -70,15 +71,35 @@ public class DaoFacade {
     public Set<String> addSearchKey(@NotNull String key) {
         Set<String> keys = new TreeSet<>();
 
+        keys.add(key);      //add to first
         List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
-                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEY)).list();
-        keys.add(key);
+                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEYS)).list();
         if (!list.isEmpty()) {
             keys.addAll(JsonUtil.getListFromJSON(String.class, list.get(0).getValue()));
         }
-        daoSession.getPreferenceDao().insertOrReplace(new Preference(SEARCH_KEY, JsonUtil.toJSON(keys)));
+        daoSession.getPreferenceDao().insertOrReplace(new Preference(SEARCH_KEYS, JsonUtil.toJSON(keys)));
 
         return keys;
+    }
+
+    public void clearHistoryKeys() {
+        daoSession.getPreferenceDao().deleteByKey(SEARCH_KEYS);
+    }
+
+    public void setSearchKey(String key) {
+        daoSession.getPreferenceDao()
+                .insertOrReplace(new Preference(SEARCH_KEYWORD, key));
+    }
+
+    @Nullable
+    public String getSearchKey() {
+        List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
+                .where(PreferenceDao.Properties.Index.eq(SEARCH_KEYWORD)).list();
+        if (!list.isEmpty()) {
+            return list.get(0).getValue();
+        }
+
+        return null;
     }
 
     public boolean isPushOpened() {

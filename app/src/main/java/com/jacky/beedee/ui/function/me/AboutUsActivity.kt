@@ -31,7 +31,7 @@ class AboutUsActivity : BaseActivity() {
         }
 
         parentFeedback.clickWithTrigger {
-            launch<ProblemFeedbackActivity>()
+            launch<FeedbackProblemActivity>()
         }
     }
 }

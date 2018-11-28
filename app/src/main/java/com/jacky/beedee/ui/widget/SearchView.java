@@ -119,6 +119,10 @@ public class SearchView extends RelativeLayout {
         return etSearch.getText().toString().trim();
     }
 
+    public String getHintText() {
+        return etSearch.getHint().toString().trim();
+    }
+
     public void setOnSearchClickListener(View.OnClickListener onClickListener) {
         this.onCloseListener = onClickListener;
     }
