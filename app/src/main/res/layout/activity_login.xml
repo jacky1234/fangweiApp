@@ -163,13 +163,13 @@
 
 
             <ImageView
-                android:id="@+id/iv_login_weixin"
+                android:id="@+id/ivLoginWX"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:srcCompat="@mipmap/ic_weixin" />
 
             <ImageView
-                android:id="@+id/iv_login_qq"
+                android:id="@+id/ivLoginQQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="42dp"
@@ -177,7 +177,7 @@
                 app:srcCompat="@mipmap/ic_qq" />
 
             <ImageView
-                android:id="@+id/iv_login_weibo"
+                android:id="@+id/ivLoginWB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/ic_weibo" />

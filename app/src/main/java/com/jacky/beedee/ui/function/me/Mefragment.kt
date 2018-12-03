@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -129,8 +128,6 @@ class Mefragment : MySupportFragment() {
 
         val onClickListener = View.OnClickListener {
             if (it is QMUICommonListItemView) {
-                val text = it.text
-                Toast.makeText(getActivity(), text.toString() + " is Clicked", Toast.LENGTH_SHORT).show()
             }
 
             when (it) {

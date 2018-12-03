@@ -6,7 +6,9 @@ import android.view.View
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.module.MySelf
+import com.jacky.beedee.logic.entity.module.User
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.logic.thridLogin.*
 import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
@@ -14,11 +16,11 @@ import com.jacky.beedee.support.util.Checker
 import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
-import com.trello.rxlifecycle2.android.ActivityEvent
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 
 class LoginActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -31,7 +33,7 @@ class LoginActivity : BaseActivity() {
         et_phone.setText(MySelf.get().mobile)
         val login = tv_login
         RxView.clicks(login).throttleFirst(1, TimeUnit.SECONDS)
-                .compose(this.bindUntilEvent(ActivityEvent.DESTROY))
+                .compose(bindToDestroy())
                 .subscribe {
                     val phone = et_phone.text.toString()
                     val pwd = et_pwd.text.toString()
@@ -40,13 +42,7 @@ class LoginActivity : BaseActivity() {
                         RequestHelper.get().login(phone, pwd)
                                 .compose(bindToDestroy())
                                 .subscribe {
-                                    MySelf.get().saveFromUser(it)
-                                    AndroidUtil.toast("登录成功")
-                                    if (MiscFacade.get().lastRunnable == null) {
-                                        AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
-                                    }
-
-                                    finish()
+                                    onLoginResult(it)
                                 }
                 }
 
@@ -56,6 +52,52 @@ class LoginActivity : BaseActivity() {
 
         tv_forget_pwd.clickWithTrigger {
             ForgetPwdActivity.start(this, et_phone.text.toString())
+        }
+
+
+        ivLoginWX.clickWithTrigger {
+            ThirdLoginHelper.loginWx(listener)
+        }
+
+        ivLoginQQ.clickWithTrigger {
+            ThirdLoginHelper.loginQQ(listener)
+        }
+    }
+
+    private fun onLoginResult(it: User) {
+        MySelf.get().saveFromUser(it)
+        AndroidUtil.toast("登录成功")
+        if (MiscFacade.get().lastRunnable == null) {
+            AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
+        }
+
+        finish()
+    }
+
+
+    val listener: OnThirdAuthListener = object : OnThirdAuthListener {
+        override fun onError(e: AuthThrowable) {
+            AndroidUtil.toast(e.message)
+        }
+
+        override fun onSuccess(result: AuthResult) {
+            when (result.platform) {
+                Platforms.WECHAT -> {
+                    RequestHelper.get().loginWX(result.code)
+                            .compose(bindToDestroy())
+                            .subscribe {
+                                onLoginResult(it)
+                            }
+                }
+
+                Platforms.QQ -> {
+                    RequestHelper.get().loginQQ(result.code)
+                            .compose(bindToDestroy())
+                            .subscribe {
+                                onLoginResult(it)
+                            }
+                }
+            }
         }
     }
 }

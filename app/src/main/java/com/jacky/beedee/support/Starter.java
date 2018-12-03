@@ -30,7 +30,7 @@ public class Starter {
 
 
         if (BuildConfig.DEBUG) {
-            DeviceDependency.current = new DeviceDependency(device, debug_url);
+            DeviceDependency.current = new DeviceDependency(device, release_url);
         } else {
             DeviceDependency.current = new DeviceDependency(device, release_url);
         }

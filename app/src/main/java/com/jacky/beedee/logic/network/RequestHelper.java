@@ -11,8 +11,10 @@ import com.jacky.beedee.logic.entity.module.User;
 import com.jacky.beedee.logic.entity.request.CollectRequest;
 import com.jacky.beedee.logic.entity.request.FeedbackRequest;
 import com.jacky.beedee.logic.entity.request.LoginRequest;
+import com.jacky.beedee.logic.entity.request.QQLoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
+import com.jacky.beedee.logic.entity.request.WXLoginRequest;
 import com.jacky.beedee.logic.entity.response.CollectResponse;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
 import com.jacky.beedee.logic.entity.response.HotVideoResponse;
@@ -66,6 +68,18 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
+    // 微信 OAuth2授权码
+    public Observable<User> loginWX(@NotNull String code) {
+        MySelf.get().setAuthorization(null);
+        return apiService.loginWX(new WXLoginRequest(code))
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<User> loginQQ(@NotNull String accessToken) {
+        MySelf.get().setAuthorization(null);
+        return apiService.loginQQ(new QQLoginRequest(accessToken))
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
 
     public Observable<Boolean> sendCode(@NotNull String s) {
         Map<String, String> map = new HashMap<>(1);

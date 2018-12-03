@@ -1,166 +1,83 @@
 package com.jacky.beedee.wxapi;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 
-public class WXEntryActivity extends Activity {
+import com.jacky.beedee.R;
+import com.jacky.beedee.logic.thridLogin.AuthResult;
+import com.jacky.beedee.logic.thridLogin.AuthThrowable;
+import com.jacky.beedee.logic.thridLogin.OnThirdAuthListener;
+import com.jacky.beedee.logic.thridLogin.Platforms;
+import com.jacky.beedee.logic.thridLogin.ThirdLoginHelper;
+import com.jacky.beedee.support.util.AndroidUtil;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
+public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+//注意：
+        //第三方开发者如果使用透明界面来实现WXEntryActivity，需要判断handleIntent的返回值，如果返回值为false，则说明入参不合法未被SDK处理，应finish当前透明界面，避免外部通过传递非法参数的Intent导致停留在透明界面，引起用户的疑惑
+        try {
+            ThirdLoginHelper.INSTANCE.getWxApi().handleIntent(getIntent(), this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+        finish();
+    }
+
+    @Override
+    public void onResp(BaseResp resp) {
+        OnThirdAuthListener listener = ThirdLoginHelper.INSTANCE.getListener();
+
+        if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+            if (listener != null) {
+                if (resp instanceof SendAuth.Resp) {
+                    final SendAuth.Resp auth = (SendAuth.Resp) resp;
+                    listener.onSuccess(new AuthResult(auth.code, Platforms.WECHAT));
+                    finish();
+                    return;
+                }
+            }
+        }
+
+        int result;
+        switch (resp.errCode) {
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                result = R.string.errcode_cancel;
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                result = R.string.errcode_deny;
+                break;
+            case BaseResp.ErrCode.ERR_UNSUPPORT:
+                result = R.string.errcode_unsupported;
+                break;
+            default:
+                result = R.string.errcode_unknown;
+                break;
+        }
+
+        if (listener != null) {
+            listener.onError(new AuthThrowable((String) AndroidUtil.getString(result)));
+        }
+
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ThirdLoginHelper.INSTANCE.clear();
+    }
 }
-//implements IWXAPIEventHandler {
-//
-//    private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
-//
-//    private Button gotoBtn, regBtn, launchBtn, checkBtn, scanBtn;
-//
-//    // IWXAPI ÊÇµÚÈý·½appºÍÎ¢ÐÅÍ¨ÐÅµÄopenapi½Ó¿Ú
-//    private IWXAPI api;
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.entry);
-//
-//        // Í¨¹ýWXAPIFactory¹¤³§£¬»ñÈ¡IWXAPIµÄÊµÀý
-//        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
-//
-//        regBtn = (Button) findViewById(R.id.reg_btn);
-//        regBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // ½«¸Ãapp×¢²áµ½Î¢ÐÅ
-//                api.registerApp(Constants.APP_ID);
-//            }
-//        });
-//
-//        gotoBtn = (Button) findViewById(R.id.goto_send_btn);
-//        gotoBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(WXEntryActivity.this, SendToWXActivity.class));
-//                finish();
-//            }
-//        });
-//
-//        launchBtn = (Button) findViewById(R.id.launch_wx_btn);
-//        launchBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(WXEntryActivity.this, "launch result = " + api.openWXApp(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//        checkBtn = (Button) findViewById(R.id.check_timeline_supported_btn);
-//        checkBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                int wxSdkVersion = api.getWXAppSupportAPI();
-//                if (wxSdkVersion >= TIMELINE_SUPPORTED_VERSION) {
-//                    Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline supported", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(WXEntryActivity.this, "wxSdkVersion = " + Integer.toHexString(wxSdkVersion) + "\ntimeline not supported", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-//
-//        scanBtn = (Button) findViewById(R.id.scan_qrcode_login_btn);
-//        scanBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(WXEntryActivity.this, ScanQRCodeLoginActivity.class));
-//                finish();
-//            }
-//        });
-//
-//        //×¢Òâ£º
-//        //µÚÈý·½¿ª·¢ÕßÈç¹ûÊ¹ÓÃÍ¸Ã÷½çÃæÀ´ÊµÏÖWXEntryActivity£¬ÐèÒªÅÐ¶ÏhandleIntentµÄ·µ»ØÖµ£¬Èç¹û·µ»ØÖµÎªfalse£¬ÔòËµÃ÷Èë²Î²»ºÏ·¨Î´±»SDK´¦Àí£¬Ó¦finishµ±Ç°Í¸Ã÷½çÃæ£¬±ÜÃâÍâ²¿Í¨¹ý´«µÝ·Ç·¨²ÎÊýµÄIntentµ¼ÖÂÍ£ÁôÔÚÍ¸Ã÷½çÃæ£¬ÒýÆðÓÃ»§µÄÒÉ»ó
-//        try {
-//            api.handleIntent(getIntent(), this);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//
-//        setIntent(intent);
-//        api.handleIntent(intent, this);
-//    }
-//
-//    // Î¢ÐÅ·¢ËÍÇëÇóµ½µÚÈý·½Ó¦ÓÃÊ±£¬»á»Øµ÷µ½¸Ã·½·¨
-//    @Override
-//    public void onReq(BaseReq req) {
-//        switch (req.getType()) {
-//            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
-//                goToGetMsg();
-//                break;
-//            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
-//                goToShowMsg((ShowMessageFromWX.Req) req);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//
-//    // µÚÈý·½Ó¦ÓÃ·¢ËÍµ½Î¢ÐÅµÄÇëÇó´¦ÀíºóµÄÏìÓ¦½á¹û£¬»á»Øµ÷µ½¸Ã·½·¨
-//    @Override
-//    public void onResp(BaseResp resp) {
-//        int result = 0;
-//
-//        Toast.makeText(this, "baseresp.getType = " + resp.getType(), Toast.LENGTH_SHORT).show();
-//
-//        switch (resp.errCode) {
-//            case BaseResp.ErrCode.ERR_OK:
-//                result = R.string.errcode_success;
-//                break;
-//            case BaseResp.ErrCode.ERR_USER_CANCEL:
-//                result = R.string.errcode_cancel;
-//                break;
-//            case BaseResp.ErrCode.ERR_AUTH_DENIED:
-//                result = R.string.errcode_deny;
-//                break;
-//            case BaseResp.ErrCode.ERR_UNSUPPORT:
-//                result = R.string.errcode_unsupported;
-//                break;
-//            default:
-//                result = R.string.errcode_unknown;
-//                break;
-//        }
-//
-//        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-//    }
-//
-//    private void goToGetMsg() {
-//        Intent intent = new Intent(this, GetFromWXActivity.class);
-//        intent.putExtras(getIntent());
-//        startActivity(intent);
-//        finish();
-//    }
-//
-//    private void goToShowMsg(ShowMessageFromWX.Req showReq) {
-//        WXMediaMessage wxMsg = showReq.message;
-//        WXAppExtendObject obj = (WXAppExtendObject) wxMsg.mediaObject;
-//
-//        StringBuffer msg = new StringBuffer(); // ×éÖ¯Ò»¸ö´ýÏÔÊ¾µÄÏûÏ¢ÄÚÈÝ
-//        msg.append("description: ");
-//        msg.append(wxMsg.description);
-//        msg.append("\n");
-//        msg.append("extInfo: ");
-//        msg.append(obj.extInfo);
-//        msg.append("\n");
-//        msg.append("filePath: ");
-//        msg.append(obj.filePath);
-//
-//        Intent intent = new Intent(this, ShowFromWXActivity.class);
-//        intent.putExtra(Constants.ShowMsgActivity.STitle, wxMsg.title);
-//        intent.putExtra(Constants.ShowMsgActivity.SMessage, msg.toString());
-//        intent.putExtra(Constants.ShowMsgActivity.BAThumbData, wxMsg.thumbData);
-//        startActivity(intent);
-//        finish();
-//    }
-//}

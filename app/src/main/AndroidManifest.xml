@@ -57,20 +57,18 @@
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:launchMode="singleTop"
+            android:taskAffinity="beedee.wxentry">
 
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="sdksample" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.function.login.LoginActivity"></activity>
+        <activity
+            android:name=".ui.function.login.LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".ui.function.login.RegisterActivity"></activity>
         <activity android:name=".ui.function.defake.DefakeDetailActivity"></activity>
         <activity android:name=".ui.function.login.RegisterFillInfoActivity"></activity>
@@ -94,6 +92,27 @@
         <activity android:name=".ui.function.me.SettingActivity" />
         <activity android:name=".ui.function.me.FeedbackProblemActivity" />
 
+        <activity android:name=".logic.thridLogin.LoginDelegateActivity" />
+
+        <!--qq login-->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent1107909602" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
 
     </application>
 </manifest>

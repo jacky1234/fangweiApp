@@ -127,22 +127,26 @@ class HomeFragment : MySupportFragment() {
 
     private fun onResultBannerList(list: List<Banner>) {
         if (isAttached()) {
-            viewPager.setAutoScroll(true, 5000)
-            viewPager.adapter = LooperPagerAdapter(list.size) { position ->
-                val imageView = ImageView(activity)
-                if (isAttached()) {
-                    imageView.scaleType = ImageView.ScaleType.CENTER_CROP
-                    imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                    setOnBannerClickListener(imageView, list[position])
-                    Glide.with(this)
-                            .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
-                            .load(list[position].image)
-                            .into(imageView)
-                }
+            if (!list.isEmpty()) {
+                viewPager.setAutoScroll(true, 5000)
+                viewPager.adapter = LooperPagerAdapter(list.size) { position ->
+                    val imageView = ImageView(activity)
+                    if (isAttached() && !list.isEmpty()) {
+                        imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+                        imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                        setOnBannerClickListener(imageView, list[position])
+                        Glide.with(this)
+                                .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
+                                .load(list[position].image)
+                                .into(imageView)
+                    }
 
-                imageView
+                    imageView
+                }
+                circleIndicator.setViewPager(viewPager)
+            } else {
+                constraintLayout.visibility = View.GONE
             }
-            circleIndicator.setViewPager(viewPager)
         }
     }
 
