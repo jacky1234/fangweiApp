@@ -37,6 +37,10 @@ interface ApiService {
     @POST("login_qq")
     fun loginQQ(@Body request: QQLoginRequest): Observable<HttpResponse<User>>
 
+
+    @POST("login_weibo")
+    fun loginWB(@Body request: WBLoginRequest): Observable<HttpResponse<User>>
+
     @POST("send_sms_code")
     fun sendCode(@Body map: Map<String, String>): Observable<HttpResponseSource>
 

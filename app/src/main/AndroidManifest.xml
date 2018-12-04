@@ -68,10 +68,10 @@
 
         <activity
             android:name=".ui.function.login.LoginActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".ui.function.login.RegisterActivity"></activity>
-        <activity android:name=".ui.function.defake.DefakeDetailActivity"></activity>
-        <activity android:name=".ui.function.login.RegisterFillInfoActivity"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".ui.function.login.RegisterActivity" />
+        <activity android:name=".ui.function.defake.DefakeDetailActivity" />
+        <activity android:name=".ui.function.login.RegisterFillInfoActivity" />
         <activity android:name=".ui.function.me.AccountAndSecurityActivity" />
         <activity android:name=".ui.function.me.BindedMobileActivity" />
         <activity android:name=".ui.function.login.ForgetPwdActivity" />
@@ -92,27 +92,30 @@
         <activity android:name=".ui.function.me.SettingActivity" />
         <activity android:name=".ui.function.me.FeedbackProblemActivity" />
 
-        <activity android:name=".logic.thridLogin.LoginDelegateActivity" />
+        <activity
+            android:name=".logic.thridLogin.AuthDelegateActivity"
+            android:theme="@style/transparentDisplay" />
 
         <!--qq login-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent1107909602" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden">
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
     </application>
 </manifest>
