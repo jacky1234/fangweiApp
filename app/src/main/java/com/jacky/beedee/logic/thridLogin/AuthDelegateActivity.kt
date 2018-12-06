@@ -79,7 +79,7 @@ class AuthDelegateActivity : Activity() {
         when (flag) {
             FLAG_LOGIN_QQ -> {
                 ThirdLoginHelper.getTencent().logout(this)
-                ThirdLoginHelper.getTencent().loginServerSide(this, "all", loginListener)
+                ThirdLoginHelper.getTencent().login(this, "all", loginListener)
             }
             FLAG_LOGIN_WB -> {
                 mSsoHandler = SsoHandler(this)

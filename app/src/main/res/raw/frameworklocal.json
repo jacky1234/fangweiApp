@@ -9,7 +9,7 @@
   "showResult": true,
   "webServiceUrl": "https://svc-pannpass-sirena.s2icode.com/api/svc",
   "webServiceToken": "e27d28d6-6224-46c9-9580-37e81878272a",
-  "aMapToken": "211cfc6dffca06f7e9d9d6c295f02d2e",
+  "aMapToken": "527b1801c1273550f7d243de89476c6f",
   "showLevel": true,
   "forcedFlash": true,
   "changeLanguage": true
