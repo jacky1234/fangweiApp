@@ -136,4 +136,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //wb
     implementation 'com.sina.weibo.sdk:core:4.3.6:openDefaultRelease@aar'
+
+    //baiduMTJ
+    implementation 'com.baidu.mobstat:mtj-sdk:latest.integration'
 }
