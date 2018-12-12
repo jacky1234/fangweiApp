@@ -20,7 +20,7 @@ class ShowBrandActivity : BaseActivity() {
         setContentView(R.layout.activity_introduce)
 
         titleView.setLeftAction(View.OnClickListener { finish() })
-        textView.text = getInfo()
+        tvRegisterProtocol.text = getInfo()
     }
 
     private fun getInfo(): CharSequence {

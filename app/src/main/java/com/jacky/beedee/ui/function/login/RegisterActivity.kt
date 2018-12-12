@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.Constant
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.network.RequestHelper
@@ -13,6 +14,7 @@ import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.Checker
 import com.jacky.beedee.ui.Dialog.DialogTipsHelper
+import com.jacky.beedee.ui.function.other.WebActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -86,6 +88,10 @@ class RegisterActivity : BaseActivity() {
                             Checker.CheckChecked(checkbox, "请先同意使用协议"))
                         requestRegister(phone, code)
                 }
+
+        tvRegisterProtocol.clickWithTrigger {
+            WebActivity.launch(this, Constant.REGISTER_PROTOCOL_URL)
+        }
     }
 
     private fun trigVerifyCode(btnGainCode: Button) {

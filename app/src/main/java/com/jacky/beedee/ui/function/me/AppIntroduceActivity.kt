@@ -17,7 +17,7 @@ class AppIntroduceActivity : BaseActivity() {
 
         titleView.setLeftAction(View.OnClickListener { finish() })
 
-        textView.text = getInfo()
+        tvRegisterProtocol.text = getInfo()
     }
 
     private fun getInfo(): CharSequence {

@@ -92,10 +92,12 @@
         <activity android:name=".ui.function.me.AppIntroduceActivity" />
         <activity android:name=".ui.function.me.SettingActivity" />
         <activity android:name=".ui.function.me.FeedbackProblemActivity" />
+        <activity android:name=".ui.function.other.WebActivity" />
 
         <activity
             android:name=".logic.thridLogin.AuthDelegateActivity"
             android:theme="@style/transparentDisplay" />
+
 
         <!--qq login-->
         <activity
