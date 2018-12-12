@@ -62,6 +62,10 @@ class LoginActivity : BaseActivity() {
         ivLoginQQ.clickWithTrigger {
             ThirdLoginHelper.loginQQ(listener)
         }
+
+        ivLoginWB.clickWithTrigger {
+            ThirdLoginHelper.loginWb(listener)
+        }
     }
 
     private fun onLoginResult(it: User) {
@@ -76,6 +80,9 @@ class LoginActivity : BaseActivity() {
 
 
     val listener: OnThirdAuthListener = object : OnThirdAuthListener {
+        override fun onCancel() {
+        }
+
         override fun onError(e: AuthThrowable) {
             AndroidUtil.toast(e.message)
         }
@@ -92,6 +99,14 @@ class LoginActivity : BaseActivity() {
 
                 Platforms.QQ -> {
                     RequestHelper.get().loginQQ(result.code)
+                            .compose(bindToDestroy())
+                            .subscribe {
+                                onLoginResult(it)
+                            }
+                }
+
+                Platforms.WEIBO -> {
+                    RequestHelper.get().loginWB(result.code)
                             .compose(bindToDestroy())
                             .subscribe {
                                 onLoginResult(it)

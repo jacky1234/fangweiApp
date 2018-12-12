@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
 import android.support.v4.app.ActivityCompat
+import com.baidu.mobstat.StatService
 import com.jacky.beedee.logic.MiscFacade
 import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.misc.LifeCircleComponents
@@ -83,12 +84,16 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
         super.onResume()
         MiscFacade.get().loginOutFlag(this, false)
         lifecycleSubject.onNext(ActivityEvent.RESUME)
+
+        StatService.onResume(this)
     }
 
     @CallSuper
     override fun onPause() {
         lifecycleSubject.onNext(ActivityEvent.PAUSE)
         super.onPause()
+
+        StatService.onPause(this)
     }
 
     @CallSuper

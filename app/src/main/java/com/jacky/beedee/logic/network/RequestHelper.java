@@ -14,6 +14,7 @@ import com.jacky.beedee.logic.entity.request.LoginRequest;
 import com.jacky.beedee.logic.entity.request.QQLoginRequest;
 import com.jacky.beedee.logic.entity.request.ReigsterRequest;
 import com.jacky.beedee.logic.entity.request.UpdateUserRequest;
+import com.jacky.beedee.logic.entity.request.WBLoginRequest;
 import com.jacky.beedee.logic.entity.request.WXLoginRequest;
 import com.jacky.beedee.logic.entity.response.CollectResponse;
 import com.jacky.beedee.logic.entity.response.FavoriteResponse;
@@ -78,6 +79,12 @@ public class RequestHelper {
     public Observable<User> loginQQ(@NotNull String accessToken) {
         MySelf.get().setAuthorization(null);
         return apiService.loginQQ(new QQLoginRequest(accessToken))
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<User> loginWB(@NotNull String accessToken) {
+        MySelf.get().setAuthorization(null);
+        return apiService.loginWB(new WBLoginRequest(accessToken))
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 

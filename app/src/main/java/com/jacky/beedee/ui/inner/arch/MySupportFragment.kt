@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.view.animation.Animation
+import com.baidu.mobstat.StatService
 import me.yokeyword.fragmentation.ExtraTransaction
 import me.yokeyword.fragmentation.ISupportFragment
 import me.yokeyword.fragmentation.SupportFragmentDelegate
@@ -55,11 +56,15 @@ open class MySupportFragment : SecondFragment(), ISupportFragment {
     override fun onResume() {
         super.onResume()
         mDelegate.onResume()
+
+        StatService.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
         mDelegate.onPause()
+
+        StatService.onPause(this)
     }
 
     override fun onDestroyView() {

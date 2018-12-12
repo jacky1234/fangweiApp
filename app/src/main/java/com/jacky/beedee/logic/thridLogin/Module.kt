@@ -14,4 +14,5 @@ data class AuthResult(val code: String, @Platforms.PLATFORM val platform: Int)
 interface OnThirdAuthListener {
     fun onSuccess(result: AuthResult)
     fun onError(e: AuthThrowable)
+    fun onCancel()
 }

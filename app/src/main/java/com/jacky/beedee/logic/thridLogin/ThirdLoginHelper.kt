@@ -1,8 +1,10 @@
 package com.jacky.beedee.logic.thridLogin
 
-import android.content.Intent
 import com.jacky.beedee.logic.Constant
 import com.jacky.beedee.support.Starter
+import com.sina.weibo.sdk.WbSdk
+import com.sina.weibo.sdk.auth.AccessTokenKeeper
+import com.sina.weibo.sdk.auth.AuthInfo
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
@@ -14,10 +16,11 @@ import com.tencent.tauth.Tencent
  * @author  jacky
  */
 object ThirdLoginHelper {
-    private var api: IWXAPI? = null
+    private var api: IWXAPI? = null     //wx
     var listener: OnThirdAuthListener? = null
-    var mTencent: Tencent? = null
+    private var mTencent: Tencent? = null       //qq
 
+    private var hasInitWbSdk = false
 
     fun loginWx(listener: OnThirdAuthListener?) {
         this.listener = listener
@@ -29,9 +32,23 @@ object ThirdLoginHelper {
 
     fun loginQQ(listener: OnThirdAuthListener?) {
         this.listener = listener
-        val intent = Intent(Starter.getContext(), LoginDelegateActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        Starter.getContext().startActivity(intent)
+        AuthDelegateActivity.launch(AuthDelegateActivity.FLAG_LOGIN_QQ)
+    }
+
+    fun loginWb(listener: OnThirdAuthListener?) {
+        this.listener = listener
+        if (!hasInitWbSdk) {
+            hasInitWbSdk = true
+            WbSdk.install(Starter.getContext(),
+                    AuthInfo(Starter.getContext(), Constant.WB_APP_ID, Constant.WB_CALLBACK_URL, "all"))
+        }
+
+        val mWbAccessToken = AccessTokenKeeper.readAccessToken(Starter.getContext())
+        if (mWbAccessToken!!.isSessionValid) {
+            listener?.onSuccess(AuthResult(mWbAccessToken.token, Platforms.WEIBO))
+        } else {
+            AuthDelegateActivity.launch(AuthDelegateActivity.FLAG_LOGIN_WB)
+        }
     }
 
     fun getWxApi(): IWXAPI {
@@ -52,6 +69,8 @@ object ThirdLoginHelper {
     }
 
     fun clear() {
+        api = null
+        mTencent = null
         listener = null
     }
 }
