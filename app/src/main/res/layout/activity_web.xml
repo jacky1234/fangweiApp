@@ -9,7 +9,7 @@
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:titleView_left_drawable="@mipmap/ic_xx"
+        app:titleView_left_drawable="@mipmap/ic_arrow_back_black"
         app:titleView_left_text="@string/register_protocol"
         app:titleView_visible_type="left" />
 
