@@ -32,10 +32,7 @@ class BeeApp : MultiDexApplication() {
 //            override fun getCacheImage(url: String?): Bitmap? {
 //                return null
 //            }
-//
-//
 //        })
-//
 //    }
 
     private fun initFragmentation() {
