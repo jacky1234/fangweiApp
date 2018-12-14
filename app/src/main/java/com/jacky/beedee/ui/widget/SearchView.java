@@ -115,6 +115,10 @@ public class SearchView extends RelativeLayout {
         etSearch.setText("");
     }
 
+    public void setText(CharSequence charSequence) {
+        etSearch.setText(charSequence);
+    }
+
     public String getText() {
         return etSearch.getText().toString().trim();
     }

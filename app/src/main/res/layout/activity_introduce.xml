@@ -25,13 +25,18 @@
             android:layout_gravity="center"
             android:src="@mipmap/image_large_gray_brand" />
 
-        <com.qmuiteam.qmui.widget.textview.QMUILinkTextView
-            android:id="@+id/tvRegisterProtocol"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:lineSpacingMultiplier="1.5"
-            android:paddingLeft="@dimen/first_margin_from_left"
-            android:paddingRight="@dimen/first_margin_from_left" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvRegisterProtocol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.5"
+                android:paddingLeft="@dimen/first_margin_from_left"
+                android:paddingRight="@dimen/first_margin_from_left" />
+        </ScrollView>
 
     </FrameLayout>
 

@@ -12,8 +12,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * 2018/10/31.
@@ -68,17 +66,21 @@ public class DaoFacade {
         return keys;
     }
 
-    public Set<String> addSearchKey(@NotNull String key) {
-        Set<String> keys = new TreeSet<>();
+    public List<String> addSearchKey(@NotNull String key) {
+        List<String> keys = new ArrayList<>();
 
         keys.add(key);      //add to first
         List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
                 .where(PreferenceDao.Properties.Index.eq(SEARCH_KEYS)).list();
         if (!list.isEmpty()) {
-            keys.addAll(JsonUtil.getListFromJSON(String.class, list.get(0).getValue()));
+            final List<String> stringDb = JsonUtil.getListFromJSON(String.class, list.get(0).getValue());
+            for (String s : stringDb) {
+                if (!keys.contains(s)) {
+                    keys.add(s);
+                }
+            }
         }
         daoSession.getPreferenceDao().insertOrReplace(new Preference(SEARCH_KEYS, JsonUtil.toJSON(keys)));
-
         return keys;
     }
 

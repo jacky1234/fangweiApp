@@ -84,21 +84,29 @@ class DiscoveryFragment : MySupportFragment() {
                         adapter.notifyDataSetChanged()
                     }
                 }
-
-
     }
 
     private val fragments = ArrayList<MySupportFragment>()
     private fun setFragment(response: Category) {
-//        TODO("always add new fragment")
-        var findFragmentByTag = findChildFragment<SecondCategoryFragment>(response.id)
+        var findFragmentByTag = fragmentManager!!.findFragmentByTag(response.id)
         if (findFragmentByTag == null) {
             findFragmentByTag = SecondCategoryFragment.newInstance(response.id)
             fragments.add(findFragmentByTag)
-            loadRootFragment(R.id.container, findFragmentByTag)
+            fragmentManager!!.beginTransaction()
+                    .add(R.id.container, findFragmentByTag, response.id)
+                    .commitAllowingStateLoss()
         }
 
-        showHideFragment(findFragmentByTag)
+        val beginTransaction = fragmentManager!!.beginTransaction()
+        for (fragment in fragments) {
+            if (fragment == findFragmentByTag) {
+                beginTransaction.show(fragment)
+            } else {
+                beginTransaction.hide(fragment)
+            }
+        }
+        beginTransaction.commitAllowingStateLoss()
     }
+
 
 }

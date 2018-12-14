@@ -36,13 +36,18 @@ class SearchKeyFragment : MySupportFragment() {
         }
     }
 
+
     private fun requestKeyWord() {
         Observable.create(ObservableOnSubscribe<List<String>> { emitter -> emitter.onNext(DaoFacade.get().searchHistoryKeys) })
                 .compose(SchedulerUtils.ioToMain())
                 .compose(bindUntilDetach())
                 .subscribe {
-                    onKeyResponse(it)
+                    setKeyResponse(it)
                 }
+    }
+
+    fun setKeyResponse(it: List<String>) {
+        onKeyResponse(it)
     }
 
     private fun onKeyResponse(it: List<String>) {

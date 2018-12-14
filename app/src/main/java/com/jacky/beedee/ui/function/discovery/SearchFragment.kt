@@ -19,13 +19,17 @@ import kotlinx.android.synthetic.main.fragment_search.*
  */
 class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener {
     override fun onHistoryKeyClick(key: String) {
-        DaoFacade.get().addSearchKey(key)
-        showOrHide(searchResultFragment!!)
-        searchResultFragment!!.requestSearchKey(key)
+        searchView.setText(key)
+
+        showOrHide(searchResultFragment)
+        AndroidUtil.runUI({
+            searchKeyFragment.setKeyResponse(DaoFacade.get().addSearchKey(key))
+        }, 500)
+        searchResultFragment.requestSearchKey(key)
     }
 
-    private var searchKeyFragment: SearchKeyFragment? = null
-    private var searchResultFragment: SearchResultFragment? = null
+    lateinit var searchKeyFragment: SearchKeyFragment
+    lateinit var searchResultFragment: SearchResultFragment
     private val fragments = ArrayList<MySupportFragment>(2)
 
 
@@ -39,10 +43,10 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
 
         searchKeyFragment = SearchKeyFragment()
         searchResultFragment = SearchResultFragment()
-        fragments.add(searchKeyFragment!!)
-        fragments.add(searchResultFragment!!)
+        fragments.add(searchKeyFragment)
+        fragments.add(searchResultFragment)
 
-        showOrHide(searchKeyFragment!!)
+        showOrHide(searchKeyFragment)
 
         tvCancel.clickWithTrigger { _mActivity.finish() }
 
@@ -61,6 +65,12 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
             }
 
             onHistoryKeyClick(key)
+        }
+
+        searchView.setOnTextChangedListener {
+            if (Strings.isNullOrEmpty(it)) {
+                showOrHide(searchKeyFragment)
+            }
         }
 
     }
