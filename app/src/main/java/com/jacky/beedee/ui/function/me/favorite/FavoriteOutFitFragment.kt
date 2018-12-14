@@ -19,6 +19,7 @@ import com.jacky.beedee.ui.adapter.FavoriteOutFitAdapter
 import com.jacky.beedee.ui.function.login.LoginActivity
 import com.jacky.beedee.ui.function.main.OutFitDetailActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.EmptyView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
@@ -44,6 +45,7 @@ class FavoriteOutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMor
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         adapter = FavoriteOutFitAdapter(R.layout.item_outfit_favorite)
+        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_collect_blank)
         adapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.cbLike) {
                 if (MySelf.get().isLogined) {

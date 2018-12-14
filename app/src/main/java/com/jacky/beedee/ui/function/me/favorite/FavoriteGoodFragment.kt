@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
-import com.jacky.beedee.logic.entity.module.Favorite
 import com.jacky.beedee.logic.entity.module.GoodType
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.adapter.FavoriteGoodAdapter
 import com.jacky.beedee.ui.function.discovery.GoodDetailActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.EmptyView
 import com.jacky.beedee.ui.widget.decoration.GridLayoutPaddingItemDecoration
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
@@ -38,10 +38,11 @@ class FavoriteGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreL
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
-        recyclerView.layoutManager = GridLayoutManager(context,2)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.addItemDecoration(GridLayoutPaddingItemDecoration(padding))
 
         adapter = FavoriteGoodAdapter(R.layout.item_good)
+        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_collect_blank)
         adapter.setOnItemClickListener { _, _, position ->
             adapter.getItem(position)!!.target?.let {
                 GoodDetailActivity.start(_mActivity, adapter.getItem(position)!!.target.id)

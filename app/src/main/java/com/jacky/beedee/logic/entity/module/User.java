@@ -31,6 +31,7 @@ public class User {
     private String mobile;
     private String email;
     private String role;
+    private boolean hasPassword;
 
     public String getId() {
         return id;
@@ -110,5 +111,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isHasPassword() {
+        return hasPassword;
+    }
+
+    public void setHasPassword(boolean hasPassword) {
+        this.hasPassword = hasPassword;
     }
 }

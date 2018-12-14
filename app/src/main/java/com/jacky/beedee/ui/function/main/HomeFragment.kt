@@ -20,6 +20,7 @@ import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.SpanUtils
 import com.jacky.beedee.ui.common.Image
 import com.jacky.beedee.ui.common.ImagePreviewActivity
+import com.jacky.beedee.ui.function.discovery.GoodDetailActivity
 import com.jacky.beedee.ui.function.other.ShowBrandActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.GridContainer
@@ -44,7 +45,6 @@ class HomeFragment : MySupportFragment() {
     private lateinit var tvHotTitle: TextView
     private lateinit var ivOutFitImageView: ImageView
     private lateinit var gridContainer: GridContainer
-    private val defaultBanners = Collections.singletonList(Banner.empty)
 
     private fun requestBanner() {
         RequestHelper.get().requestBannerList()
@@ -56,12 +56,18 @@ class HomeFragment : MySupportFragment() {
 
     private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
         imageView.setOnClickListener {
-            val image = Image()
-            image.origin = banner.image
+            if (banner.link.contains("/")) {    //normal
+                val start = banner.link.lastIndexOf("/") + 1
+                val id = banner.link.substring(start)
+                GoodDetailActivity.start(_mActivity, id)
+            } else {
+                val image = Image()
+                image.origin = banner.image
 
-            val images = ArrayList<Image>()
-            images.add(image)
-            ImagePreviewActivity.start(_mActivity, images)
+                val images = ArrayList<Image>()
+                images.add(image)
+                ImagePreviewActivity.start(_mActivity, images)
+            }
         }
     }
 
@@ -171,7 +177,6 @@ class HomeFragment : MySupportFragment() {
 
     private fun initDefaultData() {
         ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
-        onResultBannerList(defaultBanners)
         tvBrandDesc.text = getBranchDesc()
         onResultHotGoods(Collections.singletonList(GoodItem.empty))
     }

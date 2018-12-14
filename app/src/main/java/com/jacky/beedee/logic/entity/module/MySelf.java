@@ -38,6 +38,7 @@ public class MySelf {
     private String mobile;
     private String email;
     private String role;
+    private boolean hasPassword;
     private String authorization;
 
     public void saveFromUser(@NotNull User user) {
@@ -51,6 +52,7 @@ public class MySelf {
         mobile = user.getMobile();
         email = user.getEmail();
         role = user.getRole();
+        hasPassword = user.isHasPassword();
 
         save();
     }
@@ -68,11 +70,20 @@ public class MySelf {
             MySelf.get().setMobile(mySelfInfo.getMobile());
             MySelf.get().setEmail(mySelfInfo.getEmail());
             MySelf.get().setRole(mySelfInfo.getRole());
+            MySelf.get().setHasPassword(mySelfInfo.isHasPassword());
             MySelf.get().setAuthorization(mySelfInfo.getAuthorization());
         }
     }
 
     private MySelf() {
+    }
+
+    public boolean isHasPassword() {
+        return hasPassword;
+    }
+
+    public void setHasPassword(boolean hasPassword) {
+        this.hasPassword = hasPassword;
     }
 
     public String getId() {

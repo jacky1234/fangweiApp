@@ -11,6 +11,7 @@ import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.adapter.SearchResultAdapter
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
+import com.jacky.beedee.ui.widget.EmptyView
 import kotlinx.android.synthetic.main.fragment_search_result.*
 
 /**
@@ -42,6 +43,7 @@ class SearchResultFragment : MySupportFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = SearchResultAdapter(R.layout.item_search_result, list)
+        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_search_blank)
         adapter.setOnItemClickListener { _, _, position ->
             val item = list[position]
             GoodDetailActivity.start(_mActivity, item.id)

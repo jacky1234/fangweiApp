@@ -8,15 +8,10 @@ import com.jacky.beedee.ui.inner.arch.BaseRootSupportActivity
  * @author  jacky
  */
 class NewHotsGoodActivity : BaseRootSupportActivity<NewHotsGoodFragment>() {
-    override fun createClazz(): Class<NewHotsGoodFragment>  = NewHotsGoodFragment::class.java
+    override fun createClazz(): Class<NewHotsGoodFragment> = NewHotsGoodFragment::class.java
 
     override fun createSupportFragment(): NewHotsGoodFragment {
         return NewHotsGoodFragment()
-    }
-
-
-    override fun onBackPressed() {
-        super.onBackPressed()
     }
 
 }

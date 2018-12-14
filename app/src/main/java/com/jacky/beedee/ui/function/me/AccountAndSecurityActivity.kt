@@ -49,8 +49,12 @@ class AccountAndSecurityActivity : BaseActivity() {
         parent_mobile.setType(RowItemView.FLAG_RIGHT_SHOW_TEXT)
         parent_mobile.setTitle("绑定手机号")
 
-        parent_modify_pwd.setType(RowItemView.FLAG_RIGHT_SHOW_TEXT)
-        parent_modify_pwd.setTitle("修改密码")
+        if (MySelf.get().isHasPassword) {
+            parent_modify_pwd.setType(RowItemView.FLAG_RIGHT_SHOW_TEXT)
+            parent_modify_pwd.setTitle("修改密码")
+        } else {
+            parent_modify_pwd.visibility = View.GONE
+        }
 
         parent_logout.setType(RowItemView.FLAG_NONE)
         parent_logout.setTitle("退出登陆")
