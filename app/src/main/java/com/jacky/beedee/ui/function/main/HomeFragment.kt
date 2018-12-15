@@ -126,7 +126,7 @@ class HomeFragment : MySupportFragment() {
             gridContainer.addView(child)
 
             child.clickWithTrigger {
-                activity.launch<NewHotsGoodActivity>()
+                GoodDetailActivity.start(_mActivity, goodItem.id)
             }
         }
     }
