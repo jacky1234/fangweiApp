@@ -3,10 +3,12 @@ package com.jacky.beedee
 import android.support.multidex.MultiDexApplication
 import com.baidu.mobstat.StatService
 import com.jacky.beedee.logic.Constant
+import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.support.Starter
 import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.s2icode.main.S2iCodeModule
+import com.tencent.bugly.crashreport.CrashReport
 import io.reactivex.plugins.RxJavaPlugins
 import me.yokeyword.fragmentation.Fragmentation
 
@@ -19,6 +21,14 @@ class BeeApp : MultiDexApplication() {
         RxJavaPlugins.setErrorHandler(Logger.Companion::e)
         S2iCodeModule.init(this)
         initBaiduMTJ()
+        initBugly()
+    }
+
+    private fun initBugly() {
+        CrashReport.initCrashReport(this, "7cc6c3addf", true)
+        if (MySelf.get().isLogined) {
+            CrashReport.setUserId(MySelf.get().mobile)
+        }
     }
 
     private fun initBaiduMTJ() {
@@ -29,7 +39,7 @@ class BeeApp : MultiDexApplication() {
 
         //统计Ip
         val ip = AndroidUtil.getIpAddress(this)
-        
+
     }
 
     //nineGridView

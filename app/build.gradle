@@ -14,8 +14,8 @@ android {
         applicationId "com.jacky.beedee"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.0"
+        versionCode 101
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -39,8 +39,6 @@ android {
         debug {
             signingConfig signingConfigs.sign
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         }
 
         release {
@@ -55,7 +53,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 greendao {
@@ -139,4 +137,6 @@ dependencies {
 
     //baiduMTJ
     implementation 'com.baidu.mobstat:mtj-sdk:latest.integration'
+
+    implementation 'com.tencent.bugly:crashreport:latest.release'
 }
