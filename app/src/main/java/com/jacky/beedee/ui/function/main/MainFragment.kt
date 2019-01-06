@@ -2,8 +2,6 @@ package com.jacky.beedee.ui.function.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import com.jacky.beedee.ui.function.me.Mefragment
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.bottombar.BottomBarLayout
 import com.jacky.beedee.ui.widget.bottombar.BottomBarTab
-import com.tencent.bugly.crashreport.CrashReport
 
 class MainFragment : MySupportFragment() {
     private val mFragments = ArrayList<MySupportFragment>(4)
@@ -49,8 +46,6 @@ class MainFragment : MySupportFragment() {
     }
 
     private fun initTabs(view: View) {
-        CrashReport.testJavaCrash()
-
         bottomBarLayout = view.findViewById(R.id.bottomBar)
         bottomBarLayout
                 .addItem(BottomBarTab(activity, R.mipmap.ic_tab_home, R.mipmap.ic_tab_home_selected, "首页"))
