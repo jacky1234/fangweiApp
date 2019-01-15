@@ -138,8 +138,8 @@ public class RequestHelper {
     }
 
     //穿搭
-    public Observable<ListGoodResponse> requestOutfitHot() {
-        return apiService.requestOutfitHot()
+    public Observable<ListGoodResponse> requestOutfitHot(int page) {
+        return apiService.requestOutfitHot(page)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
@@ -154,13 +154,13 @@ public class RequestHelper {
     }
 
     //热门商品
-    public Observable<ListGoodResponse> requestHotGoods() {
-        return apiService.requestHotGoods()
+    public Observable<ListGoodResponse> requestHotGoods(int page) {
+        return apiService.requestHotGoods(page)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
-    public Observable<HotVideoResponse> requestDesignVideo() {
-        return apiService.requestHotDesignVideo()
+    public Observable<HotVideoResponse> requestDesignVideo(int page) {
+        return apiService.requestHotDesignVideo(page)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 

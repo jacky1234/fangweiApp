@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.layout_recylerview_with_refresh.*
  * GitHub:[https://github.com/jacky1234]
  * @author  jacky
  */
+@SuppressLint("CheckResult")
 class NewHotsGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
     private lateinit var adapter: NewHotsGoodAdapter
     private var page = 0
@@ -62,14 +64,15 @@ class NewHotsGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
     }
 
     private fun requestGoods() {
-        RequestHelper.get().requestHotGoods()
+        RequestHelper.get().requestHotGoods(page)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
                         adapter.setNewData(it.content)
                         refreshLayout.finishRefresh(true)
                     } else {
-                        if (it.content.isEmpty()) {
+                        adapter.addData(it.content)
+                        if (it.isLast) {
                             refreshLayout.finishLoadMoreWithNoMoreData()
                         } else {
                             refreshLayout.finishLoadMore(true)

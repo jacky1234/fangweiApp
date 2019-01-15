@@ -4,7 +4,7 @@ public class RegexConstants {
     /**
      * 45x56
      */
-    public static final String REGEX_W_H = "\\d*x\\d*";
+    public static final String REGEX_W_H = "\\d+_\\d+";
 
     /**
      * Regex of simple mobile.

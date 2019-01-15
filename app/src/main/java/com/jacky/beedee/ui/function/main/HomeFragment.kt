@@ -72,7 +72,7 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun requestOutfitGoods() {
-        RequestHelper.get().requestOutfitHot()
+        RequestHelper.get().requestOutfitHot(0)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {
@@ -99,7 +99,7 @@ class HomeFragment : MySupportFragment() {
 
 
     private fun requestHotGoods() {
-        RequestHelper.get().requestHotGoods()
+        RequestHelper.get().requestHotGoods(0)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {

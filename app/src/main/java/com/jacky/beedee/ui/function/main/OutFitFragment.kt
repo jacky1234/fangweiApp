@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.entity.module.GoodType
 import com.jacky.beedee.logic.entity.module.MySelf
 import com.jacky.beedee.logic.entity.module.Video
+import com.jacky.beedee.logic.entity.response.ListGoodResponse
 import com.jacky.beedee.logic.network.RequestHelper
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
@@ -20,9 +22,14 @@ import com.jacky.beedee.ui.adapter.OutfitAdapter
 import com.jacky.beedee.ui.function.login.LoginActivity
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.decoration.BottomOffsetDecoration
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.fragment_outfit.*
+import kotlinx.android.synthetic.main.layout_recylerview_with_refresh.*
 
-class OutFitFragment : MySupportFragment() {
+@SuppressLint("CheckResult")
+class OutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
     var page = 0
     private lateinit var adapter: OutfitAdapter
 
@@ -33,13 +40,17 @@ class OutFitFragment : MySupportFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        refreshLayout.setOnRefreshListener(this)
+        refreshLayout.setOnLoadMoreListener(this)
+
         titleView.setLeftAction(View.OnClickListener { pop() })
         recyclerView.layoutManager = LinearLayoutManager(context)
+
         adapter = OutfitAdapter(context!!, object : OutfitAdapter.Delegate {
             override fun onVideoClick(video: Video) {
                 try {
-                    val intent = Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.parse(video.url), "video/*");
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.setDataAndType(Uri.parse(video.url), "video/*")
                     startActivity(intent)
                 } catch (e: Exception) {
                     AndroidUtil.toast("没有支持打开视频的应用")
@@ -72,7 +83,7 @@ class OutFitFragment : MySupportFragment() {
                 } else {
                     MiscFacade.get().setLastRunnable {
                         if (isAttached()) {
-                            requestData()
+                            initData()
                         }
                     }
                     activity.launch<LoginActivity>()
@@ -82,6 +93,17 @@ class OutFitFragment : MySupportFragment() {
         recyclerView.addItemDecoration(BottomOffsetDecoration(AndroidUtil.dip2px(15f).toInt()))
         recyclerView.adapter = adapter
     }
+
+    override fun onRefresh(refreshLayout: RefreshLayout) {
+        page = 0
+        requestOutfit(false)
+    }
+
+    override fun onLoadMore(refreshLayout: RefreshLayout) {
+        page++
+        requestOutfit(true)
+    }
+
 
     override fun onResume() {
         super.onResume()
@@ -95,30 +117,51 @@ class OutFitFragment : MySupportFragment() {
     private val goodItems = ArrayList<GoodItem>()
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
-        requestData()
+        initData()
     }
 
-    private fun requestData() {
+    private fun initData() {
         //video
-        RequestHelper.get().requestDesignVideo()
+        page = 0
+        RequestHelper.get().requestDesignVideo(0)
                 .compose(bindUntilDetach())
                 .subscribe {
                     videos.clear()
                     videos.addAll(it.content)
-                    triggerData()
+                    adapter.setData(videos, goodItems)
                 }
 
-        //
-        RequestHelper.get().requestOutfitHot()
+        requestOutfit(false)
+    }
+
+    private fun requestOutfit(append: Boolean) {
+        RequestHelper.get().requestOutfitHot(page)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    goodItems.clear()
-                    goodItems.addAll(it.content)
-                    triggerData()
+                    triggerData(append, it)
                 }
     }
 
-    private fun triggerData() {
-        adapter.setData(videos, goodItems)
+    private fun triggerData(append: Boolean, response: ListGoodResponse) {
+        if (!append) {
+            goodItems.clear()
+        }
+        goodItems.addAll(response.content)
+
+        if (append) {
+            adapter.appendData(videos, goodItems)
+        } else {
+            adapter.setData(videos, goodItems)
+        }
+
+        if (response.isLast) {
+            refreshLayout.finishLoadMoreWithNoMoreData()
+        } else {
+            refreshLayout.finishLoadMore(true)
+        }
+
+        if (!append) {
+            refreshLayout.finishRefresh()
+        }
     }
 }

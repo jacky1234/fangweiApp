@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,15 +10,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseViewHolder
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.support.ext.clickWithTrigger
+import com.jacky.beedee.support.log.Logger
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.regex.RegexConstants
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
+import com.king.kotlinmvp.rx.scheduler.SchedulerUtils
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
 import kotlinx.android.synthetic.main.layout_banner_wrapper.view.*
 import kotlinx.android.synthetic.main.layout_good_price.view.*
+import java.io.File
 import java.util.regex.Pattern
 
 class GoodDetailAdapter(private val context: Context, private val delegate: Delegate?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,8 +35,8 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
         private const val TYPE_TEXT = 3
         private const val TYPE_IMAGE = 4
 
-        private val marginleft = AndroidUtil.dip2px(15f)
-        private val max_width = (AndroidUtil.getScreenWidth() - 2 * marginleft).toInt()
+        private val marginLeft = AndroidUtil.dip2px(15f)
+        private val max_width = (AndroidUtil.getScreenWidth() - 2 * marginLeft).toInt()
     }
 
     private val map = HashMap<String, String>()
@@ -46,7 +54,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
             if (matcher.find()) {
                 map[s] = matcher.group()
             } else {
-                map[s] = max_width.toString() + "x" + max_width
+                map[s] = max_width.toString() + "_" + max_width
             }
 
             dataList.add(s)
@@ -61,7 +69,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
             TYPE_BANNER_DETAIL -> holder = GoodBannerHolder(LayoutInflater.from(context).inflate(R.layout.layout_good_banner_wrapper, parent, false))
             TYPE_PRICE -> holder = PriceViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_good_price, parent, false))
             TYPE_TEXT -> holder = TextViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_good_text, parent, false))
-            TYPE_IMAGE -> holder = ImageViewHolder(ImageView(context))
+            TYPE_IMAGE -> holder = SubSamplingImageViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_large_image, parent, false))
         }
 
         return holder!!
@@ -104,7 +112,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
                 textViewHolder.bind()
             }
             TYPE_IMAGE -> {
-                val imageViewHolder = holder as ImageViewHolder
+                val imageViewHolder = holder as SubSamplingImageViewHolder
                 val url = dataList[position] as String
                 imageViewHolder.bind(url)
             }
@@ -114,7 +122,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
     private inner class GoodBannerHolder constructor(view: View) : BaseViewHolder(view) {
         fun bind() {
             itemView.viewPager.setAutoScroll(true, 5000)
-            itemView.viewPager.adapter = LooperPagerAdapter(item.details.size) { position ->
+            itemView.viewPager.adapter = LooperPagerAdapter(item.gallery.size) { position ->
                 val imageView = ImageView(context)
                 imageView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -148,28 +156,52 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
         }
     }
 
-    private inner class ImageViewHolder constructor(view: View) : BaseViewHolder(view) {
+    private inner class SubSamplingImageViewHolder constructor(view: View) : BaseViewHolder(view) {
+        @SuppressLint("CheckResult")
         fun bind(url: String) {
-            val imageView = itemView as ImageView
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            val subSamplingScaleImageView = itemView as SubsamplingScaleImageView
             val layoutParams = RecyclerView.LayoutParams(100, 200)
             layoutParams.leftMargin = AndroidUtil.dip2px(15F).toInt()
             layoutParams.topMargin = AndroidUtil.dip2px(15F).toInt()
 
             try {
-                val split = map[url]!!.split("x")
-                layoutParams.width = split[0].toInt()
-                layoutParams.height = split[1].toInt()
+                val split = map[url]!!.split("_")
+                val originWidth = split[0].toInt()
+                val originHeight = split[1].toInt()
+                val scale = originHeight * 1.0f / originWidth
+
+                layoutParams.width = max_width
+                layoutParams.height = (scale * max_width).toInt()
             } catch (e: Exception) {
                 layoutParams.width = 600
                 layoutParams.height = 600
             }
 
-            imageView.layoutParams = layoutParams
-            Glide.with(context)
-                    .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
-                    .load(url)
-                    .into(imageView)
+            subSamplingScaleImageView.tag = url
+
+            Observable.create(ObservableOnSubscribe<File> { emit ->
+                val submit = Glide.with(context)
+                        .asFile()
+                        .load(url)
+                        .submit()
+                val get: File?
+                try {
+                    get = submit.get()
+                    emit.onNext(get)
+                } catch (e: Exception) {
+                    emit.onError(e)
+                }
+            })
+                    .compose(SchedulerUtils.ioToMain())
+                    .subscribe({
+                        if (url == subSamplingScaleImageView.tag) {
+                            subSamplingScaleImageView.setImage(ImageSource.uri(it.absolutePath))
+                        }
+                    }, Logger.Companion::e)
+
+
+
+            subSamplingScaleImageView.layoutParams = layoutParams
         }
     }
 
