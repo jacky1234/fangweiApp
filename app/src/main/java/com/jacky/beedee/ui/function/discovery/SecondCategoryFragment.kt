@@ -1,13 +1,16 @@
 package com.jacky.beedee.ui.function.discovery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.entity.module.Category
 import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.network.RequestHelper
+import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.adapter.SecondCategoryAdapter
 import com.jacky.beedee.ui.inner.arch.MySupportFragment
 import com.jacky.beedee.ui.widget.decoration.GridLayoutPaddingItemDecoration
@@ -29,6 +32,10 @@ class SecondCategoryFragment : MySupportFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = SecondCategoryAdapter(context!!, object : SecondCategoryAdapter.OnGoodClickListener {
+            override fun onScanMore(category: Category) {
+                AndroidUtil.toast("todo server interface...")
+            }
+
             override fun onGoodClick(goodItem: GoodItem) {
                 GoodDetailActivity.start(_mActivity, goodItem.id)
             }
@@ -42,6 +49,7 @@ class SecondCategoryFragment : MySupportFragment() {
         recyclerView.addItemDecoration(GridLayoutPaddingItemDecoration(13))
     }
 
+    @SuppressLint("CheckResult")
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         val categoryId = arguments!!.getString(KEY_CATEGORY_ID)
