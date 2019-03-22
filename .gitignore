@@ -1,9 +1,9 @@
 fangweiApp.iml
 local.properties
 gradle.properties
+.idea/
 .gradle/
 *.iml
-.idea/
 app/build/
 build/
 captures/
