@@ -50,10 +50,6 @@ class ImagePreviewDetailFragment : MySupportFragment() {
                 imageView.setImage(ImageSource.resource(placeHolder))
             }
         }
-
-        override fun onLoadCleared(placeholder: Drawable?) {
-            super.onLoadCleared(placeholder)
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

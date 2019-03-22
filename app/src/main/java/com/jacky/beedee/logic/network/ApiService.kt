@@ -66,7 +66,7 @@ interface ApiService {
 
     //查询热门穿搭（首页“人气穿搭”和人气穿搭页“搭配推荐”）
     @GET("outfit/list_hot")
-    fun requestOutfitHot(): Observable<HttpResponse<ListGoodResponse>>
+    fun requestOutfitHot(@Query("page") page: Int): Observable<HttpResponse<ListGoodResponse>>
 
     //查询最新穿搭
     @GET("outfit/list_new")
@@ -85,10 +85,10 @@ interface ApiService {
 
 
     @GET("goods/list_hot")
-    fun requestHotGoods(): Observable<HttpResponse<ListGoodResponse>>
+    fun requestHotGoods(@Query("page") page: Int): Observable<HttpResponse<ListGoodResponse>>
 
     @GET("design/list_hot")
-    fun requestHotDesignVideo(): Observable<HttpResponse<HotVideoResponse>>
+    fun requestHotDesignVideo(@Query("page") page: Int): Observable<HttpResponse<HotVideoResponse>>
 
     @POST("collect")
     fun collectGood(@Body request: CollectRequest): Observable<HttpResponse<CollectResponse>>

@@ -16,6 +16,7 @@ import com.jacky.beedee.support.util.Checker
 import com.jacky.beedee.ui.function.main.MainActivity
 import com.jacky.beedee.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
+import com.tencent.bugly.crashreport.CrashReport
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.concurrent.TimeUnit
 
@@ -70,6 +71,8 @@ class LoginActivity : BaseActivity() {
 
     private fun onLoginResult(it: User) {
         MySelf.get().saveFromUser(it)
+        CrashReport.setUserId(it.mobile)
+
         AndroidUtil.toast("登录成功")
         if (MiscFacade.get().lastRunnable == null) {
             AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)

@@ -42,6 +42,18 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
         notifyDataSetChanged()
     }
 
+    fun appendData(videos: List<Video>, goodItems: List<GoodItem>) {
+        val origins = ArrayList<GoodItem>()
+        dataList.forEach {
+            if (it is GoodItem) {
+                origins.add(it)
+            }
+        }
+
+        origins.addAll(goodItems)
+        setData(videos, origins)
+    }
+
     override fun getItemCount(): Int {
         return dataList.size
     }

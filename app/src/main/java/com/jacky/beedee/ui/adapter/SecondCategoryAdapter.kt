@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jacky.beedee.R
+import com.jacky.beedee.logic.entity.module.Category
 import com.jacky.beedee.logic.entity.module.GoodItem
 import com.jacky.beedee.logic.entity.response.SecondCategoryResponse
 import com.jacky.beedee.logic.image.ImageLoader
@@ -32,7 +33,7 @@ class SecondCategoryAdapter(private val context: Context, private val listener: 
     fun setData(list: List<SecondCategoryResponse>) {
         lists.clear()
         list.forEach {
-            lists.add(it.category.name)
+            lists.add(it.category)
             lists.addAll(it.list)
         }
 
@@ -53,9 +54,9 @@ class SecondCategoryAdapter(private val context: Context, private val listener: 
 
     override fun getItemViewType(position: Int): Int {
         var viewType = TYPE_UNKNOW
-        val data = lists.get(position)
+        val data = lists[position]
         when (data) {
-            is String -> viewType = TYPE_TITLE
+            is Category -> viewType = TYPE_TITLE
             is GoodItem -> viewType = TYPE_IMAGE
         }
 
@@ -71,7 +72,7 @@ class SecondCategoryAdapter(private val context: Context, private val listener: 
             }
             TYPE_TITLE -> {
                 val textViewHolder = holder as TextViewHolder
-                textViewHolder.bind(lists[position] as String)
+                textViewHolder.bind(lists[position] as Category)
             }
         }
     }
@@ -99,13 +100,19 @@ class SecondCategoryAdapter(private val context: Context, private val listener: 
     }
 
     private inner class TextViewHolder constructor(view: View) : BaseViewHolder(view) {
-        fun bind(text: String) {
-            val textView = itemView as TextView
-            textView.text = text
+        fun bind(category: Category) {
+            getView<TextView>(R.id.tv_title).text = category.name
+            getView<TextView>(R.id.tv_more).let { tvMore ->
+                tvMore.text = "查看更多 >"
+                tvMore.setOnClickListener {
+                    listener?.onScanMore(category)
+                }
+            }
         }
     }
 
     interface OnGoodClickListener {
         fun onGoodClick(goodItem: GoodItem)
+        fun onScanMore(category: Category)
     }
 }

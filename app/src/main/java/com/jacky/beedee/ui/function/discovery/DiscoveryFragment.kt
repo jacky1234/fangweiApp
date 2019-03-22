@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.discovery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -71,6 +72,7 @@ class DiscoveryFragment : MySupportFragment() {
         }
     }
 
+    @SuppressLint("CheckResult")
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
 

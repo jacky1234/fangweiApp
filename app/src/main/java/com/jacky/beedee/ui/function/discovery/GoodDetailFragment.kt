@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.discovery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -41,7 +42,7 @@ class GoodDetailFragment : MySupportFragment() {
                 good?.let {
                     if (MySelf.get().isLogined) {
                         if (it.isCollected) {
-                            RequestHelper.get().uncollectItem(GoodType.GOODS,it.id)
+                            RequestHelper.get().uncollectItem(GoodType.GOODS, it.id)
                                     .compose(bindUntilDetach())
                                     .subscribe { _ ->
                                         it.isCollected = false
@@ -49,7 +50,7 @@ class GoodDetailFragment : MySupportFragment() {
                                         adapter.notifyDataSetChanged()
                                     }
                         } else {
-                            RequestHelper.get().collectItem(GoodType.GOODS,it.id)
+                            RequestHelper.get().collectItem(GoodType.GOODS, it.id)
                                     .compose(bindUntilDetach())
                                     .subscribe { _ ->
                                         it.isCollected = true
@@ -85,6 +86,7 @@ class GoodDetailFragment : MySupportFragment() {
         requestData()
     }
 
+    @SuppressLint("CheckResult")
     private fun requestData() {
         RequestHelper.get()
                 .requestGoodDetail(arguments!!.getString(KEY_GOOD_ID))

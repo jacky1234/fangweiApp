@@ -12,12 +12,6 @@
         app:titleView_title_text="@string/hot_outfits"
         app:titleView_visible_type="left_middle" />
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="none" />
+    <include layout="@layout/layout_recylerview_with_refresh" />
 
 </LinearLayout>

@@ -56,15 +56,11 @@ open class MySupportFragment : SecondFragment(), ISupportFragment {
     override fun onResume() {
         super.onResume()
         mDelegate.onResume()
-
-        StatService.onResume(this)
     }
 
     override fun onPause() {
         super.onPause()
         mDelegate.onPause()
-
-        StatService.onPause(this)
     }
 
     override fun onDestroyView() {

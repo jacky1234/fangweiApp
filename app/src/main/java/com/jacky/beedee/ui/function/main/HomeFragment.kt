@@ -1,5 +1,6 @@
 package com.jacky.beedee.ui.function.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.jacky.beedee.support.ext.clickWithTrigger
 import com.jacky.beedee.support.ext.launch
 import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.support.util.SpanUtils
+import com.jacky.beedee.support.util.Strings
 import com.jacky.beedee.ui.common.Image
 import com.jacky.beedee.ui.common.ImagePreviewActivity
 import com.jacky.beedee.ui.function.discovery.GoodDetailActivity
@@ -37,6 +39,7 @@ import kotlin.collections.ArrayList
  * GitHub:[https://github.com/jacky1234]
  * @author  jacky
  */
+@SuppressLint("CheckResult")
 class HomeFragment : MySupportFragment() {
     private lateinit var viewPager: LoopViewPager
     private lateinit var circleIndicator: CircleIndicator
@@ -72,7 +75,7 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun requestOutfitGoods() {
-        RequestHelper.get().requestOutfitHot()
+        RequestHelper.get().requestOutfitHot(0)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {
@@ -98,8 +101,9 @@ class HomeFragment : MySupportFragment() {
     }
 
 
+    @SuppressLint("CheckResult")
     private fun requestHotGoods() {
-        RequestHelper.get().requestHotGoods()
+        RequestHelper.get().requestHotGoods(0)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (it != null && !it.content.isEmpty()) {
@@ -109,24 +113,30 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun onResultHotGoods(hots: List<GoodItem>) {
-        gridContainer.removeAllViews()
-        tvHotTitle.clickWithTrigger {
-            activity.launch<NewHotsGoodActivity>()
-        }
+        if (isAttached()) {
+            gridContainer.removeAllViews()
+            tvHotTitle.clickWithTrigger {
+                activity.launch<NewHotsGoodActivity>()
+            }
 
-        hots.forEachIndexed { index, goodItem ->
-            if (index > 3) return@forEachIndexed
+            hots.forEachIndexed { index, goodItem ->
+                if (index > 3) return@forEachIndexed
 
-            val child = layoutInflater.inflate(R.layout.item_home_grid, gridContainer, false)
-            val imageView = child.findViewById<ImageView>(R.id.imageView)
-            Glide.with(this)
-                    .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
-                    .load(goodItem.thumb)
-                    .into(imageView)
-            gridContainer.addView(child)
+                val child = layoutInflater.inflate(R.layout.item_home_grid, gridContainer, false)
+                val imageView = child.findViewById<ImageView>(R.id.imageView)
+                Glide.with(this)
+                        .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
+                        .load(goodItem.thumb)
+                        .into(imageView)
+                gridContainer.addView(child)
 
-            child.clickWithTrigger {
-                GoodDetailActivity.start(_mActivity, goodItem.id)
+                child.clickWithTrigger {
+                    if (Strings.isNotBlank(goodItem.id)) {
+                        GoodDetailActivity.start(_mActivity, goodItem.id)
+                    } else {
+                        AndroidUtil.toast("参数错误...")
+                    }
+                }
             }
         }
     }
