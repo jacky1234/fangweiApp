@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.jacky.sub.beedee.ui.widget.SearchView
+        <com.jacky.lebeauty.ui.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

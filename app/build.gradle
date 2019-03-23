@@ -16,7 +16,7 @@ static def releaseTime() {
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.jacky.sub.beedee"
+        applicationId "com.jacky.lebeauty"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 104
@@ -67,7 +67,7 @@ android {
                     def outputFile = output.outputFile
                     if (outputFile != null && outputFile.name.endsWith('.apk')) {
                         def developV = variant.buildType.name
-                        def fileName = "subBeedee_v${defaultConfig.versionName}_${releaseTime()}_${developV}.apk"
+                        def fileName = "lebeauty_v${defaultConfig.versionName}_${releaseTime()}_${developV}.apk"
                         outputFileName = fileName
                     }
             }
@@ -76,7 +76,7 @@ android {
 
 greendao {
     schemaVersion 1
-    daoPackage "com.jacky.sub.beedee.support.dao.generate"
+    daoPackage "com.jacky.lebeauty.support.dao.generate"
     targetGenDir 'src/main/java'
 }
 

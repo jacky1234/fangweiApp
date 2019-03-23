@@ -20,7 +20,7 @@
                 android:background="@null"
                 app:layout_collapseMode="pin">
 
-                <com.jacky.sub.beedee.ui.widget.TitleView
+                <com.jacky.lebeauty.ui.widget.TitleView
                     android:id="@+id/titleView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/title_height"

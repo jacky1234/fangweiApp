@@ -10,7 +10,7 @@
         android:layout_marginBottom="@dimen/bottom_bar_height" />
 
 
-    <com.jacky.sub.beedee.ui.widget.bottombar.BottomBarLayout
+    <com.jacky.lebeauty.ui.widget.bottombar.BottomBarLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_bar_height"

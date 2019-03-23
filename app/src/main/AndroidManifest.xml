@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.jacky.sub.beedee">
+    package="com.jacky.lebeauty">
 
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -34,7 +34,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:name=".BeeApp"
+        android:name="com.jacky.lebeauty.BeeApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/beedee_name"
@@ -45,7 +45,7 @@
         tools:replace="android:label">
 
         <activity
-            android:name=".ui.function.login.LoadingActivity"
+            android:name="com.jacky.lebeauty.ui.function.login.LoadingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:name=".ui.function.main.MainActivity"
+            android:name="com.jacky.lebeauty.ui.function.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize|stateHidden">
@@ -64,7 +64,7 @@
         </activity>
 
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.jacky.lebeauty.wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity="beedee.wxentry">
@@ -76,81 +76,81 @@
         </activity>
 
         <activity
-            android:name=".ui.function.login.LoginActivity"
+            android:name="com.jacky.lebeauty.ui.function.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.function.login.RegisterActivity"
+            android:name="com.jacky.lebeauty.ui.function.login.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.defake.DefakeDetailActivity"
+            android:name="com.jacky.lebeauty.ui.function.defake.DefakeDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.login.RegisterFillInfoActivity"
+            android:name="com.jacky.lebeauty.ui.function.login.RegisterFillInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.AccountAndSecurityActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.AccountAndSecurityActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.BindedMobileActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.BindedMobileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.login.ForgetPwdActivity"
+            android:name="com.jacky.lebeauty.ui.function.login.ForgetPwdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.favorite.MyFavoriteActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.favorite.MyFavoriteActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.UpdatePwdActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.UpdatePwdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.UpdateNickNameActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.UpdateNickNameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.UpdateMobileActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.UpdateMobileActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.defake.ScanResultActivity"
+            android:name="com.jacky.lebeauty.ui.function.defake.ScanResultActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.other.ShowBrandActivity"
+            android:name="com.jacky.lebeauty.ui.function.other.ShowBrandActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.main.NewHotsGoodActivity"
+            android:name="com.jacky.lebeauty.ui.function.main.NewHotsGoodActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.discovery.SearchActivity"
+            android:name="com.jacky.lebeauty.ui.function.discovery.SearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.main.OutFitActivity"
+            android:name="com.jacky.lebeauty.ui.function.main.OutFitActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.discovery.GoodDetailActivity"
+            android:name="com.jacky.lebeauty.ui.function.discovery.GoodDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.main.OutFitDetailActivity"
+            android:name="com.jacky.lebeauty.ui.function.main.OutFitDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.common.ImagePreviewActivity"
+            android:name="com.jacky.lebeauty.ui.common.ImagePreviewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.AboutUsActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.AboutUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.AppIntroduceActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.AppIntroduceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.SettingActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.me.FeedbackProblemActivity"
+            android:name="com.jacky.lebeauty.ui.function.me.FeedbackProblemActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.function.other.WebActivity"
+            android:name="com.jacky.lebeauty.ui.function.other.WebActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".logic.thridLogin.AuthDelegateActivity"
+            android:name="com.jacky.lebeauty.logic.thridLogin.AuthDelegateActivity"
             android:theme="@style/transparentDisplay" />
 
 
@@ -177,7 +177,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.jacky.sub.beedee.fileprovider"
+            android:authorities="com.jacky.lebeauty.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
 

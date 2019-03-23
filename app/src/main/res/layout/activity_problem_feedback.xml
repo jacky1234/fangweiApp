@@ -6,7 +6,7 @@
     android:background="#F7F7F7"
     android:orientation="vertical">
 
-    <com.jacky.sub.beedee.ui.widget.TitleView
+    <com.jacky.lebeauty.ui.widget.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
@@ -14,7 +14,7 @@
         app:titleView_visible_type="left_middle" />
 
 
-    <com.jacky.sub.beedee.ui.widget.FloatInputLayout
+    <com.jacky.lebeauty.ui.widget.FloatInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -33,7 +33,7 @@
             android:maxLength="200"
             android:minHeight="250dp"
             android:textSize="15sp" />
-    </com.jacky.sub.beedee.ui.widget.FloatInputLayout>
+    </com.jacky.lebeauty.ui.widget.FloatInputLayout>
 
     <TextView
         android:id="@+id/tvConfirm"
