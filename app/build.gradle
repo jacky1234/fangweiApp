@@ -8,10 +8,15 @@ apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 apply plugin: 'kotlin-kapt'
 
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getDefault())
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.jacky.beedee"
+        applicationId "com.jacky.sub.beedee"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 104
@@ -54,11 +59,24 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildToolsVersion '28.0.3'
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def developV = variant.buildType.name
+                        def fileName = "subBeedee_v${defaultConfig.versionName}_${releaseTime()}_${developV}.apk"
+                        outputFileName = fileName
+                    }
+            }
+    }
 }
 
 greendao {
     schemaVersion 1
-    daoPackage "com.jacky.beedee.support.dao.generate"
+    daoPackage "com.jacky.sub.beedee.support.dao.generate"
     targetGenDir 'src/main/java'
 }
 

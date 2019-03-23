@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jacky.beedee.ui.widget.TitleView
+    <com.jacky.sub.beedee.ui.widget.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
@@ -15,7 +15,7 @@
         app:titleView_middle_text_color="@color/black"
         app:titleView_title_text="@string/account_security">
 
-    </com.jacky.beedee.ui.widget.TitleView>
+    </com.jacky.sub.beedee.ui.widget.TitleView>
 
     <LinearLayout
         style="@style/gap_line"
@@ -23,27 +23,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.jacky.beedee.ui.widget.RowItemView
+        <com.jacky.sub.beedee.ui.widget.RowItemView
             android:id="@+id/parent_head"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 
-        <com.jacky.beedee.ui.widget.RowItemView
+        <com.jacky.sub.beedee.ui.widget.RowItemView
             android:id="@+id/parent_nickname"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 
-        <com.jacky.beedee.ui.widget.RowItemView
+        <com.jacky.sub.beedee.ui.widget.RowItemView
             android:id="@+id/parent_mobile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 
-        <com.jacky.beedee.ui.widget.RowItemView
+        <com.jacky.sub.beedee.ui.widget.RowItemView
             android:id="@+id/parent_modify_pwd"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 
-        <com.jacky.beedee.ui.widget.RowItemView
+        <com.jacky.sub.beedee.ui.widget.RowItemView
             android:id="@+id/parent_logout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />

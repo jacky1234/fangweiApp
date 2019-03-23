@@ -18,7 +18,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.jacky.beedee.ui.widget.TitleView
+        <com.jacky.sub.beedee.ui.widget.TitleView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
@@ -31,7 +31,7 @@
             app:titleView_middle_text_color="@color/white"
             app:titleView_title_text="@string/register">
 
-        </com.jacky.beedee.ui.widget.TitleView>
+        </com.jacky.sub.beedee.ui.widget.TitleView>
 
         <ImageView
             android:id="@+id/imageView"
