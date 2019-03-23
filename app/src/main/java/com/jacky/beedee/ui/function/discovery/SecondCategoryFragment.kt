@@ -33,7 +33,7 @@ class SecondCategoryFragment : MySupportFragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = SecondCategoryAdapter(context!!, object : SecondCategoryAdapter.OnGoodClickListener {
             override fun onScanMore(category: Category) {
-                AndroidUtil.toast("todo server interface...")
+//                AndroidUtil.toast("todo server interface...")
             }
 
             override fun onGoodClick(goodItem: GoodItem) {

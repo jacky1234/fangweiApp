@@ -42,6 +42,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
     private val map = HashMap<String, String>()
     private var dataList = ArrayList<Any>()
     private lateinit var item: Good
+    val numberRegex = Pattern.compile(RegexConstants.REGEX_NUMBER)
     fun setData(item: Good) {
         this.item = item
         dataList.clear()
@@ -49,11 +50,17 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
         dataList.add(TYPE_PRICE)
         dataList.add(TYPE_TEXT)
         for (s in item.details) {
-            val pattern = Pattern.compile(RegexConstants.REGEX_W_H)
-            val matcher = pattern.matcher(s)
-            if (matcher.find()) {
-                map[s] = matcher.group()
-            } else {
+            val exceptSuffix = s.subSequence(0, s.lastIndexOf('.'))
+            val split = exceptSuffix.split("_")
+            try {
+                if (split.size >= 2) {
+                    if (Pattern.matches(RegexConstants.REGEX_NUMBER, split.last())
+                            && Pattern.matches(RegexConstants.REGEX_NUMBER, split[split.size - 2])) {
+                        map[s] = split[split.size - 2] + "_" + split.last()
+                    }
+                }
+            } catch (e: Exception) {
+                Logger.e(e)
                 map[s] = max_width.toString() + "_" + max_width
             }
 

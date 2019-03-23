@@ -127,3 +127,30 @@ public static java.lang.String TABLENAME;
 #bugly 
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+
+#s2icode
+-keep class com.s2icode.**{*;}
+-dontwarn com.s2icode.**
+-keep class com.j256.ormlite.**{*;}
+-dontwarn com.j256.ormlite.**
+-keep class com.loc.ad.**{*;}
+-dontwarn com.loc.ad.**
+-keep class com.amap.apis.**{*;}
+-dontwarn com.amap.apis.**
+-keep class com.serenegiant.**{*;}
+-dontwarn com.serenegiant.**
+-keep class org.greenrobot.eventbus.**{*;}
+-dontwarn org.greenrobot.eventbus.**
+#
+-dontwarn com.facebook.fresco.**
+-keep class com.facebook.fresco.**{ *;}
+-keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip # Do not strip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.common.internal.DoNotStrip class * -keepclassmembers class * {
+@com.facebook.common.internal.DoNotStrip *; }
+# Keep native methods
+-keepclassmembers class * {native <methods>; }
+-dontwarn okio.**
+-dontwarn com.squareup.okhttp.** -dontwarn okhttp3.**
+-dontwarn javax.annotation.**
+-dontwarn com.android.volley.toolbox.**

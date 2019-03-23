@@ -102,12 +102,12 @@ class SecondCategoryAdapter(private val context: Context, private val listener: 
     private inner class TextViewHolder constructor(view: View) : BaseViewHolder(view) {
         fun bind(category: Category) {
             getView<TextView>(R.id.tv_title).text = category.name
-            getView<TextView>(R.id.tv_more).let { tvMore ->
-                tvMore.text = "查看更多 >"
-                tvMore.setOnClickListener {
-                    listener?.onScanMore(category)
-                }
-            }
+//            getView<TextView>(R.id.tv_more).let { tvMore ->
+//                tvMore.text = "查看更多 >"
+//                tvMore.setOnClickListener {
+//                    listener?.onScanMore(category)
+//                }
+//            }
         }
     }
 

@@ -36,4 +36,6 @@
     <dimen name="normal_margin">4dp</dimen>
 
     <dimen name="normal_confirm_margin">48dp</dimen>
+
+    <dimen name="text_sz_scale_type">24dp</dimen>
 </resources>

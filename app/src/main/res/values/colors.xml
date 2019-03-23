@@ -17,4 +17,9 @@
     <color name="release_limit_btn_text_color">#AAAAAA</color>
     <color name="release_prompt_text_color">#DDDDDD</color>
     <color name="action_confirm">#FFEF04</color>
+
+
+    <!--s2c-->
+    <color name="WHITE">#ffffffff</color>
+    <color name="GRAY">#ff808080</color>
 </resources>

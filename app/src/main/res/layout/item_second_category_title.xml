@@ -15,13 +15,13 @@
         android:textSize="16sp"
         tools:text="第一波" />
 
-    <TextView
-        android:id="@+id/tv_more"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="right|center_vertical"
-        android:textColor="#999999"
-        tools:text="查看更多 >" />
+    <!--<TextView-->
+        <!--android:id="@+id/tv_more"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="right|center_vertical"-->
+        <!--android:textColor="#999999"-->
+        <!--tools:text="查看更多 >" />-->
 </LinearLayout>
 
