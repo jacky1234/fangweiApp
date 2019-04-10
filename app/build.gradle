@@ -16,7 +16,7 @@ static def releaseTime() {
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.jacky.lebeauty"
+        applicationId "com.jacky.labeauty"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 104
@@ -76,7 +76,7 @@ android {
 
 greendao {
     schemaVersion 1
-    daoPackage "com.jacky.lebeauty.support.dao.generate"
+    daoPackage "com.jacky.labeauty.support.dao.generate"
     targetGenDir 'src/main/java'
 }
 
@@ -164,4 +164,7 @@ dependencies {
     implementation 'com.baidu.mobstat:mtj-sdk:latest.integration'
 
     implementation 'com.tencent.bugly:crashreport:latest.release'
+
+    //
+    implementation project (':luckyfortune')
 }

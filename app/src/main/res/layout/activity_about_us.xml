@@ -6,7 +6,7 @@
     android:background="#F7F7F7"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.jacky.lebeauty.ui.widget.TitleView
+    <com.jacky.labeauty.ui.widget.TitleView
         android:id="@+id/titleView"
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -45,12 +45,12 @@
         android:layout_marginTop="30dp"
         app:layout_constraintTop_toBottomOf="@+id/tvVersion">
 
-        <com.jacky.lebeauty.ui.widget.RowItemView
+        <com.jacky.labeauty.ui.widget.RowItemView
             android:id="@+id/parentAppIntroduce"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 
-        <com.jacky.lebeauty.ui.widget.RowItemView
+        <com.jacky.labeauty.ui.widget.RowItemView
             android:id="@+id/parentFeedback"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jacky.lebeauty.ui.widget.TitleView
+    <com.jacky.labeauty.ui.widget.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
@@ -12,7 +12,7 @@
         app:titleView_right_text_color="@color/black"
         app:titleView_left_drawable="@mipmap/ic_xx">
 
-    </com.jacky.lebeauty.ui.widget.TitleView>
+    </com.jacky.labeauty.ui.widget.TitleView>
 
     <cn.bingoogolapple.qrcode.zbar.ZBarView
         android:id="@+id/zbarview"

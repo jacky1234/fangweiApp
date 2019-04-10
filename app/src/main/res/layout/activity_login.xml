@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.jacky.lebeauty.ui.widget.TitleView
+        <com.jacky.labeauty.ui.widget.TitleView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/title_height"
@@ -32,7 +32,7 @@
             app:titleView_middle_text_color="@color/white"
             app:titleView_title_text="@string/login">
 
-        </com.jacky.lebeauty.ui.widget.TitleView>
+        </com.jacky.labeauty.ui.widget.TitleView>
 
         <ImageView
             android:id="@+id/imageView"
@@ -156,6 +156,7 @@
             android:layout_marginBottom="30dp"
             android:layout_marginTop="30dp"
             android:gravity="center_vertical"
+            android:paddingBottom="30dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

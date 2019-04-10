@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.jacky.lebeauty.ui.widget.TitleView
+    <com.jacky.labeauty.ui.widget.TitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         app:titleView_title_text="@string/modify_nickname" />
 
-    <com.jacky.lebeauty.ui.widget.RowItemView
+    <com.jacky.labeauty.ui.widget.RowItemView
         android:id="@+id/modify_nickname"
         android:layout_width="match_parent"
         android:layout_height="@dimen/qmui_list_item_height" />
