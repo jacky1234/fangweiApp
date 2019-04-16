@@ -20,6 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+
+-ignorewarnings                     # 忽略警告，避免打包时某些警告出现
+
 ### greenDAO 3
 -keepclassmembers class * extends org.greenrobot.greendao.AbstractDao {
 public static java.lang.String TABLENAME;
@@ -97,9 +100,6 @@ public static java.lang.String TABLENAME;
 -keep class **.R$* {
  *;
 }
--keepclassmembers class * {
-    void *(**On*Event);
-}
 
 
 #---Gson---
@@ -154,3 +154,8 @@ public static java.lang.String TABLENAME;
 -dontwarn com.squareup.okhttp.** -dontwarn okhttp3.**
 -dontwarn javax.annotation.**
 -dontwarn com.android.volley.toolbox.**
+
+
+
+##########
+-keep class com.jacky.beedee.**{ *;}

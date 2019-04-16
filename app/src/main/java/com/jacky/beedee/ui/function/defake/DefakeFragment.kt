@@ -1,6 +1,7 @@
 package com.jacky.beedee.ui.function.defake
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -51,8 +52,10 @@ class DefakeFragment : MySupportFragment(), S2iCodeResultInterface {
                     .subscribe {
                         it.then({
                             if (isAttached()) {
-//                                activity!!.launch<DefakeDetailActivity>()
-
+                                if(Build.VERSION.SDK_INT < 21){
+                                    AndroidUtil.toast("抱歉，防伪功能只支持android5.0及以上系统，请升级您的系统")
+                                    return@then
+                                }
                                 S2iCodeModule.setS2iCodeResultInterface(this)
                                 S2iCodeModule.startS2iCamera(true)
                             }
