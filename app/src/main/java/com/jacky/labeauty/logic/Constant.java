@@ -1,7 +1,7 @@
 package com.jacky.labeauty.logic;
 
 public final class Constant {
-    public static final String WX_APP_ID = "wx7266547dcee7b1b6";
+    public static final String WX_APP_ID = "wx427a43532ca341f2";    //update
     public static final String QQ_APP_ID = "1107909602";
     public static final String WB_APP_ID = "2096526831";
     public static final String BAIDU_MTJ_APPID = "3ec3ba5e8d";

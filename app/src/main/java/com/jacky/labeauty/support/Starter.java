@@ -14,13 +14,17 @@ import com.jacky.labeauty.support.util.AndroidUtil;
  * GitHub:[https://github.com/jacky1234]
  *
  * @author jacky
+ *
+ *
+ * 测试万能验证码： 0000
+ *
  */
 public class Starter {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    private static final String debug_url = "https://api.lebeauty.yituizhineng.top";
-    private static final String release_url = "https://api.beedeemade.com";
+    private static final String debug_url = "https://api.labeauty.yituizhineng.top";
+    private static final String release_url = "";
 
     public static void init(Context context) {
         Starter.context = context;
@@ -30,7 +34,7 @@ public class Starter {
 
 
         if (BuildConfig.DEBUG) {
-            DeviceDependency.current = new DeviceDependency(device, release_url);
+            DeviceDependency.current = new DeviceDependency(device, debug_url);
         } else {
             DeviceDependency.current = new DeviceDependency(device, release_url);
         }

@@ -103,6 +103,30 @@ class Mefragment : MySupportFragment() {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         )
 
+        val itemMsg = groupListView.createItemView(
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+                "我的消息",
+                null,
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        )
+
+        val itemScore = groupListView.createItemView(
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+                "我的积分",
+                null,
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        )
+
+        val itemDiscounts = groupListView.createItemView(
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+                "我的优惠劵",
+                null,
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        )
+
         val itemAccount = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.ic_account),
                 "账户安全",
@@ -136,10 +160,15 @@ class Mefragment : MySupportFragment() {
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         )
 
-        val onClickListener = View.OnClickListener {
-            if (it is QMUICommonListItemView) {
-            }
+        val itemAdvice = groupListView.createItemView(
+                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
+                "投诉建议",
+                null,
+                QMUICommonListItemView.HORIZONTAL,
+                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+        )
 
+        val onClickListener = View.OnClickListener {
             when (it) {
                 itemFavorite -> {
                     if (MySelf.get().isLogined) {
@@ -150,6 +179,18 @@ class Mefragment : MySupportFragment() {
                         }
                         activity.launch<LoginActivity>()
                     }
+                }
+
+                itemMsg->{
+                    AndroidUtil.toast("message")
+                }
+
+                itemScore->{
+                    AndroidUtil.toast("score")
+                }
+
+                itemDiscounts->{
+                    AndroidUtil.toast("discounts")
                 }
 
                 itemAccount -> {
@@ -174,15 +215,23 @@ class Mefragment : MySupportFragment() {
                 itemFortune -> {
                     activity!!.launch<LuckyFortuneActivity>()
                 }
+
+                itemAdvice->{
+                    AndroidUtil.toast("advice")
+                }
             }
         }
 
         QMUIGroupListView.newSection(context)
                 .addItemView(itemFavorite, onClickListener)
+                .addItemView(itemMsg, onClickListener)
+                .addItemView(itemScore, onClickListener)
+                .addItemView(itemDiscounts, onClickListener)
                 .addItemView(itemAccount, onClickListener)
                 .addItemView(itemAboutUs, onClickListener)
                 .addItemView(itemSetting, onClickListener)
                 .addItemView(itemFortune, onClickListener)
+                .addItemView(itemAdvice, onClickListener)
                 .addTo(groupListView)
     }
 

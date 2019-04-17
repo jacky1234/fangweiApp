@@ -34,7 +34,7 @@ class RetrofitManager private constructor() {
 
     private fun getAppVersionHeader(): String {
         val sb = StringBuilder()
-        sb.append("BeeDee").append("/").append(deviceDependency.device.appVersion).append(" ")
+        sb.append("LaBeauty").append("/").append(deviceDependency.device.appVersion).append(" ")
                 .append(deviceDependency.device.type.name).append("/").append(deviceDependency.device.osVersion)
         return sb.toString()
     }
