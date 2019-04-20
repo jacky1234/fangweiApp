@@ -145,7 +145,7 @@
             android:background="@drawable/shape_rect_black"
             android:gravity="center"
             android:text="@string/complete"
-            android:textColor="@color/action_confirm"
+            android:textColor="@color/white"
             android:textSize="@dimen/lager_textsize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

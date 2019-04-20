@@ -16,7 +16,7 @@
 
     <color name="release_limit_btn_text_color">#AAAAAA</color>
     <color name="release_prompt_text_color">#DDDDDD</color>
-    <color name="action_confirm">#FFEF04</color>
+    <color name="action_confirm">#c2c2c2</color>
 
 
     <!--s2c-->

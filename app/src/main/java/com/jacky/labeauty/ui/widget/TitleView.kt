@@ -71,7 +71,7 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
             middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
             rightTextId = ta.getResourceId(R.styleable.TitleView_titleView_right_text, R.string.complete)
             rightTextColorId = ta.getColor(R.styleable.TitleView_titleView_right_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
-            val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, 3)
+            val type = ta.getInt(R.styleable.TitleView_titleView_visible_type, 1)
             when (type) {
                 1 -> {
                     flag = COMPOSE_LEFT_MIDDLEL_FLAG

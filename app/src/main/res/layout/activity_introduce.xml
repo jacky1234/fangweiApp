@@ -37,7 +37,5 @@
                 android:paddingLeft="@dimen/first_margin_from_left"
                 android:paddingRight="@dimen/first_margin_from_left" />
         </ScrollView>
-
     </FrameLayout>
-
 </LinearLayout>

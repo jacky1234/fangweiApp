@@ -78,6 +78,7 @@
         <Button
             android:id="@+id/btn_gain_code"
             style="@style/button_code_style"
+            android:background="@drawable/shape_white_circle"
             android:layout_marginRight="@dimen/first_margin_from_left"
             android:text="@string/get_vertify_code"
             android:textColor="@color/action_confirm"
@@ -121,7 +122,7 @@
             android:background="@drawable/shape_rect_black"
             android:gravity="center"
             android:text="下一步"
-            android:textColor="@color/action_confirm"
+            android:textColor="@color/white"
             android:textSize="@dimen/lager_textsize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

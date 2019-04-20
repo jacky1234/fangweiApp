@@ -35,4 +35,6 @@
     <string name="errcode_unsupported">不支持错误</string>
     <string name="errcode_unknown">发送返回</string>
     <string name="register_protocol">注册协议</string>
+    <string name="ancila">ANCILA</string>
+    <string name="brand_desc">品牌介绍</string>
 </resources>
