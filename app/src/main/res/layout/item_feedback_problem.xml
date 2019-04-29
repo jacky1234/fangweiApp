@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="11dp"
+    android:paddingTop="16dp"
+    android:paddingRight="17dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        tools:text="功能异常" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_weight="1"
+        android:textColor="#626262"
+        android:textSize="14sp"
+        tools:text="不能正常使用现有功能" />
+
+    <CheckBox
+        android:id="@+id/cb_checked"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
+        android:background="@drawable/selected_like_enable"
+        android:button="@null" />
+</LinearLayout>

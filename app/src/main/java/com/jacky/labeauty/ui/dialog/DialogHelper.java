@@ -1,4 +1,4 @@
-package com.jacky.labeauty.ui.Dialog;
+package com.jacky.labeauty.ui.dialog;
 
 import android.app.Activity;
 

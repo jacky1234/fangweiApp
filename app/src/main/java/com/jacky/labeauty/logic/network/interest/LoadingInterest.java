@@ -1,6 +1,6 @@
 package com.jacky.labeauty.logic.network.interest;
 
-import com.jacky.labeauty.ui.Dialog.DialogTipsHelper;
+import com.jacky.labeauty.ui.dialog.DialogTipsHelper;
 import com.jacky.labeauty.ui.inner.arch.BaseActivity;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
@@ -18,7 +18,7 @@ public class LoadingInterest implements Interest {
     public void onStart() {
         activity = BaseActivity.currentActivity;
         if (activity != null) {
-            tipDialog = DialogTipsHelper.createDefaultLoading(activity);
+            tipDialog = DialogTipsHelper.INSTANCE.createDefaultLoading(activity);
             tipDialog.show();
         }
     }

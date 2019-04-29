@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.DaoFacade
 import com.jacky.labeauty.support.ext.clickWithTrigger
-import com.jacky.labeauty.ui.Dialog.DialogHelper
+import com.jacky.labeauty.ui.dialog.DialogHelper
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils
 import io.reactivex.Observable

@@ -14,5 +14,9 @@
 
     <attr name="SwipeBackLayoutStyle" format="reference" />
 
-
+    <declare-styleable name="FeedbackItemView">
+        <attr name="feedback_itemview_title" format="reference" />
+        <attr name="feedback_itemview_content" format="reference" />
+        <attr name="feedback_itemview_checked" format="boolean" />
+    </declare-styleable>
 </resources>

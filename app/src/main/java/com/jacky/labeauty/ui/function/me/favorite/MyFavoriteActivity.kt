@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.TypedValue
+import android.view.View
 import com.jacky.labeauty.R
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.adapter.page.TabLayoutAdapter
@@ -34,6 +35,7 @@ class MyFavoriteActivity : BaseActivity() {
         fragments.add(FavoriteOutFitFragment())
         fragments.add(FavoriteGoodFragment())
 
+        titleView.setLeftAction(View.OnClickListener { finish() })
         val commonNavigator = CommonNavigator(this)
         commonNavigator.scrollPivotX = 0.25f
         commonNavigator.adapter = object : CommonNavigatorAdapter() {

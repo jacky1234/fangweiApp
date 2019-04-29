@@ -42,7 +42,7 @@
     <style name="smallButton">
         <item name="android:paddingLeft">14dp</item>
         <item name="android:paddingRight">14dp</item>
-        <item name="android:background">@drawable/shape_rect_black</item>
+        <item name="android:background">@drawable/shape_rect_gradient</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/action_confirm</item>
     </style>
@@ -51,7 +51,7 @@
     <style name="confirm_button">
         <item name="android:layout_marginLeft">@dimen/normal_confirm_margin</item>
         <item name="android:layout_marginRight">@dimen/normal_confirm_margin</item>
-        <item name="android:background">@drawable/shape_rect_black</item>
+        <item name="android:background">@drawable/shape_rect_gradient</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/lager_textsize</item>
@@ -63,6 +63,12 @@
         <item name="android:divider">@drawable/shape_gray_divider</item>
         <item name="android:showDividers">beginning|end|middle</item>
         <item name="android:dividerPadding">1dp</item>
+    </style>
+
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:divider">@drawable/shape_gray_divider</item>
     </style>
 
     <style name="button_code_style">
@@ -92,4 +98,5 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
 </resources>

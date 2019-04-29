@@ -15,27 +15,16 @@
         app:titleView_middle_text_color="@color/black"
         app:titleView_title_text="@string/branch_show" />
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="191dp"
-            android:layout_height="191dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/image_large_gray_brand" />
-
-        <ScrollView
+        <me.codeboy.android.aligntextview.AlignTextView
+            android:id="@+id/tvRegisterProtocol"
+            android:lineSpacingMultiplier="1.5"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tvRegisterProtocol"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.5"
-                android:paddingLeft="@dimen/first_margin_from_left"
-                android:paddingRight="@dimen/first_margin_from_left" />
-        </ScrollView>
-    </FrameLayout>
+            android:paddingLeft="@dimen/first_margin_from_left"
+            android:paddingRight="@dimen/first_margin_from_left"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
 </LinearLayout>

@@ -91,7 +91,7 @@
                     android:layout_height="34dp"
                     android:layout_gravity="center_vertical|right"
                     android:layout_marginRight="23dp"
-                    android:background="@drawable/shape_rect_black"
+                    android:background="@drawable/shape_rect_gradient"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:text="@string/get_vertify_code"

@@ -119,7 +119,7 @@
             android:layout_marginRight="48dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="25dp"
-            android:background="@drawable/shape_rect_black"
+            android:background="@drawable/shape_rect_gradient"
             android:gravity="center"
             android:text="下一步"
             android:textColor="@color/white"

@@ -166,5 +166,8 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport:latest.release'
 
     //
-    implementation project (':luckyfortune')
+    implementation project(':luckyfortune')
+    implementation 'me.codeboy.android:align-text-view:2.3.2'
+
+    implementation 'com.github.limuyang2.LDialog:ldialog:1.0'
 }

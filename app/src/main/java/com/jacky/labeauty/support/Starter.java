@@ -14,17 +14,18 @@ import com.jacky.labeauty.support.util.AndroidUtil;
  * GitHub:[https://github.com/jacky1234]
  *
  * @author jacky
- *
- *
+ * <p>
+ * <p>
  * 测试万能验证码： 0000
- *
  */
 public class Starter {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
+    //https://api.labeauty.yituizhineng.top
+    //https://api.labeauty.panda.online
     private static final String debug_url = "https://api.labeauty.yituizhineng.top";
-    private static final String release_url = "";
+    private static final String release_url = "https://api.labeauty.panda.online";
 
     public static void init(Context context) {
         Starter.context = context;

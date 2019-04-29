@@ -142,7 +142,7 @@
             android:layout_marginRight="48dp"
             android:layout_marginStart="48dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/shape_rect_black"
+            android:background="@drawable/shape_rect_gradient"
             android:gravity="center"
             android:text="@string/complete"
             android:textColor="@color/white"

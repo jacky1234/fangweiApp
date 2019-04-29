@@ -1,18 +1,16 @@
 package com.jacky.luckyfortune;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
-/**
- * Created by jeanboy on 2017/4/20.
- */
-
+//       try to :checkDrawable.setColorFilter(new PorterDuffColorFilter(0xffffffff, PorterDuff.Mode.MULTIPLY))
 public class PanelItemView extends FrameLayout implements ItemView {
 
-    private View overlay;
+//    private View overlay;
 
     public PanelItemView(Context context) {
         this(context, null);
@@ -24,15 +22,23 @@ public class PanelItemView extends FrameLayout implements ItemView {
 
     public PanelItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.view_panel_item, this);
-        overlay = findViewById(R.id.overlay);
+//        inflate(context, R.layout.view_panel_item, this);
+//        overlay = findViewById(R.id.overlay);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void setFocus(boolean isFocused) {
-        if (overlay != null) {
-            overlay.setVisibility(isFocused ? INVISIBLE : VISIBLE);
-        }
+//        Drawable drawable = getBackground();
+//        final int color = isFocused ? 0x6400000 : 0x6400000;
+//        if (drawable != null) {
+//            drawable = DrawableCompat.wrap(drawable);
+//            DrawableCompat.setTint(drawable, isFocused ? 0xf0ffffff : 0x6400000);
+//            setBackground(drawable);
+//        }
+//        if (overlay != null) {
+//            overlay.setVisibility(isFocused ? INVISIBLE : VISIBLE);
+//        }
     }
 
 }

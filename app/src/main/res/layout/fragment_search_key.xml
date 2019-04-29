@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:backgroundResource="@drawable/shape_corner_black"
+        app:backgroundResource="@drawable/shape_round_gradient"
         app:horizontalSpacing="15dp"
         app:itemColor="#ffef04"
         app:layout_constraintLeft_toLeftOf="parent"

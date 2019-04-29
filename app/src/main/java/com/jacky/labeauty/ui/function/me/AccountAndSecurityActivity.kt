@@ -18,7 +18,7 @@ import com.jacky.labeauty.support.ext.then
 import com.jacky.labeauty.support.ext.toast
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Strings
-import com.jacky.labeauty.ui.Dialog.DialogHelper
+import com.jacky.labeauty.ui.dialog.DialogHelper
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jacky.labeauty.ui.widget.RowItemView
 import com.zhihu.matisse.Matisse

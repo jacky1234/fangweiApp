@@ -219,10 +219,10 @@ class HomeFragment : MySupportFragment() {
 
     private fun getBranchDesc(): CharSequence {
         return SpanUtils()
-                .append("BEEDEE").setFontSize(15, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), android.R.color.black)).setBold().appendLine()
+                .append("ANCILA").setFontSize(15, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), android.R.color.black)).setBold().appendLine()
                 .append("Pursuit the 1% Life, something different.").setFontSize(12, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.tab_grey_color)).appendLine()
                 .append("追求1%的生活理念").setFontSize(12, true).appendLine()
-                .append("BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.item_title_text_color)).appendLine()
+                .append("ANCILA作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.item_title_text_color)).appendLine()
                 .create()
     }
 }

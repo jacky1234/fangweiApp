@@ -153,7 +153,21 @@
             android:name="com.jacky.labeauty.logic.thridLogin.AuthDelegateActivity"
             android:theme="@style/transparentDisplay" />
 
+        <activity
+            android:name=".ui.function.me.integral.MyIntegralActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.function.me.LuckyPanelActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.function.me.discount.MyDiscountsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.function.me.AdviceProblemActivity"
+            android:screenOrientation="portrait" />
         <!--qq login-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"

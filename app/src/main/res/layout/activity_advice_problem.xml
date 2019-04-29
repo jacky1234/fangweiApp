@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <com.jacky.labeauty.ui.widget.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        app:titleView_title_text="@string/advice_problem"
+        app:titleView_visible_type="left_middle" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f2f2f2"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/first_margin_from_left"
+                android:text="@string/issue_type"
+                android:textColor="#8b8b8d" />
+
+            <LinearLayout
+                style="@style/gap_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <com.jacky.labeauty.ui.widget.FeedbackItemView
+                    android:id="@+id/itemFunctionException"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:feedback_itemview_content="@string/function_issue"
+                    app:feedback_itemview_title="@string/function_exception" />
+
+                <com.jacky.labeauty.ui.widget.FeedbackItemView
+                    android:id="@+id/itemAdvice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:feedback_itemview_content="@string/usage_feedback"
+                    app:feedback_itemview_title="@string/usage_advice" />
+
+                <com.jacky.labeauty.ui.widget.FeedbackItemView
+                    android:id="@+id/itemFunctionRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:feedback_itemview_content="@string/function_not_complete"
+                    app:feedback_itemview_title="@string/function_request" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#f2f2f2"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/first_margin_from_left"
+                android:text="@string/detail_desc"
+                android:textColor="#8b8b8d" />
+
+            <EditText
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:background="@color/white"
+                android:gravity="left|top"
+                android:hint="@string/feedback_hint"
+                android:padding="8dp"
+                android:textSize="14sp" />
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/phone_number"
+                    android:textColor="#231815"
+                    android:textSize="14sp" />
+
+                <View
+                    style="@style/line"
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:inputType="phone"
+                    android:maxLength="11" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvConfirm"
+                style="@style/confirm_button"
+                android:layout_marginTop="59dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/submit_instantly" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

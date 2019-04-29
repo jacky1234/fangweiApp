@@ -22,11 +22,12 @@ import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.AndroidUtil.toast
 import com.jacky.labeauty.support.util.Strings
 import com.jacky.labeauty.ui.function.login.LoginActivity
-import com.jacky.labeauty.ui.function.me.favorite.MyFavoriteActivity
+import com.jacky.labeauty.ui.function.me.discount.MyDiscountsActivity
+import com.jacky.labeauty.ui.function.me.integral.MyIntegralActivity
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
-import com.jacky.luckyfortune.LuckyFortuneActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView
+import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListSectionHeaderFooterView
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.fragment_me.*
@@ -65,7 +66,7 @@ class Mefragment : MySupportFragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "CheckResult")
     private fun initFlexible() {
         RxView.clicks(parentUnLogined).throttleFirst(1, TimeUnit.SECONDS)
                 .compose(bindToLifecycle())
@@ -95,24 +96,24 @@ class Mefragment : MySupportFragment() {
     }
 
     private fun initOnce() {
-        val itemFavorite = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
-                "我的收藏",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        )
-
-        val itemMsg = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
-                "我的消息",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        )
+//        val itemFavorite = groupListView.createItemView(
+//                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+//                "我的收藏",
+//                null,
+//                QMUICommonListItemView.HORIZONTAL,
+//                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+//        )
+//
+//        val itemMsg = groupListView.createItemView(
+//                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+//                "我的消息",
+//                null,
+//                QMUICommonListItemView.HORIZONTAL,
+//                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+//        )
 
         val itemScore = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
+                ContextCompat.getDrawable(context!!, R.mipmap.me_integral),
                 "我的积分",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
@@ -120,119 +121,144 @@ class Mefragment : MySupportFragment() {
         )
 
         val itemDiscounts = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_favorite),
-                "我的优惠劵",
+                ContextCompat.getDrawable(context!!, R.mipmap.me_coupon),
+                "优惠劵",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         )
 
-        val itemAccount = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_account),
-                "账户安全",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        )
-
-        val itemAboutUs = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_about_us),
-                "关于我们",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        )
+//        val itemAccount = groupListView.createItemView(
+//                ContextCompat.getDrawable(context!!, R.mipmap.ic_account),
+//                "账户安全",
+//                null,
+//                QMUICommonListItemView.HORIZONTAL,
+//                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+//        )
 
         val itemSetting = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
+                ContextCompat.getDrawable(context!!, R.mipmap.me_setting),
                 "设置",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         )
 
-        //test
-        val itemFortune = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
-                "抽奖",
+        val itemAboutUs = groupListView.createItemView(
+                ContextCompat.getDrawable(context!!, R.mipmap.my_about),
+                "关于我们",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
         )
 
-        val itemAdvice = groupListView.createItemView(
-                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
-                "投诉建议",
-                null,
-                QMUICommonListItemView.HORIZONTAL,
-                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
-        )
+        //test
+//        val itemFortune = groupListView.createItemView(
+//                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
+//                "抽奖",
+//                null,
+//                QMUICommonListItemView.HORIZONTAL,
+//                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+//        )
+//
+//        val itemAdvice = groupListView.createItemView(
+//                ContextCompat.getDrawable(context!!, R.mipmap.ic_setting),
+//                "投诉建议",
+//                null,
+//                QMUICommonListItemView.HORIZONTAL,
+//                QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
+//        )
 
         val onClickListener = View.OnClickListener {
             when (it) {
-                itemFavorite -> {
-                    if (MySelf.get().isLogined) {
-                        activity!!.launch<MyFavoriteActivity>()
-                    } else {
-                        MiscFacade.get().setLastRunnable {
-                            itemFavorite.performClick()
-                        }
-                        activity.launch<LoginActivity>()
-                    }
+//                itemFavorite -> {
+//                    if (MySelf.get().isLogined) {
+//                        activity!!.launch<MyFavoriteActivity>()
+//                    } else {
+//                        MiscFacade.get().setLastRunnable {
+//                            itemFavorite.performClick()
+//                        }
+//                        activity.launch<LoginActivity>()
+//                    }
+//                }
+//
+//                itemMsg -> {
+//                    AndroidUtil.toast("message")
+//                }
+
+                itemScore -> {
+                    ensureLogin(it, Runnable {
+                        startActivity(Intent(getActivity(), MyIntegralActivity::class.java))
+                    })
                 }
 
-                itemMsg->{
-                    AndroidUtil.toast("message")
+                itemDiscounts -> {
+                    ensureLogin(it, Runnable {
+                        startActivity(Intent(this@Mefragment.getActivity(), MyDiscountsActivity::class.java))
+                    })
                 }
 
-                itemScore->{
-                    AndroidUtil.toast("score")
-                }
+//                itemAccount -> {
+//                    if (MySelf.get().isLogined) {
+//                        activity!!.launch<AccountAndSecurityActivity>()
+//                    } else {
+//                        MiscFacade.get().setLastRunnable {
+//                            itemAccount.performClick()
+//                        }
+//                        activity.launch<LoginActivity>()
+//                    }
+//                }
 
-                itemDiscounts->{
-                    AndroidUtil.toast("discounts")
-                }
-
-                itemAccount -> {
-                    if (MySelf.get().isLogined) {
-                        activity!!.launch<AccountAndSecurityActivity>()
-                    } else {
-                        MiscFacade.get().setLastRunnable {
-                            itemAccount.performClick()
-                        }
-                        activity.launch<LoginActivity>()
-                    }
+                itemSetting -> {
+                    ensureLogin(it, Runnable {
+                        activity!!.launch<SettingActivity>()
+                    })
                 }
 
                 itemAboutUs -> {
                     activity!!.launch<AboutUsActivity>()
                 }
 
-                itemSetting -> {
-                    activity!!.launch<SettingActivity>()
-                }
-
-                itemFortune -> {
-                    activity!!.launch<LuckyFortuneActivity>()
-                }
-
-                itemAdvice->{
-                    AndroidUtil.toast("advice")
-                }
+//                itemFortune -> {
+//                    activity!!.launch<LuckyPanelActivity>()
+//                }
+//
+//                itemAdvice -> {
+//                    AndroidUtil.toast("advice")
+//                }
             }
         }
 
+        groupListView.separatorStyle = QMUIGroupListView.SEPARATOR_STYLE_NONE
         QMUIGroupListView.newSection(context)
-                .addItemView(itemFavorite, onClickListener)
-                .addItemView(itemMsg, onClickListener)
+//                .addItemView(itemFavorite, onClickListener)
+//                .addItemView(itemMsg, onClickListener)
                 .addItemView(itemScore, onClickListener)
                 .addItemView(itemDiscounts, onClickListener)
-                .addItemView(itemAccount, onClickListener)
-                .addItemView(itemAboutUs, onClickListener)
+//                .addItemView(itemAccount, onClickListener)
                 .addItemView(itemSetting, onClickListener)
-                .addItemView(itemFortune, onClickListener)
-                .addItemView(itemAdvice, onClickListener)
+                .addItemView(itemAboutUs, onClickListener)
+//                .addItemView(itemFortune, onClickListener)
+//                .addItemView(itemAdvice, onClickListener)
                 .addTo(groupListView)
+
+        val childCount = groupListView.childCount
+        for (i in 0 until childCount) {
+            if (groupListView.getChildAt(i) is QMUIGroupListSectionHeaderFooterView) {
+                groupListView.getChildAt(i).visibility = View.GONE
+            }
+        }
+    }
+
+    private fun ensureLogin(view: View, runnable: Runnable?) {
+        if (MySelf.get().isLogined) {
+            runnable?.run()
+        } else {
+            MiscFacade.get().setLastRunnable {
+                view.performClick()
+            }
+            activity.launch<LoginActivity>()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

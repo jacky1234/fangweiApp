@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.jacky.labeauty.logic.entity.module.Banner;
 import com.jacky.labeauty.logic.entity.module.Category;
+import com.jacky.labeauty.logic.entity.module.Feedback;
 import com.jacky.labeauty.logic.entity.module.Good;
 import com.jacky.labeauty.logic.entity.module.GoodType;
 import com.jacky.labeauty.logic.entity.module.MySelf;
@@ -17,6 +18,7 @@ import com.jacky.labeauty.logic.entity.request.UpdateUserRequest;
 import com.jacky.labeauty.logic.entity.request.WBLoginRequest;
 import com.jacky.labeauty.logic.entity.request.WXLoginRequest;
 import com.jacky.labeauty.logic.entity.response.CollectResponse;
+import com.jacky.labeauty.logic.entity.response.DiscountResponse;
 import com.jacky.labeauty.logic.entity.response.FavoriteResponse;
 import com.jacky.labeauty.logic.entity.response.HotVideoResponse;
 import com.jacky.labeauty.logic.entity.response.HttpResponseSource;
@@ -100,6 +102,11 @@ public class RequestHelper {
         request.setContent(s);
         return apiService.feedbackProblem(request)
                 .compose(BooleanTransformer.handleResult(true));
+    }
+
+    public Observable<Feedback> feedbackProblem(@NotNull FeedbackRequest request) {
+        return apiService.feedbackAdvice(request)
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
     public Observable<Boolean> forgetPwd(String mobile, String code, String newPwd) {
@@ -203,6 +210,12 @@ public class RequestHelper {
 
     public Observable<KeywordResponse> getSearchKeyword() {
         return apiService.getSearchKeyword()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
+    //优惠劵
+    public Observable<DiscountResponse> requestDiscounts(int page) {
+        return apiService.requestDiscounts(page)
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 

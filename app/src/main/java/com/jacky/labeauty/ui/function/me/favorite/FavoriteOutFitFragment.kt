@@ -14,8 +14,8 @@ import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
-import com.jacky.labeauty.ui.Dialog.DialogHelper
 import com.jacky.labeauty.ui.adapter.FavoriteOutFitAdapter
+import com.jacky.labeauty.ui.dialog.DialogHelper
 import com.jacky.labeauty.ui.function.login.LoginActivity
 import com.jacky.labeauty.ui.function.main.OutFitDetailActivity
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment

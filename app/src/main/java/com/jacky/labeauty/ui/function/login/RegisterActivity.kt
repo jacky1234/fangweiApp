@@ -13,7 +13,7 @@ import com.jacky.labeauty.support.ext.clickWithTrigger
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Checker
-import com.jacky.labeauty.ui.Dialog.DialogTipsHelper
+import com.jacky.labeauty.ui.dialog.DialogTipsHelper
 import com.jacky.labeauty.ui.function.other.WebActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView

@@ -1,9 +1,6 @@
 package com.jacky.labeauty.logic.network
 
-import com.jacky.labeauty.logic.entity.module.Banner
-import com.jacky.labeauty.logic.entity.module.Category
-import com.jacky.labeauty.logic.entity.module.Good
-import com.jacky.labeauty.logic.entity.module.User
+import com.jacky.labeauty.logic.entity.module.*
 import com.jacky.labeauty.logic.entity.request.*
 import com.jacky.labeauty.logic.entity.response.*
 import io.reactivex.Observable
@@ -108,6 +105,12 @@ interface ApiService {
     @POST("feedback/post")
     fun feedbackProblem(@Body request: FeedbackRequest): Observable<HttpResponseSource>
 
+    @POST("collect")
+    fun feedbackAdvice(@Body request: FeedbackRequest): Observable<HttpResponse<Feedback>>
+
     @GET("goods/get_search_term")
     fun getSearchKeyword(): Observable<HttpResponse<KeywordResponse>>
+
+    @GET("coupon/list")
+    fun requestDiscounts(@Query("page") page: Int): Observable<HttpResponse<DiscountResponse>>
 }
