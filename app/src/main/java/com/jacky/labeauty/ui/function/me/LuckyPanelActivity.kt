@@ -1,5 +1,7 @@
 package com.jacky.labeauty.ui.function.me
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -11,6 +13,15 @@ import kotlinx.android.synthetic.main.activity_lucky_panel.*
 import java.util.*
 
 class LuckyPanelActivity : BaseActivity() {
+    companion object {
+        const val REQUEST_LUCKY_CODE = 100
+
+        fun launchForResult(from: Activity) {
+            val intent = Intent(from, LuckyPanelActivity::class.java)
+            from.startActivityForResult(intent, REQUEST_LUCKY_CODE)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lucky_panel)

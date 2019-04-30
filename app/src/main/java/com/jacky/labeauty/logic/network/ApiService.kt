@@ -112,5 +112,20 @@ interface ApiService {
     fun getSearchKeyword(): Observable<HttpResponse<KeywordResponse>>
 
     @GET("coupon/list")
-    fun requestDiscounts(@Query("page") page: Int): Observable<HttpResponse<DiscountResponse>>
+    fun requestDiscounts(@Query("page") page: Int): Observable<HttpPageResponse<MyDiscount>>
+
+    @GET("wallet/get")
+    fun requestIntegral(): Observable<HttpResponse<MyIntegral>>
+
+    @GET("task/sign")
+    fun requestSign(): Observable<HttpResponse<Sign>>
+
+    @GET("wallet/log/list")
+    fun requestIntegrals(@Query("direction") direction: String,
+                         @Query("page") page: Int,
+                         @Query("size") size: Int
+    ): Observable<HttpPageResponse<IntegralRecorder>>
+
+    @POST("address/create")
+    fun addAddressRecorder(@Body request: AddAddressRequest): Observable<HttpResponse<Address>>
 }

@@ -168,20 +168,36 @@
         <activity
             android:name=".ui.function.me.AdviceProblemActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.function.me.MessageActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.function.me.address.MyAddressActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.function.me.address.EditAddressActivity"
+            android:screenOrientation="portrait">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+
         <!--qq login-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent1107909602" />
-            </intent-filter>
-        </activity>
+            android:noHistory="true" />
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

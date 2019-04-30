@@ -10,7 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingRight="16dp">
 
         <ImageView
             android:id="@+id/iv_left_icon"
@@ -26,7 +27,8 @@
             android:layout_marginLeft="@dimen/normal_margin"
             android:textSize="@dimen/normal_textsize"
             tools:text="@string/back"
-            tools:textColor="@android:color/black" />
+            tools:textColor="@android:color/black"
+            tools:visibility="visible" />
     </LinearLayout>
 
     <TextView
@@ -48,11 +50,11 @@
         android:orientation="horizontal">
 
         <!--<ImageView-->
-            <!--android:visibility="gone"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/first_margin_from_left"-->
-            <!--tools:src="@mipmap/ic_arrow_back_black" />-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/first_margin_from_left"-->
+        <!--tools:src="@mipmap/ic_arrow_back_black" />-->
 
         <TextView
             android:id="@+id/tv_right_text"

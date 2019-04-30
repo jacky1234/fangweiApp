@@ -48,6 +48,7 @@
     <string name="submit_instantly">立即提交</string>
     <string name="issue_type">问题类型</string>
     <string name="detail_desc">详情描述</string>
+    <string name="my_message">我的消息</string>
 
     <string name="function_exception">功能异常</string>
     <string name="function_issue">不能正常使用现有功能</string>
@@ -58,4 +59,10 @@
     <string name="phone_number">手机号</string>
     <string name="dear_user">亲爱的用户</string>
     <string name="usage_integral">可用积分</string>
+    <string name="try_lucky">抽  奖</string>
+    <string name="daily_sign_integral">每日首次登陆+10积分</string>
+    <string name="my_address">我的地址</string>
+    <string name="edit_address">填写地址</string>
+    <string name="default_address">默认地址</string>
+    <string name="empty_discount">亲，你暂时还没有优惠券哦</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.jacky.labeauty.support.util;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -18,6 +20,9 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.text.InputFilter;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +35,8 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Enumeration;
 
 
@@ -210,5 +217,19 @@ public class AndroidUtil {
 
         }
         return "0.0.0.0";
+    }
+
+    /**
+     * @param pattern yyyy.MM.dd
+     * @param time
+     * @return
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static CharSequence formatTime(String pattern, Long time) {
+        return new SimpleDateFormat(pattern).format(new Date(time));
+    }
+
+    public static View getContentView(Activity activity) {
+        return ((ViewGroup) (activity.getWindow().getDecorView().findViewById(Window.ID_ANDROID_CONTENT))).getChildAt(0);
     }
 }

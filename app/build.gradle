@@ -170,4 +170,5 @@ dependencies {
     implementation 'me.codeboy.android:align-text-view:2.3.2'
 
     implementation 'com.github.limuyang2.LDialog:ldialog:1.0'
+    implementation 'com.smartTop:jd-address:1.0.3'
 }

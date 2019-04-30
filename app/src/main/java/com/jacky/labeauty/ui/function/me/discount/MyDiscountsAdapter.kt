@@ -1,13 +1,11 @@
 package com.jacky.labeauty.ui.function.me.discount
 
-import android.annotation.SuppressLint
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.entity.module.MyDiscount
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.SpanUtils
-import java.text.SimpleDateFormat
-import java.util.*
 
 class MyDiscountsAdapter constructor(itemLayoutId: Int) : BaseQuickAdapter<MyDiscount, BaseViewHolder>(itemLayoutId) {
     override fun convert(holder: BaseViewHolder, item: MyDiscount) {
@@ -44,8 +42,7 @@ class MyDiscountsAdapter constructor(itemLayoutId: Int) : BaseQuickAdapter<MyDis
         return ""
     }
 
-    @SuppressLint("SimpleDateFormat")
     private fun formatTime(time: Long): CharSequence {
-        return SimpleDateFormat("yyyy.MM.dd").format(Date(time))
+        return AndroidUtil.formatTime("yyyy.MM.dd", time)
     }
 }

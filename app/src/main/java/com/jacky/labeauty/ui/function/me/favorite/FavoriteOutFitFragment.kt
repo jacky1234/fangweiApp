@@ -1,5 +1,6 @@
 package com.jacky.labeauty.ui.function.me.favorite
 
+import android.annotation.SuppressLint
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -87,6 +88,7 @@ class FavoriteOutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMor
         refreshLayout.setOnLoadMoreListener(this)
     }
 
+    @SuppressLint("CheckResult")
     private fun requestList(loadMore: Boolean) {
         RequestHelper.get().requestCollectList(GoodType.OUTFIT, page)
                 .compose(bindUntilDetach())

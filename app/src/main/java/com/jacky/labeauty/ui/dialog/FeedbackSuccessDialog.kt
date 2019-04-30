@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import com.jacky.labeauty.R
 
-class FeedbackSuccessDialog(private val mContext: Context) : AlertDialog(mContext, R.style.dialog) {
+class FeedbackSuccessDialog(mContext: Context) : AlertDialog(mContext, R.style.dialog) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,5 +28,4 @@ class FeedbackSuccessDialog(private val mContext: Context) : AlertDialog(mContex
 //        attributes.height = (defaultDisplay.height * HEIGHT_SCALE).toInt()
 //        window.attributes = attributes
     }
-
 }

@@ -65,7 +65,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         try {
             ta = context.obtainStyledAttributes(attrs, R.styleable.TitleView)
             leftDrawableId = ta.getResourceId(R.styleable.TitleView_titleView_left_drawable, R.mipmap.ic_arrow_back_black)
-            leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, R.string.back)
+
+            // R.string.back
+            leftTextId = ta.getResourceId(R.styleable.TitleView_titleView_left_text, 0)
             middleTextId = ta.getResourceId(R.styleable.TitleView_titleView_title_text, R.string.login)
             leftTextColorId = ta.getColor(R.styleable.TitleView_titleView_left_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
             middleTextColorId = ta.getColor(R.styleable.TitleView_titleView_middle_text_color, ContextCompat.getColor(Starter.getContext(), android.R.color.black))
@@ -91,7 +93,9 @@ class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
         setFlag(flag)
         setLeftDrawableId(leftDrawableId)
-        setLeftTextId(leftTextId)
+        if (leftTextId != 0) {
+            setLeftTextId(leftTextId)
+        }
         setLeftTextColorId(leftTextColorId)
         setMiddleTextId(middleTextId)
         setMiddleTextColorId(middleTextColorId)

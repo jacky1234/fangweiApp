@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/my_bg"
@@ -40,10 +41,11 @@
         app:layout_constraintTop_toBottomOf="@+id/titleView" />
 
     <TextView
-        android:id="@+id/tvIntegralCount"
+        android:id="@+id/tv_integral_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:text="0"
         android:textColor="#333333"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -51,24 +53,70 @@
         app:layout_constraintTop_toBottomOf="@+id/tvUsageIntegral"
         tools:text="999" />
 
+    <TextView
+        android:id="@+id/tvTryLucky"
+        android:layout_width="122dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_rect_gradient"
+        android:gravity="center"
+        android:text="@string/try_lucky"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
 
     <!--45+106-->
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="34dp"
         android:layout_marginRight="15dp"
         android:background="@color/white"
-        android:paddingBottom="30dp">
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_integral_count"
+        app:layout_constraintVertical_weight="1">
 
-        <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
-            android:id="@+id/groupListView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_corners_white"
-            android:divider="@null" />
-    </ScrollView>
+            android:layout_height="@dimen/title_height">
+
+            <net.lucode.hackware.magicindicator.MagicIndicator
+                android:id="@+id/magic_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/title_height"
+                android:layout_gravity="center_horizontal" />
+        </FrameLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/shape_rect_gradient"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingTop="1dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="1dp"
+        android:text="@string/daily_sign_integral"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout3" />
+
 </android.support.constraint.ConstraintLayout>
 
 

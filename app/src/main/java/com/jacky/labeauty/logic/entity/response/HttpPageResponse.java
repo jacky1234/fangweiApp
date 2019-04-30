@@ -1,35 +1,19 @@
 package com.jacky.labeauty.logic.entity.response;
 
-import com.jacky.labeauty.logic.entity.module.MyDiscount;
-
-import java.util.List;
-
-public class DiscountResponse {
+public class HttpPageResponse<T> extends HttpListResponse<T> {
 
     /**
-     * message : ok
      * page : 0
      * size : 10
      * total : 1
      * last : true
      * first : true
      */
-
-    private String message;
     private int page;
     private int size;
     private int total;
     private boolean last;
     private boolean first;
-    private List<MyDiscount> data;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 
     public int getPage() {
         return page;
@@ -69,13 +53,5 @@ public class DiscountResponse {
 
     public void setFirst(boolean first) {
         this.first = first;
-    }
-
-    public List<MyDiscount> getData() {
-        return data;
-    }
-
-    public void setData(List<MyDiscount> data) {
-        this.data = data;
     }
 }

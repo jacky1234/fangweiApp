@@ -4,6 +4,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import com.jacky.labeauty.R
+import com.jacky.labeauty.support.function.Predicate
 import com.jacky.labeauty.support.util.regex.RegexUtils
 
 class Checker {
@@ -34,6 +35,16 @@ class Checker {
             val phone = textView.text.toString()
             if (!RegexUtils.isMobileSimple(phone)) {
                 AndroidUtil.toast(R.string.mobile_number_wrong)
+                return false
+            }
+
+            return true
+        }
+
+        @JvmStatic
+        fun <T> check(predicate: Predicate<T>, t: T, toast: CharSequence): Boolean {
+            if (!predicate.test(t)) {
+                AndroidUtil.toast(toast)
                 return false
             }
 

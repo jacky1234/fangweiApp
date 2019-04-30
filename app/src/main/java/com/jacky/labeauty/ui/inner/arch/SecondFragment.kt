@@ -3,12 +3,10 @@ package com.jacky.labeauty.ui.inner.arch
 import android.app.Activity
 import android.content.Context
 import com.jacky.labeauty.support.misc.LifeCircleComponents
-import com.trello.rxlifecycle2.android.ActivityEvent
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.disposables.Disposable
 
 open class SecondFragment : RxFragment() {
     private val lifeCircleComponents = LifeCircleComponents()
-    private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
     protected var activity: Activity? = null
 
     fun isAttached(): Boolean {
@@ -23,6 +21,15 @@ open class SecondFragment : RxFragment() {
     override fun onDetach() {
         super.onDetach()
         activity = null
+    }
+
+    fun addDispose(dispose: Disposable) {
+        lifeCircleComponents.addDispose(dispose)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        lifeCircleComponents.removeDispose()
     }
 
 }

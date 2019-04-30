@@ -12,6 +12,7 @@ import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.dialog.DialogTipsHelper
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
+import com.jacky.labeauty.ui.widget.EmptyView
 import com.jacky.labeauty.ui.widget.decoration.DividerPaddingDecoration
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
@@ -29,6 +30,8 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        titleView.setLeftAction(View.OnClickListener { activity!!.finish() })
+
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
         adapter = MyDiscountsAdapter(R.layout.item_discount)
@@ -39,19 +42,13 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
         recyclerView.adapter = adapter
         requestDiscounts()
 
-        titleView.setLeftAction(View.OnClickListener {
-            activity!!.finish()
-        })
-
         adapter?.setOnItemClickListener { _, _, position ->
             //detail
             DialogTipsHelper.showDiscountDetailDialog(fragmentManager!!)
         }
-        adapter?.onItemChildClickListener = object : BaseQuickAdapter.OnItemChildClickListener {
-            override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int) {
-                //to use discount
-
-            }
+        adapter?.emptyView = EmptyView(context!!, R.drawable.empty_coupons, null, 0, R.string.empty_discount)
+        adapter?.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
+            //to use discount
         }
     }
 

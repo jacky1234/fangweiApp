@@ -2,13 +2,19 @@ package com.jacky.labeauty.logic.network;
 
 import android.support.annotation.NonNull;
 
+import com.jacky.labeauty.logic.entity.module.Address;
 import com.jacky.labeauty.logic.entity.module.Banner;
 import com.jacky.labeauty.logic.entity.module.Category;
 import com.jacky.labeauty.logic.entity.module.Feedback;
 import com.jacky.labeauty.logic.entity.module.Good;
 import com.jacky.labeauty.logic.entity.module.GoodType;
+import com.jacky.labeauty.logic.entity.module.IntegralRecorder;
+import com.jacky.labeauty.logic.entity.module.MyDiscount;
+import com.jacky.labeauty.logic.entity.module.MyIntegral;
 import com.jacky.labeauty.logic.entity.module.MySelf;
+import com.jacky.labeauty.logic.entity.module.Sign;
 import com.jacky.labeauty.logic.entity.module.User;
+import com.jacky.labeauty.logic.entity.request.AddAddressRequest;
 import com.jacky.labeauty.logic.entity.request.CollectRequest;
 import com.jacky.labeauty.logic.entity.request.FeedbackRequest;
 import com.jacky.labeauty.logic.entity.request.LoginRequest;
@@ -18,9 +24,9 @@ import com.jacky.labeauty.logic.entity.request.UpdateUserRequest;
 import com.jacky.labeauty.logic.entity.request.WBLoginRequest;
 import com.jacky.labeauty.logic.entity.request.WXLoginRequest;
 import com.jacky.labeauty.logic.entity.response.CollectResponse;
-import com.jacky.labeauty.logic.entity.response.DiscountResponse;
 import com.jacky.labeauty.logic.entity.response.FavoriteResponse;
 import com.jacky.labeauty.logic.entity.response.HotVideoResponse;
+import com.jacky.labeauty.logic.entity.response.HttpPageResponse;
 import com.jacky.labeauty.logic.entity.response.HttpResponseSource;
 import com.jacky.labeauty.logic.entity.response.KeywordResponse;
 import com.jacky.labeauty.logic.entity.response.ListGoodResponse;
@@ -28,6 +34,7 @@ import com.jacky.labeauty.logic.entity.response.SecondCategoryResponse;
 import com.jacky.labeauty.logic.entity.response.UploadFileResponse;
 import com.jacky.labeauty.logic.network.transformer.BooleanTransformer;
 import com.jacky.labeauty.logic.network.transformer.HttpListResponseTransformer;
+import com.jacky.labeauty.logic.network.transformer.HttpPageResponseTransformer;
 import com.jacky.labeauty.logic.network.transformer.HttpResponseTransformer;
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils;
 
@@ -213,10 +220,32 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(false));
     }
 
-    //优惠劵
-    public Observable<DiscountResponse> requestDiscounts(int page) {
-        return apiService.requestDiscounts(page)
+    public Observable<MyIntegral> requestMyIntegral() {
+        return apiService.requestIntegral()
                 .compose(HttpResponseTransformer.handleResult(false));
+    }
+
+    //优惠劵
+    public Observable<HttpPageResponse<MyDiscount>> requestDiscounts(int page) {
+        return apiService.requestDiscounts(page)
+                .compose(HttpPageResponseTransformer.handPageResult(false));
+    }
+
+    //签到
+    public Observable<Sign> requestSign() {
+        return apiService.requestSign()
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    //增加地址
+    public Observable<Address> addAddressRecorder(AddAddressRequest request) {
+        return apiService.addAddressRecorder(request)
+                .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<HttpPageResponse<IntegralRecorder>> requestIntegrals(int page, String direction) {
+        return apiService.requestIntegrals(direction, page, 10)
+                .compose(HttpPageResponseTransformer.handPageResult(true));
     }
 
     public static RequestHelper get() {
@@ -226,6 +255,4 @@ public class RequestHelper {
     private static final class InstanceHolder {
         private static final RequestHelper INSTANCE = new RequestHelper();
     }
-
-
 }
