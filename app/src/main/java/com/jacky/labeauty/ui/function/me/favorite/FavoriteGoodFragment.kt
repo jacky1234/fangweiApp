@@ -42,7 +42,10 @@ class FavoriteGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreL
         recyclerView.addItemDecoration(GridLayoutPaddingItemDecoration(padding))
 
         adapter = FavoriteGoodAdapter(R.layout.item_good)
-        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_collect_blank)
+
+        val emptyView = EmptyView(context!!)
+        emptyView.setImageResource(R.mipmap.ic_collect_blank)
+        adapter.emptyView = emptyView
         adapter.setOnItemClickListener { _, _, position ->
             adapter.getItem(position)!!.target?.let {
                 GoodDetailActivity.start(_mActivity, adapter.getItem(position)!!.target.id)

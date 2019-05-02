@@ -5,7 +5,9 @@ import android.content.Context
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import com.jacky.labeauty.R
+import com.jacky.labeauty.logic.entity.module.Prize
 import com.jacky.labeauty.support.util.AndroidUtil
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog
 import top.limuyang2.ldialog.LDialog
 import top.limuyang2.ldialog.base.BaseLDialog
@@ -45,16 +47,17 @@ object DialogTipsHelper {
                 .create()
     }
 
+    fun createDeleteWarningDialog(context: Context, listener: OnConfirmListener?): QMUIDialog {
+        return QMUIDialog.MenuDialogBuilder(context)
+                .setTitle("确定删除吗？")
+                .addAction("确定") { dialog, index ->
+                    listener?.confirm()
+                }.create()
+    }
 
-    fun createOpenLuckyBoxDialog(activity: Activity): AlertDialog {
-        // TODO: 2019/4/25  中奖 dialog
-        val builder = android.support.v7.app.AlertDialog.Builder(activity)
-        builder.setView(R.layout.dialog_open_lucky_box)
-        builder.setTitle("Material Design Dialog")
-        builder.setMessage("这是 android.support.v7.app.AlertDialog 中的样式")
-        builder.setNegativeButton("取消", null)
-        builder.setPositiveButton("确定", null)
-        return builder.show()
+
+    fun createOpenLuckyBoxDialog(activity: Activity, getPrizeClickListener: LuckyBoxDialog.OnGetPrizeClickListener?, prize: Prize): AlertDialog {
+        return LuckyBoxDialog(getPrizeClickListener, prize, activity)
     }
 
     fun showDiscountDetailDialog(fragmentManager: android.support.v4.app.FragmentManager) {
@@ -75,5 +78,9 @@ object DialogTipsHelper {
 
     fun createFeedbackDialog(context: Context): AlertDialog {
         return FeedbackSuccessDialog(context)
+    }
+
+    public interface OnConfirmListener {
+        fun confirm()
     }
 }

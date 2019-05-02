@@ -43,7 +43,10 @@ class SearchResultFragment : MySupportFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = SearchResultAdapter(R.layout.item_search_result, list)
-        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_search_blank)
+
+        val emptyView = EmptyView(context!!)
+        emptyView.setImageResource(R.mipmap.ic_search_blank)
+        adapter.emptyView = emptyView
         adapter.setOnItemClickListener { _, _, position ->
             val item = list[position]
             GoodDetailActivity.start(_mActivity, item.id)

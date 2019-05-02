@@ -128,4 +128,17 @@ interface ApiService {
 
     @POST("address/create")
     fun addAddressRecorder(@Body request: AddAddressRequest): Observable<HttpResponse<Address>>
+
+    @GET("address/delete")
+    fun deleteAddress(@Query("id") id: String): Observable<HttpResponseSource>
+
+    @POST("address/update")
+    fun updateAddress(@Body request: Address): Observable<HttpResponse<Address>>
+
+    @GET("prize/draw")
+    fun requestPrizes(): Observable<HttpResponse<PrizeResponse>>
+
+    @GET("address/list")
+    fun requestAddresses(@Query("page") page: Int,
+                         @Query("size") size: Int): Observable<HttpListResponse<Address>>
 }

@@ -9,15 +9,23 @@ import android.widget.FrameLayout
 import com.jacky.labeauty.R
 import kotlinx.android.synthetic.main.layout_emptyview.view.*
 
-class EmptyView @JvmOverloads constructor(context: Context, id: Int, attrs: AttributeSet? = null, defStyleAttr: Int = 0, val text: Int = -1) : FrameLayout(context, attrs, defStyleAttr) {
-
+class EmptyView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
     init {
         addView(LayoutInflater.from(context).inflate(R.layout.layout_emptyview, this, false))
+    }
+
+    fun setImageResource(id: Int): EmptyView {
         imageView.setImageResource(id)
-        if (text > 0) {
-            tvDesc.setText(text)
+        return this
+    }
+
+    fun setDescID(imageResId: Int): EmptyView {
+        if (imageResId > 0) {
+            tvDesc.setText(imageResId)
         } else {
             tvDesc.visibility = View.GONE
         }
+        return this
     }
 }

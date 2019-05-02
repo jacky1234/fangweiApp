@@ -46,7 +46,11 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
             //detail
             DialogTipsHelper.showDiscountDetailDialog(fragmentManager!!)
         }
-        adapter?.emptyView = EmptyView(context!!, R.drawable.empty_coupons, null, 0, R.string.empty_discount)
+
+        val emptyView = EmptyView(context!!)
+        emptyView.setImageResource(R.drawable.empty_coupons)
+        emptyView.setDescID(R.string.empty_discount)
+        adapter?.emptyView = emptyView
         adapter?.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
             //to use discount
         }

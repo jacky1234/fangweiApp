@@ -2,6 +2,7 @@ package com.jacky.labeauty.logic.network;
 
 import android.support.annotation.NonNull;
 
+import com.jacky.labeauty.logic.Constant;
 import com.jacky.labeauty.logic.entity.module.Address;
 import com.jacky.labeauty.logic.entity.module.Banner;
 import com.jacky.labeauty.logic.entity.module.Category;
@@ -30,6 +31,7 @@ import com.jacky.labeauty.logic.entity.response.HttpPageResponse;
 import com.jacky.labeauty.logic.entity.response.HttpResponseSource;
 import com.jacky.labeauty.logic.entity.response.KeywordResponse;
 import com.jacky.labeauty.logic.entity.response.ListGoodResponse;
+import com.jacky.labeauty.logic.entity.response.PrizeResponse;
 import com.jacky.labeauty.logic.entity.response.SecondCategoryResponse;
 import com.jacky.labeauty.logic.entity.response.UploadFileResponse;
 import com.jacky.labeauty.logic.network.transformer.BooleanTransformer;
@@ -243,9 +245,29 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
+    public Observable<Boolean> deleteAddress(String addressId) {
+        return apiService.deleteAddress(addressId)
+                .compose(BooleanTransformer.handleResult(true));
+    }
+
+    public Observable<Address> updateAddress(boolean loading, Address address) {
+        return apiService.updateAddress(address)
+                .compose(HttpResponseTransformer.handleResult(loading));
+    }
+
     public Observable<HttpPageResponse<IntegralRecorder>> requestIntegrals(int page, String direction) {
         return apiService.requestIntegrals(direction, page, 10)
-                .compose(HttpPageResponseTransformer.handPageResult(true));
+                .compose(HttpPageResponseTransformer.handPageResult(false));
+    }
+
+    public Observable<PrizeResponse> requestPrizes() {
+        return apiService.requestPrizes()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
+    public Observable<List<Address>> requestAddresses(boolean loading) {
+        return apiService.requestAddresses(0, Constant.MAX_PAGE_SIZE)
+                .compose(HttpListResponseTransformer.handleResult(loading));
     }
 
     public static RequestHelper get() {

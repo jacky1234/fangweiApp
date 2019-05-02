@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <com.jacky.labeauty.ui.widget.EmptyView
+            android:id="@+id/emptyView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvAddAddress"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/stroke_round_blue"
+            android:gravity="center"
+            android:text="@string/add_get_prize_info"
+            android:textColor="@color/labe_blue"
+            android:textSize="15sp" />
+    </LinearLayout>
+</FrameLayout>
+

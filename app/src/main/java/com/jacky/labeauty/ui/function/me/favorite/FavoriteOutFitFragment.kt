@@ -46,7 +46,10 @@ class FavoriteOutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMor
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         adapter = FavoriteOutFitAdapter(R.layout.item_outfit_favorite)
-        adapter.emptyView = EmptyView(context!!, R.mipmap.ic_collect_blank)
+
+        val emptyView = EmptyView(context!!)
+        emptyView.setImageResource(R.mipmap.ic_collect_blank)
+        adapter.emptyView = emptyView
         adapter.setOnItemChildClickListener { _, view, position ->
             if (view.id == R.id.cbLike) {
                 if (MySelf.get().isLogined) {

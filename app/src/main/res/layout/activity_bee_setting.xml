@@ -22,5 +22,10 @@
             android:id="@+id/parentPush"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
+
+        <com.jacky.labeauty.ui.widget.RowItemView
+            android:id="@+id/parentAddress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
     </LinearLayout>
 </LinearLayout>

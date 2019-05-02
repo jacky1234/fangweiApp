@@ -26,7 +26,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 
 class MyIntegralActivity : BaseActivity() {
     private val tabNames = ArrayList<String>(2)
-    private val fragments = ArrayList<Fragment>(2)
+    private val fragments = ArrayList<IntegralRecorderFragment>(2)
 
 
     @SuppressLint("CheckResult")
@@ -35,8 +35,8 @@ class MyIntegralActivity : BaseActivity() {
         setContentView(R.layout.activity_my_integral)
         tabNames.add("积分获取记录")
         tabNames.add("积分消费记录")
-        fragments.add(IntergralRecorderFragment.newInstance(IntergralRecorderFragment.TYPE_IN))
-        fragments.add(IntergralRecorderFragment.newInstance(IntergralRecorderFragment.TYPE_OUT))
+        fragments.add(IntegralRecorderFragment.newInstance(IntegralRecorderFragment.TYPE_IN))
+        fragments.add(IntegralRecorderFragment.newInstance(IntegralRecorderFragment.TYPE_OUT))
 
         titleView.setLeftAction(View.OnClickListener { finish() })
 
@@ -47,13 +47,13 @@ class MyIntegralActivity : BaseActivity() {
 
             override fun getTitleView(context: Context, index: Int): IPagerTitleView {
                 val simplePagerTitleView = SimplePagerTitleView(context)
-                val paint = simplePagerTitleView.paint
-                paint.isFakeBoldText = true
+//                val paint = simplePagerTitleView.paint
+//                paint.isFakeBoldText = true
 
                 simplePagerTitleView.text = tabNames[index]
-                simplePagerTitleView.normalColor = Color.parseColor("#222222")
+                simplePagerTitleView.normalColor = Color.parseColor("#8b8b8d")
                 simplePagerTitleView.selectedColor = ContextCompat.getColor(context, R.color.labe_blue)
-                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18F)
+                simplePagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
                 simplePagerTitleView.setOnClickListener { viewPager.currentItem = index }
                 simplePagerTitleView.height = AndroidUtil.dip2px(55F).toInt()
                 return simplePagerTitleView
@@ -71,21 +71,35 @@ class MyIntegralActivity : BaseActivity() {
 
         magic_indicator.navigator = commonNavigator
 
-        val tabLayoutAdapter = TabLayoutAdapter(supportFragmentManager, tabNames, fragments)
+        val tabLayoutAdapter = TabLayoutAdapter(supportFragmentManager, tabNames, fragments as List<Fragment>)
         viewPager.adapter = tabLayoutAdapter
         ViewPagerHelper.bind(magic_indicator, viewPager)
 
+        tvTryLucky.clickWithTrigger {
+            LuckyPanelActivity.launchForResult(this@MyIntegralActivity)
+        }
+    }
 
-        //gain integral
+    @SuppressLint("CheckResult")
+    override fun onResume() {
+        super.onResume()
+        RequestHelper.get().requestSign()
+                .compose(bindToDestroy())
+                .subscribe {
+                    requestIntegral()
+                    fragments.forEach {
+                        it.setSinged()
+                    }
+                }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun requestIntegral() {
         RequestHelper.get().requestMyIntegral()
                 .compose(bindToDestroy())
                 .subscribe {
                     tv_integral_count.text = it.bonusPoints.toString()
                 }
-
-        tvTryLucky.clickWithTrigger {
-            LuckyPanelActivity.launchForResult(this@MyIntegralActivity)
-        }
     }
 
 

@@ -1,14 +1,16 @@
 package com.jacky.labeauty.ui.function.me.address
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.jacky.labeauty.R
+import com.jacky.labeauty.logic.entity.module.Address
 import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.entity.request.AddAddressRequest
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.function.Predicate
-import com.jacky.labeauty.support.log.Logger
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Checker
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
@@ -27,6 +29,19 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
         , AddressSelector.onSelectorAreaPositionListener {
     var dialog: BottomDialog? = null
     private var isSelectAddress = false
+
+    companion object {
+        const val KEY_ADDRESS = "KEY_ADDRESS"
+
+        @JvmStatic
+        fun launch(from: Activity, address: Address? = null) {
+            val intent = Intent(from, EditAddressActivity::class.java)
+            if (address != null) {
+                intent.putExtra(KEY_ADDRESS, address)
+            }
+            from.startActivity(intent)
+        }
+    }
 
     override fun onAddressSelected(province: Province?, city: City?, county: County?, street: Street?) {
 //        val provinceCode = if (province == null) "" else province.code
@@ -74,7 +89,7 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
         tvShi.setOnClickListener { showChooseAddressPanel() }
         tvXian.setOnClickListener { showChooseAddressPanel() }
 
-
+        fillWithAddress(intent.getSerializableExtra(KEY_ADDRESS) as Address?)
         tvConfirm.setOnClickListener {
             if ((Checker.check(etName, "请输入收货人姓名")
                             && Checker.checkMobile(etPhone)
@@ -101,9 +116,16 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
                         .compose(bindToDestroy())
                         .subscribe {
                             //add success
-                            Logger.i(it.toString())
+                            AndroidUtil.toast("添加成功")
+                            finish()
                         }
             }
+        }
+    }
+
+    private fun fillWithAddress(address: Address?) {
+        if (address != null) {
+
         }
     }
 
@@ -113,6 +135,10 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
         val attributes = window.attributes
         attributes.height = (AndroidUtil.getScreenHeight() * 3.0f / 4).toInt()
         window?.attributes = attributes
+
+        dialog.setTextSelectedColor(R.color.labe_grey)
+        dialog.setTextUnSelectedColor(R.color.labe_blue)
+        dialog.setIndicatorBackgroundColor(R.color.labe_blue)
 
         dialog.setOnAddressSelectedListener(this)
         dialog.setDialogDismisListener(this)

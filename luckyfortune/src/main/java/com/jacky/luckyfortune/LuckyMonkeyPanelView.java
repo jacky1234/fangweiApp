@@ -10,6 +10,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by jeanboy on 2017/4/20.
  */
@@ -89,6 +92,8 @@ public class LuckyMonkeyPanelView extends FrameLayout {
         for (View anItemViewArr : itemViewArr) {
             anItemViewArr.setEnabled(false);
         }
+
+        notifyObserver(Observer.NORMAL);
     }
 
     public void setAction(View.OnClickListener onClickListener) {
@@ -182,6 +187,7 @@ public class LuckyMonkeyPanelView extends FrameLayout {
 
                             if (isTryToStop && currentSpeed == DEFAULT_SPEED && stayIndex == currentIndex) {
                                 isGameRunning = false;
+                                notifyObserver(Observer.STOPPED);
                             }
                         }
                     });
@@ -193,6 +199,32 @@ public class LuckyMonkeyPanelView extends FrameLayout {
     public void tryToStop(int position) {
         stayIndex = position;
         isTryToStop = true;
+        notifyObserver(Observer.TRY_TO_STOP);
     }
 
+
+    List<Observer> observers = new ArrayList<>();
+
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    private void notifyObserver(int statues) {
+        for (Observer observer : observers) {
+            observer.onPanelStatusChange(statues);
+        }
+    }
+
+    public interface Observer {
+        int NORMAL = 0;
+        int TRY_TO_STOP = 1;
+        int STOPPED = 2;
+
+        /**
+         * @param status 0: normal
+         *               1: try to stop
+         *               2: stopped
+         */
+        void onPanelStatusChange(int status);
+    }
 }

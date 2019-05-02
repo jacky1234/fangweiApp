@@ -1,6 +1,8 @@
 package com.jacky.labeauty.logic.entity.module;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
 
     /**
      * id : 5caed27123294643544c6c27
@@ -124,5 +126,18 @@ public class Address {
 
     public void setDetailedAddress(String detailedAddress) {
         this.detailedAddress = detailedAddress;
+    }
+
+    public static Address updateRequest(Address that) {
+        final Address address = new Address();
+        address.id = that.id;
+        address.province = that.province;
+        address.city = that.city;
+        address.area = that.area;
+        address.address = that.address;
+        address.name = that.name;
+        address.mobile = that.mobile;
+        address.defaultAddress = that.defaultAddress;
+        return address;
     }
 }

@@ -1,37 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="恭喜你您，中奖了!" />
 
         <LinearLayout
+            android:id="@+id/parent_gif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@drawable/shape_round_white_5"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="18dp"
+            android:paddingTop="21dp"
+            android:paddingRight="18dp"
+            android:paddingBottom="21dp">
 
-            <ImageView
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="18sp"
+                tools:text="恭喜您，中奖了！" />
+
+
+            <!--实物中奖-->
+            <LinearLayout
+                android:id="@+id/parent_gift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/gift_iv_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:maxWidth="148dp"
+                    tools:src="@mipmap/ic_account" />
+
+                <TextView
+                    android:id="@+id/gift_tvDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#333333"
+                    android:textSize="10sp"
+                    tools:text="小米蓝牙耳机一副" />
+
+                <TextView
+                    android:id="@+id/gift_tvTips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/get_prize_address_tip"
+                    android:textColor="#8b8b8d"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!--实物中奖-->
+            <LinearLayout
+                tools:visibility="gone"
+                android:id="@+id/parent_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/coupon_iv_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:maxWidth="148dp"
+                    tools:src="@mipmap/ic_account" />
+
+                <TextView
+                    android:id="@+id/coupon_tvTips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33dp"
+                    android:text="@string/get_prize_deadline_tip"
+                    android:textColor="#8b8b8d"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <!--no prize-->
+            <LinearLayout
+                android:id="@+id/parent_np"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/np_iv_thumb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:maxWidth="148dp"
+                    android:src="@drawable/no_prize" />
+
+                <TextView
+                    android:id="@+id/np_tvTips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:text="@string/no_prize_courage"
+                    android:textColor="#8b8b8d"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvButton"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_rect_gradient"
+                android:gravity="center"
+                android:text="@string/get_prize_instant"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="56dp"
+            android:background="#999999" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/delete_with_circle" />
+    </LinearLayout>
 </FrameLayout>

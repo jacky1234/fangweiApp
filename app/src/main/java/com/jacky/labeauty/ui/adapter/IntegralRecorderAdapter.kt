@@ -10,7 +10,11 @@ class IntegralRecorderAdapter constructor(type: String, itemLayoutId: Int) : Bas
     override fun convert(helper: BaseViewHolder, item: IntegralRecorder) {
         helper.setText(R.id.tv_type, item.remark)
                 .setText(R.id.tv_create_date, formatTime(item.createTime))
-                .setText(R.id.tv_integral_count, "+" + item.changed)
+                .setText(R.id.tv_integral_count, if (item.changed > 0) {
+                    "+" + item.changed
+                } else {
+                    item.changed.toString()
+                })
     }
 
     private fun formatTime(time: Long): CharSequence {

@@ -65,4 +65,14 @@
     <string name="edit_address">填写地址</string>
     <string name="default_address">默认地址</string>
     <string name="empty_discount">亲，你暂时还没有优惠券哦</string>
+    <string name="empty_score_consume">你还没有消费记录哦~</string>
+    <string name="empty_score_gain">你还没有获取过积分哦~</string>
+    <string name="get_prize_instant">立即提货</string>
+    <string name="get_prize_title">恭喜您，中奖了！</string>
+    <string name="no_prize_title">很遗憾，未中奖！</string>
+    <string name="no_prize_courage">继续努力，总有成为那个幸运儿的</string>
+    <string name="get_prize_address_tip">中奖礼物请尽快填写地址哦</string>
+    <string name="get_prize_deadline_tip">优惠券请在规定的时间内使用，过期无效</string>
+    <string name="empty_address">你还没有添加地址哦~</string>
+    <string name="add_get_prize_info">+ 添加收货信息</string>
 </resources>
