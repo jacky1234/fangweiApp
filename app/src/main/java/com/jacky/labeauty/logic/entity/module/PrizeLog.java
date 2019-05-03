@@ -1,7 +1,9 @@
 package com.jacky.labeauty.logic.entity.module;
 
+import java.io.Serializable;
+
 // 中奖记录
-public class PrizeLog {
+public class PrizeLog implements Serializable {
 
     /**
      * id : 5cc7e595c3fb56801cbe999e

@@ -1,5 +1,5 @@
 <resources>
-    <string name="beedee_name">LeBeauty</string>
+    <string name="beedee_name">LaBeauty</string>
     <string name="back">返回</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
@@ -42,6 +42,7 @@
     <string name="lucky_pay_integral">积分抽奖</string>
     <string name="daily_login_integral">每次首次登陆+10积分</string>
     <string name="_100_consume_integer">100积分/次</string>
+    <string name="my_prize">我的奖品</string>
     <string name="my_discounts">我的优惠劵</string>
     <string name="to_use_instant">立即使用</string>
     <string name="discount_card">优惠劵</string>
@@ -73,6 +74,13 @@
     <string name="no_prize_courage">继续努力，总有成为那个幸运儿的</string>
     <string name="get_prize_address_tip">中奖礼物请尽快填写地址哦</string>
     <string name="get_prize_deadline_tip">优惠券请在规定的时间内使用，过期无效</string>
+    <string name="get_prize_integral_tip">积分已存入您的账户</string>
+    <string name="extract_prize_instant">立即提货</string>
+
     <string name="empty_address">你还没有添加地址哦~</string>
     <string name="add_get_prize_info">+ 添加收货信息</string>
+    <string name="extract_prize_success">提货成功</string>
+    <string name="extract_prize_success_tip">亲爱的用户我们会尽快发出您的中奖商品请耐心等候</string>
+    <string name="submit_success">提交成功</string>
+    <string name="submit_success_tip">亲爱的用户我们会在10个工作日落实此类事情再次感谢您的建议！</string>
 </resources>

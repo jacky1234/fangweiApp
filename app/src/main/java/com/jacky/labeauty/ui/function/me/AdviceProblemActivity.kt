@@ -10,6 +10,7 @@ import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Checker
 import com.jacky.labeauty.support.util.Strings
 import com.jacky.labeauty.ui.dialog.DialogTipsHelper
+import com.jacky.labeauty.ui.function.me.prize.ShowSuccessActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jacky.labeauty.ui.widget.FeedbackItemView
 import kotlinx.android.synthetic.main.activity_advice_problem.*
@@ -59,16 +60,16 @@ class AdviceProblemActivity : BaseActivity() {
             }
 
             if (item == null) {
-                AndroidUtil.toast("请选择反馈类型")
+                AndroidUtil.toast("请选择反馈类型！")
                 return@clickWithTrigger
             }
+
+            if (Checker.check(etPhone, "请输入手机号！") && !Checker.checkMobile(etPhone)) {
+                return@clickWithTrigger
+            }
+
 
             val phone = etPhone.text.toString()
-            if (Strings.isNotBlank(phone) && !Checker.checkMobile(etPhone)) {
-                return@clickWithTrigger
-            }
-
-
             val request = FeedbackRequest()
             request.category = item.getCategory() as String?
             request.content = text
@@ -82,6 +83,7 @@ class AdviceProblemActivity : BaseActivity() {
                                 .createFeedbackDialog(this)
                         createFeedbackDialog.setOnCancelListener {
                             this@AdviceProblemActivity.finish()
+                            ShowSuccessActivity.launch(this@AdviceProblemActivity, ShowSuccessActivity.TYPE_FEEDBACK)
                         }
                         createFeedbackDialog.show()
                     }

@@ -89,7 +89,8 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
         tvShi.setOnClickListener { showChooseAddressPanel() }
         tvXian.setOnClickListener { showChooseAddressPanel() }
 
-        fillWithAddress(intent.getSerializableExtra(KEY_ADDRESS) as Address?)
+        val address = intent.getSerializableExtra(KEY_ADDRESS) as Address?
+        fillWithAddress(address)
         tvConfirm.setOnClickListener {
             if ((Checker.check(etName, "请输入收货人姓名")
                             && Checker.checkMobile(etPhone)
@@ -103,29 +104,50 @@ class EditAddressActivity : BaseActivity(), OnAddressSelectedListener
                 val county = tvXian.text.toString()
                 val detail = etAddressDetail.text.toString().trim()
 
-                val request = AddAddressRequest()
-                request.province = province
-                request.city = city
-                request.area = county
-                request.address = detail
-                request.name = name
-                request.mobile = phone
-                request.isDefaultAddress = true
+                if (address != null) {
+                    address.name = name
+                    address.mobile = phone
+                    address.province = province
+                    address.city = city
+                    address.area = county
+                    address.address = detail
+                    RequestHelper.get().updateAddress(true, address)
+                            .compose(bindToDestroy())
+                            .subscribe {
+                                AndroidUtil.toast("修改成功")
+                                finish()
+                            }
+                } else {
 
-                RequestHelper.get().addAddressRecorder(request)
-                        .compose(bindToDestroy())
-                        .subscribe {
-                            //add success
-                            AndroidUtil.toast("添加成功")
-                            finish()
-                        }
+                    val request = AddAddressRequest()
+                    request.province = province
+                    request.city = city
+                    request.area = county
+                    request.address = detail
+                    request.name = name
+                    request.mobile = phone
+                    request.isDefaultAddress = true
+                    RequestHelper.get().addAddressRecorder(request)
+                            .compose(bindToDestroy())
+                            .subscribe {
+                                //add success
+                                AndroidUtil.toast("添加成功")
+                                finish()
+                            }
+                }
             }
         }
     }
 
     private fun fillWithAddress(address: Address?) {
         if (address != null) {
-
+            isSelectAddress = true
+            etName.setText(address.name)
+            etPhone.setText(address.mobile)
+            tvProvince.text = address.province
+            tvShi.text = address.city
+            tvXian.text = address.area
+            etAddressDetail.setText(address.address)
         }
     }
 

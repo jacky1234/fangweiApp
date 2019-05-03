@@ -46,6 +46,7 @@ class LuckyBoxDialog(private val getPrizeClickListener: OnGetPrizeClickListener?
 
         parent_gift.visibility = View.GONE
         parent_coupon.visibility = View.GONE
+        parent_integral.visibility = View.GONE
         parent_np.visibility = View.GONE
 
         val targetType = prize.targetType
@@ -64,6 +65,12 @@ class LuckyBoxDialog(private val getPrizeClickListener: OnGetPrizeClickListener?
                     parent_coupon.visibility = View.VISIBLE
 
                     loadImage(148, coupon_iv_thumb)
+                    tvButton.text = "点击领取"
+                }
+                Prize.TARGET_TYPE_INTEGRAL -> {
+                    parent_integral.visibility = View.VISIBLE
+
+                    //todo
                     tvButton.text = "点击领取"
                 }
             }

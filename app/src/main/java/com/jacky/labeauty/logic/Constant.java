@@ -11,5 +11,6 @@ public final class Constant {
     public static final String REGISTER_PROTOCOL_URL = "https://static.labeauty.yituizhineng.top/html/registration_agreement.html";
 //    public static final String REGISTER_PROTOCOL_URL = "https://static.labeauty.panda.online/html/registration_agreement.html";
 
+    public static final int NORMAL_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 100;
 }

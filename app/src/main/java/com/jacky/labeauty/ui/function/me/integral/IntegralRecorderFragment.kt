@@ -14,6 +14,7 @@ import com.jacky.labeauty.support.log.Logger
 import com.jacky.labeauty.ui.adapter.IntegralRecorderAdapter
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.EmptyView
+import com.jacky.labeauty.ui.widget.decoration.DividerItemDecoration
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
@@ -59,9 +60,11 @@ class IntegralRecorderFragment : MySupportFragment(), OnRefreshListener, OnLoadM
         super.onLazyInitView(savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))
         recyclerView.adapter = adapter
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
+        refreshLayout.setBackgroundColor(resources.getColor(R.color.white))
     }
 
     @SuppressLint("CheckResult")
@@ -98,6 +101,9 @@ class IntegralRecorderFragment : MySupportFragment(), OnRefreshListener, OnLoadM
 
         refreshLayout.finishLoadMore(true)
         refreshLayout.finishRefresh(true)
+        if (response.isLast) {
+            refreshLayout.setNoMoreData(true)
+        }
     }
 
     companion object {

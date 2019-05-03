@@ -1,6 +1,8 @@
 package com.jacky.labeauty.logic.entity.module;
 
-public class Prize {
+import java.io.Serializable;
+
+public class Prize implements Serializable {
 
     /**
      * "id": "5cc2854b2329468b8cfb5598",
@@ -15,6 +17,7 @@ public class Prize {
     public static final String TARGET_TYPE_EMPTY = "EMPTY";
     public static final String TARGET_TYPE_GIFT = "GIFT";
     public static final String TARGET_TYPE_COUPON = "COUPON";
+    public static final String TARGET_TYPE_INTEGRAL = "INTEGRA";
 
     private String id;
     private long createTime;

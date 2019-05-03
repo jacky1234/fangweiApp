@@ -17,6 +17,7 @@ import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.SpanUtils
 import com.jacky.labeauty.ui.dialog.DialogTipsHelper
 import com.jacky.labeauty.ui.dialog.LuckyBoxDialog
+import com.jacky.labeauty.ui.function.me.prize.ExtractPrizeActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jacky.luckyfortune.LuckyMonkeyPanelView
 import kotlinx.android.synthetic.main.activity_lucky_panel.*
@@ -108,10 +109,11 @@ class LuckyPanelActivity : BaseActivity(), LuckyMonkeyPanelView.Observer {
 
     //0-8
     private fun onOpenLuckyBox(prize: Prize, prizeLog: PrizeLog) {
-        DialogTipsHelper.createOpenLuckyBoxDialog(this, object : LuckyBoxDialog.OnGetPrizeClickListener {
+        DialogTipsHelper.createOpenLuckyBoxDialog(
+                this, object : LuckyBoxDialog.OnGetPrizeClickListener {
             override fun getPrizeClickListener() {
-                //
                 Logger.i("get prize gif")
+                ExtractPrizeActivity.launch(this@LuckyPanelActivity, prize, prizeLog)
             }
         }, prize).show()
     }

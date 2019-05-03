@@ -22,7 +22,7 @@ import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.AndroidUtil.toast
 import com.jacky.labeauty.support.util.Strings
 import com.jacky.labeauty.ui.function.login.LoginActivity
-import com.jacky.labeauty.ui.function.me.discount.MyDiscountsActivity
+import com.jacky.labeauty.ui.function.me.discount.MyPrizeActivity
 import com.jacky.labeauty.ui.function.me.integral.MyIntegralActivity
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jakewharton.rxbinding2.view.RxView
@@ -48,7 +48,7 @@ class Mefragment : MySupportFragment() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val content = inflater.inflate(R.layout.fragment_me, null)
+        val content = inflater.inflate(R.layout.fragment_me, container, false)
         parentUnLogined = content.findViewById<View>(R.id.parent_unlogined)
         parentLogined = content.findViewById<View>(R.id.parent_login)
         groupListView = content.findViewById(R.id.groupListView)
@@ -106,7 +106,7 @@ class Mefragment : MySupportFragment() {
 
         val itemDiscounts = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.me_coupon),
-                "优惠劵",
+                "我的奖品",
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -138,7 +138,7 @@ class Mefragment : MySupportFragment() {
 
                 itemDiscounts -> {
                     ensureLogin(it, Runnable {
-                        startActivity(Intent(this@Mefragment.getActivity(), MyDiscountsActivity::class.java))
+                        startActivity(Intent(this@Mefragment.getActivity(), MyPrizeActivity::class.java))
                     })
                 }
 
@@ -172,6 +172,19 @@ class Mefragment : MySupportFragment() {
         tv_msg.clickWithTrigger {
             startActivity(Intent(getActivity(), MessageActivity::class.java))
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun requestMsgCount() {
+        RequestHelper.get().requestMsgCount()
+                .compose(bindUntilDetach())
+                .subscribe {
+                    tvHasMessage.visibility = if (it.value > 0) {
+                        View.VISIBLE
+                    } else {
+                        View.GONE
+                    }
+                }
     }
 
     private fun ensureLogin(view: View, runnable: Runnable?) {
@@ -218,5 +231,6 @@ class Mefragment : MySupportFragment() {
     override fun onResume() {
         super.onResume()
         initFlexible()
+        requestMsgCount()
     }
 }

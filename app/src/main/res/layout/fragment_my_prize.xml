@@ -12,8 +12,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleView_title_text="@string/my_discounts"
+        app:titleView_title_text="@string/my_prize"
         app:titleView_visible_type="left_middle" />
 
-    <include layout="@layout/layout_recylerview_with_refresh" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height">
+
+        <net.lucode.hackware.magicindicator.MagicIndicator
+            android:id="@+id/magic_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/title_height"
+            android:layout_gravity="center_horizontal" />
+    </FrameLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
 </LinearLayout>

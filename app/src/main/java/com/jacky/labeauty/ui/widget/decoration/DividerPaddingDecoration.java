@@ -34,15 +34,15 @@ public class DividerPaddingDecoration extends RecyclerView.ItemDecoration {
         if (mOrientation == VERTICAL_LIST) {
             outRect.set(0, itemPadding, 0, 0);
         } else {
-            outRect.set(itemPadding, itemPadding, 0, 0);
+            outRect.set(itemPadding, 0, 0, 0);
         }
-        final int position = parent.getChildAdapterPosition(view);
-        if (position == parent.getChildCount() - 1) {
-            if (mOrientation == VERTICAL_LIST) {
-                outRect.bottom = itemPadding;
-            } else {
-                outRect.right = itemPadding;
-            }
-        }
+//        final int position = parent.getChildAdapterPosition(view);
+//        if (position == parent.getChildAdapterPosition(view) - 1) {
+//            if (mOrientation == VERTICAL_LIST) {
+//                outRect.bottom = itemPadding;
+//            } else {
+//                outRect.right = itemPadding;
+//            }
+//        }
     }
 }

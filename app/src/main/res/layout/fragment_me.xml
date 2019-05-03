@@ -98,13 +98,25 @@
 
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/tv_msg"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/news" />
+                android:layout_marginRight="25dp">
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/news" />
+
+                <TextView
+                    android:id="@+id/tvHasMessage"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_gravity="right"
+                    android:background="@drawable/shape_circle_dot" />
+            </FrameLayout>
 
         </FrameLayout>
     </LinearLayout>
@@ -113,10 +125,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="150dp"
         android:layout_marginLeft="15dp"
-        android:background="@color/white"
+        android:layout_marginTop="150dp"
         android:layout_marginRight="15dp"
+        android:background="@color/white"
         android:paddingBottom="30dp">
 
         <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView

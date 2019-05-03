@@ -103,9 +103,6 @@ interface ApiService {
     fun requestGroupByCatalogue(@Query("categoryId") categoryId: String): Observable<HttpListResponse<SecondCategoryResponse>>
 
     @POST("feedback/post")
-    fun feedbackProblem(@Body request: FeedbackRequest): Observable<HttpResponseSource>
-
-    @POST("collect")
     fun feedbackAdvice(@Body request: FeedbackRequest): Observable<HttpResponse<Feedback>>
 
     @GET("goods/get_search_term")
@@ -113,6 +110,10 @@ interface ApiService {
 
     @GET("coupon/list")
     fun requestDiscounts(@Query("page") page: Int): Observable<HttpPageResponse<MyDiscount>>
+
+    @GET("prize/log/bind_address")
+    fun bindAddress(@Query("prizeLogId") prizeLogId: String,
+                    @Query("addressId") addressId: String): Observable<HttpResponseSource>
 
     @GET("wallet/get")
     fun requestIntegral(): Observable<HttpResponse<MyIntegral>>
@@ -141,4 +142,15 @@ interface ApiService {
     @GET("address/list")
     fun requestAddresses(@Query("page") page: Int,
                          @Query("size") size: Int): Observable<HttpListResponse<Address>>
+
+    @GET("notice/read")
+    fun noticeMsgRead(): Observable<HttpResponseSource>
+
+    @GET("notice/count_unread")
+    fun requestMsgCount(): Observable<HttpResponse<MsgCount>>
+
+    @GET("notice/list")
+    fun requestMessages(@Query("page") page: Int,
+                        @Query("size") size: Int): Observable<HttpPageResponse<Message>>
+
 }

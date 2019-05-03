@@ -1,6 +1,8 @@
 package com.jacky.labeauty.logic.entity.module;
 
-public class MyDiscount {
+import java.io.Serializable;
+
+public class MyDiscount implements Serializable {
     //reduceRule
     public final static String VALUE = "VALUE";
     public final static String DISCOUNT = "DISCOUNT";
@@ -43,6 +45,7 @@ public class MyDiscount {
     private int duration;
     private boolean disabled;
     private long sendTime;
+    private String desc;
 
     public String getId() {
         return id;
@@ -162,5 +165,13 @@ public class MyDiscount {
 
     public void setSendTime(long sendTime) {
         this.sendTime = sendTime;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

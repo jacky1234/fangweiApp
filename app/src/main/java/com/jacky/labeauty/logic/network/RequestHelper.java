@@ -10,6 +10,8 @@ import com.jacky.labeauty.logic.entity.module.Feedback;
 import com.jacky.labeauty.logic.entity.module.Good;
 import com.jacky.labeauty.logic.entity.module.GoodType;
 import com.jacky.labeauty.logic.entity.module.IntegralRecorder;
+import com.jacky.labeauty.logic.entity.module.Message;
+import com.jacky.labeauty.logic.entity.module.MsgCount;
 import com.jacky.labeauty.logic.entity.module.MyDiscount;
 import com.jacky.labeauty.logic.entity.module.MyIntegral;
 import com.jacky.labeauty.logic.entity.module.MySelf;
@@ -103,13 +105,6 @@ public class RequestHelper {
         Map<String, String> map = new HashMap<>(1);
         map.put("mobile", s);
         return apiService.sendCode(map)
-                .compose(BooleanTransformer.handleResult(true));
-    }
-
-    public Observable<Boolean> feedbackProblem(@NotNull String s) {
-        FeedbackRequest request = new FeedbackRequest();
-        request.setContent(s);
-        return apiService.feedbackProblem(request)
                 .compose(BooleanTransformer.handleResult(true));
     }
 
@@ -233,6 +228,12 @@ public class RequestHelper {
                 .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
+    //提货
+    public Observable<Boolean> bindAddress(String prizeLogId, String addressId) {
+        return apiService.bindAddress(prizeLogId, addressId)
+                .compose(BooleanTransformer.handleResult(true));
+    }
+
     //签到
     public Observable<Sign> requestSign() {
         return apiService.requestSign()
@@ -268,6 +269,21 @@ public class RequestHelper {
     public Observable<List<Address>> requestAddresses(boolean loading) {
         return apiService.requestAddresses(0, Constant.MAX_PAGE_SIZE)
                 .compose(HttpListResponseTransformer.handleResult(loading));
+    }
+
+    public Observable<Boolean> noticeMsgRead() {
+        return apiService.noticeMsgRead()
+                .compose(BooleanTransformer.handleResult(false));
+    }
+
+    public Observable<MsgCount> requestMsgCount() {
+        return apiService.requestMsgCount()
+                .compose(HttpResponseTransformer.handleResult(false));
+    }
+
+    public Observable<HttpPageResponse<Message>> requestMessages(int page) {
+        return apiService.requestMessages(page, Constant.NORMAL_PAGE_SIZE)
+                .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
     public static RequestHelper get() {

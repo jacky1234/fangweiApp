@@ -1,7 +1,9 @@
 package com.jacky.labeauty.ui.function.me.address
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SimpleItemAnimator
@@ -28,6 +30,24 @@ import kotlinx.android.synthetic.main.activity_my_address.*
 class MyAddressActivity : BaseActivity() {
     private var deleteDialog: QMUIDialog? = null
     lateinit var adapter: AddressRecorderAdapter
+
+    companion object {
+        const val REQUEST_ADDRESS_CODE = 100
+        const val KEY_CHOOSE_ADDRESS = "KEY_CHOOSE_ADDRESS"
+        const val KEY_RESULT_ADDRESS = "KEY_RESULT_ADDRESS"
+
+        @JvmStatic
+        fun launch(from: Activity, chooseAddress: Boolean = false, code: Int = -1) {
+            val intent = Intent(from, MyAddressActivity::class.java)
+            intent.putExtra(KEY_CHOOSE_ADDRESS, chooseAddress)
+            if (code != -1) {
+                from.startActivityForResult(intent, code)
+            } else {
+                from.startActivity(intent)
+            }
+        }
+    }
+
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +92,14 @@ class MyAddressActivity : BaseActivity() {
                 }
             }
         }
+        if (intent.getBooleanExtra(KEY_CHOOSE_ADDRESS, false)) {
+            adapter.setOnItemClickListener { _, _, position ->
+                val intent = Intent()
+                intent.putExtra(KEY_RESULT_ADDRESS, adapter.getItem(position))
+                setResult(Activity.RESULT_OK, intent)
+                finish()
+            }
+        }
 
         val footView = FootView(this)
         footView.clickWithTrigger {
@@ -81,7 +109,6 @@ class MyAddressActivity : BaseActivity() {
 
         recyclerView.addItemDecoration(DividerPaddingDecoration(this
                 , DividerPaddingDecoration.VERTICAL_LIST, AndroidUtil.dip2px(10F).toInt()))
-//        adapter.setNewData(mockData())
 
         val contentView = AndroidUtil.getContentView(this) as ViewGroup
         adapter.emptyView = getEmptyView(contentView)
@@ -125,24 +152,6 @@ class MyAddressActivity : BaseActivity() {
             EditAddressActivity.launch(this)
         }
         return view
-    }
-
-
-    private fun mockData(): List<Address> {
-        val arrayList = ArrayList<Address>()
-        for (i in 0 until 100) {
-            val address = Address()
-            address.id = i.toString()
-            address.name = "name$i"
-            address.province = "浙江省"
-            address.city = "杭州市"
-            address.area = "江干区"
-            address.address = "克亚时代广场1106室"
-            address.mobile = "18516606250"
-            address.isDefaultAddress = i == 10
-            arrayList.add(address)
-        }
-        return arrayList
     }
 
     private class FootView constructor(context: Context) : TextView(context) {

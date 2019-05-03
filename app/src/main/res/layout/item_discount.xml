@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:layout_height="83dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="@drawable/shape_round_white_5">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="14dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:textSize="28sp"
@@ -23,22 +25,29 @@
         android:id="@+id/discount_desc_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="80dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf="@+id/tv_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tv_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textSize="13sp"
             tools:text="coco" />
 
         <TextView
             android:id="@+id/tv_scope"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:singleLine="true"
+            android:textColor="#a5a5a5"
+            android:textSize="10sp"
             tools:text="coco" />
 
 
@@ -46,17 +55,35 @@
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:singleLine="true"
+            android:textColor="#a5a5a5"
+            android:textSize="12sp"
             tools:text="coco" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_to_use"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="82dp"
+        android:layout_height="25dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/shape_rect_gradient"
+        android:gravity="center"
         android:text="@string/to_use_instant"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_divider"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="3dp"
+        android:background="@drawable/discount_divider_white_h"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_to_use"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

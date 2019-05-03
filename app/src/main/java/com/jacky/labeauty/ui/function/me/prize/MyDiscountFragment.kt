@@ -1,4 +1,4 @@
-package com.jacky.labeauty.ui.function.me.discount
+package com.jacky.labeauty.ui.function.me.prize
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,27 +10,25 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.util.AndroidUtil
-import com.jacky.labeauty.ui.dialog.DialogTipsHelper
+import com.jacky.labeauty.ui.function.me.discount.MyDiscountsAdapter
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.EmptyView
 import com.jacky.labeauty.ui.widget.decoration.DividerPaddingDecoration
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
-import kotlinx.android.synthetic.main.fragment_my_discounts.*
 import kotlinx.android.synthetic.main.layout_recylerview_with_refresh.*
 
-class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
+class MyDiscountFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
     private var adapter: MyDiscountsAdapter? = null
     private var page = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_my_discounts, container, false)
+        return inflater.inflate(R.layout.fragment_my_discount, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        titleView.setLeftAction(View.OnClickListener { activity!!.finish() })
+    override fun onLazyInitView(savedInstanceState: Bundle?) {
+        super.onLazyInitView(savedInstanceState)
 
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
@@ -42,9 +40,11 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
         recyclerView.adapter = adapter
         requestDiscounts()
 
-        adapter?.setOnItemClickListener { _, _, position ->
+        adapter?.setOnItemClickListener { adapter, _, position ->
             //detail
-            DialogTipsHelper.showDiscountDetailDialog(fragmentManager!!)
+//            DialogTipsHelper.showDiscountDetailDialog(fragmentManager!!)
+
+            goToDetail(adapter, position)
         }
 
         val emptyView = EmptyView(context!!)
@@ -53,6 +53,16 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
         adapter?.emptyView = emptyView
         adapter?.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
             //to use discount
+            goToDetail(adapter, position)
+        }
+    }
+
+    private fun goToDetail(adapter: BaseQuickAdapter<*, *>?, position: Int) {
+        val cast = adapter as MyDiscountsAdapter
+        val discount = cast.getItem(position)
+        if (discount != null) {
+            val parentFragment = fragmentManager!!.fragments[0] as MySupportFragment
+            parentFragment.start(MyDiscountDetailFragment.newInstance(discount))
         }
     }
 
@@ -78,6 +88,7 @@ class MyDiscountsFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
                     }
                 }
     }
+
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         page = 0

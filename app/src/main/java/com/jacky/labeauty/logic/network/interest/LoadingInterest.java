@@ -1,5 +1,6 @@
 package com.jacky.labeauty.logic.network.interest;
 
+import com.jacky.labeauty.support.log.Logger;
 import com.jacky.labeauty.ui.dialog.DialogTipsHelper;
 import com.jacky.labeauty.ui.inner.arch.BaseActivity;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -31,7 +32,11 @@ public class LoadingInterest implements Interest {
     @Override
     public void onEnd() {
         if (activity != null && tipDialog.isShowing()) {
-            tipDialog.dismiss();
+            try {
+                tipDialog.dismiss();
+            } catch (Exception e) {
+                Logger.e(e);
+            }
         }
     }
 }
