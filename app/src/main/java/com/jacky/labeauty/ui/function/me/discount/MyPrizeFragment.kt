@@ -82,6 +82,14 @@ class MyPrizeFragment : MySupportFragment() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
 
+                        for (i in 0 until 2) {
+                            val pagerTitleView = navigator.getPagerTitleView(i) as SimplePagerTitleView
+                            pagerTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, if (position == i) {
+                                18f
+                            } else {
+                                15f
+                            })
+                        }
                     }
                 }
                 indicator.mode = LinePagerIndicator.MODE_EXACTLY
