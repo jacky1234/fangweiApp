@@ -8,6 +8,7 @@ import com.jacky.labeauty.logic.entity.module.Banner;
 import com.jacky.labeauty.logic.entity.module.Category;
 import com.jacky.labeauty.logic.entity.module.Feedback;
 import com.jacky.labeauty.logic.entity.module.Good;
+import com.jacky.labeauty.logic.entity.module.GoodItem;
 import com.jacky.labeauty.logic.entity.module.GoodType;
 import com.jacky.labeauty.logic.entity.module.IntegralRecorder;
 import com.jacky.labeauty.logic.entity.module.Message;
@@ -32,7 +33,6 @@ import com.jacky.labeauty.logic.entity.response.HotVideoResponse;
 import com.jacky.labeauty.logic.entity.response.HttpPageResponse;
 import com.jacky.labeauty.logic.entity.response.HttpResponseSource;
 import com.jacky.labeauty.logic.entity.response.KeywordResponse;
-import com.jacky.labeauty.logic.entity.response.ListGoodResponse;
 import com.jacky.labeauty.logic.entity.response.PrizeResponse;
 import com.jacky.labeauty.logic.entity.response.SecondCategoryResponse;
 import com.jacky.labeauty.logic.entity.response.UploadFileResponse;
@@ -149,9 +149,9 @@ public class RequestHelper {
     }
 
     //穿搭
-    public Observable<ListGoodResponse> requestOutfitHot(int page) {
+    public Observable<HttpPageResponse<GoodItem>> requestOutfitHot(int page) {
         return apiService.requestOutfitHot(page)
-                .compose(HttpResponseTransformer.handleResult(false));
+                .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
     public Observable<Good> requestOutfitDetail(String outfitId) {
@@ -165,9 +165,9 @@ public class RequestHelper {
     }
 
     //热门商品
-    public Observable<ListGoodResponse> requestHotGoods(int page) {
+    public Observable<HttpPageResponse<GoodItem>> requestHotGoods(int page) {
         return apiService.requestHotGoods(page)
-                .compose(HttpResponseTransformer.handleResult(false));
+                .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
     public Observable<HotVideoResponse> requestDesignVideo(int page) {
@@ -198,9 +198,9 @@ public class RequestHelper {
                 .compose(HttpListResponseTransformer.handleResult(true));
     }
 
-    public Observable<ListGoodResponse> requestSearchGood(String key) {
+    public Observable<HttpPageResponse<GoodItem>> requestSearchGood(String key) {
         return apiService.requestSearchGood(key)
-                .compose(HttpResponseTransformer.handleResult(true));
+                .compose(HttpPageResponseTransformer.handPageResult(true));
     }
 
     public Observable<List<SecondCategoryResponse>> requestGroupByCategroy(String categoryId) {

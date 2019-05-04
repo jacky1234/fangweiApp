@@ -68,10 +68,10 @@ class NewHotsGoodFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLi
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
-                        adapter.setNewData(it.content)
+                        adapter.setNewData(it.data)
                         refreshLayout.finishRefresh(true)
                     } else {
-                        adapter.addData(it.content)
+                        adapter.addData(it.data)
                         if (it.isLast) {
                             refreshLayout.finishLoadMoreWithNoMoreData()
                         } else {

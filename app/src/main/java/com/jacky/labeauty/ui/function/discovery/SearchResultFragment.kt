@@ -1,5 +1,6 @@
 package com.jacky.labeauty.ui.function.discovery
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -23,14 +24,16 @@ class SearchResultFragment : MySupportFragment() {
     private lateinit var adapter: SearchResultAdapter
     private val list = ArrayList<GoodItem>()
 
+    @SuppressLint("CheckResult")
     fun requestSearchKey(key: String) {
         RequestHelper.get().requestSearchGood(key)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    if (it.content.isEmpty()) {
+                    if (it.data.isEmpty()) {
                         AndroidUtil.toast("无搜索结果")
+                        return@subscribe
                     }
-                    list.addAll(it.content)
+                    list.addAll(it.data)
                     adapter.notifyDataSetChanged()
                 }
     }

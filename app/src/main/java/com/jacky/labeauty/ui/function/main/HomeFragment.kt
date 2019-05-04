@@ -78,8 +78,8 @@ class HomeFragment : MySupportFragment() {
         RequestHelper.get().requestOutfitHot(0)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    if (it != null && !it.content.isEmpty()) {
-                        onResultOutfit(it.content)
+                    if (it != null && !it.data.isEmpty()) {
+                        onResultOutfit(it.data)
                     }
                 }
     }
@@ -106,8 +106,8 @@ class HomeFragment : MySupportFragment() {
         RequestHelper.get().requestHotGoods(0)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    if (it != null && !it.content.isEmpty()) {
-                        onResultHotGoods(it.content)
+                    if (it != null && !it.data.isEmpty()) {
+                        onResultHotGoods(it.data)
                     }
                 }
     }

@@ -63,14 +63,14 @@ interface ApiService {
 
     //查询热门穿搭（首页“人气穿搭”和人气穿搭页“搭配推荐”）
     @GET("outfit/list_hot")
-    fun requestOutfitHot(@Query("page") page: Int): Observable<HttpResponse<ListGoodResponse>>
+    fun requestOutfitHot(@Query("page") page: Int): Observable<HttpPageResponse<GoodItem>>
 
-    //查询最新穿搭
-    @GET("outfit/list_new")
-    fun requestOutfitNew(): Observable<HttpResponse<ListGoodResponse>>
-
-    @GET("outfit/search")
-    fun searchOutfit(): Observable<HttpResponse<ListGoodResponse>>
+//    //查询最新穿搭
+//    @GET("outfit/list_new")
+//    fun requestOutfitNew(): Observable<HttpResponse<ListGoodResponse>>
+//
+//    @GET("outfit/search")
+//    fun searchOutfit(): Observable<HttpResponse<ListGoodResponse>>
 
     //查询穿搭详情
     @GET("outfit/get")
@@ -82,7 +82,7 @@ interface ApiService {
 
 
     @GET("goods/list_hot")
-    fun requestHotGoods(@Query("page") page: Int): Observable<HttpResponse<ListGoodResponse>>
+    fun requestHotGoods(@Query("page") page: Int): Observable<HttpPageResponse<GoodItem>>
 
     @GET("design/list_hot")
     fun requestHotDesignVideo(@Query("page") page: Int): Observable<HttpResponse<HotVideoResponse>>
@@ -97,7 +97,7 @@ interface ApiService {
     fun requestFirstCategory(): Observable<HttpListResponse<Category>>
 
     @GET("goods/search")
-    fun requestSearchGood(@Query("keyword") keyword: String): Observable<HttpResponse<ListGoodResponse>>
+    fun requestSearchGood(@Query("keyword") keyword: String): Observable<HttpPageResponse<GoodItem>>
 
     @GET("goods/group_by_category")
     fun requestGroupByCatalogue(@Query("categoryId") categoryId: String): Observable<HttpListResponse<SecondCategoryResponse>>

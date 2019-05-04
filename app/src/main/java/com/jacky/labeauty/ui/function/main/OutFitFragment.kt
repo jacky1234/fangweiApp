@@ -14,7 +14,7 @@ import com.jacky.labeauty.logic.entity.module.GoodItem
 import com.jacky.labeauty.logic.entity.module.GoodType
 import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.entity.module.Video
-import com.jacky.labeauty.logic.entity.response.ListGoodResponse
+import com.jacky.labeauty.logic.entity.response.HttpPageResponse
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
@@ -142,11 +142,11 @@ class OutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListene
                 }
     }
 
-    private fun triggerData(append: Boolean, response: ListGoodResponse) {
+    private fun triggerData(append: Boolean, response: HttpPageResponse<GoodItem>) {
         if (!append) {
             goodItems.clear()
         }
-        goodItems.addAll(response.content)
+        goodItems.addAll(response.data)
 
         if (append) {
             adapter.appendData(videos, goodItems)
