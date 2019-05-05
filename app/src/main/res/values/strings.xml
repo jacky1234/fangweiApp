@@ -66,6 +66,7 @@
     <string name="edit_address">填写地址</string>
     <string name="default_address">默认地址</string>
     <string name="empty_discount">亲，你暂时还没有优惠券哦</string>
+    <string name="empty_entity_prize">亲，你暂时还没有实物奖品哦</string>
     <string name="empty_score_consume">你还没有消费记录哦~</string>
     <string name="empty_score_gain">你还没有获取过积分哦~</string>
     <string name="get_prize_instant">立即提货</string>

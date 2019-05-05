@@ -11,6 +11,7 @@ import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.adapter.MyDiscountsAdapter
+import com.jacky.labeauty.ui.adapter.MyEntityPrizeAdapter
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.EmptyView
 import com.jacky.labeauty.ui.widget.decoration.DividerPaddingDecoration
@@ -19,12 +20,15 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.layout_recylerview_with_refresh.*
 
-class MyDiscountFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
-    private var adapter: MyDiscountsAdapter? = null
+/**
+ * 实物奖品展示
+ */
+class MyEntityFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListener {
+    private var adapter: MyEntityPrizeAdapter? = null
     private var page = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_my_discount, container, false)
+        return inflater.inflate(R.layout.fragment_my_entity, container, false)
     }
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
@@ -32,7 +36,7 @@ class MyDiscountFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLis
 
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
-        adapter = MyDiscountsAdapter(R.layout.item_discount)
+        adapter = MyEntityPrizeAdapter(R.layout.item_discount)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         val span = AndroidUtil.dip2px(15f).toInt()
@@ -48,12 +52,11 @@ class MyDiscountFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreLis
         }
 
         val emptyView = EmptyView(context!!)
-        emptyView.setImageResource(R.drawable.empty_coupons)
-        emptyView.setDescID(R.string.empty_discount)
+        emptyView.setImageResource(R.drawable.empty_prize)
+        emptyView.setDescID(R.string.empty_entity_prize)
         adapter?.emptyView = emptyView
         adapter?.onItemChildClickListener = BaseQuickAdapter.OnItemChildClickListener { adapter, view, position ->
-            //to use discount
-            goToDetail(adapter, position)
+            //            goToDetail(adapter, position)
         }
     }
 

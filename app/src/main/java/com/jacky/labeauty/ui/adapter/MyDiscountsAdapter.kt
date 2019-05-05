@@ -1,4 +1,4 @@
-package com.jacky.labeauty.ui.function.me.discount
+package com.jacky.labeauty.ui.adapter
 
 import android.widget.TextView
 import com.chad.library.adapter.base.BaseQuickAdapter
