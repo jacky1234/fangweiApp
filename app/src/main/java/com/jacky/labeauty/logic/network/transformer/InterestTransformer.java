@@ -62,7 +62,11 @@ public class InterestTransformer {
             isStartExecute = true;
             AndroidUtil.runUI(() -> {
                 if (interest != null) {
-                    interest.onStart();
+                    try {
+                        interest.onStart();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }

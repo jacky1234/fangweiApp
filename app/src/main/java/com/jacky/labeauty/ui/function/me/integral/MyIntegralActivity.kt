@@ -33,8 +33,8 @@ class MyIntegralActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_integral)
-        tabNames.add("积分获取记录")
-        tabNames.add("积分消费记录")
+        tabNames.add(AndroidUtil.getString(R.string.recorder_get_integral).toString())
+        tabNames.add(AndroidUtil.getString(R.string.recorder_out_integral).toString())
         fragments.add(IntegralRecorderFragment.newInstance(IntegralRecorderFragment.TYPE_IN))
         fragments.add(IntegralRecorderFragment.newInstance(IntegralRecorderFragment.TYPE_OUT))
 

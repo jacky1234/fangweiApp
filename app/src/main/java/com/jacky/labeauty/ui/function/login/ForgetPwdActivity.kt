@@ -56,21 +56,21 @@ class ForgetPwdActivity : BaseActivity() {
 
             RxView.enabled(btnGainCode).accept(false)
             RequestHelper.get().sendCode(phone).subscribe {
-                AndroidUtil.toast("发送成功")
+                AndroidUtil.toast(R.string.send_success)
                 trigVerifyCode(btnGainCode)
             }
         }
 
         tv_confirm.clickWithTrigger {
-            if (Checker.check(et_phone, "请输入手机号") &&
+            if (Checker.check(et_phone, AndroidUtil.getString(R.string.please_input_phone_number)) &&
                     Checker.checkMobile(et_phone) &&
-                    Checker.check(et_code, "请输入验证码") &&
-                    Checker.check(et_pwd, "请输入密码") &&
-                    Checker.check(et_confirm_pwd, "请确认密码") &&
-                    Checker.equalsContent(et_pwd, et_confirm_pwd, "两次输入的密码不一样")) {
+                    Checker.check(et_code, AndroidUtil.getString(R.string.please_input_sms_code)) &&
+                    Checker.check(et_pwd, AndroidUtil.getString(R.string.please_input_pwd)) &&
+                    Checker.check(et_confirm_pwd, AndroidUtil.getString(R.string.please_confirm_pwd)) &&
+                    Checker.equalsContent(et_pwd, et_confirm_pwd, AndroidUtil.getString(R.string.twice_pwd_difference))) {
                 RequestHelper.get().forgetPwd(et_phone.text.toString(), et_code.text.toString(), et_pwd.text.toString())
                         .subscribe {
-                            toast("修改成功")
+                            toast(R.string.update_success)
                             finish()
                         }
             }

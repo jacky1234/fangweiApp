@@ -59,19 +59,20 @@ class LuckyBoxDialog(private val getPrizeClickListener: OnGetPrizeClickListener?
 
                     loadImage(97, gift_iv_thumb)
                     gift_tvDesc.text = prize.name
-                    tvButton.text = "立即提货"
+                    tvButton.setText(R.string.extract_prize_instant)
                 }
                 Prize.TARGET_TYPE_COUPON -> {
                     parent_coupon.visibility = View.VISIBLE
 
                     loadImage(148, coupon_iv_thumb)
-                    tvButton.text = "点击领取"
+                    tvButton.setText(R.string.tap_to_get)
                 }
                 Prize.TARGET_TYPE_INTEGRAL -> {
                     parent_integral.visibility = View.VISIBLE
 
-                    //todo
-                    tvButton.text = "点击领取"
+                    loadImage(120, iv_integral)
+//                    tvIntegralNumber.text = prize.name
+                    tvButton.setText(R.string.tap_to_get)
                 }
             }
 

@@ -8,18 +8,21 @@
 
     <com.jacky.labeauty.ui.widget.TitleView
         android:id="@+id/titleView"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:titleView_visible_type="left_middle"
-        app:titleView_title_text="@string/about_us" />
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleView_title_text="@string/about_us"
+        app:titleView_visible_type="left_middle" />
 
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:src="@mipmap/ic_clear_logo"
+        android:src="@drawable/logo_about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleView" />
@@ -47,6 +50,11 @@
 
         <com.jacky.labeauty.ui.widget.RowItemView
             android:id="@+id/parentAppIntroduce"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qmui_list_item_height" />
+
+        <com.jacky.labeauty.ui.widget.RowItemView
+            android:id="@+id/parentVersion"
             android:layout_width="match_parent"
             android:layout_height="@dimen/qmui_list_item_height" />
 

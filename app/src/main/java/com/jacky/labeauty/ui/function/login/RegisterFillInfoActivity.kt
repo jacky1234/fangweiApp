@@ -32,22 +32,22 @@ class RegisterFillInfoActivity : BaseActivity() {
                 .subscribe {
                     val nickname = et_nickname.text.toString()
                     if (Strings.isNullOrEmpty(nickname)) {
-                        toast("请输入昵称")
+                        toast(R.string.please_input_nickname)
                         return@subscribe
                     }
 
                     val pwd = et_pwd.text.toString()
                     if (Strings.isNullOrEmpty(pwd)) {
-                        toast("请输入密码")
+                        toast(R.string.please_input_pwd)
                         return@subscribe
                     }
                     if (Strings.isNullOrEmpty(et_confirm_pwd.text.toString())) {
-                        toast("请确认密码")
+                        toast(R.string.please_confirm_pwd)
                         return@subscribe
                     }
 
                     if (pwd != et_confirm_pwd.text.toString()) {
-                        toast("两次输入的密码不一致")
+                        toast(R.string.twice_pwd_difference)
                         return@subscribe
                     }
                     val request = UpdateUserRequest()

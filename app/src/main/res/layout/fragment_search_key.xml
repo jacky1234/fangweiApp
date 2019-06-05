@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
-        android:text="历史搜索记录"
+        android:text="@string/history_of_key_words"
         android:textSize="@dimen/normal_textsize" />
 
     <ImageView

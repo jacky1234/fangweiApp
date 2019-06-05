@@ -6,6 +6,7 @@ import com.jacky.labeauty.logic.Constant;
 import com.jacky.labeauty.logic.entity.module.Address;
 import com.jacky.labeauty.logic.entity.module.Banner;
 import com.jacky.labeauty.logic.entity.module.Category;
+import com.jacky.labeauty.logic.entity.module.DefakeBean;
 import com.jacky.labeauty.logic.entity.module.Feedback;
 import com.jacky.labeauty.logic.entity.module.Good;
 import com.jacky.labeauty.logic.entity.module.GoodItem;
@@ -14,10 +15,12 @@ import com.jacky.labeauty.logic.entity.module.IntegralRecorder;
 import com.jacky.labeauty.logic.entity.module.Message;
 import com.jacky.labeauty.logic.entity.module.MsgCount;
 import com.jacky.labeauty.logic.entity.module.MyDiscount;
+import com.jacky.labeauty.logic.entity.module.MyEntityPrize;
 import com.jacky.labeauty.logic.entity.module.MyIntegral;
 import com.jacky.labeauty.logic.entity.module.MySelf;
 import com.jacky.labeauty.logic.entity.module.Sign;
 import com.jacky.labeauty.logic.entity.module.User;
+import com.jacky.labeauty.logic.entity.module.Video;
 import com.jacky.labeauty.logic.entity.request.AddAddressRequest;
 import com.jacky.labeauty.logic.entity.request.CollectRequest;
 import com.jacky.labeauty.logic.entity.request.FeedbackRequest;
@@ -29,7 +32,6 @@ import com.jacky.labeauty.logic.entity.request.WBLoginRequest;
 import com.jacky.labeauty.logic.entity.request.WXLoginRequest;
 import com.jacky.labeauty.logic.entity.response.CollectResponse;
 import com.jacky.labeauty.logic.entity.response.FavoriteResponse;
-import com.jacky.labeauty.logic.entity.response.HotVideoResponse;
 import com.jacky.labeauty.logic.entity.response.HttpPageResponse;
 import com.jacky.labeauty.logic.entity.response.HttpResponseSource;
 import com.jacky.labeauty.logic.entity.response.KeywordResponse;
@@ -170,9 +172,9 @@ public class RequestHelper {
                 .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
-    public Observable<HotVideoResponse> requestDesignVideo(int page) {
+    public Observable<HttpPageResponse<Video>> requestDesignVideo(int page) {
         return apiService.requestHotDesignVideo(page)
-                .compose(HttpResponseTransformer.handleResult(false));
+                .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
     public Observable<CollectResponse> collectItem(@NotNull GoodType type, String targetId) {
@@ -225,6 +227,11 @@ public class RequestHelper {
     //优惠劵
     public Observable<HttpPageResponse<MyDiscount>> requestDiscounts(int page) {
         return apiService.requestDiscounts(page)
+                .compose(HttpPageResponseTransformer.handPageResult(false));
+    }
+
+    public Observable<HttpPageResponse<MyEntityPrize>> requestEntities(int page) {
+        return apiService.requestEntities(page)
                 .compose(HttpPageResponseTransformer.handPageResult(false));
     }
 
@@ -284,6 +291,11 @@ public class RequestHelper {
     public Observable<HttpPageResponse<Message>> requestMessages(int page) {
         return apiService.requestMessages(page, Constant.NORMAL_PAGE_SIZE)
                 .compose(HttpPageResponseTransformer.handPageResult(false));
+    }
+
+    public Observable<DefakeBean> requestCommodity(String code) {
+        return apiService.requestCommodity(code)
+                .compose(HttpResponseTransformer.handleResult(true));
     }
 
     public static RequestHelper get() {

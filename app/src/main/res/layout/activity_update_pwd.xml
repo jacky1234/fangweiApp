@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/first_margin_from_left"
                 android:minWidth="59dp"
-                android:text="旧密码" />
+                android:text="@string/old_pwd" />
 
             <EditText
                 android:id="@+id/et_old_pwd"
@@ -39,7 +39,7 @@
                 android:layout_marginRight="@dimen/first_margin_from_left"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="请输入旧密码"
+                android:hint="@string/please_input_old_pwd"
                 android:textSize="@dimen/normal_textsize" />
         </LinearLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/first_margin_from_left"
                 android:minWidth="59dp"
-                android:text="新密码" />
+                android:text="@string/new_pwd" />
 
             <EditText
                 android:id="@+id/et_new_pwd"
@@ -65,7 +65,7 @@
                 android:layout_marginRight="@dimen/first_margin_from_left"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="请输入新密码"
+                android:hint="@string/please_input_new_pwd"
                 android:textSize="@dimen/normal_textsize" />
         </LinearLayout>
 
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/first_margin_from_left"
                 android:minWidth="59dp"
-                android:text="旧密码" />
+                android:text="@string/old_pwd" />
 
             <EditText
                 android:id="@+id/et_confirm_new_pwd"
@@ -91,7 +91,7 @@
                 android:layout_marginRight="@dimen/first_margin_from_left"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="请再次输入新密码"
+                android:hint="@string/please_input_old_pwd_again"
                 android:textSize="@dimen/normal_textsize" />
         </LinearLayout>
 

@@ -1,11 +1,9 @@
 package com.jacky.labeauty.ui.function.me
 
-import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.jacky.labeauty.R
-import com.jacky.labeauty.support.Starter
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.SpanUtils
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import kotlinx.android.synthetic.main.activity_app_introduce.*
@@ -22,14 +20,13 @@ class AppIntroduceActivity : BaseActivity() {
 
     private fun getInfo(): CharSequence {
         return SpanUtils()
-                .appendLine()
-                .appendLine("为了净化市场，减少假冒产品给我们顾客及LABEAUTY带来的负面影响和损失，维护企业和ANCILA品牌的形象和声誉，增强消费者购正规商品的信心，我们亲历推出本款APP。\n" +
-                        "APP特点：\n" +
-                        "1、扫描商品二维码，快速检验真伪。\n" +
-                        "2、完整展示labeauty产品，加深顾客对正品印象。\n" +
-                        "3、专业的防伪溯源技术保障，专业技术团队。\n" +
-                        "4、中日双语，无障碍使用。\n" +
-                        "5、权威质检曝光。\n")
+                .appendLine(AndroidUtil.getString(R.string.app_introduce_content))
+                .append(AndroidUtil.getString(R.string.app_feature)).appendLine(":")
+                .appendLine(AndroidUtil.getString(R.string.app_feature_1))
+                .appendLine(AndroidUtil.getString(R.string.app_feature_2))
+                .appendLine(AndroidUtil.getString(R.string.app_feature_3))
+                .appendLine(AndroidUtil.getString(R.string.app_feature_4))
+                .appendLine(AndroidUtil.getString(R.string.app_feature_5))
                 .create()
 //        return SpanUtils()
 //                .appendLine().appendLine().appendLine()

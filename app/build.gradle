@@ -19,8 +19,8 @@ android {
         applicationId "com.jacky.labeauty"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 104
-        versionName "1.0.4"
+        versionCode 105
+        versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -167,6 +167,7 @@ dependencies {
 
     //
     implementation project(':luckyfortune')
+    implementation project(':qrscanlibrary')
     implementation 'me.codeboy.android:align-text-view:2.3.2'
 
     implementation 'com.github.limuyang2.LDialog:ldialog:1.0'

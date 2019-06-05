@@ -43,7 +43,7 @@ class DefakeDetailFragment : MySupportFragment() {
 //                                    .imageEngine(GlideEngine())
 //                                    .forResult(REQUEST_CODE_CHOOSE)
                         } else {
-                            AndroidUtil.toast("请开启存储权限")
+                            AndroidUtil.toast(R.string.please_open_storage_permission)
                         }
                     }
 

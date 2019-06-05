@@ -11,6 +11,7 @@ import com.jacky.labeauty.logic.DaoFacade
 import com.jacky.labeauty.logic.entity.module.Category
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.ext.clickWithTrigger
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Strings
 import com.jacky.labeauty.ui.adapter.SearchOnFirstCategoryAdapter
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
@@ -68,7 +69,7 @@ class DiscoveryFragment : MySupportFragment() {
     private fun recoveryKeyWord() {
         val searchKey = DaoFacade.get().searchKey
         if (Strings.isNotBlank(searchKey)) {
-            tvSearch.text = "搜索产品，$searchKey"
+            tvSearch.text = AndroidUtil.getString(R.string.search_product).toString() + "，$searchKey"
         }
     }
 

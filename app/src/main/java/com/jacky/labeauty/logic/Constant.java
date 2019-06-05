@@ -13,4 +13,5 @@ public final class Constant {
 
     public static final int NORMAL_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 100;
+    public static final long SEVEN_DAY_TM = 7 * 24 * 3600 * 1000L;
 }

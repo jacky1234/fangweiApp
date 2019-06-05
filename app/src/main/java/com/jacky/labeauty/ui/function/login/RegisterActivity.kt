@@ -69,7 +69,7 @@ class RegisterActivity : BaseActivity() {
 
             RxView.enabled(btnGainCode).accept(false)
             RequestHelper.get().sendCode(phone).subscribe {
-                AndroidUtil.toast("发送成功")
+                AndroidUtil.toast(R.string.send_success)
                 trigVerifyCode(btnGainCode)
             }
         }
@@ -82,10 +82,10 @@ class RegisterActivity : BaseActivity() {
                     val phone = et_phone.text.toString()
                     val code = et_code.text.toString()
 
-                    if (Checker.check(et_phone, "请输入手机号") &&
+                    if (Checker.check(et_phone, AndroidUtil.getString(R.string.please_input_phone_number)) &&
                             Checker.checkMobile(et_phone) &&
-                            Checker.check(et_code, "请输入验证码") &&
-                            Checker.CheckChecked(checkbox, "请先同意使用协议"))
+                            Checker.check(et_code, AndroidUtil.getString(R.string.please_input_sms_code)) &&
+                            Checker.CheckChecked(checkbox, AndroidUtil.getString(R.string.please_agree_protocol)))
                         requestRegister(phone, code)
                 }
 
@@ -103,7 +103,7 @@ class RegisterActivity : BaseActivity() {
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe {
                     MySelf.get().saveFromUser(it)
-                    DialogTipsHelper.createSuccess(this, "注册成功")
+                    DialogTipsHelper.createSuccess(this, AndroidUtil.getString(R.string.register_success))
                     AndroidUtil.runUI({ this@RegisterActivity.launch<RegisterFillInfoActivity>() }, 100)
                 }
     }

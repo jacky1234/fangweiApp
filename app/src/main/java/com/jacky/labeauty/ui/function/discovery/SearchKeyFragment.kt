@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.DaoFacade
 import com.jacky.labeauty.support.ext.clickWithTrigger
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.dialog.DialogHelper
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.king.kotlinmvp.rx.scheduler.SchedulerUtils
@@ -29,7 +30,7 @@ class SearchKeyFragment : MySupportFragment() {
 
         requestKeyWord()
         iv_clear.clickWithTrigger {
-            DialogHelper.createSimpleConfirmDialog(activity!!, "确定需要删除历史记录吗？") { _, _ ->
+            DialogHelper.createSimpleConfirmDialog(activity!!, AndroidUtil.getString(R.string.confirm_del_history)) { _, _ ->
                 DaoFacade.get().clearHistoryKeys()
                 requestKeyWord()
             }.show()

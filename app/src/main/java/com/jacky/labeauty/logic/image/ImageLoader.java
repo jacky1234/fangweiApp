@@ -28,13 +28,13 @@ public class ImageLoader {
         defaultRequestOptions.placeholder(R.mipmap.ic_plackholder_header)
                 .error(R.mipmap.ic_plackholder_header);
 
-        _16To9RequestOptions.placeholder(R.mipmap.item_empty_16_9)
-                .error(R.mipmap.item_empty_16_9);
+        _16To9RequestOptions.placeholder(R.drawable.item_empty_16_9)
+                .error(R.drawable.item_empty_16_9);
 
         _16To9RequestRoundCornerOptions.apply(_16To9RequestOptions);
 
-        _1To1RequestOptions.placeholder(R.mipmap.item_empty_1_1)
-                .error(R.mipmap.item_empty_1_1);
+        _1To1RequestOptions.placeholder(R.drawable.item_empty_1_1)
+                .error(R.drawable.item_empty_1_1);
     }
 
     /**
@@ -44,7 +44,7 @@ public class ImageLoader {
      * @return
      */
     public static SelectionCreator chooseImageFromGallery(@NotNull Activity activity) {
-       return Matisse.from(activity)
+        return Matisse.from(activity)
                 .choose(MimeType.ofImage())
                 .showSingleMediaType(true)
                 .gridExpectedSize(AndroidUtil.getScreenWidth() / 3 - 10)

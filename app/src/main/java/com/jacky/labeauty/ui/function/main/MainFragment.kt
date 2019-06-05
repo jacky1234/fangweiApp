@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jacky.labeauty.R
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.function.defake.DefakeFragment
 import com.jacky.labeauty.ui.function.discovery.DiscoveryFragment
 import com.jacky.labeauty.ui.function.me.Mefragment
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.bottombar.BottomBarLayout
 import com.jacky.labeauty.ui.widget.bottombar.BottomBarTab
+import java.util.*
 
 class MainFragment : MySupportFragment() {
     private val mFragments = ArrayList<MySupportFragment>(4)
@@ -48,10 +50,10 @@ class MainFragment : MySupportFragment() {
     private fun initTabs(view: View) {
         bottomBarLayout = view.findViewById(R.id.bottomBar)
         bottomBarLayout
-                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_home, R.mipmap.ic_tab_home_selected, "首页"))
-                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_discovery, R.mipmap.ic_tab_discovery_selected, "发现"))
-                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_defake, R.mipmap.ic_tab_defake_selected, "防伪检测"))
-                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_me, R.mipmap.ic_tab_me_selected, "我的"))
+                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_home, R.mipmap.ic_tab_home_selected, AndroidUtil.getString(R.string.home)))
+                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_discovery, R.mipmap.ic_tab_discovery_selected, AndroidUtil.getString(R.string.discovery)))
+                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_defake, R.mipmap.ic_tab_defake_selected, AndroidUtil.getString(R.string.inspect_defake)))
+                .addItem(BottomBarTab(activity, R.mipmap.ic_tab_me, R.mipmap.ic_tab_me_selected, AndroidUtil.getString(R.string.mine)))
 
         bottomBarLayout.setOnTabSelectedListener(object : BottomBarLayout.OnTabSelectedListener {
             override fun onTabUnselected(position: Int) {

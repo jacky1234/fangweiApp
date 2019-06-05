@@ -136,4 +136,11 @@ public class MiscFacade {
             activity.startActivity(intent);
         }
     }
+
+    public void restartActvityStack(Activity activity) {
+        activity.finishAffinity();
+        Intent intent = new Intent(activity, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
 }

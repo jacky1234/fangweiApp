@@ -85,7 +85,7 @@ interface ApiService {
     fun requestHotGoods(@Query("page") page: Int): Observable<HttpPageResponse<GoodItem>>
 
     @GET("design/list_hot")
-    fun requestHotDesignVideo(@Query("page") page: Int): Observable<HttpResponse<HotVideoResponse>>
+    fun requestHotDesignVideo(@Query("page") page: Int): Observable<HttpPageResponse<Video>>
 
     @POST("collect")
     fun collectGood(@Body request: CollectRequest): Observable<HttpResponse<CollectResponse>>
@@ -110,6 +110,9 @@ interface ApiService {
 
     @GET("coupon/list")
     fun requestDiscounts(@Query("page") page: Int): Observable<HttpPageResponse<MyDiscount>>
+
+    @GET("gift/list")
+    fun requestEntities(@Query("page") page: Int): Observable<HttpPageResponse<MyEntityPrize>>
 
     @GET("prize/log/bind_address")
     fun bindAddress(@Query("prizeLogId") prizeLogId: String,
@@ -153,4 +156,6 @@ interface ApiService {
     fun requestMessages(@Query("page") page: Int,
                         @Query("size") size: Int): Observable<HttpPageResponse<Message>>
 
+    @GET("commodity/get_by_code")
+    fun requestCommodity(@Query("code") code: String): Observable<HttpResponse<DefakeBean>>
 }

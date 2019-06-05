@@ -24,6 +24,7 @@ public class DaoFacade {
     private static final long SEARCH_KEYS = 2;
     private static final long SETTING_PUSH = 3;         //是否打开推送
     private static final long SEARCH_KEYWORD = 4;       //推荐搜索
+    private static final long LANGUAGE_SETTING = 5;       //语言
     private DaoSession daoSession;
 
     private DaoFacade() {
@@ -101,6 +102,21 @@ public class DaoFacade {
             return list.get(0).getValue();
         }
 
+        return null;
+    }
+
+    public void setLanguageKey(int key) {
+        daoSession.getPreferenceDao()
+                .insertOrReplace(new Preference(LANGUAGE_SETTING, String.valueOf(key)));
+    }
+
+    @Nullable
+    public Integer getLanguagekey() {
+        List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
+                .where(PreferenceDao.Properties.Index.eq(LANGUAGE_SETTING)).list();
+        if (!list.isEmpty()) {
+            return Integer.parseInt(list.get(0).getValue());
+        }
         return null;
     }
 

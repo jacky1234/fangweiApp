@@ -10,7 +10,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.util.AndroidUtil
-import com.jacky.labeauty.ui.adapter.MyDiscountsAdapter
 import com.jacky.labeauty.ui.adapter.MyEntityPrizeAdapter
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.EmptyView
@@ -36,19 +35,21 @@ class MyEntityFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListe
 
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
-        adapter = MyEntityPrizeAdapter(R.layout.item_discount)
+        adapter = MyEntityPrizeAdapter(R.layout.item_my_entity_prize)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        val span = AndroidUtil.dip2px(15f).toInt()
+        val span = AndroidUtil.dip2px(12f).toInt()
         recyclerView.addItemDecoration(DividerPaddingDecoration(context, LinearLayoutManager.VERTICAL, span))
         recyclerView.adapter = adapter
-        requestDiscounts()
+        requestEntitiesPrize()
 
-        adapter?.setOnItemClickListener { adapter, _, position ->
+        adapter?.setOnItemClickListener { _, _, position ->
             //detail
 //            DialogTipsHelper.showDiscountDetailDialog(fragmentManager!!)
 
-            goToDetail(adapter, position)
+            if (adapter != null) {
+                ExtractPrizeActivity.launch(activity!!, adapter?.getItem(position)!!)
+            }
         }
 
         val emptyView = EmptyView(context!!)
@@ -60,18 +61,9 @@ class MyEntityFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListe
         }
     }
 
-    private fun goToDetail(adapter: BaseQuickAdapter<*, *>?, position: Int) {
-        val cast = adapter as MyDiscountsAdapter
-        val discount = cast.getItem(position)
-        if (discount != null) {
-            val parentFragment = fragmentManager!!.fragments[0] as MySupportFragment
-            parentFragment.start(MyDiscountDetailFragment.newInstance(discount))
-        }
-    }
-
     @SuppressLint("CheckResult")
-    private fun requestDiscounts() {
-        RequestHelper.get().requestDiscounts(page)
+    private fun requestEntitiesPrize() {
+        RequestHelper.get().requestEntities(page)
                 .compose(bindUntilDetach())
                 .subscribe {
                     if (page == 0) {
@@ -95,11 +87,11 @@ class MyEntityFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListe
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
         page = 0
-        requestDiscounts()
+        requestEntitiesPrize()
     }
 
     override fun onLoadMore(refreshLayout: RefreshLayout) {
         page++
-        requestDiscounts()
+        requestEntitiesPrize()
     }
 }

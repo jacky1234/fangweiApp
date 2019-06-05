@@ -69,7 +69,7 @@ class UpdateMobileActivity : BaseActivity() {
                     Checker.checkMobile(et_new_mobile)) {
                 RxView.enabled(btnGainCode).accept(false)
                 RequestHelper.get().sendCode(phone).subscribe {
-                    AndroidUtil.toast("发送成功")
+                    AndroidUtil.toast(R.string.send_success)
                     trigVerifyCode(btnGainCode)
                 }
             }

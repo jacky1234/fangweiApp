@@ -127,7 +127,7 @@ class OutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListene
                 .compose(bindUntilDetach())
                 .subscribe {
                     videos.clear()
-                    videos.addAll(it.content)
+                    videos.addAll(it.data)
                     adapter.setData(videos, goodItems)
                 }
 

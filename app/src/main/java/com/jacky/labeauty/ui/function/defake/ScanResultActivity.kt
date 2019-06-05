@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.jacky.labeauty.R
 import com.jacky.labeauty.support.ext.clickWithTrigger
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.SpanUtils
 import com.jacky.labeauty.support.util.Strings
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
@@ -36,7 +37,7 @@ class ScanResultActivity : BaseActivity() {
     }
 
     private fun getRealInfo(): CharSequence {
-        return SpanUtils().append("扫描结果显示为正品").setFontSize(19, false).setBold()
+        return SpanUtils().append(AndroidUtil.getString(R.string.inspect_result_real)).setFontSize(19, false).setBold()
                 .appendLine().appendLine()
                 .appendImage(R.mipmap.ic_small_back_vertical).append(Strings.enter).append("安全信息")
 //                .appendLine().append("产品编号：").append("${}")

@@ -112,7 +112,6 @@ class LuckyPanelActivity : BaseActivity(), LuckyMonkeyPanelView.Observer {
         DialogTipsHelper.createOpenLuckyBoxDialog(
                 this, object : LuckyBoxDialog.OnGetPrizeClickListener {
             override fun getPrizeClickListener() {
-                Logger.i("get prize gif")
                 ExtractPrizeActivity.launch(this@LuckyPanelActivity, prize, prizeLog)
             }
         }, prize).show()

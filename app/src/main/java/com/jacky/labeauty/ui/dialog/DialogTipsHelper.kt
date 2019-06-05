@@ -24,7 +24,7 @@ import top.limuyang2.ldialog.base.ViewHolder
 object DialogTipsHelper {
 
     @JvmOverloads
-    fun createSuccess(context: Context, s: String = "发送成功"): QMUITipDialog {
+    fun createSuccess(context: Context, s: CharSequence = "发送成功"): QMUITipDialog {
         return QMUITipDialog.Builder(context)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_SUCCESS)
                 .setTipWord(s)
@@ -37,7 +37,7 @@ object DialogTipsHelper {
     }
 
     fun createDefaultLoading(context: Context): QMUITipDialog {
-        return createLoading(context, "正在加载")
+        return createLoading(context, AndroidUtil.getString(R.string.loading).toString())
     }
 
     fun createLoading(context: Context, s: String): QMUITipDialog {
@@ -49,8 +49,8 @@ object DialogTipsHelper {
 
     fun createDeleteWarningDialog(context: Context, listener: OnConfirmListener?): QMUIDialog {
         return QMUIDialog.MenuDialogBuilder(context)
-                .setTitle("确定删除吗？")
-                .addAction("确定") { dialog, index ->
+                .setTitle(AndroidUtil.getString(R.string.confirm_to_del).toString() + "？")
+                .addAction(R.string.confirm) { dialog, index ->
                     listener?.confirm()
                 }.create()
     }

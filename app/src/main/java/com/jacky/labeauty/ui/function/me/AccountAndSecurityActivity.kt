@@ -1,6 +1,7 @@
 package com.jacky.labeauty.ui.function.me
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -124,6 +125,7 @@ class AccountAndSecurityActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun changeableData() {
         rxPermissions.request(Manifest.permission.INTERNET).subscribe {
             it.then({
@@ -131,7 +133,7 @@ class AccountAndSecurityActivity : BaseActivity() {
                         .setDefaultRequestOptions(ImageLoader.defaultRequestOptions)
                         .load(MySelf.get().avatar)
                         .apply(RequestOptions.bitmapTransform(CircleCrop()))
-                        .into(parent_head.imageView)
+                        .into(parent_head.imageView!!)
             }, { AndroidUtil.toast("未获取网络权限") })
         }
 

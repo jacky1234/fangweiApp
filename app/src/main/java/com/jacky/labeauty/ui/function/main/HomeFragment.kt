@@ -186,7 +186,7 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun initDefaultData() {
-        ivOutFitImageView.setImageResource(R.mipmap.item_empty_16_9)
+        ivOutFitImageView.setImageResource(R.drawable.item_empty_16_9)
         tvBrandDesc.text = getBranchDesc()
         onResultHotGoods(Collections.singletonList(GoodItem.empty))
     }
@@ -219,10 +219,11 @@ class HomeFragment : MySupportFragment() {
 
     private fun getBranchDesc(): CharSequence {
         return SpanUtils()
-                .append("ANCILA").setFontSize(15, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), android.R.color.black)).setBold().appendLine()
-                .append("Pursuit the 1% Life, something different.").setFontSize(12, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.tab_grey_color)).appendLine()
-                .append("追求1%的生活理念").setFontSize(12, true).appendLine()
-                .append("ANCILA作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。").setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.item_title_text_color)).appendLine()
+                .appendLine("ANCILA").setFontSize(15, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), android.R.color.black)).setBold()
+                .append(AndroidUtil.getString(R.string.intro_top_1)).setFontSize(12, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.tab_grey_color))
+                .appendLine(AndroidUtil.getString(R.string.intro_top_2)).setFontSize(12, true).setForegroundColor(ContextCompat.getColor(Starter.getContext(), R.color.tab_grey_color))
+                .append(AndroidUtil.getString(R.string.intro_top_3)).setFontSize(12, true)
+                .appendLine(AndroidUtil.getString(R.string.intro_top_4)).setFontSize(12, true)
                 .create()
     }
 }

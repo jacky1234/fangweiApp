@@ -25,7 +25,7 @@ public class Starter {
     //https://api.labeauty.yituizhineng.top
     //https://api.labeauty.panda.online
     private static final String debug_url = "https://api.labeauty.yituizhineng.top";
-    private static final String release_url = "https://api.labeauty.panda.online";
+    private static final String release_url = "https://api.labeauty.yituizhineng.top";
 
     public static void init(Context context) {
         Starter.context = context;

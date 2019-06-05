@@ -1,1 +1,1 @@
-include ':app', ':luckyfortune'
+include ':app', ':luckyfortune', ':qrscanlibrary'

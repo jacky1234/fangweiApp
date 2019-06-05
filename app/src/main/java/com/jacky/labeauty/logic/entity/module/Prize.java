@@ -11,13 +11,13 @@ public class Prize implements Serializable {
      * "name": "谢谢参与", // 奖品名称
      * "thumb": "", // 奖品图片
      * "targetId": "5caed8472329462c9037a7c3",
-     * "targetType": "EMPTY" // 奖品类型。EMPTY：未中奖，GIFT：实物，COUPON：优惠券
+     * "targetType": "EMPTY" // 奖品类型。EMPTY：未中奖，GIFT：实物，COUPON：优惠券， BONUS_POINT：积分
      */
 
     public static final String TARGET_TYPE_EMPTY = "EMPTY";
     public static final String TARGET_TYPE_GIFT = "GIFT";
     public static final String TARGET_TYPE_COUPON = "COUPON";
-    public static final String TARGET_TYPE_INTEGRAL = "INTEGRA";
+    public static final String TARGET_TYPE_INTEGRAL = "BONUS_POINT";
 
     private String id;
     private long createTime;

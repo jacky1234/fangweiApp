@@ -28,6 +28,7 @@
             android:id="@+id/tvRegisterProtocol"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:lineSpacingMultiplier="1.5"
             android:paddingLeft="@dimen/first_margin_from_left"
             android:paddingRight="@dimen/first_margin_from_left"

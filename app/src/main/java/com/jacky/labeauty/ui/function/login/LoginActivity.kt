@@ -38,8 +38,8 @@ class LoginActivity : BaseActivity() {
                 .subscribe {
                     val phone = et_phone.text.toString()
                     val pwd = et_pwd.text.toString()
-                    if (Checker.check(et_phone, "请输入手机号") &&
-                            Checker.checkMobile(et_phone) && Checker.check(et_pwd, "请输入密码"))
+                    if (Checker.check(et_phone, AndroidUtil.getString(R.string.please_input_phone_number)) &&
+                            Checker.checkMobile(et_phone) && Checker.check(et_pwd, AndroidUtil.getString(R.string.please_input_pwd)))
                         RequestHelper.get().login(phone, pwd)
                                 .compose(bindToDestroy())
                                 .subscribe {
@@ -73,7 +73,7 @@ class LoginActivity : BaseActivity() {
         MySelf.get().saveFromUser(it)
         CrashReport.setUserId(it.mobile)
 
-        AndroidUtil.toast("登录成功")
+        AndroidUtil.toast(AndroidUtil.getString(R.string.login_success))
         if (MiscFacade.get().lastRunnable == null) {
             AndroidUtil.runUI({ this@LoginActivity.launch<MainActivity>() }, 100)
         }

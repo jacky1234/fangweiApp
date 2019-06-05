@@ -19,11 +19,15 @@ class AboutUsActivity : BaseActivity() {
 
         titleView.setLeftAction(View.OnClickListener { finish() })
 
-        tvVersion.text = "版本 V${DeviceDependency.current.device.appVersion}"
+//        tvVersion.text = "版本 V${DeviceDependency.current.device.appVersion}"
         parentAppIntroduce.setTitle("APP说明")
         parentAppIntroduce.setType(RowItemView.FLAG_NONE)
 
-        parentFeedback.setTitle("问题反馈")
+        parentVersion.setTitle("版本说明")
+        parentVersion.setType(RowItemView.FLAG_RIGHT_SHOW_TEXT, false)
+        parentVersion.setRightDesc(DeviceDependency.current.device.appVersion)
+
+        parentFeedback.setTitle("投诉建议")
         parentFeedback.setType(RowItemView.FLAG_NONE)
 
         parentAppIntroduce.clickWithTrigger {

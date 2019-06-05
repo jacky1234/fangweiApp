@@ -231,6 +231,12 @@ class Mefragment : MySupportFragment() {
     override fun onResume() {
         super.onResume()
         initFlexible()
-        requestMsgCount()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            requestMsgCount()
+        }
     }
 }

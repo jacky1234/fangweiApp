@@ -3,6 +3,7 @@ package com.jacky.labeauty.logic.network.exception;
 import android.net.ParseException;
 
 import com.google.gson.JsonParseException;
+import com.jacky.labeauty.R;
 import com.jacky.labeauty.logic.MiscFacade;
 import com.jacky.labeauty.support.log.Logger;
 import com.jacky.labeauty.support.util.AndroidUtil;
@@ -62,9 +63,9 @@ public class CustomException {
                 ex = new ApiException(NETWORK_ERROR, e.getMessage());
             } else if (e instanceof UnknownHostException) {
                 //连接错误
-                ex = new ApiException(NETWORK_ERROR, "连接异常");
+                ex = new ApiException(NETWORK_ERROR, AndroidUtil.getString(R.string.connect_exception).toString());
             } else if (e instanceof SocketTimeoutException) {
-                ex = new ApiException(NETWORK_ERROR, "连接超时");
+                ex = new ApiException(NETWORK_ERROR, AndroidUtil.getString(R.string.connect_timeout).toString());
             } else {
                 //未知错误
                 ex = new ApiException(UNKNOWN, e.getMessage());

@@ -27,13 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="13dp"
-        android:text="您当前绑定的手机号"
+        android:text="@string/current_bind_mobile_number"
         android:textColor="#A8A8A8" />
 
     <TextView
         android:id="@+id/tv_confirm"
         style="@style/confirm_button"
         android:layout_marginTop="47dp"
-        android:text="更改手机号" />
+        android:text="@string/update_mobile" />
 
 </LinearLayout>

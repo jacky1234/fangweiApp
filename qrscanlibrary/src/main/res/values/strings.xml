@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">QRScanLibrary</string>
+    <string name="scan_title">扫码</string>
+    <string name="flash_light_open">轻点照亮</string>
+    <string name="click_to_scan">轻触屏幕继续扫码</string>
+    <string name="flash_light_close">轻点关闭</string>
+    <string name="tip_scan_fix_qr">请对准二维码进行扫描</string>
+</resources>

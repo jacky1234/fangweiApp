@@ -90,7 +90,7 @@
             android:layout_marginRight="23dp"
             android:drawableLeft="@drawable/edit"
             android:drawablePadding="8dp"
-            android:text="编辑"
+            android:text="@string/edit"
             android:textColor="#999999"
             android:textSize="13sp" />
 

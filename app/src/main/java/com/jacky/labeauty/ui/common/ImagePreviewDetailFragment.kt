@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_image_preview_detail.*
  */
 class ImagePreviewDetailFragment : MySupportFragment() {
 
-    val placeHolder = R.mipmap.item_empty_1_1
+    val placeHolder = R.drawable.item_empty_1_1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_image_preview_detail, container, false)

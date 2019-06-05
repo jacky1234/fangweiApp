@@ -17,6 +17,7 @@ import com.jacky.labeauty.R
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.adapter.page.TabLayoutAdapter
 import com.jacky.labeauty.ui.function.me.prize.MyDiscountFragment
+import com.jacky.labeauty.ui.function.me.prize.MyEntityFragment
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import kotlinx.android.synthetic.main.fragment_my_prize.*
 import net.lucode.hackware.magicindicator.NavigatorHelper
@@ -46,7 +47,7 @@ class MyPrizeFragment : MySupportFragment() {
         tabNames.add("优惠券")
         tabNames.add("实物奖品")
         fragments.add(MyDiscountFragment())
-        fragments.add(MyDiscountFragment())
+        fragments.add(MyEntityFragment())
 
         val commonNavigator = object : CommonNavigator(context!!) {
             override fun onAfterInitTitleView() {

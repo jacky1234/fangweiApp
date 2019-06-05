@@ -52,7 +52,7 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
 
         val searchKey = DaoFacade.get().searchKey
         if (Strings.isNotBlank(searchKey)) {
-            searchView.setSearchHint("搜索产品，$searchKey")
+            searchView.setSearchHint(AndroidUtil.getString(R.string.search_product).toString() + "，$searchKey")
         }
         searchView.setKeyDelegate {
             var key = searchView.text
@@ -61,7 +61,7 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
             }
 
             if (Strings.isNullOrEmpty(key)) {
-                AndroidUtil.toast("请输入关键字")
+                AndroidUtil.toast(R.string.please_input_key_words)
             }
 
             onHistoryKeyClick(key)

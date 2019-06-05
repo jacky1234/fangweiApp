@@ -189,6 +189,10 @@
             android:name=".ui.function.me.prize.ShowSuccessActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.function.defake.ShowEntityDetailActivity"
+            android:screenOrientation="portrait" />
+
         <!--qq login-->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
