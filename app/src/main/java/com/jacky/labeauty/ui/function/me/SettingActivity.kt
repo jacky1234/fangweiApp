@@ -9,16 +9,18 @@ import com.jacky.labeauty.logic.DaoFacade
 import com.jacky.labeauty.logic.MiscFacade
 import com.jacky.labeauty.logic.entity.module.Language
 import com.jacky.labeauty.logic.entity.module.MySelf
+import com.jacky.labeauty.logic.language.LanguageUtil
+import com.jacky.labeauty.support.Starter
 import com.jacky.labeauty.support.ext.clickWithTrigger
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.dialog.DialogHelper
+import com.jacky.labeauty.ui.function.main.MainActivity
 import com.jacky.labeauty.ui.function.me.address.MyAddressActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jacky.labeauty.ui.widget.RowItemView
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import kotlinx.android.synthetic.main.activity_bee_setting.*
-import java.util.*
 
 class SettingActivity : BaseActivity() {
     private var languageDia: QMUIDialog? = null
@@ -54,7 +56,7 @@ class SettingActivity : BaseActivity() {
             DaoFacade.get().togglePushSetting()
         })
 
-        val queryLanguage = queryLanguage()
+        val queryLanguage = LanguageUtil.query()
         parentLan.setRightDesc(queryLanguage.desc)
 
         val language = Language.languages
@@ -68,7 +70,15 @@ class SettingActivity : BaseActivity() {
                     .setTitle(R.string.take_effort_on_restart)
                     .addItems(items) { _, which ->
                         val choose: Language = Language.languages[which]
-                        updateLanguage(choose)
+                        if (LanguageUtil.update(this@SettingActivity, choose) &&
+                                LanguageUtil.update(Starter.getContext(), choose)) {
+                            DaoFacade.get().setLanguageKey(choose.key)
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            startActivity(intent)
+                        }
+
+
                         languageDia?.dismiss()
                     }
                     .show()
@@ -97,33 +107,4 @@ class SettingActivity : BaseActivity() {
             }.show()
         }
     }
-
-    // 默认中文
-    private fun queryLanguage(): Language {
-        val languageKey = DaoFacade.get().languageKey
-        if (languageKey != null) {
-            val languages = Language.languages
-            languages.forEach {
-                if (it.key == languageKey) {
-                    return it
-                }
-            }
-        }
-
-        return Language.defaultLanguage
-    }
-
-
-    private fun updateLanguage(language: Language) {
-        val myLocale = Locale(language.locale)
-        val res = resources
-        val dm = resources.displayMetrics
-        val conf = resources.configuration
-        conf.locale = myLocale
-        res.updateConfiguration(conf, dm)
-
-        DaoFacade.get().setLanguageKey(language.key)
-        MiscFacade.get().restartActvityStack(this)
-    }
-
 }

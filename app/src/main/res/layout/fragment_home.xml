@@ -111,7 +111,7 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
                     android:layout_marginTop="15dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:text="了解更多"
+                    android:text="@string/know_more"
                     android:textColor="@color/white" />
 
             </LinearLayout>

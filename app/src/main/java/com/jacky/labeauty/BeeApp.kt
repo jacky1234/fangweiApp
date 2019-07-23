@@ -5,6 +5,7 @@ import android.support.multidex.MultiDexApplication
 import com.baidu.mobstat.StatService
 import com.jacky.labeauty.logic.Constant
 import com.jacky.labeauty.logic.entity.module.MySelf
+import com.jacky.labeauty.logic.language.LanguageUtil
 import com.jacky.labeauty.support.Starter
 import com.jacky.labeauty.support.log.Logger
 import com.jacky.labeauty.support.util.AndroidUtil
@@ -36,6 +37,8 @@ class BeeApp : MultiDexApplication() {
                 return ClassicsHeader(context)//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
             }
         })
+
+        LanguageUtil.readSet(this)
     }
 
     private fun initBugly() {
@@ -55,24 +58,6 @@ class BeeApp : MultiDexApplication() {
         val ip = AndroidUtil.getIpAddress(this)
 
     }
-
-    //nineGridView
-//    private fun initGridView() {
-//        NineGridView.setImageLoader(object : NineGridView.ImageLoader {
-//            override fun onDisplayImage(context: Context?, imageView: ImageView?, url: String?) {
-//                if (context != null && imageView != null) {
-//                    Glide.with(context)
-//                            .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
-//                            .load(url)
-//                            .into(imageView)
-//                }
-//            }
-//
-//            override fun getCacheImage(url: String?): Bitmap? {
-//                return null
-//            }
-//        })
-//    }
 
     private fun initFragmentation() {
         Fragmentation.builder()

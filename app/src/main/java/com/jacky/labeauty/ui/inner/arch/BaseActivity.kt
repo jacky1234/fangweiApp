@@ -6,6 +6,7 @@ import android.support.annotation.CheckResult
 import android.support.v4.app.ActivityCompat
 import com.baidu.mobstat.StatService
 import com.jacky.labeauty.logic.MiscFacade
+import com.jacky.labeauty.logic.language.LanguageUtil
 import com.jacky.labeauty.support.log.Logger
 import com.jacky.labeauty.support.misc.LifeCircleComponents
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -68,6 +69,7 @@ open class BaseActivity : MySupportActivity(), LifecycleProvider<ActivityEvent> 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LanguageUtil.readSet(this)
         currentActivity = this
         rxPermissions = RxPermissions(this)
         lifecycleSubject.onNext(ActivityEvent.CREATE)

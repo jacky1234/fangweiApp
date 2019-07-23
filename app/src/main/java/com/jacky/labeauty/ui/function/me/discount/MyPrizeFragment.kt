@@ -32,7 +32,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.model.Positio
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 
 class MyPrizeFragment : MySupportFragment() {
-    private val tabNames = ArrayList<String>(2)
+    private val tabNames = ArrayList<CharSequence>(2)
     private val fragments = ArrayList<Fragment>(2)
     private lateinit var navigator: CommonNavigator
 
@@ -44,8 +44,8 @@ class MyPrizeFragment : MySupportFragment() {
         super.onViewCreated(view, savedInstanceState)
         titleView.setLeftAction(View.OnClickListener { activity!!.finish() })
 
-        tabNames.add("优惠券")
-        tabNames.add("实物奖品")
+        tabNames.add(AndroidUtil.getString(R.string.youhuijuan))
+        tabNames.add(AndroidUtil.getString(R.string.real_prize))
         fragments.add(MyDiscountFragment())
         fragments.add(MyEntityFragment())
 

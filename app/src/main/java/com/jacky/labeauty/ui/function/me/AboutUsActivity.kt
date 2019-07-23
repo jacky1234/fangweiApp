@@ -7,6 +7,7 @@ import com.jacky.labeauty.R
 import com.jacky.labeauty.support.ext.clickWithTrigger
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.system.DeviceDependency
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jacky.labeauty.ui.widget.RowItemView
 import kotlinx.android.synthetic.main.activity_about_us.*
@@ -19,15 +20,14 @@ class AboutUsActivity : BaseActivity() {
 
         titleView.setLeftAction(View.OnClickListener { finish() })
 
-//        tvVersion.text = "版本 V${DeviceDependency.current.device.appVersion}"
-        parentAppIntroduce.setTitle("APP说明")
+        parentAppIntroduce.setTitle(AndroidUtil.getString(R.string.app_introduce))
         parentAppIntroduce.setType(RowItemView.FLAG_NONE)
 
-        parentVersion.setTitle("版本说明")
+        parentVersion.setTitle(AndroidUtil.getString(R.string.version_story))
         parentVersion.setType(RowItemView.FLAG_RIGHT_SHOW_TEXT, false)
         parentVersion.setRightDesc(DeviceDependency.current.device.appVersion)
 
-        parentFeedback.setTitle("投诉建议")
+        parentFeedback.setTitle(AndroidUtil.getString(R.string.advice_problem))
         parentFeedback.setType(RowItemView.FLAG_NONE)
 
         parentAppIntroduce.clickWithTrigger {

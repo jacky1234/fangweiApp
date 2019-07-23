@@ -98,7 +98,7 @@ class Mefragment : MySupportFragment() {
     private fun initOnce() {
         val itemScore = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.me_integral),
-                "我的积分",
+                AndroidUtil.getString(R.string.my_integral),
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -106,7 +106,7 @@ class Mefragment : MySupportFragment() {
 
         val itemDiscounts = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.me_coupon),
-                "我的奖品",
+                AndroidUtil.getString(R.string.my_prize),
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -114,7 +114,7 @@ class Mefragment : MySupportFragment() {
 
         val itemSetting = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.me_setting),
-                "设置",
+                AndroidUtil.getString(R.string.bee_settings),
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON
@@ -122,7 +122,7 @@ class Mefragment : MySupportFragment() {
 
         val itemAboutUs = groupListView.createItemView(
                 ContextCompat.getDrawable(context!!, R.mipmap.my_about),
-                "关于我们",
+                AndroidUtil.getString(R.string.about_us),
                 null,
                 QMUICommonListItemView.HORIZONTAL,
                 QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON

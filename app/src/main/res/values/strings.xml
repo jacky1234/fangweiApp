@@ -159,4 +159,10 @@
     <string name="video_show_progress">护肤品展示过程</string>
     <string name="newest_recommend">最新推荐</string>
     <string name="has_join_my_prizes">已加入我的奖品</string>
+    <string name="know_more">了解更多</string>
+    <string name="start_inspect">开始检测</string>
+    <string name="inspect_tips">点击开始检测，并对准条形码进行扫描</string>
+    <string name="youhuijuan">优惠券</string>
+    <string name="real_prize">实物奖品</string>
+    <string name="version_story">版本说明</string>
 </resources>

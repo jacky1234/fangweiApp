@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import java.util.List;
 
 public class TabLayoutAdapter extends FragmentStatePagerAdapter {
-    private List<String> tabNames;
+    private List<CharSequence> tabNames;
     private List<Fragment> fragments;
 
-    public TabLayoutAdapter(FragmentManager fm, List<String> tabNames, List<Fragment> fragments) {
+    public TabLayoutAdapter(FragmentManager fm, List<CharSequence> tabNames, List<Fragment> fragments) {
         super(fm);
         this.tabNames = tabNames;
         this.fragments = fragments;

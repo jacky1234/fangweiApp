@@ -157,4 +157,12 @@
 	<string name="video_show_progress">スキンケア製品展示プロセス</string>
 	<string name="newest_recommend">最新のおすすめ</string>
 	<string name="has_join_my_prizes">私の賞に参加しました</string>
+	<string name="know_more">もっと詳しく</string>
+	<string name="start_inspect">テストを開始</string>
+	<string name="inspect_tips">クリックしてテストを開始し、バーコードをスキャンします</string>
+    <string name="youhuijuan">クーポン</string>
+    <string name="real_prize">物理賞</string>
+	<string name="version_story">リリース</string>
+
+
 </resources>

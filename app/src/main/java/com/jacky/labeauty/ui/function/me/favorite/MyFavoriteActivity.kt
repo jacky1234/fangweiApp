@@ -23,7 +23,7 @@ import java.util.*
 
 
 class MyFavoriteActivity : BaseActivity() {
-    private val tabNames = ArrayList<String>(2)
+    private val tabNames = ArrayList<CharSequence>(2)
     private val fragments = ArrayList<Fragment>(2)
 
 

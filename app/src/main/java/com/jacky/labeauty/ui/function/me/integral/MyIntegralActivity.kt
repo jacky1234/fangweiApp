@@ -25,7 +25,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.Li
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView
 
 class MyIntegralActivity : BaseActivity() {
-    private val tabNames = ArrayList<String>(2)
+    private val tabNames = ArrayList<CharSequence>(2)
     private val fragments = ArrayList<IntegralRecorderFragment>(2)
 
 
