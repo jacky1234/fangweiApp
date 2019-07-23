@@ -19,7 +19,6 @@ import com.jacky.labeauty.ui.widget.RowItemView
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog
 import kotlinx.android.synthetic.main.activity_bee_setting.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class SettingActivity : BaseActivity() {
     private var languageDia: QMUIDialog? = null
@@ -57,17 +56,17 @@ class SettingActivity : BaseActivity() {
 
         val queryLanguage = queryLanguage()
         parentLan.setRightDesc(queryLanguage.desc)
+
         val language = Language.languages
-        val items = ArrayList<CharSequence>().apply {
-            language.forEach {
-                add(it.desc)
-            }
+        val items = Array(language.size) { "" }
+        language.forEachIndexed { index, l ->
+            items[index] = l.desc
         }
 
         parentLan.clickWithTrigger {
             languageDia = QMUIDialog.CheckableDialogBuilder(this)
                     .setTitle(R.string.take_effort_on_restart)
-                    .addItems(items.toArray() as Array<out CharSequence>?) { _, which ->
+                    .addItems(items) { _, which ->
                         val choose: Language = Language.languages[which]
                         updateLanguage(choose)
                         languageDia?.dismiss()
@@ -101,7 +100,7 @@ class SettingActivity : BaseActivity() {
 
     // 默认中文
     private fun queryLanguage(): Language {
-        val languageKey = DaoFacade.get().languagekey
+        val languageKey = DaoFacade.get().languageKey
         if (languageKey != null) {
             val languages = Language.languages
             languages.forEach {

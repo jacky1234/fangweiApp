@@ -88,8 +88,8 @@ public class AndroidUtil {
         Toast.makeText(Starter.getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    public static CharSequence getString(int id) {
-        return Starter.getContext().getString(id);
+    public static CharSequence getString(int id, Object... formatArgs) {
+        return Starter.getContext().getString(id, formatArgs);
     }
 
     public static void runUI(Runnable runnable) {

@@ -111,7 +111,7 @@ public class DaoFacade {
     }
 
     @Nullable
-    public Integer getLanguagekey() {
+    public Integer getLanguageKey() {
         List<Preference> list = daoSession.getPreferenceDao().queryBuilder()
                 .where(PreferenceDao.Properties.Index.eq(LANGUAGE_SETTING)).list();
         if (!list.isEmpty()) {

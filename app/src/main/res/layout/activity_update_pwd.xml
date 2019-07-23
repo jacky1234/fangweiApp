@@ -81,14 +81,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/first_margin_from_left"
                 android:minWidth="59dp"
-                android:text="@string/old_pwd" />
+                android:text="@string/confirm_new_pwd" />
 
             <EditText
                 android:id="@+id/et_confirm_new_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="28dp"
-                android:layout_marginRight="@dimen/first_margin_from_left"
+                android:layout_marginRight="8dp"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/please_input_old_pwd_again"

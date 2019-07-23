@@ -15,6 +15,7 @@ import com.jacky.labeauty.logic.entity.module.GoodItem
 import com.jacky.labeauty.logic.entity.module.Video
 import com.jacky.labeauty.logic.entity.wrapper.VideosWrapper
 import com.jacky.labeauty.logic.image.ImageLoader
+import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.ui.widget.layoutManager.BannerLayoutManager
 import kotlinx.android.synthetic.main.item_outfit_recommand.view.*
 import kotlinx.android.synthetic.main.item_video.view.*
@@ -26,8 +27,8 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
         const val TYPE_OUTFIT_RECOMMEND = 3
         const val TYPE_OUTFIT_ITEM = 4
 
-        private const val VIDEO_TITLE = "衣服制作视频"
-        private const val OUTFIT_RECOMMENT_TITLE = "搭配推荐"
+        private val VIDEO_TITLE = AndroidUtil.getString(R.string.video_show_progress)
+        private val OUTFIT_RECOMMENT_TITLE = AndroidUtil.getString(R.string.newest_skin_recommend)
     }
 
     private var dataList = ArrayList<Any>()
@@ -141,7 +142,7 @@ class OutfitAdapter(private val context: Context, private val delegate: Delegate
                             .load(item.url)
                             .into(imageView)
 
-                    tvDesc.text = item.name
+                    tvDesc.text =  AndroidUtil.getString(R.string.send_time, AndroidUtil.formatTime("yyyy-MM-dd", item.createTime))
 
                     ivPlay.setOnClickListener {
                         delegate?.onVideoClick(item)

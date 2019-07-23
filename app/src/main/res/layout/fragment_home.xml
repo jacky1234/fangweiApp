@@ -54,11 +54,11 @@
             style="@style/home_item_bold_title_scrollable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
             android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="50dp"
-            android:drawablePadding="4dp"
             android:drawableRight="@mipmap/ic_arrow_right_black"
+            android:drawablePadding="4dp"
             android:text="@string/brand_desc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -79,11 +79,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#F7F7F7"
+                android:gravity="center_horizontal"
                 android:lineSpacingMultiplier="1.2"
-                android:paddingBottom="24dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp"
                 android:paddingTop="24dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="24dp"
                 tools:text="BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。\n
 BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要的感觉。" />
 
@@ -105,13 +106,13 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
                 <TextView
                     android:id="@+id/tv_know_more"
                     style="@style/smallButton"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginTop="15dp"
-                    android:text="了解更多" />
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="了解更多"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -123,9 +124,9 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:drawablePadding="4dp"
             android:drawableRight="@mipmap/ic_arrow_right_black"
-            android:text="人气穿搭"
+            android:drawablePadding="4dp"
+            android:text="@string/video_title"
             app:layout_constraintStart_toStartOf="@+id/tvBrandTitle"
             app:layout_constraintTop_toBottomOf="@+id/parent_brand" />
 
@@ -135,8 +136,8 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/first_margin_from_left"
-            android:layout_marginRight="@dimen/first_margin_from_left"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="@dimen/first_margin_from_left"
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -150,9 +151,9 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:drawablePadding="4dp"
             android:drawableRight="@mipmap/ic_arrow_right_black"
-            android:text="最新主推"
+            android:drawablePadding="4dp"
+            android:text="@string/newest_recommend"
             app:layout_constraintStart_toStartOf="@+id/tvBrandTitle"
             app:layout_constraintTop_toBottomOf="@+id/iv_hotFit" />
 
@@ -160,10 +161,10 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
             android:id="@+id/gridContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_hots_title" />

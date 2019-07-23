@@ -109,10 +109,8 @@
     <string name="intro_top_2">\"一个女人只有二十年的生命，其余的时间都在衰老。\"</string>
     <string name="intro_top_3">AANCILA品牌自2013年成立以来，</string>
     <string name="intro_top_4">一直遵从内心本真，与时间对抗，与美丽为伍。</string>
-    <string name="is_one">是一个</string>
-    <string name="is_one_what">蕴含生物科技的日本美容院线专业抗衰老品牌，致力于从生物科技中探索保持青春的生物密码。</string>
-    <string name="intro_bottom_1">隶属日本LABEAUTY公司旗下品牌。（LABEAUTY是日本一家化妆品、美容仪器公司，于2013年在日本横滨成立，以”充满自信的美丽“为宗旨，开发和销售针对各种皮肤类型，量身定制不同的高端化妆品。）</string>
-    <string name="intro_bottom_2">推ANCILA不仅成为日本女性冻龄护肤的秘密，并于2018年成功入驻中国市场，受到了广大消费者的喜爱。品牌主打灯塔水母系列，坚持纯粹高效的护肤态度，实现了产品的深层补水和修复亮白。其中爆款水母面膜和逆时空水母胶原蛋白水乳霜逐渐在市场上有了一定影响力，受到了张韶涵、沈梦辰等明星的倾力荐。</string>
+    <string name="intro_bottom_1">是一个蕴含生物科技的日本美容院线专业抗衰老品牌，致力于从生物科技中探索保持青春的生物密码。隶属日本LABEAUTY公司旗下品牌。（LABEAUTY是日本一家化妆品、美容仪器公司，于2013年在日本横滨成立，以”充满自信的美丽“为宗旨，开发和销售针对各种皮肤类型，量身定制不同的高端化妆品。）</string>
+    <string name="intro_bottom_2">ANCILA不仅成为日本女性冻龄护肤的秘密，并于2018年成功入驻中国市场，受到了广大消费者的喜爱。品牌主打灯塔水母系列，坚持纯粹高效的护肤态度，实现了产品的深层补水和修复亮白。其中爆款水母面膜和逆时空水母胶原蛋白水乳霜逐渐在市场上有了一定影响力，受到了张韶涵、沈梦辰等明星的倾力荐。</string>
     <string name="intro_bottom_3">以“成为高端护肤界的领先者”为企业愿景，ANCILA一直秉承“创新护肤、合理护肤”的新理念，希望把正确的护肤理念传递给有所追求的消费者。</string>
     <string name="please_open_storage_permission">请开启存储权限</string>
     <string name="please_open_storage_camera_permission">请开启存储和相机权限</string>
@@ -135,6 +133,7 @@
     <string name="please_input_old_pwd">请输入旧密码</string>
     <string name="new_pwd">新密码</string>
     <string name="please_input_new_pwd">请输入新密码</string>
+    <string name="confirm_new_pwd">再次确认</string>
     <string name="please_input_old_pwd_again">请再次输入新密码</string>
     <string name="loading">正在加载</string>
     <string name="confirm_to_del">确定删除吗</string>
@@ -154,4 +153,10 @@
     <string name="chinese">中文</string>
     <string name="japanese">日语</string>
     <string name="take_effort_on_restart">设置后，会自动重启</string>
+    <string name="video_title">精彩视频</string>
+    <string name="newest_skin_recommend">护肤品推荐</string>
+    <string name="send_time">发布时间：%1s</string>
+    <string name="video_show_progress">护肤品展示过程</string>
+    <string name="newest_recommend">最新推荐</string>
+    <string name="has_join_my_prizes">已加入我的奖品</string>
 </resources>

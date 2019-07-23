@@ -28,9 +28,9 @@
                 android:id="@+id/tvCenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingMultiplier="1.5"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
+                android:textStyle="bold"
+                android:textSize="39sp"
                 android:paddingLeft="@dimen/first_margin_from_left"
                 android:paddingRight="@dimen/first_margin_from_left" />
 
@@ -38,6 +38,7 @@
                 android:id="@+id/tvRegisterProtocol"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:lineSpacingMultiplier="1.5"
                 android:paddingLeft="@dimen/first_margin_from_left"
                 android:paddingRight="@dimen/first_margin_from_left" />

@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import com.example.qrscanlibrary.QrScanFacade
 import com.example.qrscanlibrary.ZxingImageHelper
 import com.jacky.labeauty.R
+import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.ext.clickWithTrigger
 import com.jacky.labeauty.support.ext.then
@@ -59,30 +60,35 @@ class DefakeFragment : MySupportFragment(), S2iCodeResultInterface {
                     .subscribe {
                         it.then({
                             if (isAttached()) {
-                                val items = arrayOf(AndroidUtil.getString(R.string.defake), AndroidUtil.getString(R.string.follow_source))
-                                chooseDialog = QMUIDialog.CheckableDialogBuilder(getActivity())
-                                        .addItems(items) { dialog, which ->
-                                            when (which) {
-                                                0 -> {
-                                                    S2iCodeModule.setS2iCodeResultInterface(this@DefakeFragment)
-                                                    S2iCodeModule.startS2iCamera(true)
-                                                }
-                                                1 -> {
-                                                    QrScanFacade.start(activity!!, object : ZxingImageHelper.OnDecodeListener {
-                                                        override fun onDecodeSuccess(result: String) {
-                                                            Logger.i("decode success $result")
-                                                            requestQrResult(result)
-                                                        }
+                                if (MySelf.get().role == "MANAGER" || MySelf.get().role == "ADMIN") {
+                                    val items = arrayOf(AndroidUtil.getString(R.string.defake), AndroidUtil.getString(R.string.follow_source))
+                                    chooseDialog = QMUIDialog.CheckableDialogBuilder(getActivity())
+                                            .addItems(items) { dialog, which ->
+                                                when (which) {
+                                                    0 -> {
+                                                        S2iCodeModule.setS2iCodeResultInterface(this@DefakeFragment)
+                                                        S2iCodeModule.startS2iCamera(true)
+                                                    }
+                                                    1 -> {
+                                                        QrScanFacade.start(activity!!, object : ZxingImageHelper.OnDecodeListener {
+                                                            override fun onDecodeSuccess(result: String) {
+                                                                Logger.i("decode success $result")
+                                                                requestQrResult(result)
+                                                            }
 
-                                                        override fun onDecodeFail(e: Throwable?) {
-                                                            Logger.i("decode error")
-                                                        }
-                                                    })
+                                                            override fun onDecodeFail(e: Throwable?) {
+                                                                Logger.i("decode error")
+                                                            }
+                                                        })
+                                                    }
                                                 }
+                                                chooseDialog?.dismiss()
                                             }
-                                            chooseDialog?.dismiss()
-                                        }
-                                        .show()
+                                            .show()
+                                } else {
+                                    S2iCodeModule.setS2iCodeResultInterface(this@DefakeFragment)
+                                    S2iCodeModule.startS2iCamera(true)
+                                }
                             }
                         }, {
                             AndroidUtil.toast(R.string.please_open_storage_camera_permission)

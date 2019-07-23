@@ -28,23 +28,23 @@ class ShowBrandActivity : BaseActivity() {
 
     private fun getCenter(): CharSequence {
         return SpanUtils()
-                .appendLine(AndroidUtil.getString(R.string.intro_top_1))
-                .appendLine(AndroidUtil.getString(R.string.intro_top_2))
-                .appendLine(AndroidUtil.getString(R.string.intro_top_3))
-                .appendLine(AndroidUtil.getString(R.string.intro_top_4))
+                .append("ANCILA")
                 .create()
     }
 
     private fun getInfo(): CharSequence {
         return SpanUtils()
-                .append("    ").append(AndroidUtil.getString(R.string.is_one)).setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true)
-                .append(AndroidUtil.getString(R.string.is_one_what)).setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true).setBold()
-                .appendLine(AndroidUtil.getString(R.string.intro_bottom_1))
+//                .append("    ").append(AndroidUtil.getString(R.string.is_one)).setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true)
+//                .append(AndroidUtil.getString(R.string.is_one_what)).setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true).setBold()
+                .append("    ").appendLine(AndroidUtil.getString(R.string.intro_bottom_1))
+                .appendLine()
                 .setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true)
                 .append("    ").appendLine(AndroidUtil.getString(R.string.intro_bottom_2))
+                .appendLine()
                 .setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true)
                 .append("    ").appendLine(AndroidUtil.getString(R.string.intro_bottom_3))
                 .setForegroundColor(Color.parseColor("#666666")).setFontSize(14, true)
+                .appendLine()
                 .create()
 
     }

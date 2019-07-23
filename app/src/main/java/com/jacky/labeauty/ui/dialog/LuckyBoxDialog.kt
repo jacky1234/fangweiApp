@@ -83,9 +83,12 @@ class LuckyBoxDialog(private val getPrizeClickListener: OnGetPrizeClickListener?
         }
 
         tvButton.setOnClickListener {
-            if (targetType == Prize.TARGET_TYPE_GIFT) {
-                getPrizeClickListener?.getPrizeClickListener()
+            when (targetType) {
+                Prize.TARGET_TYPE_GIFT -> getPrizeClickListener?.getPrizeClickListener()
+                Prize.TARGET_TYPE_COUPON,
+                Prize.TARGET_TYPE_INTEGRAL -> AndroidUtil.toast(R.string.has_join_my_prizes)
             }
+
             dismiss()
         }
 

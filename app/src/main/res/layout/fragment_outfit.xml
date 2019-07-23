@@ -9,7 +9,7 @@
         android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
-        app:titleView_title_text="@string/hot_outfits"
+        app:titleView_title_text="@string/video_title"
         app:titleView_visible_type="left_middle" />
 
     <include layout="@layout/layout_recylerview_with_refresh" />

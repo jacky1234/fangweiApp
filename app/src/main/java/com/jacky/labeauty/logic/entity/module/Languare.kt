@@ -2,6 +2,7 @@ package com.jacky.labeauty.logic.entity.module
 
 import com.jacky.labeauty.R
 import com.jacky.labeauty.support.util.AndroidUtil
+import java.util.*
 
 class Language private constructor(val key: Int, val desc: String, val locale: String) {
     companion object {
@@ -10,11 +11,11 @@ class Language private constructor(val key: Int, val desc: String, val locale: S
         }
 
         val languages = ArrayList<Language>()
-        val defaultLanguage = create(2, AndroidUtil.getString(R.string.chinese).toString(), "zh_CN")
+        val defaultLanguage = create(1, AndroidUtil.getString(R.string.chinese).toString(), "zh_CN")
 
         init {
             languages.add(defaultLanguage)
-            languages.add(create(2, AndroidUtil.getString(R.string.japanese).toString(), "jp"))
+            languages.add(create(2, AndroidUtil.getString(R.string.japanese).toString(), "ja"))
         }
     }
 }

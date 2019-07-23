@@ -8,6 +8,6 @@
     android:layout_marginLeft="@dimen/first_margin_from_left"
     android:layout_marginRight="@dimen/first_margin_from_left"
     android:textStyle="bold"
-    android:text="衣服制作视频">
+    android:text="@string/video_title">
 
 </TextView>

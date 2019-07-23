@@ -39,7 +39,7 @@ class BeeApp : MultiDexApplication() {
     }
 
     private fun initBugly() {
-        CrashReport.initCrashReport(this, "7cc6c3addf", true)
+        CrashReport.initCrashReport(this, "7806f8141b", true)
         if (MySelf.get().isLogined) {
             CrashReport.setUserId(MySelf.get().mobile)
         }
@@ -76,8 +76,8 @@ class BeeApp : MultiDexApplication() {
 
     private fun initFragmentation() {
         Fragmentation.builder()
-                .stackViewMode(Fragmentation.BUBBLE)
-                .debug(BuildConfig.DEBUG)
+                .stackViewMode(Fragmentation.NONE)
+//                .debug(BuildConfig.DEBUG)
                 .handleException(Logger.Companion::e)
                 .install()
     }
