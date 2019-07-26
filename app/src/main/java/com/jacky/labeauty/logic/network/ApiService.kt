@@ -47,6 +47,9 @@ interface ApiService {
     @POST("user/update")
     fun updateUserInfo(@Body updateUserRequest: UpdateUserRequest): Observable<HttpResponse<User>>
 
+    @POST("change_password")
+    fun changePwd(@Body updateUserRequest: ChangePwdRequest): Observable<HttpResponseSource>
+
     @POST("change_mobile")
     fun changeMobile(@Body map: Map<String, String>): Observable<HttpResponse<User>>
 

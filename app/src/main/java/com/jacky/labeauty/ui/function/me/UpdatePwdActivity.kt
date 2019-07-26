@@ -36,14 +36,13 @@ class UpdatePwdActivity : BaseActivity() {
                     Checker.check(et_new_pwd, "请输入新密码") &&
                     Checker.check(et_confirm_new_pwd, "请再次输入新密码") &&
                     Checker.equalsContent(et_new_pwd, et_confirm_new_pwd, "两次输入的密码不一致")) {
-                val request = UpdateUserRequest()
-                request.password = et_new_pwd.text.toString()
-                RequestHelper.get().updateUserInfo(request)
+                val oldPwd = et_old_pwd.text.toString().trim()
+                val newPwd = et_new_pwd.text.toString().trim()
+                RequestHelper.get().changePwd(oldPwd,newPwd)
                         .compose(bindToDestroy())
                         .subscribe {
-                            MySelf.get().saveFromUser(it)
                             AndroidUtil.toast(R.string.update_success)
-                            launch<MainActivity>()
+                            MainActivity.launch(this@UpdatePwdActivity)
                         }
             }
         }

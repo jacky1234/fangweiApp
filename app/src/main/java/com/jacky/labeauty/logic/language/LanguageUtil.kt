@@ -4,9 +4,12 @@ import android.content.Context
 import android.os.Build
 import com.jacky.labeauty.logic.DaoFacade
 import com.jacky.labeauty.logic.entity.module.Language
+import com.jacky.labeauty.support.Starter
 
 class LanguageUtil {
     companion object {
+        private var currentLanguage: Language? = null
+
         @JvmStatic
         fun readSet(context: Context) {
             val query = query()
@@ -24,6 +27,7 @@ class LanguageUtil {
 
             try {
                 context.resources.updateConfiguration(configuration, context.resources.displayMetrics)
+                currentLanguage = language
             } catch (ignore: Exception) {
                 return false
             }
@@ -43,6 +47,15 @@ class LanguageUtil {
             }
 
             return Language.defaultLanguage
+        }
+
+        @JvmStatic
+        fun getCurrentLanguage(): Language {
+            if (currentLanguage == null) {
+                readSet(Starter.getContext())
+            }
+
+            return currentLanguage!!
         }
     }
 }

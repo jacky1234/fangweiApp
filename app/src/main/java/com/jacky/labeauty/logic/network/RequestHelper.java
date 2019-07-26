@@ -22,6 +22,7 @@ import com.jacky.labeauty.logic.entity.module.Sign;
 import com.jacky.labeauty.logic.entity.module.User;
 import com.jacky.labeauty.logic.entity.module.Video;
 import com.jacky.labeauty.logic.entity.request.AddAddressRequest;
+import com.jacky.labeauty.logic.entity.request.ChangePwdRequest;
 import com.jacky.labeauty.logic.entity.request.CollectRequest;
 import com.jacky.labeauty.logic.entity.request.FeedbackRequest;
 import com.jacky.labeauty.logic.entity.request.LoginRequest;
@@ -127,6 +128,11 @@ public class RequestHelper {
     public Observable<User> updateUserInfo(@NotNull UpdateUserRequest user) {
         return apiService.updateUserInfo(user)
                 .compose(HttpResponseTransformer.handleResult(true));
+    }
+
+    public Observable<Boolean> changePwd(@NotNull String old,String update) {
+        return apiService.changePwd(new ChangePwdRequest(old,update))
+                .compose(BooleanTransformer.handleResult(true));
     }
 
     public Observable<User> updateMobile(@NotNull String mobile, @NotNull String code) {

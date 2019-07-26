@@ -129,6 +129,9 @@ class Mefragment : MySupportFragment() {
         )
 
         val onClickListener = View.OnClickListener {
+            if (!isAttached()) {
+                return@OnClickListener
+            }
             when (it) {
                 itemScore -> {
                     ensureLogin(it, Runnable {

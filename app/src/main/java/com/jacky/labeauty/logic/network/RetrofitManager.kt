@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.entity.response.HttpResponse
+import com.jacky.labeauty.logic.language.LanguageUtil
 import com.jacky.labeauty.logic.network.inteceptor.LogicInterceptor
 import com.jacky.labeauty.logic.network.parse.JsonFormatParser
 import com.jacky.labeauty.support.Starter
@@ -63,6 +64,7 @@ class RetrofitManager private constructor() {
      * 设置头
      */
     private fun addHeaderInterceptor(): Interceptor {
+        val currentLanguage = LanguageUtil.getCurrentLanguage()
         return Interceptor { chain ->
             val originalRequest = chain.request()
             val requestBuilder = originalRequest.newBuilder()
@@ -73,6 +75,7 @@ class RetrofitManager private constructor() {
             }
             requestBuilder.header("X-App-Version", getAppVersionHeader())
             requestBuilder.method(originalRequest.method(), originalRequest.body())
+            requestBuilder.addHeader("Accept-Language", currentLanguage.header)
             val request = requestBuilder.build()
             chain.proceed(request)
         }

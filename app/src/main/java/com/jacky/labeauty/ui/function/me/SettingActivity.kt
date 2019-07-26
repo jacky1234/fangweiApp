@@ -73,9 +73,7 @@ class SettingActivity : BaseActivity() {
                         if (LanguageUtil.update(this@SettingActivity, choose) &&
                                 LanguageUtil.update(Starter.getContext(), choose)) {
                             DaoFacade.get().setLanguageKey(choose.key)
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                            startActivity(intent)
+                            MainActivity.launch(this@SettingActivity)
                         }
 
 
