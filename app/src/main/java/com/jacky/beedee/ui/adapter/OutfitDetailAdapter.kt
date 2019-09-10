@@ -12,11 +12,9 @@ import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.image.ImageLoader
 import com.jacky.beedee.support.util.AndroidUtil
-import com.jacky.beedee.support.util.regex.RegexConstants
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import kotlinx.android.synthetic.main.layout_banner_wrapper.view.*
 import kotlinx.android.synthetic.main.layout_outfit_text.view.*
-import java.util.regex.Pattern
 
 class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -38,11 +36,22 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         dataList.add(TYPE_BANNER_DETAIL)
         dataList.add(TYPE_TEXT)
         for (s in item.details) {
-            val pattern = Pattern.compile(RegexConstants.REGEX_W_H)
-            val matcher = pattern.matcher(s)
-            if (matcher.find()) {
-                map[s] = matcher.group()
-            } else {
+            // 1 remove suffix
+            var handleS = s
+
+            handleS = s.substring(0, s.lastIndexOf("."))
+            val split = handleS.split("_")
+            val size = split.size
+            try {
+                if (size >= 2) {
+                    val w = split[size - 2].toInt()
+                    val h = split[size - 1].toInt()
+                    map[s] = "${w}_$h"
+                }
+            } catch (e: Exception) {
+            }
+
+            if (!map.containsKey(s)) {
                 map[s] = max_width.toString() + "x" + max_width
             }
 
@@ -136,9 +145,11 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
             layoutParams.topMargin = AndroidUtil.dip2px(15F).toInt()
 
             try {
-                val split = map[url]!!.split("x")
-                layoutParams.width = split[0].toInt()
-                layoutParams.height = split[1].toInt()
+                val split = map[url]!!.split("_")
+                val adapterWidth = AndroidUtil.getScreenWidth() - layoutParams.leftMargin - layoutParams.rightMargin
+                val ratio = adapterWidth * 1.0f / split[0].toInt()
+                layoutParams.width = adapterWidth
+                layoutParams.height = (split[1].toInt() * ratio).toInt()
             } catch (e: Exception) {
                 layoutParams.width = 600
                 layoutParams.height = 600
