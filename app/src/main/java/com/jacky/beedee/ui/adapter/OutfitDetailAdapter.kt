@@ -1,13 +1,19 @@
 package com.jacky.beedee.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.ViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.chad.library.adapter.base.BaseViewHolder
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import com.jacky.beedee.R
 import com.jacky.beedee.logic.entity.module.Good
 import com.jacky.beedee.logic.image.ImageLoader
@@ -15,6 +21,7 @@ import com.jacky.beedee.support.util.AndroidUtil
 import com.jacky.beedee.ui.widget.looper.LooperPagerAdapter
 import kotlinx.android.synthetic.main.layout_banner_wrapper.view.*
 import kotlinx.android.synthetic.main.layout_outfit_text.view.*
+import java.io.File
 
 class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -66,7 +73,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         when (viewType) {
             TYPE_BANNER_DETAIL -> holder = OutfitBannerHolder(LayoutInflater.from(context).inflate(R.layout.layout_banner_wrapper, parent, false))
             TYPE_TEXT -> holder = TextViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_outfit_text, parent, false))
-            TYPE_IMAGE -> holder = ImageViewHolder(ImageView(context))
+            TYPE_IMAGE -> holder = ImageViewHolder(SubsamplingScaleImageView(context))
         }
 
         return holder!!
@@ -137,11 +144,13 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
     }
 
     private inner class ImageViewHolder constructor(view: View) : BaseViewHolder(view) {
+        @SuppressLint("CheckResult")
         fun bind(url: String) {
-            val imageView = itemView as ImageView
-            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            val imageView = itemView as SubsamplingScaleImageView
+            imageView.setDoubleTapZoomDuration(100)
             val layoutParams = RecyclerView.LayoutParams(100, 200)
             layoutParams.leftMargin = AndroidUtil.dip2px(15F).toInt()
+            layoutParams.rightMargin = AndroidUtil.dip2px(15F).toInt()
             layoutParams.topMargin = AndroidUtil.dip2px(15F).toInt()
 
             try {
@@ -159,7 +168,11 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
             Glide.with(context)
                     .setDefaultRequestOptions(ImageLoader._1To1RequestOptions)
                     .load(url)
-                    .into(imageView)
+                    .downloadOnly(object : ViewTarget<SubsamplingScaleImageView, File>(imageView) {
+                        override fun onResourceReady(resource: File, transition: Transition<in File>?) {
+                            imageView.setImage(ImageSource.uri(Uri.fromFile(resource)))
+                        }
+                    })
         }
     }
 }

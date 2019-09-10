@@ -22,11 +22,11 @@ class LoadingActivity : BaseActivity() {
         setContentView(R.layout.activity_loading)
 
         rxPermissions.requestEach(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .subscribe { }
-
-        AndroidUtil.runUI({
-            launch<MainActivity>()
-            finish()
-        }, if (MySelf.get().isLogined) 300L else 1500L)
+                .subscribe {
+                    AndroidUtil.runUI({
+                        launch<MainActivity>()
+                        finish()
+                    }, if (MySelf.get().isLogined) 300L else 1500L)
+                }
     }
 }

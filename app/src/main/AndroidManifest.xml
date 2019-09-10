@@ -60,7 +60,6 @@
             android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize|stateHidden">
-
         </activity>
 
         <activity
