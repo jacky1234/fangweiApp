@@ -121,7 +121,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
     private inner class OutfitBannerHolder constructor(view: View) : BaseViewHolder(view) {
         fun bind() {
             itemView.viewPager.setAutoScroll(true, 5000)
-            itemView.viewPager.adapter = LooperPagerAdapter(item.details.size) { position ->
+            itemView.viewPager.adapter = LooperPagerAdapter(item.gallery.size) { position ->
                 val imageView = ImageView(context)
                 imageView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
