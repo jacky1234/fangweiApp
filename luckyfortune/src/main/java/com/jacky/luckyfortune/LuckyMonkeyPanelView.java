@@ -209,6 +209,10 @@ public class LuckyMonkeyPanelView extends FrameLayout {
         observers.add(observer);
     }
 
+    public boolean removeObserver(Observer observer) {
+        return observers.remove(observer);
+    }
+
     private void notifyObserver(int statues) {
         for (Observer observer : observers) {
             observer.onPanelStatusChange(statues);

@@ -99,7 +99,7 @@ BeeDee作为设计师原创品牌，坚持创新,坚持原创追求我们想要�
                     android:id="@+id/iv_logo"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:src="@mipmap/image_brand_black"
+                    android:src="@drawable/app_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvBrandTitle" />
 

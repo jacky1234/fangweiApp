@@ -79,9 +79,11 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
-    public Observable<User> login(@NotNull String phone, @NonNull String pwd) {
-        MySelf.get().setAuthorization(null);
-        return apiService.login(new LoginRequest(phone, pwd))
+    public Observable<User> login(@NotNull String phone, String pwd, String code, boolean isClearAuthorization) {
+        if (isClearAuthorization) {
+            MySelf.get().setAuthorization(null);
+        }
+        return apiService.login(new LoginRequest(phone, pwd, code))
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
@@ -130,8 +132,8 @@ public class RequestHelper {
                 .compose(HttpResponseTransformer.handleResult(true));
     }
 
-    public Observable<Boolean> changePwd(@NotNull String old,String update) {
-        return apiService.changePwd(new ChangePwdRequest(old,update))
+    public Observable<Boolean> changePwd(@NotNull String old, String update) {
+        return apiService.changePwd(new ChangePwdRequest(old, update))
                 .compose(BooleanTransformer.handleResult(true));
     }
 

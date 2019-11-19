@@ -1,12 +1,14 @@
 package com.jacky.labeauty.logic.entity.module;
 
+import java.io.Serializable;
+
 /**
  * 2018/11/1.
  * GitHub:[https://github.com/jacky1234]
  *
  * @author jacky
  */
-public class User {
+public class User implements Serializable {
 
     /**
      * id : 5bcae7fd98acbe351ecd7db3

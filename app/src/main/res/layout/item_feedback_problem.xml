@@ -32,6 +32,6 @@
         android:id="@+id/cb_checked"
         android:layout_width="21dp"
         android:layout_height="21dp"
-        android:background="@drawable/selected_like_enable"
+        android:background="@drawable/selected_like"
         android:button="@null" />
 </LinearLayout>

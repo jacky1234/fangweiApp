@@ -28,8 +28,8 @@ class SearchFragment : MySupportFragment(), SearchKeyFragment.OnKeyClickListener
         searchResultFragment.requestSearchKey(key)
     }
 
-    lateinit var searchKeyFragment: SearchKeyFragment
-    lateinit var searchResultFragment: SearchResultFragment
+    private lateinit var searchKeyFragment: SearchKeyFragment
+    private lateinit var searchResultFragment: SearchResultFragment
     private val fragments = ArrayList<MySupportFragment>(2)
 
 

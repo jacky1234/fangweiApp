@@ -63,17 +63,27 @@ class LuckyPanelActivity : BaseActivity(), LuckyMonkeyPanelView.Observer {
                 prizeResponse = null
                 requestPrizes()
                 lucky_panel.startGame()
-            } else {
-                val response = prizeResponse
-                if (response == null) {
-                    AndroidUtil.toast("数据还没有准备好，请稍后")
-                    return@setAction
-                }
 
-                lucky_panel.tryToStop(response.prizeIndex)
+                AndroidUtil.runUI({
+                    if (isFinishing) {
+                        return@runUI
+                    }
+
+                    val response = prizeResponse
+                    if (response != null) {
+                        lucky_panel.tryToStop(response.prizeIndex)
+                    } else {
+                        AndroidUtil.toast("数据还没有准备好，请稍后")
+                    }
+                }, 2500)
             }
         }
         lucky_panel.addObserver(this)
+    }
+
+    override fun onDestroy() {
+        lucky_panel.removeObserver(this)
+        super.onDestroy()
     }
 
     override fun onPanelStatusChange(status: Int) {

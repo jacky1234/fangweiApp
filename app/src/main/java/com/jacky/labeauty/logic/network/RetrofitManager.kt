@@ -29,10 +29,6 @@ class RetrofitManager private constructor() {
         fun get() = instance
     }
 
-    init {
-        //header
-    }
-
     private fun getAppVersionHeader(): String {
         val sb = StringBuilder()
         sb.append("LaBeauty").append("/").append(deviceDependency.device.appVersion).append(" ")

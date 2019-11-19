@@ -15,7 +15,7 @@
         android:background="@drawable/shape_search_rect_gray"
         android:drawableLeft="@mipmap/ic_small_search"
         android:drawablePadding="4dp"
-        android:hint="搜索产品，“羽绒服”..."
+        android:hint="搜索产品，“水母面膜"
         android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"

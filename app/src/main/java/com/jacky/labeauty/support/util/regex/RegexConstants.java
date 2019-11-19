@@ -6,7 +6,7 @@ public class RegexConstants {
      */
     public static final String REGEX_W_H = "\\d+_\\d+";
 
-    public static final String REGEX_NUMBER = "\\d+";
+    public static final String REGEX_NUMBER = "w\\d+_h\\d+";
 
     /**
      * Regex of simple mobile.

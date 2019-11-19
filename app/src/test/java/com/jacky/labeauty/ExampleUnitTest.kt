@@ -111,11 +111,23 @@ class ExampleUnitTest {
 
     @Test
     fun regex() {
-        val r_name3 = "https://static.beedeemade.com/201901/5c3d7764ee795871ee0c90cd_520_5641.png"
-        val pattern = Pattern.compile("\\d+_\\d+")
+        val r_name3 = "https://static.labeauty.yituizhineng.top/201911/5dbd1d55e90cf8515b9e6c45_s2115207_w750_h10199.jpg"
+        val pattern = Pattern.compile("w\\d+_h\\d+")
         val matcher = pattern.matcher(r_name3)
         if (matcher.find()) {
-            System.out.println(matcher.group())
+            val message = matcher.group()
+            println(message)
+
+            val split = message.split("_")
+            if (split[0].startsWith("w")) {
+                val w = split[0].trim().replace("w","")
+                println(w)
+            }
+
+            if(split[1].startsWith("h")){
+                val h = split[1].trim().replace("h","")
+                println(h)
+            }
         }
     }
 }

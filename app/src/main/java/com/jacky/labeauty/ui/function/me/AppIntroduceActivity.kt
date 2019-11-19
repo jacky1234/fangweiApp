@@ -20,8 +20,11 @@ class AppIntroduceActivity : BaseActivity() {
 
     private fun getInfo(): CharSequence {
         return SpanUtils()
+                .appendImage(R.drawable.app_logo)
+                .appendLine().appendLine()
                 .appendLine(AndroidUtil.getString(R.string.app_introduce_content))
-                .append(AndroidUtil.getString(R.string.app_feature)).appendLine(":")
+                .appendLine()
+                .append(AndroidUtil.getString(R.string.app_feature)).setBold().appendLine(":")
                 .appendLine(AndroidUtil.getString(R.string.app_feature_1))
                 .appendLine(AndroidUtil.getString(R.string.app_feature_2))
                 .appendLine(AndroidUtil.getString(R.string.app_feature_3))

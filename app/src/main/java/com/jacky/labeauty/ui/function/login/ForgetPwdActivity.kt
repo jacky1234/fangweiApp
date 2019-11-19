@@ -2,6 +2,7 @@ package com.jacky.labeauty.ui.function.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.MiscFacade
@@ -20,10 +21,8 @@ import kotlinx.android.synthetic.main.activity_forget_pwd.*
 
 class ForgetPwdActivity : BaseActivity() {
     companion object {
-        @JvmField
-        val KEY_FORGET_PWD_MOBILE = "KEY_FORGET_PWD_MOBILE"
+        const val KEY_FORGET_PWD_MOBILE = "KEY_FORGET_PWD_MOBILE"
 
-        @JvmStatic
         fun start(activity: BaseActivity, mobile: String) {
             val intent = Intent(activity, ForgetPwdActivity::class.java)
             intent.putExtra(KEY_FORGET_PWD_MOBILE, mobile)
@@ -37,6 +36,8 @@ class ForgetPwdActivity : BaseActivity() {
 
         val mobile = intent.getStringExtra(KEY_FORGET_PWD_MOBILE)
         et_phone.setText(mobile)
+
+        titleView.setLeftAction(View.OnClickListener { finish() })
 
         val btnGainCode = btn_gain_code
         val verifyCodeAvailable = MiscFacade.get().isVerifyCodeAvailable

@@ -1,5 +1,6 @@
 package com.jacky.labeauty.ui.function.login
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,16 +9,19 @@ import com.jacky.labeauty.R
 import com.jacky.labeauty.logic.Constant
 import com.jacky.labeauty.logic.MiscFacade
 import com.jacky.labeauty.logic.entity.module.MySelf
+import com.jacky.labeauty.logic.entity.module.User
 import com.jacky.labeauty.logic.network.RequestHelper
 import com.jacky.labeauty.support.ext.clickWithTrigger
 import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Checker
 import com.jacky.labeauty.ui.dialog.DialogTipsHelper
+import com.jacky.labeauty.ui.function.main.MainActivity
 import com.jacky.labeauty.ui.function.other.WebActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.tencent.bugly.crashreport.CrashReport
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.Observer
@@ -75,6 +79,9 @@ class RegisterActivity : BaseActivity() {
         }
 
         val next = tv_next
+        if (intent.getBooleanExtra(KEY_THIRD_LOGIN, false)) {
+            next.setText(R.string.complete)
+        }
         RxView.clicks(next).throttleFirst(1, TimeUnit.SECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .bindToLifecycle(btnGainCode)
@@ -90,7 +97,7 @@ class RegisterActivity : BaseActivity() {
                 }
 
         tvRegisterProtocol.clickWithTrigger {
-            WebActivity.launch(this, Constant.REGISTER_PROTOCOL_URL)
+            WebActivity.launch(this, Constant.REGISTER_PROTOCOL_URL, R.string.register_protocol)
         }
     }
 
@@ -98,7 +105,25 @@ class RegisterActivity : BaseActivity() {
         MiscFacade.get().registerCodeListenerAndTrigger(codeObserver)
     }
 
+    @SuppressLint("CheckResult")
     private fun requestRegister(phone: String, code: String) {
+        val isThirdLogin = intent.getBooleanExtra(KEY_THIRD_LOGIN, false)
+        if (isThirdLogin) {
+            val user = intent.getSerializableExtra(KEY_USER) as User? ?: return
+            RequestHelper.get().login(phone, null, code, false)
+                    .subscribe {
+                        MySelf.get().saveFromUser(it)
+                        CrashReport.setUserId(it.mobile)
+                        AndroidUtil.toast(AndroidUtil.getString(R.string.login_success))
+                        if (MiscFacade.get().lastRunnable == null) {
+                            AndroidUtil.runUI({ this@RegisterActivity.launch<MainActivity>() }, 100)
+                        }
+
+                        finish()
+                    }
+            return
+        }
+
         RequestHelper.get().register(phone, code)
                 .compose(bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe {
@@ -115,10 +140,15 @@ class RegisterActivity : BaseActivity() {
 
     companion object {
         const val KEY_MOBILE = "KEY_MOBILE"
+        private const val KEY_THIRD_LOGIN = "KEY_THIRD_LOGIN"
+        private const val KEY_USER = "KEY_USER"
+
         @JvmStatic
-        fun start(activity: BaseActivity, mobile: String) {
+        fun start(activity: BaseActivity, mobile: String?, thirdLogin: Boolean, user: User? = null) {
             val intent = Intent(activity, RegisterActivity::class.java)
             intent.putExtra(KEY_MOBILE, mobile)
+            intent.putExtra(KEY_THIRD_LOGIN, thirdLogin)
+            intent.putExtra(KEY_USER, user)
             activity.startActivity(intent)
         }
     }

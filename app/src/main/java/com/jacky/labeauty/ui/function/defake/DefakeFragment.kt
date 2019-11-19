@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import com.example.qrscanlibrary.QrScanFacade
 import com.example.qrscanlibrary.ZxingImageHelper
 import com.jacky.labeauty.R
@@ -27,6 +26,8 @@ import com.s2icode.dao.S2iCodeResultBase
 import com.s2icode.main.S2iCodeModule
 import com.s2icode.main.S2iCodeResultInterface
 import com.tbruyelle.rxpermissions2.RxPermissions
+import kotlinx.android.synthetic.main.fragment_defake_entrance.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 /**
@@ -63,11 +64,15 @@ class DefakeFragment : MySupportFragment(), S2iCodeResultInterface {
         }
     }
 
-    var chooseDialog: QMUIDialog? = null
+    private var chooseDialog: QMUIDialog? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val content = inflater.inflate(com.jacky.labeauty.R.layout.fragment_defake_entrance, null)
-        val btnScan = content.findViewById<FrameLayout>(com.jacky.labeauty.R.id.parent_scan)
-        btnScan.clickWithTrigger {
+        return inflater.inflate(R.layout.fragment_defake_entrance, null)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        parent_scan.clickWithTrigger {
             rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.INTERNET)
                     .subscribe {
                         it.then({
@@ -86,8 +91,6 @@ class DefakeFragment : MySupportFragment(), S2iCodeResultInterface {
                         })
                     }
         }
-
-        return content
     }
 
     private fun doFake() {

@@ -31,7 +31,7 @@
             android:id="@+id/cbLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/selected_like_enable"
+            android:background="@drawable/selected_like"
             android:button="@null" />
 
         <TextView

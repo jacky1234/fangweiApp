@@ -40,7 +40,7 @@ class LoginActivity : BaseActivity() {
                     val pwd = et_pwd.text.toString()
                     if (Checker.check(et_phone, AndroidUtil.getString(R.string.please_input_phone_number)) &&
                             Checker.checkMobile(et_phone) && Checker.check(et_pwd, AndroidUtil.getString(R.string.please_input_pwd)))
-                        RequestHelper.get().login(phone, pwd)
+                        RequestHelper.get().login(phone, pwd, null, true)
                                 .compose(bindToDestroy())
                                 .subscribe {
                                     onLoginResult(it)
@@ -48,7 +48,7 @@ class LoginActivity : BaseActivity() {
                 }
 
         tv_register.clickWithTrigger {
-            RegisterActivity.start(this, et_phone.text.toString())
+            RegisterActivity.start(this, et_phone.text.toString(), false)
         }
 
         tv_forget_pwd.clickWithTrigger {
@@ -70,6 +70,11 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun onLoginResult(it: User) {
+        if (it.role == "OPEN_USER") {
+            finish()
+            RegisterActivity.start(this, null, true, it)
+            return
+        }
         MySelf.get().saveFromUser(it)
         CrashReport.setUserId(it.mobile)
 

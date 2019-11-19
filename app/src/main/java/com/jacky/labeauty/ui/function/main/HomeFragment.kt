@@ -24,6 +24,7 @@ import com.jacky.labeauty.ui.common.Image
 import com.jacky.labeauty.ui.common.ImagePreviewActivity
 import com.jacky.labeauty.ui.function.discovery.GoodDetailActivity
 import com.jacky.labeauty.ui.function.other.ShowBrandActivity
+import com.jacky.labeauty.ui.function.other.WebActivity
 import com.jacky.labeauty.ui.inner.arch.MySupportFragment
 import com.jacky.labeauty.ui.widget.GridContainer
 import com.jacky.labeauty.ui.widget.looper.LoopViewPager
@@ -46,7 +47,6 @@ class HomeFragment : MySupportFragment() {
     private lateinit var tvBrandDesc: TextView
     private lateinit var tvOutFit: TextView
     private lateinit var tvHotTitle: TextView
-    private lateinit var ivOutFitImageView: ImageView
     private lateinit var gridContainer: GridContainer
 
     private fun requestBanner() {
@@ -59,6 +59,12 @@ class HomeFragment : MySupportFragment() {
 
     private fun setOnBannerClickListener(imageView: ImageView, banner: Banner) {
         imageView.setOnClickListener {
+            if (banner.link.startsWith("http")) {
+                val activity = getActivity() ?: return@setOnClickListener
+                WebActivity.launch(activity, banner.link)
+                return@setOnClickListener
+            }
+
             if (banner.link.contains("/")) {    //normal
                 val start = banner.link.lastIndexOf("/") + 1
                 val id = banner.link.substring(start)
@@ -78,35 +84,18 @@ class HomeFragment : MySupportFragment() {
         RequestHelper.get().requestOutfitHot(0)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    if (it != null && !it.data.isEmpty()) {
-                        onResultOutfit(it.data)
+                    if (it != null && it.data.isNotEmpty()) {
+                        setVideoLayoutVisibility(true, it.data[0])
                     }
                 }
     }
-
-    private fun onResultOutfit(lists: List<GoodItem>) {
-        val thumb = lists[0].thumb
-        Glide.with(this)
-                .setDefaultRequestOptions(ImageLoader._16To9RequestOptions)
-                .load(thumb)
-                .into(ivOutFitImageView)
-
-        tvOutFit.clickWithTrigger {
-            activity.launch<OutFitActivity>()
-        }
-
-        ivOutFitImageView.clickWithTrigger {
-            activity.launch<OutFitActivity>()
-        }
-    }
-
 
     @SuppressLint("CheckResult")
     private fun requestHotGoods() {
         RequestHelper.get().requestHotGoods(0)
                 .compose(bindUntilDetach())
                 .subscribe {
-                    if (it != null && !it.data.isEmpty()) {
+                    if (it != null && it.data.isNotEmpty()) {
                         onResultHotGoods(it.data)
                     }
                 }
@@ -143,11 +132,11 @@ class HomeFragment : MySupportFragment() {
 
     private fun onResultBannerList(list: List<Banner>) {
         if (isAttached()) {
-            if (!list.isEmpty()) {
+            if (list.isNotEmpty()) {
                 viewPager.setAutoScroll(true, 5000)
                 viewPager.adapter = LooperPagerAdapter(list.size) { position ->
                     val imageView = ImageView(activity)
-                    if (isAttached() && !list.isEmpty()) {
+                    if (isAttached() && list.isNotEmpty()) {
                         imageView.scaleType = ImageView.ScaleType.CENTER_CROP
                         imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                         setOnBannerClickListener(imageView, list[position])
@@ -166,6 +155,30 @@ class HomeFragment : MySupportFragment() {
         }
     }
 
+    private fun setVideoLayoutVisibility(v: Boolean, item: GoodItem? = null) {
+        if (v) {
+            tv_outfit_title.visibility = View.VISIBLE
+            iv_hotFit.visibility = View.VISIBLE
+            if (item != null) {
+                Glide.with(this)
+                        .setDefaultRequestOptions(ImageLoader._16To9RequestRoundCornerOptions)
+                        .load(item.thumb)
+                        .into(iv_hotFit)
+
+                tvOutFit.clickWithTrigger {
+                    activity.launch<OutFitActivity>()
+                }
+
+                iv_hotFit.clickWithTrigger {
+                    activity.launch<OutFitActivity>()
+                }
+            }
+        } else {
+            tv_outfit_title.visibility = View.GONE
+            iv_hotFit.visibility = View.GONE
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val content = inflater.inflate(R.layout.fragment_home, null)
         initView(content)
@@ -177,6 +190,7 @@ class HomeFragment : MySupportFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setVideoLayoutVisibility(false)
         parent_brand.clickWithTrigger {
             activity.launch<ShowBrandActivity>()
         }
@@ -186,7 +200,6 @@ class HomeFragment : MySupportFragment() {
     }
 
     private fun initDefaultData() {
-        ivOutFitImageView.setImageResource(R.drawable.item_empty_16_9)
         tvBrandDesc.text = getBranchDesc()
         onResultHotGoods(Collections.singletonList(GoodItem.empty))
     }
@@ -205,7 +218,6 @@ class HomeFragment : MySupportFragment() {
         tvBrandDesc = content.findViewById(R.id.tv_brand_desc) as TextView
         tvOutFit = content.findViewById(R.id.tv_outfit_title) as TextView
         tvHotTitle = content.findViewById(R.id.tv_hots_title) as TextView
-        ivOutFitImageView = content.findViewById(R.id.iv_hotFit) as ImageView
         gridContainer = content.findViewById(R.id.gridContainer) as GridContainer
         gridContainer.setItemPadding(ImageLoader.item_padding)
     }

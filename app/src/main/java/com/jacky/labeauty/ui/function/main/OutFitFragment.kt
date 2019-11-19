@@ -43,7 +43,7 @@ class OutFitFragment : MySupportFragment(), OnRefreshListener, OnLoadMoreListene
         refreshLayout.setOnRefreshListener(this)
         refreshLayout.setOnLoadMoreListener(this)
 
-        titleView.setLeftAction(View.OnClickListener { pop() })
+        titleView.setLeftAction(View.OnClickListener { getActivity()?.finish() })
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         adapter = OutfitAdapter(context!!, object : OutfitAdapter.Delegate {

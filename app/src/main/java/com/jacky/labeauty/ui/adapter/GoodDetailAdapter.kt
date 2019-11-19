@@ -42,7 +42,6 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
     private val map = HashMap<String, String>()
     private var dataList = ArrayList<Any>()
     private lateinit var item: Good
-    val numberRegex = Pattern.compile(RegexConstants.REGEX_NUMBER)
     fun setData(item: Good) {
         this.item = item
         dataList.clear()
@@ -50,17 +49,17 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
         dataList.add(TYPE_PRICE)
         dataList.add(TYPE_TEXT)
         for (s in item.details) {
-            val exceptSuffix = s.subSequence(0, s.lastIndexOf('.'))
-            val split = exceptSuffix.split("_")
             try {
-                if (split.size >= 2) {
-                    if (Pattern.matches(RegexConstants.REGEX_NUMBER, split.last())
-                            && Pattern.matches(RegexConstants.REGEX_NUMBER, split[split.size - 2])) {
-                        map[s] = split[split.size - 2] + "_" + split.last()
-                    }
+                val pattern = Pattern.compile(RegexConstants.REGEX_NUMBER)
+                val matcher = pattern.matcher(s)
+                if (matcher.find()) {
+                    val message = matcher.group()
+                    val split = message.split("_")
+                    val w = split[0].trim().replace("w", "")
+                    val h = split[1].trim().replace("h", "")
+                    map[s] = w + "_" + h
                 }
             } catch (e: Exception) {
-                Logger.e(e)
                 map[s] = max_width.toString() + "_" + max_width
             }
 
@@ -104,8 +103,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val itemViewType = getItemViewType(position)
-        when (itemViewType) {
+        when (getItemViewType(position)) {
             TYPE_BANNER_DETAIL -> {
                 val outfitBannerHolder = holder as GoodBannerHolder
                 outfitBannerHolder.bind()
@@ -145,6 +143,7 @@ class GoodDetailAdapter(private val context: Context, private val delegate: Dele
     }
 
     private inner class PriceViewHolder constructor(view: View) : BaseViewHolder(view) {
+        @SuppressLint("SetTextI18n")
         fun bind() {
             itemView.tvName.text = item.name
             itemView.tvPrice.text = "¥${item.price}"
