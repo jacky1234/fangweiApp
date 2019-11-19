@@ -120,7 +120,7 @@ class HomeFragment : MySupportFragment() {
             }
 
             hots.forEachIndexed { index, goodItem ->
-                if (index > 3) return@forEachIndexed
+                if (index > 7) return@forEachIndexed
 
                 val child = layoutInflater.inflate(R.layout.item_home_grid, gridContainer, false)
                 val imageView = child.findViewById<ImageView>(R.id.imageView)
