@@ -38,12 +38,18 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
         dataList.add(TYPE_BANNER_DETAIL)
         dataList.add(TYPE_TEXT)
         for (s in item.details) {
-            val pattern = Pattern.compile(RegexConstants.REGEX_W_H)
-            val matcher = pattern.matcher(s)
-            if (matcher.find()) {
-                map[s] = matcher.group()
-            } else {
-                map[s] = max_width.toString() + "x" + max_width
+            try {
+                val pattern = Pattern.compile(RegexConstants.REGEX_NUMBER)
+                val matcher = pattern.matcher(s)
+                if (matcher.find()) {
+                    val message = matcher.group()
+                    val split = message.split("_")
+                    val w = split[0].trim().replace("w", "")
+                    val h = split[1].trim().replace("h", "")
+                    map[s] = w + "_" + h
+                }
+            } catch (e: Exception) {
+                map[s] = max_width.toString() + "_" + max_width
             }
 
             dataList.add(s)
@@ -84,8 +90,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val itemViewType = getItemViewType(position)
-        when (itemViewType) {
+        when (getItemViewType(position)) {
             TYPE_BANNER_DETAIL -> {
                 val outfitBannerHolder = holder as OutfitBannerHolder
                 outfitBannerHolder.bind()
@@ -105,7 +110,7 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
     private inner class OutfitBannerHolder constructor(view: View) : BaseViewHolder(view) {
         fun bind() {
             itemView.viewPager.setAutoScroll(true, 5000)
-            itemView.viewPager.adapter = LooperPagerAdapter(item.details.size) { position ->
+            itemView.viewPager.adapter = LooperPagerAdapter(item.gallery.size) { position ->
                 val imageView = ImageView(context)
                 imageView.scaleType = ImageView.ScaleType.CENTER_CROP
                 imageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -136,9 +141,9 @@ class OutfitDetailAdapter(private val context: Context) : RecyclerView.Adapter<R
             layoutParams.topMargin = AndroidUtil.dip2px(15F).toInt()
 
             try {
-                val split = map[url]!!.split("x")
-                layoutParams.width = split[0].toInt()
-                layoutParams.height = split[1].toInt()
+                val split = map[url]!!.split("_")
+                layoutParams.width = max_width
+                layoutParams.height = (split[1].toInt() * max_width * 1.0f / split[0].toInt()).toInt()
             } catch (e: Exception) {
                 layoutParams.width = 600
                 layoutParams.height = 600
