@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Bundle
 import android.view.View
 import com.jacky.labeauty.R
+import com.jacky.labeauty.logic.Constant
 import com.jacky.labeauty.logic.MiscFacade
 import com.jacky.labeauty.logic.entity.module.MySelf
 import com.jacky.labeauty.logic.entity.module.User
@@ -14,6 +15,7 @@ import com.jacky.labeauty.support.ext.launch
 import com.jacky.labeauty.support.util.AndroidUtil
 import com.jacky.labeauty.support.util.Checker
 import com.jacky.labeauty.ui.function.main.MainActivity
+import com.jacky.labeauty.ui.function.other.WebActivity
 import com.jacky.labeauty.ui.inner.arch.BaseActivity
 import com.jakewharton.rxbinding2.view.RxView
 import com.tencent.bugly.crashreport.CrashReport
@@ -60,12 +62,19 @@ class LoginActivity : BaseActivity() {
             ThirdLoginHelper.loginWx(listener)
         }
 
-        ivLoginQQ.clickWithTrigger {
-            ThirdLoginHelper.loginQQ(listener)
-        }
+//        ivLoginQQ.clickWithTrigger {
+//            ThirdLoginHelper.loginQQ(listener)
+//        }
+//
+//        ivLoginWB.clickWithTrigger {
+//            ThirdLoginHelper.loginWb(listener)
+//        }
 
-        ivLoginWB.clickWithTrigger {
-            ThirdLoginHelper.loginWb(listener)
+        tvUserProtocol.clickWithTrigger {
+            WebActivity.launch(this,Constant.REGISTER_PROTOCOL_URL,R.string.register_protocol)
+        }
+        tvPrivacyProtocol.clickWithTrigger {
+            WebActivity.launch(this,Constant.URL_PRIVACY_POLICY,R.string.privacy_protocol)
         }
     }
 

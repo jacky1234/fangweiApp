@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="beedee_name">LaBeauty</string>
+	<string name="beedee_name">labeauty</string>
 	<string name="back">戻る</string>
 	<string name="login">ログイン</string>
 	<string name="register">登録</string>
@@ -163,6 +163,7 @@
     <string name="youhuijuan">クーポン</string>
     <string name="real_prize">物理賞</string>
 	<string name="version_story">リリース</string>
-
+	<string name="user_protocol">ユーザー契約</string>
+	<string name="privacy_protocol">プライバシー規約</string>
 
 </resources>
